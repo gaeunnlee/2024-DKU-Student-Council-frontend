@@ -7,5 +7,8 @@
  */
 export const ROUTES = {
    /** 메인 화면 */
-   MAIN: { root: "/" },
+   MAIN: '/',
+
+   /** 404 화면 */
+   NOT_FOUND: '*',
 };
