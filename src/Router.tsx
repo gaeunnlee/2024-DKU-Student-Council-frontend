@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ROUTES } from './constants';
 import Main from './pages';
 import NotFound from './pages/404';
+import Login from './pages/login';
 
 /**
  * @description 라우터
@@ -16,6 +17,7 @@ export default function Router() {
          <Suspense fallback={<div>loading...</div>}>
             <Routes>
                <Route path={ROUTES.MAIN} element={<Main />} />
+               <Route path={ROUTES.LOGIN} element={<Login />} />
                <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
             </Routes>
          </Suspense>

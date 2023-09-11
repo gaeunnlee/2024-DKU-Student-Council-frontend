@@ -3,7 +3,12 @@ module.exports = {
       browser: true,
       es2021: true,
    },
-   extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:react/recommended'],
+   extends: [
+      'eslint:recommended',
+      'plugin:react-hooks/recommended',
+      'plugin:@typescript-eslint/recommended',
+      'plugin:react/recommended',
+   ],
    overrides: [
       {
          env: {
@@ -20,12 +25,11 @@ module.exports = {
       ecmaVersion: 'latest',
       sourceType: 'module',
    },
-   plugins: ['@typescript-eslint', 'react'],
+   plugins: ['@typescript-eslint', 'react', 'cypress'],
    rules: {
       indent: ['error', 3],
       'linebreak-style': ['error', 'unix'],
       quotes: ['error', 'single'],
       semi: ['error', 'always'],
    },
-   excludes: ['commitlint.config.js'],
 };
