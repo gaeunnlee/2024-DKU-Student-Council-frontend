@@ -4,5 +4,13 @@
 
 ### Info
 
--  💻 codebase: React v18
-- 
+-  💻 Codebase: React v18
+-  📖 Package Manager: Yarn v1.22.19
+
+### Installation
+
+```cli
+git clone https://github.com/EveryUniv/next-student-council-frontend.git
+cd next-student-council-frontend
+yarn
+```
