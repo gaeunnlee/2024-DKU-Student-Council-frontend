@@ -5,7 +5,7 @@ import { ROUTES } from './constants';
 import Main from './pages';
 import NotFound from './pages/404';
 import Login from './pages/login';
-import SignupVerify from './pages/signupVerify';
+import SignupVerify from './pages/signup/verify';
 
 /**
  * @description 라우터
