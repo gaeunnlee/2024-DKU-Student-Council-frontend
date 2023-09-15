@@ -1,10 +1,11 @@
 import React from 'react';
 import { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ROUTES } from './constants';
+import { ROUTES } from './constant';
 import Main from './pages';
 import NotFound from './pages/404';
 import Login from './pages/login';
+import DefaultLayout from 'layouts/DefaultLayout';
 
 /**
  * @description 라우터
@@ -15,11 +16,13 @@ export default function Router() {
       <BrowserRouter>
          {/* TODO: 로딩 컴포넌트 만들어 넣기 */}
          <Suspense fallback={<div>loading...</div>}>
-            <Routes>
-               <Route path={ROUTES.MAIN} element={<Main />} />
-               <Route path={ROUTES.LOGIN} element={<Login />} />
-               <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
-            </Routes>
+            <DefaultLayout>
+               <Routes>
+                  <Route path={ROUTES.MAIN} element={<Main />} />
+                  <Route path={ROUTES.LOGIN} element={<Login />} />
+                  <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+               </Routes>
+            </DefaultLayout>
          </Suspense>
       </BrowserRouter>
    );

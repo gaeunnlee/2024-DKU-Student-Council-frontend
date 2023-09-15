@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Login from '../pages/login';
 import { BrowserRouter } from 'react-router-dom';
-import { CONSTANTS } from '../constants';
+import { CONSTANTS } from '../constant';
 
 describe('로그인', () => {
    it('로그인 버튼이 있어야 한다.', () => {
