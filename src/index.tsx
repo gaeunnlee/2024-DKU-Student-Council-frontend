@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { worker } from './mocks/browsers';
 import axios from 'axios';
-import { CONSTANTS } from './constants';
+import { CONSTANTS } from './constant';
+import './index.css';
 
 if (process.env.NODE_ENV === 'development') {
    worker.start();
