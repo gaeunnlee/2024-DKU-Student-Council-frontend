@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../constants';
 import axios from 'axios';
 
@@ -61,6 +61,9 @@ export default function Login() {
             />
             <button data-testid='login-button'>로그인</button>
          </form>
+         {/* ROUTES에 아래 페이지 경로 업데이트시 변경 예정 */}
+         <Link to={ROUTES.NOT_FOUND}>회원가입</Link>
+         <Link to={ROUTES.NOT_FOUND}>ID/PW 찾기</Link>
       </>
    );
 }
