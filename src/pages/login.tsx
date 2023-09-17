@@ -19,10 +19,16 @@ export default function Login() {
       login: async (e: FormEvent<HTMLFormElement>) => {
          e.preventDefault();
          // 로그인 로직
-         const { data } = await axios.post('/user/login', loginInfo);
-         console.log(data);
-         alert('로그인되었습니다');
-         navigate(ROUTES.MAIN);
+         try {
+            const { data } = await axios.post('/user/login', loginInfo);
+            console.log(data);
+            alert('로그인되었습니다');
+            navigate(ROUTES.MAIN);
+         } catch (error) {
+            if (axios.isAxiosError(error)) {
+               alert(error?.response?.data.message[0]);
+            }
+         }
       },
    };
 
