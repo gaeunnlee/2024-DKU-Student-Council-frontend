@@ -28,7 +28,7 @@ module.exports = {
    plugins: ['@typescript-eslint', 'react', 'cypress'],
    rules: {
       indent: ['error', 3],
-      'linebreak-style': ['error', 'unix'],
+      'linebreak-style': ['error', process.env.NODE_ENV === 'prod' ? 'unix' : 'windows'],
       quotes: ['error', 'single'],
       semi: ['error', 'always'],
    },
