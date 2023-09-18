@@ -2,6 +2,7 @@ import React from 'react';
 import { useModal } from 'hooks/useModal';
 import { IWithReactChildren } from 'interfaces/default-interfaces';
 import Button from '../button';
+import { motion } from 'framer-motion';
 
 export interface ModalProps {
    title?: string;
@@ -21,12 +22,22 @@ export default function Modal({ title, children, accept, cancel }: ModalProps & 
    return (
       <>
          <Modal.Overlay />
-         <div className='absolute left-[50%] top-[50%] z-50 min-w-[250px] translate-x-[-50%] translate-y-[-50%] rounded-md bg-white p-3 shadow-sm py-4'>
+         <motion.div
+            className='absolute top-[50%] z-50 min-w-[300px] max-w-[calc(100%-1rem)] rounded-md bg-white p-4 shadow-sm'
+            animate={{
+               scale: [0, 1],
+               translateY: '-50%',
+            }}
+            style={{
+               left: '50%',
+               translateX: '-50%',
+            }}
+         >
             <header className='rounded-t-20px flex w-full items-center justify-center bg-white'>
-               <h4 className='z-1 pointer-events-none w-full'>{title}</h4>
+               <h4 className='w-full font-bold text-lg'>{title}</h4>
             </header>
             <div />
-            <div className='my-4 mx-2'>{children}</div>
+            <div className='my-4 mx-2 overflow-hidden'>{children}</div>
             <div className='flex flex-col gap-2'>
                {accept && (
                   <Button
@@ -50,12 +61,18 @@ export default function Modal({ title, children, accept, cancel }: ModalProps & 
                   </Button>
                )}
             </div>
-         </div>
+         </motion.div>
       </>
    );
 }
 
 Modal.Overlay = function Overlay() {
    const { close } = useModal();
-   return <div className='absolute right-0 top-0 z-0 h-full w-full bg-black opacity-20' onClick={close} />;
+   return (
+      <motion.div
+         className='absolute right-0 top-0 z-0 h-full w-full bg-black'
+         onClick={close}
+         animate={{ opacity: [0, 0.2] }}
+      />
+   );
 };

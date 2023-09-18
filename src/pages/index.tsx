@@ -8,7 +8,7 @@ export default function Main() {
       <div>
          <Button
             onClick={() =>
-               open(<div>테스트 모달</div>, {
+               open(<div>테스트 모달 qweruqwiepotueopiwrufhgviosdfnlgkjnadfskjngknsdfkj</div>, {
                   title: '테스트',
                   accept: {
                      text: '확인',
