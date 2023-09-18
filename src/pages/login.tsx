@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../constants';
 import axios from 'axios';
 
-interface LoginProps {
+interface ILoginInfo {
    studentId: string;
    password: string;
 }
