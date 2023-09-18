@@ -1,7 +1,19 @@
 import React from 'react';
+import clsx from 'clsx';
 
-export default function Button(props: React.ComponentProps<'button'>) {
+interface Props extends React.ComponentProps<'button'> {
+   variant?: 'primary' | 'red';
+}
+
+export default function Button({ variant, ...props }: Props) {
    return (
-      <button className={'rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700'} {...props} />
+      <button
+         className={clsx(
+            'rounded-full px-4 py-2',
+            variant === 'primary' ? 'bg-blue-600' : variant === 'red' ? 'bg-red-700' : 'bg-white',
+            variant === 'primary' ? 'text-white' : variant === 'red' ? 'text-white' : 'text-black',
+         )}
+         {...props}
+      />
    );
 }

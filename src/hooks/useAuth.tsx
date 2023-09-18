@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useEffectOnce } from './useEffectOnce';
-import { CONSTANTS, ROUTES } from '../constants';
+import { CONSTANTS, ROUTES } from '../constant';
 import type { ILoginInfo } from '../pages/login';
 import axios, { AxiosResponse } from 'axios';
 import { useNavigate } from 'react-router';
