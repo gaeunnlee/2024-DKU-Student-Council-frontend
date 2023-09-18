@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../constant';
 import { useAuth } from '../hooks/useAuth';
@@ -9,7 +9,7 @@ export interface ILoginInfo {
 }
 
 export default function Login() {
-   const [loginInfo, setLoginInfo] = useState<ILoginInfo>({
+   const [loginInfo, setLoginInfo] = React.useState<ILoginInfo>({
       studentId: '',
       password: '',
    });
