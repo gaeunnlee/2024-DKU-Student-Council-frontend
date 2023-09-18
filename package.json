@@ -36,9 +36,9 @@
     "**/*.{js,jsx,ts,tsx}": [
       "eslint --fix",
       "prettier --write",
-      "git add"
+      "git add ."
     ]
-  },
+  }, 
   "eslintConfig": {
     "extends": [
       "react-app",
