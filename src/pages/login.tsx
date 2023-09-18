@@ -1,33 +1,25 @@
 import React, { FormEvent, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ROUTES } from '../constants';
-import axios from 'axios';
+import { useAuth } from '../hooks/useAuth';
 
-interface ILoginInfo {
+export interface ILoginInfo {
    studentId: string;
    password: string;
 }
 
 export default function Login() {
-   const navigate = useNavigate();
    const [loginInfo, setLoginInfo] = useState<ILoginInfo>({
       studentId: '',
       password: '',
    });
+   const { login } = useAuth();
 
    const handle = {
       login: async (e: FormEvent<HTMLFormElement>) => {
          e.preventDefault();
          // 로그인 로직
-         try {
-            const { data } = await axios.post('/user/login', loginInfo);
-            alert('로그인되었습니다');
-            navigate(ROUTES.MAIN);
-         } catch (error) {
-            if (axios.isAxiosError(error)) {
-               alert(error?.response?.data.message[0]);
-            }
-         }
+         login(loginInfo);
       },
    };
 
