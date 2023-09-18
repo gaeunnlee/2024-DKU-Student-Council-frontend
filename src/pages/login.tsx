@@ -21,7 +21,6 @@ export default function Login() {
          // 로그인 로직
          try {
             const { data } = await axios.post('/user/login', loginInfo);
-            console.log(data);
             alert('로그인되었습니다');
             navigate(ROUTES.MAIN);
          } catch (error) {
