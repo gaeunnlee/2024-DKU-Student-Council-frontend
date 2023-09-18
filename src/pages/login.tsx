@@ -10,7 +10,7 @@ interface ILoginInfo {
 
 export default function Login() {
    const navigate = useNavigate();
-   const [loginInfo, setLoginInfo] = useState<LoginProps>({
+   const [loginInfo, setLoginInfo] = useState<ILoginInfo>({
       studentId: '',
       password: '',
    });
