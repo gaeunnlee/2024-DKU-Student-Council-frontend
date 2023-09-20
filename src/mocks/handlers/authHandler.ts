@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { API_PATH, CONSTANTS } from '../../constants';
+import { API_PATH, CONSTANTS } from '../../constant';
 
 const { SERVER_URL } = CONSTANTS;
 
