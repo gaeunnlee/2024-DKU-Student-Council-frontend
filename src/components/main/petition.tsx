@@ -3,6 +3,7 @@ import React from 'react';
 import { BaseSkeleton, TextSkeleton } from 'components/ui/skeleton';
 import type { PetitionType } from 'shared/enum/petition';
 import { ReactComponent as ProfilePic } from 'assets/images/profile.svg';
+import Box from 'components/ui/box';
 
 export interface IPetition {
    id: number;
@@ -33,10 +34,10 @@ export default function Petition({ petitions }: { petitions?: IPetition[] }) {
                <span className='flex items-center justify-center w-10 h-10 bg-blue-100 rounded-full ring-8 ring-white'>
                   <ProfilePic className='rounded-full shadow-lg opacity-40' />
                </span>
-               <div className='items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm flex-1'>
+               <Box className='items-center justify-between flex-1'>
                   <time className='mb-1 text-xs font-normal text-gray-400'>{item.d_day}일 남음</time>
                   <div className='text-sm font-normal text-gray-500 '>{item.title}</div>
-               </div>
+               </Box>
             </div>
          ))}
       </ol>
