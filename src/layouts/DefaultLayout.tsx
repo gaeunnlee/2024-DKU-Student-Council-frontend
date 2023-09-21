@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IWithReactChildren } from 'shared/interfaces/default-interfaces';
+import { IWithReactChildren } from 'interfaces/default-interfaces';
 
 type DefaultLayoutProps = IWithReactChildren & React.HTMLAttributes<HTMLDivElement>;
 
