@@ -1,32 +1,16 @@
-import Button from 'components/ui/button';
-import { useModal } from 'hooks/useModal';
 import React from 'react';
+import { AxiosError } from 'axios';
+import { useAlert } from 'hooks/useAlert';
 
 export default function Main() {
-   const { open } = useModal();
-   return (
-      <div>
-         <Button
-            onClick={() =>
-               open(<div>테스트 모달 qweruqwiepotueopiwrufhgviosdfnlgkjnadfskjngknsdfkj</div>, {
-                  title: '테스트',
-                  accept: {
-                     text: '확인',
-                     onClick: () => {
-                        console.log('확인');
-                     },
-                  },
-                  cancel: {
-                     text: '취소',
-                     onClick: () => {
-                        console.log('취소');
-                     },
-                  },
-               })
-            }
-         >
-            모달 열기
-         </Button>
-      </div>
-   );
+   const { alert } = useAlert();
+
+   const setError = () => {
+      try {
+         throw new AxiosError('테스트 에러');
+      } catch (error) {
+         alert(error as AxiosError);
+      }
+   };
+   return <button onClick={setError}>에러</button>;
 }
