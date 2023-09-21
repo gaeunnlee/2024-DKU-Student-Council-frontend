@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ROUTES } from 'constant';
+import { CONSTANTS, ROUTES } from 'constant';
 
 interface NavItem {
    id: number;
@@ -128,7 +128,7 @@ export default function Nav() {
    return (
       // pwa인 경우: pb-[20px] h-[80px]
       <motion.nav
-         className='w-full bg-blue-600 h-[60px] left-[50%] translate-x-[-50%] fixed flex justify-between px-6 items-center max-w-3xl'
+         className={`w-full bg-blue-600 h-[${CONSTANTS.bottomNavSize}] left-[50%] translate-x-[-50%] fixed flex justify-between px-6 items-center max-w-3xl`}
          initial={{ bottom: '-60px' }}
          animate={{ bottom: '0px' }}
          exit={{ bottom: '-60px' }}

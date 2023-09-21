@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import { IWithReactChildren } from 'interfaces/default-interfaces';
+import { IWithReactChildren } from 'shared/interfaces/default-interfaces';
 import Gnb from 'components/common/gnb';
 import Nav from 'components/common/nav';
 import { ROUTES } from 'constant';
@@ -38,10 +38,10 @@ export default function GnbLayout({ children }: IWithReactChildren) {
    const currentLayout = layoutVariant.find((layout) => layout.path === currentPath);
 
    return (
-      <div className='flex flex-col h-screen'>
+      <>
          {currentLayout?.header}
-         <div className='flex-1'>{children}</div>
+         {children}
          <AnimatePresence>{!currentLayout?.fullscreen && <Nav />}</AnimatePresence>
-      </div>
+      </>
    );
 }

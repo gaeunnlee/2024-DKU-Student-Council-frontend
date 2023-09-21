@@ -21,6 +21,9 @@ export const CONSTANTS = {
    atk_key: 'damda-atk',
    /** RefreshToken Key */
    rtk_key: 'damda-rtk',
+
+   /** 하단 네비게이션 사이즈 */
+   bottomNavSize: '60px',
 };
 
 /**

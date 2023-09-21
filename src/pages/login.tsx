@@ -2,7 +2,7 @@ import React, { FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from 'hooks/useAuth';
 import { ROUTES } from 'constant';
-import { IIdPassword } from 'interfaces/default-interfaces';
+import { IIdPassword } from 'shared/interfaces/default-interfaces';
 import Input from 'components/ui/input';
 
 export default function Login() {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useModal } from 'hooks/useModal';
-import { IWithReactChildren } from 'interfaces/default-interfaces';
+import { IWithReactChildren } from 'shared/interfaces/default-interfaces';
 import Button from '../button';
 import { motion } from 'framer-motion';
 

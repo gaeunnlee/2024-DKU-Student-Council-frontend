@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { useAlert } from 'hooks/useAlert';
 import { API_PATH, CONSTANTS, ROUTES } from 'constant';
-import type { IIdPassword } from 'interfaces/default-interfaces';
+import type { IIdPassword } from 'shared/interfaces/default-interfaces';
 import type { ILoginResponse } from 'api/axios-interface';
 
 export const useAuth = () => {

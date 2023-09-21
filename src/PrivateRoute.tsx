@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from 'hooks/useAuth';
-import { IWithReactChildren } from 'interfaces/default-interfaces';
+import { IWithReactChildren } from 'shared/interfaces/default-interfaces';
 import { Navigate } from 'react-router-dom';
 import { ROUTES } from 'constant';
 
