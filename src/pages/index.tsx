@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { Suspense } from 'react';
+
+const Banner = React.lazy(() => import('components/main/banner'));
 
 export default function Main() {
    return (
@@ -8,13 +10,9 @@ export default function Main() {
             <h2 className='text-2xl font-medium mb-2'>도전하는 지성, 세계를 향한 창조</h2>
             <span className='text-xs'>DANKOOK UNIVERSITY STUDENT COUNCIL</span>
          </div>
-         <img
-            src={
-               'https://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_34f4838a2b3047f39ac9cb0701558e46/main-storage/carousel-d2dd283a-bb34-43a9-9180-9d93bf1c4c37.png'
-            }
-            style={{ width: '100vw' }}
-            alt='banner'
-         />
+         <Suspense fallback={<div>Loading...</div>}>
+            <Banner />
+         </Suspense>
       </main>
    );
 }
