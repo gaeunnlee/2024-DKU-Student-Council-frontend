@@ -1,16 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { worker } from './mocks/browsers';
 import axios from 'axios';
-import { CONSTANTS } from './constant';
 import './index.css';
+import { CONSTANTS } from './constant';
 
-if (process.env.NODE_ENV === 'development') {
-   worker.start();
-}
-
-axios.defaults.baseURL = CONSTANTS.BASE_URL;
+axios.defaults.baseURL = CONSTANTS.SERVER_URL;
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(

@@ -1,24 +1,20 @@
 import React, { FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '../constant';
-import { useAuth } from '../hooks/useAuth';
-
-export interface ILoginInfo {
-   studentId: string;
-   password: string;
-}
+import { useAuth } from 'hooks/useAuth';
+import { ROUTES } from 'constant';
+import { IIdPassword } from 'interfaces/default-interfaces';
 
 export default function Login() {
-   const [loginInfo, setLoginInfo] = React.useState<ILoginInfo>({
+   const initLoginInfo: IIdPassword = {
       studentId: '',
       password: '',
-   });
+   };
+   const [loginInfo, setLoginInfo] = React.useState<IIdPassword>(initLoginInfo);
    const { login } = useAuth();
 
    const handle = {
-      login: async (e: FormEvent<HTMLFormElement>) => {
+      login: (e: FormEvent<HTMLFormElement>) => {
          e.preventDefault();
-         // 로그인 로직
          login(loginInfo);
       },
    };

@@ -43,6 +43,10 @@ export const ROUTES = {
  * @description API 경로
  */
 export const API_PATH = {
-   /** 로그인 */
-   LOGIN: '/login',
+   USER: {
+      /** 내 정보 조회 */
+      ME: '/user',
+      /** 로그인 */
+      LOGIN: '/user/login',
+   },
 };
