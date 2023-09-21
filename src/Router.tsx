@@ -21,8 +21,8 @@ export default function Router() {
                <Routes>
                   <Route path={ROUTES.MAIN} element={<Main />} />
                   <Route path={ROUTES.LOGIN} element={<Login />} />
-                  <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
                   <Route path={ROUTES.SIGNUP_VERIFY} element={<SignupVerify />} />
+                  <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
                </Routes>
             </DefaultLayout>
          </Suspense>
