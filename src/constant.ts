@@ -37,7 +37,10 @@ export const ROUTES = {
    LOGIN: '/login',
    /** 404 화면 */
    NOT_FOUND: '*',
-   SIGNUP_VERIFY: '/signup/verify',
+   SIGNUP: {
+      ROOT: '/signup',
+      VERIFY: '/signup/verify'
+   },
 };
 
 /**
