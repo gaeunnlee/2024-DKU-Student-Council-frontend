@@ -49,5 +49,7 @@ export const ROUTES = {
 export const API_PATH = {
    /** 로그인 */
    LOGIN: '/login',
-   SIGNUP_VERIFY: '/user/dku/verify',
+   SIGNUP: {
+      VERIFY: '/user/dku/verify',
+   },
 };
