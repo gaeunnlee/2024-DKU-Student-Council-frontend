@@ -1,8 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import { API_PATH } from 'constant';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
+import { BaseSkeleton } from 'components/ui/skeleton';
+
+export const BannerSize = 'w-[calc(100%-8px)] h-[130px]';
 
 interface IBanner {
    id: number;
@@ -14,19 +18,21 @@ export default function Banner() {
    const [banner, setBanner] = React.useState<IBanner[] | undefined>(undefined);
 
    const fetchBanner = async () => {
-      const res = await axios.get<IBanner[]>('/main/carousel');
+      const res = await axios.get<IBanner[]>(API_PATH.MAIN.CAROUSEL);
       setBanner(res.data);
+      console.log(res.data);
    };
 
    React.useEffect(() => {
       fetchBanner();
    }, []);
-   return (
+
+   return banner ? (
       <Swiper
          autoplay={{ delay: 1000 }}
          navigation
          pagination={{ clickable: true }}
-         className='w-[calc(100%-8px)] h-[130px]'
+         className={BannerSize}
          spaceBetween='8px'
       >
          {banner?.map((item) => (
@@ -35,5 +41,7 @@ export default function Banner() {
             </SwiperSlide>
          ))}
       </Swiper>
+   ) : (
+      <BaseSkeleton className={`${BannerSize} rounded-xl m-auto`} />
    );
 }

@@ -1,5 +1,4 @@
-import React, { Suspense } from 'react';
-
+import React from 'react';
 const Banner = React.lazy(() => import('components/main/banner'));
 
 export default function Main() {
@@ -10,9 +9,9 @@ export default function Main() {
             <h2 className='text-2xl font-medium mb-2'>도전하는 지성, 세계를 향한 창조</h2>
             <span className='text-xs'>DANKOOK UNIVERSITY STUDENT COUNCIL</span>
          </div>
-         <Suspense fallback={<div>Loading...</div>}>
-            <Banner />
-         </Suspense>
+         {/* <Suspense fallback={<div>klo</div>}> */}
+         <Banner />
+         {/* </Suspense> */}
       </main>
    );
 }

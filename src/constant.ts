@@ -64,4 +64,12 @@ export const API_PATH = {
          VERIFY: '/user/dku/verify',
       },
    },
+   MAIN: {
+      /** 메인페이지 모든 데이터 */
+      ROOT: '/main',
+      /** 캐러셀 목록 */
+      CAROUSEL: '/main/carousel',
+      /** 학사일정 */
+      SCHEDULE: '/main/schedule',
+   },
 };
