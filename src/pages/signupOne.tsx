@@ -12,7 +12,7 @@ export default function Login() {
       setAgreeCheck(newAgreeCheck);
    };
 
-   const nexthandle = () => {
+   const nextHandle = () => {
       // 체크 여부 확인
       if (agreeCheck[0] && agreeCheck[1] && agreeCheck[2]) {
          // 회원가입 다음 화면으로
