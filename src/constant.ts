@@ -40,6 +40,7 @@ export const ROUTES = {
    SIGNUP: {
       ROOT: '/signup',
       VERIFY: '/signup/verify',
+      TERMS: '/signup/terms',
    },
 };
 
