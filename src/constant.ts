@@ -37,6 +37,10 @@ export const ROUTES = {
    LOGIN: '/login',
    /** 404 화면 */
    NOT_FOUND: '*',
+   SIGNUP: {
+      ROOT: '/signup',
+      VERIFY: '/signup/verify'
+   },
 };
 
 /**
@@ -48,5 +52,8 @@ export const API_PATH = {
       ME: '/user',
       /** 로그인 */
       LOGIN: '/user/login',
+      SIGNUP: {
+        VERIFY: '/user/dku/verify',
+      },
    },
 };

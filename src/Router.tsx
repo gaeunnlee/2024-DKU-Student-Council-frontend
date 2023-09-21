@@ -6,6 +6,7 @@ import Main from './pages';
 import NotFound from './pages/404';
 import Login from './pages/login';
 import DefaultLayout from 'layouts/DefaultLayout';
+import SignupVerify from './pages/signup/verify';
 
 /**
  * @description 라우터
@@ -20,6 +21,7 @@ export default function Router() {
                <Routes>
                   <Route path={ROUTES.MAIN} element={<Main />} />
                   <Route path={ROUTES.LOGIN} element={<Login />} />
+                  <Route path={ROUTES.SIGNUP_VERIFY} element={<SignupVerify />} />
                   <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
                </Routes>
             </DefaultLayout>
