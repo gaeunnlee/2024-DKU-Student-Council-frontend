@@ -6,7 +6,7 @@ import { Regex } from '../../utils/regex';
 
 const { SERVER_URL } = CONSTANTS;
 
-export interface IverifyInfo {
+export interface IVerifyInfo {
    studentId: string;
    password: string;
 }
