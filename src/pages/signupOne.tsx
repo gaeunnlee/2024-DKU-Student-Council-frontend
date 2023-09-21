@@ -14,7 +14,7 @@ export default function Login() {
 
    const nexthandle = () => {
       // 체크 여부 확인
-      if (agreeCheck[0] === true && agreeCheck[1] === true && agreeCheck[2] === true) {
+      if (agreeCheck[0] && agreeCheck[1] && agreeCheck[2]) {
          // 회원가입 다음 화면으로
          // navigate(ROUTE.);
       } else {
