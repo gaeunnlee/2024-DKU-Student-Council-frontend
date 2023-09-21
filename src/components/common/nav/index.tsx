@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { ROUTES } from 'constant';
 
 interface NavItem {
    id: number;
@@ -99,7 +101,7 @@ const navItems: NavItem[] = [
    {
       id: 5,
       name: '마이',
-      path: '/my-page',
+      path: ROUTES.MYPAGE,
       icon: (
          <span className='rounded-full bg-slate-300 w-[22px] h-[22px] my-1 grid place-content-center border-white border-2'>
             <svg
@@ -125,7 +127,13 @@ const navItems: NavItem[] = [
 export default function Nav() {
    return (
       // pwa인 경우: pb-[20px] h-[80px]
-      <nav className='w-full bg-blue-600 h-[60px] left-[50%] translate-x-[-50%] fixed bottom-0 flex justify-between px-6 items-center max-w-3xl'>
+      <motion.nav
+         className='w-full bg-blue-600 h-[60px] left-[50%] translate-x-[-50%] fixed flex justify-between px-6 items-center max-w-3xl'
+         initial={{ bottom: '-60px' }}
+         animate={{ bottom: '0px' }}
+         exit={{ bottom: '-60px' }}
+         transition={{ duration: 0.3 }}
+      >
          {navItems.map((el) => (
             <Link
                key={el.id}
@@ -136,6 +144,6 @@ export default function Nav() {
                {el.name}
             </Link>
          ))}
-      </nav>
+      </motion.nav>
    );
 }

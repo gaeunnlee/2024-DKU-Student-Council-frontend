@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as BrandLogo } from 'assets/images/logo.svg';
+import { ROUTES } from 'constant';
 
 interface Props extends React.ComponentProps<'header'> {
    left?: JSX.Element;
@@ -46,9 +47,9 @@ Gnb.Notification = function Notification() {
 Gnb.Logo = function Logo() {
    return (
       <div>
-         <span>
+         <Link to={ROUTES.MAIN}>
             <BrandLogo height={15} />
-         </span>
+         </Link>
       </div>
    );
 };

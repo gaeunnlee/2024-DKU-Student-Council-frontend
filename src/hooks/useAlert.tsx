@@ -7,7 +7,7 @@ import { MessagedError } from 'api/axios-interface';
 export const useAlert = () => {
    const { open } = useModal();
 
-   const alertModal = (content: string | undefined) =>
+   const alertModal = (content: string | number | boolean | undefined) =>
       (
          <div>
             {content ?? (
@@ -27,8 +27,8 @@ export const useAlert = () => {
       },
    };
 
-   const alert = (error: string | AxiosError | unknown) => {
-      if (typeof error === 'string') {
+   const alert = (error: string | number | boolean | AxiosError | unknown) => {
+      if (typeof error === 'string' || typeof error === 'number' || typeof error === 'boolean') {
          open(alertModal(error), alertOption);
       } else if (isAxiosError<MessagedError>(error)) {
          open(alertModal(error.response?.data.msg), alertOption);

@@ -35,11 +35,17 @@ export const ROUTES = {
    MAIN: '/',
    /** 로그인 화면 */
    LOGIN: '/login',
+   /** 마이페이지 */
+   MYPAGE: '/mypage',
    /** 404 화면 */
    NOT_FOUND: '*',
+   /** 회원가입 */
    SIGNUP: {
+      /** 루트 */
       ROOT: '/signup',
+      /** 학생 인증 */
       VERIFY: '/signup/verify',
+      /** 동의 */
       TERMS: '/signup/terms',
    },
 };
@@ -53,6 +59,7 @@ export const API_PATH = {
       ME: '/user',
       /** 로그인 */
       LOGIN: '/user/login',
+      /** 회원가입 */
       SIGNUP: {
          VERIFY: '/user/dku/verify',
       },
