@@ -3,11 +3,10 @@ import axios from 'axios';
 import { API_PATH } from 'constant';
 import { useAlert } from 'hooks/useAlert';
 import { useEffectOnce } from 'hooks/useEffectOnce';
-import { Banner, Notice } from 'components/main';
+import { Banner, Notice, Petition, Calendar } from 'components/main';
 import type { IBanner } from 'components/main/banner';
 import type { INotice } from 'components/main/notice';
-import Petition, { IPetition } from 'components/main/petition';
-import Calendar from 'components/main/calendar';
+import type { IPetition } from 'components/main/petition';
 
 interface IMain {
    carousels: IBanner[];

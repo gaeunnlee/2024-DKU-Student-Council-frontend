@@ -2,6 +2,7 @@
 import React from 'react';
 import { BaseSkeleton, TextSkeleton } from 'components/ui/skeleton';
 import type { PetitionType } from 'shared/enum/petition';
+import { ReactComponent as ProfilePic } from 'assets/images/profile.svg';
 
 export interface IPetition {
    id: number;
@@ -29,8 +30,8 @@ export default function Petition({ petitions }: { petitions?: IPetition[] }) {
       <ol className='relative px-4 border-l border-gray-200 flex flex-col gap-4'>
          {petitions.map((item) => (
             <div key={item.id} className='flex items-center justify-between gap-3'>
-               <span className='flex items-center justify-center w-14 h-14 bg-blue-100 rounded-full ring-8 ring-white '>
-                  <img className='rounded-full shadow-lg' src='/docs/images/people/profile-picture-3.jpg' />
+               <span className='flex items-center justify-center w-10 h-10 bg-blue-100 rounded-full ring-8 ring-white'>
+                  <ProfilePic className='rounded-full shadow-lg opacity-40' />
                </span>
                <div className='items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm flex-1'>
                   <time className='mb-1 text-xs font-normal text-gray-400'>{item.d_day}일 남음</time>
