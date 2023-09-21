@@ -3,26 +3,20 @@ import axios from 'axios';
 import { API_PATH } from 'constant';
 import { useAlert } from 'hooks/useAlert';
 import { useEffectOnce } from 'hooks/useEffectOnce';
-import { PetitionType } from 'shared/enum/petition';
 import { Banner, Notice } from 'components/main';
 import type { IBanner } from 'components/main/banner';
 import type { INotice } from 'components/main/notice';
+import Petition, { IPetition } from 'components/main/petition';
+import Calendar from 'components/main/calendar';
 
 interface IMain {
    carousels: IBanner[];
    recentNews: INotice[];
+   popularPetitions: IPetition[];
    recentConferences: [
       {
          id: number;
          title: string;
-      },
-   ];
-   popularPetitions: [
-      {
-         id: number;
-         title: string;
-         petitionStatus: PetitionType;
-         d_day: number;
       },
    ];
 }
@@ -53,6 +47,8 @@ export default function Main() {
          </div>
          <Banner banners={main?.carousels} />
          <Notice notices={main?.recentNews} />
+         <Petition petitions={main?.popularPetitions} />
+         <Calendar />
       </main>
    );
 }
