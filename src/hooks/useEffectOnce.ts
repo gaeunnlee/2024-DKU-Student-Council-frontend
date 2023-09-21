@@ -14,5 +14,6 @@ import React, { useEffect } from 'react';
  * @auther 이호연
  */
 export const useEffectOnce = (callback: React.EffectCallback) => {
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    useEffect(callback, []);
 };

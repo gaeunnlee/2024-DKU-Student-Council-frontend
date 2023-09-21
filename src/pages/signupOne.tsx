@@ -77,7 +77,7 @@ export default function Login() {
             </div>
          </div>
 
-         <button onClick={nexthandle}>동의 완료</button>
+         <button onClick={nextHandle}>동의 완료</button>
       </>
    );
 }

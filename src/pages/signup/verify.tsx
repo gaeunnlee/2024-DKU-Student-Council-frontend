@@ -1,20 +1,14 @@
 import React, { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CONSTANTS, API_PATH, ROUTES } from '../../constants';
+import { API_PATH, ROUTES } from 'constant';
 import axios, { AxiosError } from 'axios';
-import { Regex } from '../../utils/regex';
-
-const { SERVER_URL } = CONSTANTS;
-
-export interface IVerifyInfo {
-   studentId: string;
-   password: string;
-}
+import { Regex } from 'utils/regex';
+import type { IIdPassword } from 'interfaces/default-interfaces';
 
 export default function SignupVerify() {
    const navigate = useNavigate();
 
-   const [verifyInfo, setVerifyInfo] = useState<IverifyInfo>({
+   const [verifyInfo, setVerifyInfo] = useState<IIdPassword>({
       studentId: '',
       password: '',
    });
@@ -22,9 +16,9 @@ export default function SignupVerify() {
    const [studentIdError, setStudentIdError] = useState<string | null>(null);
    const [passwordError, setPasswordError] = useState<string | null>(null);
 
-   const verify = async (verifyInfo: IverifyInfo) => {
+   const verify = async (verifyInfo: IIdPassword) => {
       try {
-         const response = await axios.post(SERVER_URL + API_PATH.SIGNUP_VERIFY, verifyInfo);
+         const response = await axios.post(API_PATH.USER.SIGNUP.VERIFY, verifyInfo);
          navigate(ROUTES.MAIN); // 테스트차 성공 시 main으로 이동
          console.log(response);
       } catch (error) {

@@ -39,7 +39,7 @@ export const ROUTES = {
    NOT_FOUND: '*',
    SIGNUP: {
       ROOT: '/signup',
-      VERIFY: '/signup/verify'
+      VERIFY: '/signup/verify',
    },
 };
 
@@ -53,7 +53,7 @@ export const API_PATH = {
       /** 로그인 */
       LOGIN: '/user/login',
       SIGNUP: {
-        VERIFY: '/user/dku/verify',
+         VERIFY: '/user/dku/verify',
       },
    },
 };
