@@ -7,9 +7,7 @@ type DefaultLayoutProps = IWithReactChildren & React.HTMLAttributes<HTMLDivEleme
 export default function DefaultLayout({ children, className, ...props }: DefaultLayoutProps) {
    return (
       <div
-         className={`flex flex-col max-w-3xl mx-auto overflow-y-auto overflow-x-hidden ${
-            typeof className !== 'undefined' ? className : ''
-         }`}
+         className={`flex flex-col max-w-3xl mx-auto overflow-y-auto overflow-x-hidden ${className ?? ''}`}
          style={{ marginBottom: CONSTANTS.bottomNavSize }}
          {...props}
       >

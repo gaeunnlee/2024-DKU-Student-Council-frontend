@@ -6,6 +6,7 @@ import { useAlert } from 'hooks/useAlert';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { ReactComponent as ChevronRight } from 'assets/images/chevron_right.svg';
 import { BaseSkeleton, TextSkeleton } from 'components/ui/skeleton';
+import SpeedDial from 'components/ui/speed-dial';
 
 interface IRental {
    content: Content[];
@@ -42,26 +43,33 @@ export default function Rental() {
    });
 
    return (
-      <Board
-         skeleton={
-            <BaseSkeleton className='p-4 my-[1px] rounded-lg h-full flex justify-between items-center'>
-               <TextSkeleton className='rounded-full' width={4} height={1} />
-               <span className='text-sm text-gray-400 flex items-center'>
-                  잔여: <TextSkeleton width={1} className='rounded-full' />
-                  <ChevronRight className='opacity-30' />
-               </span>
-            </BaseSkeleton>
-         }
-         skeletonCount={10}
-      >
-         {rental?.content.map((item) => (
-            <Board.Cell key={item.id} className='flex justify-between items-center'>
-               <h6>{item.name}</h6>
-               <span className='text-sm text-gray-400 flex items-center'>
-                  잔여: <div>{item.remaining}</div> <ChevronRight className='opacity-30' />
-               </span>
-            </Board.Cell>
-         ))}
-      </Board>
+      <>
+         <Board
+            skeleton={
+               <BaseSkeleton className='p-4 my-[1px] rounded-lg h-full flex justify-between items-center'>
+                  <TextSkeleton className='rounded-full' width={4} height={1} />
+                  <span className='text-sm text-gray-400 flex items-center'>
+                     잔여: <TextSkeleton width={1} className='rounded-full' />
+                     <ChevronRight className='opacity-30' />
+                  </span>
+               </BaseSkeleton>
+            }
+            skeletonCount={10}
+         >
+            {rental?.content.map((item) => (
+               <Board.Cell key={item.id} className='flex justify-between items-center'>
+                  <h6>{item.name}</h6>
+                  <span className='text-sm text-gray-400 flex items-center'>
+                     잔여: <div>{item.remaining}</div> <ChevronRight className='opacity-30' />
+                  </span>
+               </Board.Cell>
+            ))}
+         </Board>
+         <SpeedDial>
+            <button className='bg-blue-500 rounded-full px-4 py-2 text-white text-lg shadow-xl'>
+               대여하기
+            </button>
+         </SpeedDial>
+      </>
    );
 }
