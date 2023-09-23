@@ -13,7 +13,7 @@ interface NavItem {
 const navItems: NavItem[] = [
    {
       id: 1,
-      name: '카테고리',
+      name: '메뉴',
       path: '/category',
       icon: (
          <svg
@@ -36,7 +36,7 @@ const navItems: NavItem[] = [
    },
    {
       id: 2,
-      name: '스냅',
+      name: '커뮤니티',
       path: '/snap',
       icon: (
          <svg
@@ -61,7 +61,7 @@ const navItems: NavItem[] = [
    {
       id: 3,
       name: '홈',
-      path: '/',
+      path: ROUTES.MAIN,
       icon: (
          <svg
             width='30'
@@ -80,8 +80,8 @@ const navItems: NavItem[] = [
    },
    {
       id: 4,
-      name: '좋아요',
-      path: '/like',
+      name: '대여물품',
+      path: ROUTES.RENTAL.ROOT,
       icon: (
          <svg
             width='30'

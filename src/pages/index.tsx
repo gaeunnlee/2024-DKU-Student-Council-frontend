@@ -3,7 +3,7 @@ import axios from 'axios';
 import { API_PATH } from 'constant';
 import { useAlert } from 'hooks/useAlert';
 import { useEffectOnce } from 'hooks/useEffectOnce';
-import { Banner, Notice, Petition, Calendar } from 'components/main';
+import { Banner, Notice, Petition } from 'components/main';
 import type { IBanner } from 'components/main/banner';
 import type { INotice } from 'components/main/notice';
 import type { IPetition } from 'components/main/petition';
@@ -47,7 +47,6 @@ export default function Main() {
          <Banner banners={main?.carousels} />
          <Notice notices={main?.recentNews} />
          <Petition petitions={main?.popularPetitions} />
-         <Calendar />
       </main>
    );
 }

@@ -46,24 +46,24 @@ export default function Petition({ petitions }: { petitions?: IPetition[] }) {
          <h3 className='font-bold text-lg'>실시간 인기 청원</h3>
          <ul className='mt-4'>
             <li className='flex items-center justify-between my-1'>
-               <TextSkeleton className='my-1 rounded-full w-[7rem]' />
-               <TextSkeleton className='my-1 rounded-full w-[3rem]' />
+               <TextSkeleton className='my-1 rounded-full' width={7} />
+               <TextSkeleton className='my-1 rounded-full' width={3} />
             </li>
             <li className='flex items-center justify-between my-1'>
-               <TextSkeleton className='my-1 rounded-full w-[15rem]' />
-               <TextSkeleton className='my-1 rounded-full w-[2rem]' />
+               <TextSkeleton className='my-1 rounded-full' width={15} />
+               <TextSkeleton className='my-1 rounded-full' width={2} />
             </li>
             <li className='flex items-center justify-between my-1'>
-               <TextSkeleton className='my-1 rounded-full w-[10rem]' />
-               <TextSkeleton className='my-1 rounded-full w-[3rem]' />
+               <TextSkeleton className='my-1 rounded-full' width={10} />
+               <TextSkeleton className='my-1 rounded-full' width={3} />
             </li>
             <li className='flex items-center justify-between my-1'>
-               <TextSkeleton className='my-1 rounded-full w-[17rem]' />
-               <TextSkeleton className='my-1 rounded-full w-[2rem]' />
+               <TextSkeleton className='my-1 rounded-full' width={17} />
+               <TextSkeleton className='my-1 rounded-full' width={2} />
             </li>
             <li className='flex items-center justify-between my-1'>
-               <TextSkeleton className='my-1 rounded-full w-[14rem]' />
-               <TextSkeleton className='my-1 rounded-full w-[2rem]' />
+               <TextSkeleton className='my-1 rounded-full' width={14} />
+               <TextSkeleton className='my-1 rounded-full' width={2} />
             </li>
          </ul>
       </BaseSkeleton>

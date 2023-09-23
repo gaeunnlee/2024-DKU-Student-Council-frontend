@@ -51,6 +51,11 @@ export const ROUTES = {
       /** 동의 */
       TERMS: '/signup/terms',
    },
+   /** 대여물품 */
+   RENTAL: {
+      /** 루트 */
+      ROOT: '/rental',
+   },
 };
 
 /**
@@ -74,5 +79,9 @@ export const API_PATH = {
       CAROUSEL: '/main/carousel',
       /** 학사일정 */
       SCHEDULE: '/main/schedule',
+   },
+   RENTAL: {
+      /** 대여물품 목록 */
+      ITEM: '/rental/item',
    },
 };

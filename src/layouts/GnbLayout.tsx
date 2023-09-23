@@ -30,6 +30,10 @@ const layoutVariant: ILayoutVariant[] = [
       path: ROUTES.MYPAGE,
       header: <Gnb center={<Gnb.Title>마이페이지</Gnb.Title>} />,
    },
+   {
+      path: ROUTES.RENTAL.ROOT,
+      header: <Gnb center={<Gnb.Title>대여물품</Gnb.Title>} />,
+   },
 ];
 
 export default function GnbLayout({ children }: IWithReactChildren) {

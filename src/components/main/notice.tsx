@@ -25,11 +25,11 @@ export default function Notice({ notices }: { notices?: INotice[] }) {
       <BaseSkeleton className='px-4 py-5 m-4 rounded-xl'>
          <h3 className='font-bold text-lg'>최신 공지사항</h3>
          <ul className='mt-4'>
-            <TextSkeleton className='my-3 rounded-full w-[7rem]' />
-            <TextSkeleton className='my-3 rounded-full w-[15rem]' />
-            <TextSkeleton className='my-3 rounded-full w-[10rem]' />
-            <TextSkeleton className='my-3 rounded-full w-[17rem]' />
-            <TextSkeleton className='my-3 rounded-full w-[14rem]' />
+            <TextSkeleton className='my-3 rounded-full' width={7} />
+            <TextSkeleton className='my-3 rounded-full' width={15} />
+            <TextSkeleton className='my-3 rounded-full' width={10} />
+            <TextSkeleton className='my-3 rounded-full' width={17} />
+            <TextSkeleton className='my-3 rounded-full' width={14} />
          </ul>
       </BaseSkeleton>
    );
