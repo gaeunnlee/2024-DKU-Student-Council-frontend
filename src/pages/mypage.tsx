@@ -6,6 +6,7 @@ import { useEffectOnce } from 'hooks/useEffectOnce';
 import Box from 'components/ui/box';
 import Button from 'components/ui/button';
 import Text from 'components/ui/text';
+import { useLayout } from 'hooks/useLayout';
 
 interface IMyInfo {
    studentId: string;
@@ -23,7 +24,7 @@ interface IMyInfo {
 
 export default function MyPage() {
    const { alert } = useAlert();
-
+   const { setTitle } = useLayout();
    const [myInfo, setMyInfo] = React.useState<IMyInfo | null>(null);
 
    const fetchMyInfo = async () => {
@@ -37,6 +38,7 @@ export default function MyPage() {
 
    useEffectOnce(() => {
       fetchMyInfo();
+      setTitle('마이페이지');
    });
 
    return (
