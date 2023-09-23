@@ -5,21 +5,10 @@ import { API_PATH, ROUTES } from 'constant';
 import { useAlert } from 'hooks/useAlert';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { ReactComponent as ChevronRight } from 'assets/images/chevron_right.svg';
-import { BaseSkeleton, TextSkeleton } from 'components/ui/skeleton';
 import SpeedDial from 'components/ui/speed-dial';
 import { Link } from 'react-router-dom';
 import { useLayout } from 'hooks/useLayout';
-
-interface IRental {
-   content: Content[];
-   hasNext: boolean;
-   totalPages: number;
-   totalElements: number;
-   page: number;
-   size: number;
-   first: boolean;
-   last: boolean;
-}
+import { IPaging } from 'api/axios-interface';
 
 interface Content {
    id: number;
@@ -28,13 +17,13 @@ interface Content {
 }
 
 export default function Rental() {
-   const [rental, setRental] = React.useState<IRental | null>(null);
+   const [rental, setRental] = React.useState<IPaging<Content> | null>(null);
    const { alert } = useAlert();
    const { setTitle } = useLayout();
 
    const fetchRental = async () => {
       try {
-         const { data } = await axios.get<IRental>(API_PATH.RENTAL.ITEM + '?page=0&size=20');
+         const { data } = await axios.get<IPaging<Content>>(API_PATH.RENTAL.ITEM + '?page=0&size=20');
          setRental(data);
       } catch (error) {
          alert(error);
@@ -48,18 +37,7 @@ export default function Rental() {
 
    return (
       <>
-         <Board
-            skeleton={
-               <BaseSkeleton className='p-4 my-[1px] rounded-lg h-full flex justify-between items-center'>
-                  <TextSkeleton className='rounded-full' width={4} height={1} />
-                  <span className='text-sm text-gray-400 flex items-center'>
-                     잔여: <TextSkeleton width={1} className='rounded-full' />
-                     <ChevronRight className='opacity-30' />
-                  </span>
-               </BaseSkeleton>
-            }
-            skeletonCount={10}
-         >
+         <Board>
             {rental?.content.map((item) => (
                <Board.Cell key={item.id}>
                   <Link

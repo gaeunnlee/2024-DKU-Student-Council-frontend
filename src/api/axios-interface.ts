@@ -19,3 +19,17 @@ export interface ILoginResponse {
    accessToken: string;
    refreshToken: string;
 }
+
+/**
+ * @description 페이징 정보
+ */
+export interface IPaging<T> {
+   content: T[];
+   hasNext: boolean;
+   totalPages: number;
+   totalElements: number;
+   page: number;
+   size: number;
+   first: boolean;
+   last: boolean;
+}
