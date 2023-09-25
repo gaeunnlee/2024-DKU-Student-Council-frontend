@@ -7,7 +7,7 @@ export default function SignupTerms() {
    const [agreeCheck, setAgreeCheck] = useState([false, false, false]);
    const navigate = useNavigate();
 
-   const handleCheckboxChange = (index: number) => {
+   const onCheckboxChange = (index: number) => {
       if (index === 3) {
          if (agreeCheck[0] && agreeCheck[1] && agreeCheck[2]) {
             const newAgreeCheck = [false, false, false];
@@ -23,7 +23,7 @@ export default function SignupTerms() {
       }
    };
 
-   const nextHandle = () => {
+   const goNext = () => {
       // 체크 여부 확인
       if (agreeCheck[0] && agreeCheck[1] && agreeCheck[2]) {
          navigate(ROUTES.SIGNUP.VERIFY);
@@ -41,15 +41,15 @@ export default function SignupTerms() {
                   <input
                      type='checkbox'
                      checked={agreeCheck[0] && agreeCheck[1] && agreeCheck[2]}
-                     onChange={() => handleCheckboxChange(3)}
+                     onChange={() => onCheckboxChange(3)}
                   />
                </label>
                <p>
                   단국대학교 총학생회 홈페이지는 단국대학교 홈페이지 서비스 회원가입 및 본인 인증을 위하여
-                  아래와 같이 개인정보를 수집, 이용합니다.
+                  아래와 같이 개인정보를 수집, 이용합니다. test
                </p>
                <label>
-                  <input type='checkbox' checked={agreeCheck[0]} onChange={() => handleCheckboxChange(0)} />
+                  <input type='checkbox' checked={agreeCheck[0]} onChange={() => onCheckboxChange(0)} />
                   <span>[필수]</span>개인정보 수집, 이용 동의
                </label>
                <p>
@@ -60,7 +60,7 @@ export default function SignupTerms() {
 
             <div>
                <label>
-                  <input type='checkbox' checked={agreeCheck[1]} onChange={() => handleCheckboxChange(1)} />
+                  <input type='checkbox' checked={agreeCheck[1]} onChange={() => onCheckboxChange(1)} />
                   <span>[필수]</span>개인정보 제 3자 제공 동의
                </label>
                <p>
@@ -71,7 +71,7 @@ export default function SignupTerms() {
 
             <div>
                <label>
-                  <input type='checkbox' checked={agreeCheck[2]} onChange={() => handleCheckboxChange(2)} />
+                  <input type='checkbox' checked={agreeCheck[2]} onChange={() => onCheckboxChange(2)} />
                   <span>[필수]</span>개인정보 수집, 이용 동의
                </label>
                <p>
@@ -81,7 +81,7 @@ export default function SignupTerms() {
             </div>
          </div>
 
-         <button onClick={nextHandle}>동의 완료</button>
+         <button onClick={goNext}>동의 완료</button>
       </>
    );
 }
