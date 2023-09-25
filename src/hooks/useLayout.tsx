@@ -8,7 +8,7 @@ export const useLayout = () => {
 
    useEffectOnce(() => {
       return () => {
-         setTitle('');
+         setTitle(null);
          setBackButton(false);
          setFullscreen(false);
       };

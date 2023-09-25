@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
-import { useLayout } from 'hooks/useLayout';
 import { useParams } from 'react-router-dom';
+import { useLayout } from 'hooks/useLayout';
 import { useAlert } from 'hooks/useAlert';
 import { API_PATH } from 'constant';
 import { IPaging } from 'api/axios-interface';
@@ -25,11 +25,12 @@ export default function RentalProduct() {
    const { setTitle, setBackButton } = useLayout();
    const { alert } = useAlert();
    const [product, setProduct] = React.useState<IProduct[] | null>(null);
+   const [isEmpty, setIsEmpty] = React.useState(false);
 
    const fetchProduct = async () => {
       try {
          const { data } = await axios.get<IPaging<IProduct>>(API_PATH.RENTAL.ITEM_DETAIL(id ?? '0'));
-         setProduct(data.content.length > 0 ? data.content : null);
+         setProduct(data.content);
          setTitle(data.content[0]?.itemName ?? '');
       } catch (e) {
          alert(e);
@@ -41,13 +42,23 @@ export default function RentalProduct() {
       fetchProduct();
    }, [id]);
 
+   useEffect(() => {
+      if (product && product.length === 0) {
+         setIsEmpty(true);
+      }
+   }, [product]);
+
    return (
-      <Board emptiable>
-         {product?.map((item) => (
-            <Board.Cell key={item.id}>
-               <Text length={4}>{item.title}</Text>
-            </Board.Cell>
-         ))}
+      <Board>
+         {isEmpty ? (
+            <Board.NoData />
+         ) : (
+            product?.map((item) => (
+               <Board.Cell key={item.id}>
+                  <Text length={4}>{item.title}</Text>
+               </Board.Cell>
+            ))
+         )}
       </Board>
    );
 }

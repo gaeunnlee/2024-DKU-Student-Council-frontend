@@ -1,15 +1,15 @@
 import { create } from 'zustand';
 
 interface GnbState {
-   title: string;
-   setTitle: (title: string) => void;
+   title: string | null;
+   setTitle: (title: string | null) => void;
    backButton: boolean;
    setBackButton: (backButton: boolean) => void;
 }
 
 export const gnbState = create<GnbState>((set) => ({
-   title: '',
-   setTitle: (title: string) => set({ title }),
+   title: null,
+   setTitle: (title: string | null) => set({ title }),
    backButton: false,
    setBackButton: (backButton: boolean) => set({ backButton }),
 }));

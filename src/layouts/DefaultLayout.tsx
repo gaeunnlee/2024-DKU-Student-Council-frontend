@@ -6,6 +6,7 @@ import { IWithReactChildren } from 'shared/interfaces/default-interfaces';
 import { gnbState } from 'stores/gnb-store';
 import { navStore } from 'stores/nav-store';
 import { AnimatePresence } from 'framer-motion';
+import { TextSkeleton } from 'components/ui/skeleton';
 
 type DefaultLayoutProps = IWithReactChildren & React.HTMLAttributes<HTMLDivElement>;
 
@@ -14,8 +15,11 @@ export default function DefaultLayout({ children, className, ...props }: Default
    const { fullscreen } = navStore();
    return (
       <>
-         {title ? (
-            <Gnb left={backButton ? <Gnb.GoBack /> : undefined} center={<Gnb.Title>{title}</Gnb.Title>} />
+         {title !== null ? (
+            <Gnb
+               left={backButton ? <Gnb.GoBack /> : undefined}
+               center={<Gnb.Title>{title === '' ? <TextSkeleton width={4} /> : title}</Gnb.Title>}
+            />
          ) : (
             <Gnb left={backButton ? <Gnb.GoBack /> : undefined} center={<Gnb.Logo />} />
          )}

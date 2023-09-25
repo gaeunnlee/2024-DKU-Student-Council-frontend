@@ -52,11 +52,7 @@ export default function Rental() {
                </Board.Cell>
             ))}
          </Board>
-         <SpeedDial>
-            <button className='bg-blue-500 rounded-full px-4 py-2 text-white text-lg shadow-xl'>
-               대여하기
-            </button>
-         </SpeedDial>
+         <SpeedDial className='bg-blue-500 text-white text-lg py-2 px-4'>대여하기</SpeedDial>
       </>
    );
 }
