@@ -4,8 +4,11 @@ import { useAuth } from 'hooks/useAuth';
 import { ROUTES } from 'constant';
 import { IIdPassword } from 'shared/interfaces/default-interfaces';
 import Input from 'components/ui/input';
+import { useLayout } from 'hooks/useLayout';
+import { useEffectOnce } from 'hooks/useEffectOnce';
 
 export default function Login() {
+   const { setFullscreen, setTitle, setBackButton } = useLayout();
    const initLoginInfo: IIdPassword = {
       studentId: '',
       password: '',
@@ -19,6 +22,12 @@ export default function Login() {
          login(loginInfo);
       },
    };
+
+   useEffectOnce(() => {
+      setFullscreen(true);
+      setTitle('로그인');
+      setBackButton(true);
+   });
 
    return (
       <>

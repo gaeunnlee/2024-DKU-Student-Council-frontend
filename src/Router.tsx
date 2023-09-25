@@ -3,15 +3,16 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ROUTES } from './constant';
 import DefaultLayout from 'layouts/DefaultLayout';
 
-const Main = React.lazy(() => import('pages'));
+import Main from 'pages';
 import NotFound from 'pages/404';
 import Login from 'pages/login';
 import Signup from 'pages/signup';
 import SignupVerify from 'pages/signup/verify';
 import SignupTerms from 'pages/signup/terms';
-import GnbLayout from 'layouts/GnbLayout';
 import MyPage from 'pages/mypage';
 import PrivateRoute from 'PrivateRoute';
+import Rental from 'pages/rental';
+import RentalProduct from 'pages/rental/[id]';
 
 /**
  * @description 라우터
@@ -20,28 +21,28 @@ import PrivateRoute from 'PrivateRoute';
 export default function Router() {
    return (
       <BrowserRouter>
-         <GnbLayout>
-            {/* TODO: 로딩 컴포넌트 만들어 넣기 */}
-            <DefaultLayout>
-               <Routes>
-                  <Route path={ROUTES.MAIN} element={<Main />} />
-                  <Route path={ROUTES.LOGIN} element={<Login />} />
-                  <Route
-                     path={ROUTES.MYPAGE}
-                     element={
-                        <PrivateRoute>
-                           <MyPage />
-                        </PrivateRoute>
-                     }
-                  />
-                  <Route path={ROUTES.SIGNUP.ROOT} element={<Signup />}>
-                     <Route index path={ROUTES.SIGNUP.VERIFY} element={<SignupVerify />} />
-                     <Route path={ROUTES.SIGNUP.TERMS} element={<SignupTerms />} />
-                  </Route>
-                  <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
-               </Routes>
-            </DefaultLayout>
-         </GnbLayout>
+         {/* TODO: 로딩 컴포넌트 만들어 넣기 */}
+         <DefaultLayout>
+            <Routes>
+               <Route path={ROUTES.MAIN} element={<Main />} />
+               <Route path={ROUTES.LOGIN} element={<Login />} />
+               <Route
+                  path={ROUTES.MYPAGE}
+                  element={
+                     <PrivateRoute>
+                        <MyPage />
+                     </PrivateRoute>
+                  }
+               />
+               <Route path={ROUTES.SIGNUP.ROOT} element={<Signup />}>
+                  <Route index path={ROUTES.SIGNUP.VERIFY} element={<SignupVerify />} />
+                  <Route path={ROUTES.SIGNUP.TERMS} element={<SignupTerms />} />
+               </Route>
+               <Route path={ROUTES.RENTAL.ROOT} element={<Rental />} />
+               <Route path={ROUTES.RENTAL.ITEM} element={<RentalProduct />} />
+               <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+            </Routes>
+         </DefaultLayout>
       </BrowserRouter>
    );
 }

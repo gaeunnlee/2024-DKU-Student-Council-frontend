@@ -5,7 +5,8 @@ import { useAlert } from 'hooks/useAlert';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import Box from 'components/ui/box';
 import Button from 'components/ui/button';
-import { TextSkeleton } from 'components/ui/skeleton';
+import Text from 'components/ui/text';
+import { useLayout } from 'hooks/useLayout';
 
 interface IMyInfo {
    studentId: string;
@@ -21,13 +22,9 @@ interface IMyInfo {
    admin: boolean;
 }
 
-const MyPageSkeleton = ({ width }: { width: number }) => (
-   <TextSkeleton className={'h-[2rem] rounded-md'} style={{ width: width + 'rem' }} />
-);
-
 export default function MyPage() {
    const { alert } = useAlert();
-
+   const { setTitle } = useLayout();
    const [myInfo, setMyInfo] = React.useState<IMyInfo | null>(null);
 
    const fetchMyInfo = async () => {
@@ -41,6 +38,7 @@ export default function MyPage() {
 
    useEffectOnce(() => {
       fetchMyInfo();
+      setTitle('마이페이지');
    });
 
    return (
@@ -48,11 +46,9 @@ export default function MyPage() {
          <div className='flex justify-between items-center'>
             <label className='text-xs'>
                닉네임
-               {myInfo ? (
-                  <h4 className='text-2xl font-medium'>{myInfo?.nickname}</h4>
-               ) : (
-                  <MyPageSkeleton width={5} />
-               )}
+               <Text className='text-2xl font-medium' length={5} height={1.5}>
+                  {myInfo?.nickname}
+               </Text>
             </label>
             <Box>
                <span>{myInfo?.admin ? '관리자' : '재학생'}</span>
@@ -60,72 +56,49 @@ export default function MyPage() {
          </div>
          <Box className='mt-4'>
             <label className='text-xs'>학번</label>
-            {myInfo ? (
-               <h4 className='text-2xl font-medium'>{myInfo?.studentId}</h4>
-            ) : (
-               <MyPageSkeleton width={7} />
-            )}
-
+            <Text className='text-2xl font-medium' length={7} height={1.5}>
+               {myInfo?.studentId}
+            </Text>
             <label className='text-xs'>이름</label>
-            {myInfo ? (
-               <h4 className='text-2xl font-medium'>{myInfo?.username}</h4>
-            ) : (
-               <MyPageSkeleton width={5} />
-            )}
-
+            <Text className='text-2xl font-medium' length={5} height={1.5}>
+               {myInfo?.username}
+            </Text>
             <label className='text-xs'>학과</label>
-            {myInfo ? (
-               <h4 className='text-2xl font-medium'>{myInfo?.department}</h4>
-            ) : (
-               <MyPageSkeleton width={8} />
-            )}
-
-            <label className='text-xs'>전공</label>
-            {myInfo ? (
-               <h4 className='text-2xl font-medium'>{myInfo?.major}</h4>
-            ) : (
-               <MyPageSkeleton width={8} />
-            )}
-
-            <label className='text-xs'>학번</label>
-            {myInfo ? (
-               <h4 className='text-2xl font-medium'>{myInfo?.yearOfAdmission}</h4>
-            ) : (
-               <MyPageSkeleton width={4} />
-            )}
-
+            <Text className='text-2xl font-medium' length={8} height={1.5}>
+               {myInfo?.department}
+            </Text>
+            <label>전공</label>
+            <Text className='text-2xl font-medium' length={8} height={1.5}>
+               {myInfo?.major}
+            </Text>
+            <label>학번</label>
+            <Text className='text-2xl font-medium' length={4} height={1.5}>
+               {myInfo?.yearOfAdmission}
+            </Text>
             <label className='text-xs'>전화번호</label>
-            {myInfo ? (
-               <h4 className='text-2xl font-medium'>{myInfo?.phoneNumber}</h4>
-            ) : (
-               <MyPageSkeleton width={10} />
-            )}
+            <Text className='text-2xl font-medium' length={10} height={1.5}>
+               {myInfo?.phoneNumber}
+            </Text>
          </Box>
          <Box className='mt-4'>
             <label className='text-xs'>작성한 게시글</label>
-            {myInfo ? (
-               <h4 className='text-2xl font-medium'>{myInfo?.writePostCount}</h4>
-            ) : (
-               <MyPageSkeleton width={3} />
-            )}
+            <Text className='text-2xl font-medium' length={3} height={1.5}>
+               {myInfo?.writePostCount}
+            </Text>
 
             <label className='text-xs'>댓글 단 게시글</label>
-            {myInfo ? (
-               <h4 className='text-2xl font-medium'>{myInfo?.commentedPostCount}</h4>
-            ) : (
-               <MyPageSkeleton width={4} />
-            )}
+            <Text className='text-2xl font-medium' length={4} height={1.5}>
+               {myInfo?.commentedPostCount}
+            </Text>
 
             <label className='text-xs'>좋아요 누른 게시글</label>
-            {myInfo ? (
-               <h4 className='text-2xl font-medium'>{myInfo?.likedPostCount}</h4>
-            ) : (
-               <MyPageSkeleton width={2} />
-            )}
+            <Text className='text-2xl font-medium' length={2} height={1.5}>
+               {myInfo?.likedPostCount}
+            </Text>
          </Box>
          <Box className='mt-4 flex flex-col'>
-            <Button>로그아웃</Button>
-            <Button variant='red'>탈퇴하기</Button>
+            <Button variant='red'>로그아웃</Button>
+            <Button>탈퇴하기</Button>
          </Box>
       </div>
    );
