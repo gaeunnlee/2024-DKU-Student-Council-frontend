@@ -8,17 +8,17 @@ export default function SignupTerms() {
    const navigate = useNavigate();
 
    const onCheckboxChange = (index: number) => {
-      if (index === 3) {
-         if (agreeCheck[0] && agreeCheck[1] && agreeCheck[2]) {
-            const newAgreeCheck = [false, false, false];
-            setAgreeCheck(newAgreeCheck);
-         } else {
-            const newAgreeCheck = [true, true, true];
-            setAgreeCheck(newAgreeCheck);
-         }
+      const newAgreeCheck = [...agreeCheck];
+      newAgreeCheck[index] = !newAgreeCheck[index];
+      setAgreeCheck(newAgreeCheck);
+   };
+
+   const onAllCheckboxChange = () => {
+      if (agreeCheck[0] && agreeCheck[1] && agreeCheck[2]) {
+         const newAgreeCheck = [false, false, false];
+         setAgreeCheck(newAgreeCheck);
       } else {
-         const newAgreeCheck = [...agreeCheck];
-         newAgreeCheck[index] = !newAgreeCheck[index];
+         const newAgreeCheck = [true, true, true];
          setAgreeCheck(newAgreeCheck);
       }
    };
@@ -41,7 +41,7 @@ export default function SignupTerms() {
                   <input
                      type='checkbox'
                      checked={agreeCheck[0] && agreeCheck[1] && agreeCheck[2]}
-                     onChange={() => onCheckboxChange(3)}
+                     onChange={onAllCheckboxChange}
                   />
                </label>
                <p>
