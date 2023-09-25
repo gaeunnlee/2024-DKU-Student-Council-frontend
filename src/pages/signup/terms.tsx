@@ -7,9 +7,16 @@ export default function SignupTerms() {
    const [agreeCheck, setAgreeCheck] = useState([false, false, false]);
    const navigate = useNavigate();
 
-   const onCheckboxChange = (index: number) => {
+   const onCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const name = e.target.name;
       const newAgreeCheck = [...agreeCheck];
-      newAgreeCheck[index] = !newAgreeCheck[index];
+      if (name === 'agree1') {
+         newAgreeCheck[0] = !newAgreeCheck[0];
+      } else if (name === 'agree2') {
+         newAgreeCheck[1] = !newAgreeCheck[1];
+      } else if (name === 'agree3') {
+         newAgreeCheck[2] = !newAgreeCheck[2];
+      }
       setAgreeCheck(newAgreeCheck);
    };
 
@@ -49,7 +56,7 @@ export default function SignupTerms() {
                   아래와 같이 개인정보를 수집, 이용합니다. test
                </p>
                <label>
-                  <input type='checkbox' checked={agreeCheck[0]} onChange={() => onCheckboxChange(0)} />
+                  <input type='checkbox' name='agree1' checked={agreeCheck[0]} onChange={onCheckboxChange} />
                   <span>[필수]</span>개인정보 수집, 이용 동의
                </label>
                <p>
@@ -60,7 +67,7 @@ export default function SignupTerms() {
 
             <div>
                <label>
-                  <input type='checkbox' checked={agreeCheck[1]} onChange={() => onCheckboxChange(1)} />
+                  <input type='checkbox' name='agree2' checked={agreeCheck[1]} onChange={onCheckboxChange} />
                   <span>[필수]</span>개인정보 제 3자 제공 동의
                </label>
                <p>
@@ -71,7 +78,7 @@ export default function SignupTerms() {
 
             <div>
                <label>
-                  <input type='checkbox' checked={agreeCheck[2]} onChange={() => onCheckboxChange(2)} />
+                  <input type='checkbox' name='agree3' checked={agreeCheck[2]} onChange={onCheckboxChange} />
                   <span>[필수]</span>개인정보 수집, 이용 동의
                </label>
                <p>
