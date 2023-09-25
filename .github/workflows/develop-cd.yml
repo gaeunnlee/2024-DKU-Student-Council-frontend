@@ -52,7 +52,7 @@ jobs:
         docker push $USERNAME/$REPO:latest
 
     - name: SSH Remote Commands
-      uses: appleboy/ssh-action@0.1.4
+      uses: appleboy/ssh-action@v0.1.4
       env:
         REPO: ${{ secrets.DOCKER_REPO }}
       with:
