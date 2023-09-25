@@ -2,8 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'constant';
+import { useAlert } from '../../hooks/useAlert';
 
 export default function SignupTerms() {
+   const { alert } = useAlert();
+
    const [agreeCheck, setAgreeCheck] = useState([false, false, false]);
    const navigate = useNavigate();
 
