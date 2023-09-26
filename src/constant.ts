@@ -60,4 +60,9 @@ export const API_PATH = {
          VERIFY: '/user/dku/verify',
       },
    },
+   /* 청원게시판 */
+   POST: {
+      /* 게시판 목록 */
+      PETITON: '/post/petition',
+   },
 };
