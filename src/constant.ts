@@ -46,10 +46,12 @@ export const ROUTES = {
    SIGNUP: {
       /** 루트 */
       ROOT: '/signup',
-      /** 학생 인증 */
-      VERIFY: '/signup/verify',
       /** 동의 */
       TERMS: '/signup/terms',
+      /** 학생 인증 */
+      VERIFY: '/signup/verify',
+      /** 회원 정보 입력 */
+      INFO: '/signup/info',
    },
    /** 대여물품 */
    RENTAL: {

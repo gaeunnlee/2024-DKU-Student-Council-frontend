@@ -7,8 +7,9 @@ import Main from 'pages';
 import NotFound from 'pages/404';
 import Login from 'pages/login';
 import Signup from 'pages/signup';
-import SignupVerify from 'pages/signup/verify';
 import SignupTerms from 'pages/signup/terms';
+import SignupVerify from 'pages/signup/verify';
+import SignupInfo from 'pages/signup/info';
 import MyPage from 'pages/mypage';
 import PrivateRoute from 'PrivateRoute';
 import Rental from 'pages/rental';
@@ -37,6 +38,7 @@ export default function Router() {
                <Route path={ROUTES.SIGNUP.ROOT} element={<Signup />}>
                   <Route index path={ROUTES.SIGNUP.VERIFY} element={<SignupVerify />} />
                   <Route path={ROUTES.SIGNUP.TERMS} element={<SignupTerms />} />
+                  <Route path={ROUTES.SIGNUP.INFO} element={<SignupInfo />} />
                </Route>
                <Route path={ROUTES.RENTAL.ROOT} element={<Rental />} />
                <Route path={ROUTES.RENTAL.ITEM} element={<RentalProduct />} />

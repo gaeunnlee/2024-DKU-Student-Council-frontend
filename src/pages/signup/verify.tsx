@@ -1,20 +1,12 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API_PATH, ROUTES } from 'constant';
 import axios from 'axios';
+import type { StudentVerifyResponse } from 'api/axios-interface';
 import { Regex } from 'utils/regex';
 import Input from 'components/ui/input';
 import { useAlert } from 'hooks/useAlert';
 import Button from 'components/ui/button';
-
-interface StudentVerifyResponse {
-   signupToken: string;
-   student: {
-      studentName: string;
-      studentId: string;
-      major: string;
-   };
-}
 
 interface IVerifyInfo {
    dkuStudentId: string;
@@ -29,16 +21,15 @@ export default function SignupVerify() {
       dkuPassword: '',
    });
 
-   const [studentIdError, setStudentIdError] = useState<string | null>(null);
-   const [passwordError, setPasswordError] = useState<string | null>(null);
+   const [isFormValid, setIsFormValid] = useState(false);
+
 
    const { alert } = useAlert();
 
    const verify = async (verifyInfo: IVerifyInfo) => {
       try {
-         const response = await axios.post<StudentVerifyResponse>(API_PATH.USER.SIGNUP.VERIFY, verifyInfo);
-         navigate(ROUTES.MAIN); // 테스트차 성공 시 main으로 이동
-         console.log(response);
+         const { data } = await axios.post<StudentVerifyResponse>(API_PATH.USER.SIGNUP.VERIFY, verifyInfo);
+         navigate(ROUTES.SIGNUP.INFO, { state: { data } }); 
       } catch (error) {
          alert(error);
       }
@@ -50,32 +41,20 @@ export default function SignupVerify() {
          ...verifyInfo,
          [name]: value,
       });
-
-      // 유효성 검사
-      if (name === 'studentId') {
-         if (!Regex.studentId.test(value)) {
-            setStudentIdError('유효한 학번을 입력하세요 (8자리 숫자)');
-         } else {
-            setStudentIdError(null);
-         }
-      } else if (name === 'password') {
-         if (!Regex.password.test(value)) {
-            setPasswordError(
-               '비밀번호는 8자 이상 16자 이하이며, 영문 대소문자, 숫자, 특수문자 중 3가지 이상 조합되어야 합니다.',
-            );
-         } else {
-            setPasswordError(null);
-         }
-      }
    };
+
+   useEffect(() => {
+      const isStudentIdValid = Regex.studentId.test(verifyInfo.dkuStudentId);
+      const isPasswordValid = verifyInfo.dkuPassword !== '';
+      setIsFormValid(isStudentIdValid && isPasswordValid);
+   }, [verifyInfo]);
+
 
    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      if (studentIdError || passwordError) {
-         return;
-      }
       verify(verifyInfo);
    };
+   
 
    return (
       <div className='flex items-center justify-center min-h-screen'>
@@ -88,7 +67,6 @@ export default function SignupVerify() {
                onChange={handleInputChange}
                className='w-full'
             />
-            {studentIdError && <div className='text-red-500 mb-4'>{studentIdError}</div>}
             <Input
                type='password'
                name='dkuPassword'
@@ -97,9 +75,14 @@ export default function SignupVerify() {
                onChange={handleInputChange}
                className='w-full'
             />
-            {passwordError && <div className='text-red-500 mb-4'>{passwordError}</div>}
-            <Button type='submit' variant='primary' className='w-full'>
-               인증
+            <p className="mb-4 text-gray-400 text-xs">단국대학교 웹정보 로그인 시 사용 되는 ID, PW를 통해 학생인증이 진행됩니다. (입력한 정보는 인증 후 즉시 폐기됩니다)</p>
+            <Button
+               type='submit'
+               variant={isFormValid ? 'primary' : 'red'}
+               className='w-full p-2 rounded'
+               disabled={!isFormValid}
+            >
+          인증
             </Button>
          </form>
       </div>
