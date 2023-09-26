@@ -1,8 +1,8 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'constant';
 import { useAlert } from '../../hooks/useAlert';
+import Checkbox from '../../components/ui/input/checkbox';
 
 export default function SignupTerms() {
    const { alert } = useAlert();
@@ -54,40 +54,34 @@ export default function SignupTerms() {
                      onChange={onAllCheckboxChange}
                   />
                </label>
-               <p>
-                  단국대학교 총학생회 홈페이지는 단국대학교 홈페이지 서비스 회원가입 및 본인 인증을 위하여
-                  아래와 같이 개인정보를 수집, 이용합니다. test
-               </p>
-               <label>
-                  <input type='checkbox' name='agree1' checked={agreeCheck[0]} onChange={onCheckboxChange} />
-                  <span>[필수]</span>개인정보 수집, 이용 동의
-               </label>
-               <p>
-                  단국대학교 총학생회 홈페이지는 단국대학교 홈페이지 서비스 회원가입 및 본인 인증을 위하여
-                  아래와 같이 개인정보를 수집, 이용합니다.
-               </p>
+               <p />
+               <Checkbox
+                  name='agree1'
+                  checked={agreeCheck[0]}
+                  onChange={onCheckboxChange}
+                  label='단국대학교 총학생회 홈페이지는 단국대학교 홈페이지 서비스 회원가입 및 본인 인증을 위하여
+                  아래와 같이 개인정보를 수집, 이용합니다.'
+               />
             </div>
 
             <div>
-               <label>
-                  <input type='checkbox' name='agree2' checked={agreeCheck[1]} onChange={onCheckboxChange} />
-                  <span>[필수]</span>개인정보 제 3자 제공 동의
-               </label>
-               <p>
-                  단국대학교 총학생회는 회원님의 개인정보를 개인정보 처리방침에서 고지한 제 3자 제공범위
-                  내에서 제공하며, 정보주체의 사전 동의 없이 범위를 초과하여 제 3자에게 제공하지 않습니다.
-               </p>
+               <Checkbox
+                  name='agree2'
+                  checked={agreeCheck[1]}
+                  onChange={onCheckboxChange}
+                  label='단국대학교 총학생회는 회원님의 개인정보를 개인정보 처리방침에서 고지한 제 3자 제공범위
+                  내에서 제공하며, 정보주체의 사전 동의 없이 범위를 초과하여 제 3자에게 제공하지 않습니다.'
+               />
             </div>
 
             <div>
-               <label>
-                  <input type='checkbox' name='agree3' checked={agreeCheck[2]} onChange={onCheckboxChange} />
-                  <span>[필수]</span>개인정보 수집, 이용 동의
-               </label>
-               <p>
-                  단국대학교 총학생회는 단국대학교 학생임을 인증하기 위하여 아래와 같이 단국대학교 홈페이지 내
-                  개인정보를 수집, 이용합니다.
-               </p>
+               <Checkbox
+                  name='agree3'
+                  checked={agreeCheck[2]}
+                  onChange={onCheckboxChange}
+                  label='단국대학교 총학생회는 단국대학교 학생임을 인증하기 위하여 아래와 같이 단국대학교 홈페이지 내
+                  개인정보를 수집, 이용합니다.'
+               />
             </div>
          </div>
 
