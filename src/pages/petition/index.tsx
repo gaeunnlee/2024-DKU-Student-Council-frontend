@@ -19,7 +19,7 @@ interface IPetitionPost {
 }
 
 export default function PetitionBoard() {
-   const [board, setBoard] = useState<IPetitionPost[]>();
+   const [board, setBoard] = useState<IPetitionPost[]>([]);
 
    /* 청원게시판 글 목록 불러오기 */
    useEffectOnce(() => {
@@ -33,5 +33,18 @@ export default function PetitionBoard() {
       });
    };
 
-   return <>청원게시판</>;
+   return (
+      <ul className='flex flex-col gap-10'>
+         {board.map(({ id, status, title, agreeCount, expiresAt }) => {
+            return (
+               <li key={id} className='grid grid-cols-5'>
+                  <span>{status}</span>
+                  <span>{title}</span>
+                  <span>{agreeCount}</span>
+                  <span>{expiresAt}</span>
+               </li>
+            );
+         })}
+      </ul>
+   );
 }
