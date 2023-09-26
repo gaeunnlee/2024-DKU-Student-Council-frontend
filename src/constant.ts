@@ -41,6 +41,10 @@ export const ROUTES = {
       ROOT: '/signup',
       VERIFY: '/signup/verify',
    },
+   PETITION: {
+      ROOT: '/petition',
+      POST: '/petition/:id',
+   },
 };
 
 /**

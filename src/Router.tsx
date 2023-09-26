@@ -7,6 +7,7 @@ import NotFound from './pages/404';
 import Login from './pages/login';
 import DefaultLayout from 'layouts/DefaultLayout';
 import SignupVerify from './pages/signup/verify';
+import PetitionBoard from 'pages/petition';
 
 /**
  * @description 라우터
@@ -23,6 +24,7 @@ export default function Router() {
                   <Route path={ROUTES.LOGIN} element={<Login />} />
                   <Route path={ROUTES.SIGNUP.VERIFY} element={<SignupVerify />} />
                   <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+                  <Route path={ROUTES.PETITION.ROOT} element={<PetitionBoard />} />
                </Routes>
             </DefaultLayout>
          </Suspense>
