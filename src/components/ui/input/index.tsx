@@ -5,9 +5,24 @@ interface InputProps extends React.ComponentProps<'input'> {
    placeholder?: string;
    value?: string;
    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+   message?: string | null;
+   isSuccess?: boolean;
 }
 
-export default function Input({ className, type, label, placeholder, value, onChange, ...props }: InputProps) {
+export default function Input({
+   className,
+   type,
+   label,
+   placeholder,
+   name,
+   value,
+   onChange,
+   message,
+   isSuccess,
+   ...props
+}: InputProps) {
+   const messageClassName = isSuccess ? 'text-blue-500' : 'text-red-500';
+
    return (
       <div className={'flex flex-col'}>
          {label && <label className={'block text-gray-600 text-sm ml-5 mb-1'}>{label}</label>}
@@ -16,10 +31,12 @@ export default function Input({ className, type, label, placeholder, value, onCh
             ${className}::placeholder text-gray-600 mb-2`}
             type={type}
             placeholder={placeholder}
+            name={name}
             value={value}
-            onChange={onChange}
+            onChange={onChange || (() => {})}
             {...props}
          />
+         {message && <p className={`text-xs text-center ${messageClassName}`}>{message}</p>}
       </div>
    );
 }
