@@ -74,6 +74,16 @@ export const API_PATH = {
       /** 회원가입 */
       SIGNUP: {
          VERIFY: '/user/dku/verify',
+         INFO: {
+            /** 회원가입 */
+            ROOT: (signupToken: string) => `/user/${signupToken}`,
+            /** 닉네임 중복 검사 */
+            NICKNAME: '/user/valid',
+            /** 인증 SMS 전송 */
+            PHONE_VERIFICATION: (signupToken: string) => `/user/sms/${signupToken}`,
+            /** SMS 코드 확인 */
+            CODE: (signupToken: string) => `/user/sms/verify/${signupToken}`,
+         },
       },
    },
    MAIN: {
