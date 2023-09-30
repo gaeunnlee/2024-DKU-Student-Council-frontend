@@ -33,12 +33,3 @@ export interface IPaging<T> {
    first: boolean;
    last: boolean;
 }
-
-export interface StudentVerifyResponse {
-   signupToken: string;
-   student: {
-      studentName: string;
-      studentId: string;
-      major: string;
-   };
-}

@@ -2,11 +2,19 @@ import React, { FormEvent, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API_PATH, ROUTES } from 'constant';
 import axios from 'axios';
-import type { StudentVerifyResponse } from 'api/axios-interface';
 import { Regex } from 'utils/regex';
 import Input from 'components/ui/input';
 import { useAlert } from 'hooks/useAlert';
 import Button from 'components/ui/button';
+
+interface StudentVerifyResponse {
+   signupToken: string;
+   student: {
+      studentName: string;
+      studentId: string;
+      major: string;
+   };
+}
 
 interface IVerifyInfo {
    dkuStudentId: string;
@@ -23,13 +31,12 @@ export default function SignupVerify() {
 
    const [isFormValid, setIsFormValid] = useState(false);
 
-
    const { alert } = useAlert();
 
    const verify = async (verifyInfo: IVerifyInfo) => {
       try {
          const { data } = await axios.post<StudentVerifyResponse>(API_PATH.USER.SIGNUP.VERIFY, verifyInfo);
-         navigate(ROUTES.SIGNUP.INFO, { state: { data } }); 
+         navigate(ROUTES.SIGNUP.INFO, { state: { data } });
       } catch (error) {
          alert(error);
       }
@@ -49,12 +56,10 @@ export default function SignupVerify() {
       setIsFormValid(isStudentIdValid && isPasswordValid);
    }, [verifyInfo]);
 
-
    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       verify(verifyInfo);
    };
-   
 
    return (
       <div className='flex items-center justify-center min-h-screen'>
@@ -75,14 +80,17 @@ export default function SignupVerify() {
                onChange={handleInputChange}
                className='w-full'
             />
-            <p className="mb-4 text-gray-400 text-xs">단국대학교 웹정보 로그인 시 사용 되는 ID, PW를 통해 학생인증이 진행됩니다. (입력한 정보는 인증 후 즉시 폐기됩니다)</p>
+            <p className='mb-4 text-gray-400 text-xs'>
+               단국대학교 웹정보 로그인 시 사용 되는 ID, PW를 통해 학생인증이 진행됩니다. (입력한 정보는 인증
+               후 즉시 폐기됩니다)
+            </p>
             <Button
                type='submit'
                variant={isFormValid ? 'primary' : 'red'}
                className='w-full p-2 rounded'
                disabled={!isFormValid}
             >
-          인증
+               인증
             </Button>
          </form>
       </div>
