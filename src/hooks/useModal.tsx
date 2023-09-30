@@ -1,6 +1,7 @@
 import { ModalProps } from 'components/ui/modal';
 import { ModalContext } from 'components/ui/modal/modal-provider';
 import React from 'react';
+
 /**
  * @description 모달을 사용하기 위한 커스텀 훅
  */

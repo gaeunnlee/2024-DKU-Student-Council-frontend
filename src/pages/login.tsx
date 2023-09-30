@@ -2,7 +2,8 @@ import React, { FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from 'hooks/useAuth';
 import { ROUTES } from 'constant';
-import { IIdPassword } from 'interfaces/default-interfaces';
+import { IIdPassword } from 'shared/interfaces/default-interfaces';
+import Input from 'components/ui/input';
 
 export default function Login() {
    const initLoginInfo: IIdPassword = {
@@ -22,7 +23,7 @@ export default function Login() {
    return (
       <>
          <form data-testid='login-form' onSubmit={handle.login}>
-            <input
+            <Input
                value={loginInfo.studentId}
                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   if (e.target.value.length < 9) {
@@ -35,7 +36,7 @@ export default function Login() {
                type='number'
                placeholder='학번'
             />
-            <input
+            <Input
                value={loginInfo.password}
                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setLoginInfo((prev) => {

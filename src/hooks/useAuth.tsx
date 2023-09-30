@@ -1,25 +1,13 @@
-import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
-import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useAlert } from 'hooks/useAlert';
 import { API_PATH, CONSTANTS, ROUTES } from 'constant';
-import type { IIdPassword } from 'interfaces/default-interfaces';
+import type { IIdPassword } from 'shared/interfaces/default-interfaces';
 import type { ILoginResponse } from 'api/axios-interface';
 
 export const useAuth = () => {
-   const [isLoggedIn, setIsLoggedIn] = useState(false);
    const navigate = useNavigate();
    const { alert } = useAlert();
-
-   useEffectOnce(() => {
-      const atk = localStorage.getItem(CONSTANTS.atk_key);
-      if (!atk) {
-         setIsLoggedIn(false);
-      } else if (atk.length > 0) {
-         setIsLoggedIn(true);
-      }
-   });
 
    const login = async (loginInfo: IIdPassword) => {
       try {
@@ -41,6 +29,8 @@ export const useAuth = () => {
          alert(error);
       }
    };
+
+   const isLoggedIn = (() => !!localStorage.getItem(CONSTANTS.atk_key))();
 
    return {
       isLoggedIn,

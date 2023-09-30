@@ -34,17 +34,19 @@ export default function PetitionBoard() {
    };
 
    return (
-      <ul className='flex flex-col gap-10'>
-         {board.map(({ id, status, title, agreeCount, expiresAt }) => {
-            return (
-               <li key={id} className='grid grid-cols-5'>
-                  <span>{status}</span>
-                  <span>{title}</span>
-                  <span>{agreeCount}</span>
-                  <span>{expiresAt}</span>
-               </li>
-            );
-         })}
-      </ul>
+      <>
+         <ul className='flex flex-col gap-10'>
+            {board.map(({ id, status, title, agreeCount, expiresAt }) => {
+               return (
+                  <li key={id} className='grid grid-cols-5'>
+                     <span>{status}</span>
+                     <span>{title}</span>
+                     <span>{agreeCount}</span>
+                     <span>{expiresAt}</span>
+                  </li>
+               );
+            })}
+         </ul>
+      </>
    );
 }

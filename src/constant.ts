@@ -21,6 +21,9 @@ export const CONSTANTS = {
    atk_key: 'damda-atk',
    /** RefreshToken Key */
    rtk_key: 'damda-rtk',
+
+   /** 하단 네비게이션 사이즈 */
+   bottomNavSize: '60px',
 };
 
 /**
@@ -35,11 +38,18 @@ export const ROUTES = {
    MAIN: '/',
    /** 로그인 화면 */
    LOGIN: '/login',
+   /** 마이페이지 */
+   MYPAGE: '/mypage',
    /** 404 화면 */
    NOT_FOUND: '*',
+   /** 회원가입 */
    SIGNUP: {
+      /** 루트 */
       ROOT: '/signup',
+      /** 학생 인증 */
       VERIFY: '/signup/verify',
+      /** 동의 */
+      TERMS: '/signup/terms',
    },
    PETITION: {
       ROOT: '/petition',
@@ -56,13 +66,21 @@ export const API_PATH = {
       ME: '/user',
       /** 로그인 */
       LOGIN: '/user/login',
+      /** 회원가입 */
       SIGNUP: {
          VERIFY: '/user/dku/verify',
       },
    },
-   /* 청원게시판 */
+   MAIN: {
+      /** 메인페이지 모든 데이터 */
+      ROOT: '/main',
+      /** 캐러셀 목록 */
+      CAROUSEL: '/main/carousel',
+      /** 학사일정 */
+      SCHEDULE: '/main/schedule',
+   },
    POST: {
-      /* 게시판 목록 */
+      /* 청원게시판 */
       PETITON: '/post/petition',
    },
 };
