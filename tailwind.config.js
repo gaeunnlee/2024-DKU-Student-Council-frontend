@@ -3,6 +3,9 @@ module.exports = {
    content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
    theme: {
       extend: {
+         width : {
+            '311': '311px',
+         },
          animation: {
             fadeIn: 'fadeIn 0.3s ease-in-out',
             fadeOut: 'fadeOut 0.3s ease-in-out',
