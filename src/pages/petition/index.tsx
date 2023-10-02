@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { API_PATH } from 'constant';
-import { useEffectOnce } from 'hooks/useEffectOnce';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface IPetitionPost {
    id: string;
@@ -20,22 +19,41 @@ interface IPetitionPost {
 
 export default function PetitionBoard() {
    const [board, setBoard] = useState<IPetitionPost[]>([]);
+   const [page, setPage] = useState(0);
+   const [loading, setLoading] = useState(true);
+   const target = useRef<HTMLDivElement>(null);
 
-   /* 청원게시판 글 목록 불러오기 */
-   useEffectOnce(() => {
-      fetchBoard();
+   const callback = (entries: IntersectionObserverEntry[]) => {
+      if (entries[0].isIntersecting) {
+         setPage((prevPage) => prevPage + 1);
+      }
+   };
+
+   useEffect(() => {
+      const observer = new IntersectionObserver(callback);
+      if (target.current) {
+         observer.observe(target.current);
+      }
+      return () => observer.disconnect();
    });
 
-   const fetchBoard = () => {
-      axios.get(API_PATH.POST.PETITON).then(({ data }) => {
-         setBoard(data.content);
-         console.log(board);
+   const fetchBoard = (boardPage: number) => {
+      setLoading(true);
+      axios.get(`${API_PATH.POST.PETITON}?page=${boardPage}&size=10&sort=id,desc`).then(({ data }) => {
+         setBoard((prev) => {
+            return page === 0 ? data.content : prev.concat(data.content);
+         });
+         setLoading(data.content.length === 0);
       });
    };
 
+   useEffect(() => {
+      fetchBoard(page);
+   }, [page]);
+
    return (
       <>
-         <ul className='flex flex-col gap-10'>
+         <ul className='flex flex-col gap-20'>
             {board.map(({ id, status, title, agreeCount, expiresAt }) => {
                return (
                   <li key={id} className='grid grid-cols-5'>
@@ -47,6 +65,7 @@ export default function PetitionBoard() {
                );
             })}
          </ul>
+         {!loading && <div ref={target} />}
       </>
    );
 }
