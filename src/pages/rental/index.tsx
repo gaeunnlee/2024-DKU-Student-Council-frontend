@@ -23,7 +23,7 @@ export default function Rental() {
 
    const fetchRental = async () => {
       try {
-         const { data } = await axios.get<IPaging<Content>>(API_PATH.RENTAL.ITEM + '?page=0&size=20');
+         const { data } = await axios.get<IPaging<Content>>(API_PATH.POST.RENTAL.ITEM + '?page=0&size=20');
          setRental(data);
       } catch (error) {
          alert(error);

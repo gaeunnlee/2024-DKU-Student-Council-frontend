@@ -39,31 +39,11 @@ export default function Router() {
                <Route path={ROUTES.SIGNUP.ROOT} element={<Signup />}>
                   <Route index path={ROUTES.SIGNUP.VERIFY} element={<SignupVerify />} />
                   <Route path={ROUTES.SIGNUP.TERMS} element={<SignupTerms />} />
-               </Route>
-               <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
-               <Route path={ROUTES.PETITION.ROOT} element={<PetitionBoard />} />
-            </Routes>
-         </DefaultLayout>
-         {/* TODO: 로딩 컴포넌트 만들어 넣기 */}
-         <DefaultLayout>
-            <Routes>
-               <Route path={ROUTES.MAIN} element={<Main />} />
-               <Route path={ROUTES.LOGIN} element={<Login />} />
-               <Route
-                  path={ROUTES.MYPAGE}
-                  element={
-                     <PrivateRoute>
-                        <MyPage />
-                     </PrivateRoute>
-                  }
-               />
-               <Route path={ROUTES.SIGNUP.ROOT} element={<Signup />}>
-                  <Route index path={ROUTES.SIGNUP.VERIFY} element={<SignupVerify />} />
-                  <Route path={ROUTES.SIGNUP.TERMS} element={<SignupTerms />} />
                   <Route path={ROUTES.SIGNUP.INFO} element={<SignupInfo />} />
                </Route>
                <Route path={ROUTES.RENTAL.ROOT} element={<Rental />} />
                <Route path={ROUTES.RENTAL.ITEM} element={<RentalProduct />} />
+               <Route path={ROUTES.PETITION.ROOT} element={<PetitionBoard />} />
                <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
             </Routes>
          </DefaultLayout>
