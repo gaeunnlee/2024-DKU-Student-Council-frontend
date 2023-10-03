@@ -13,7 +13,7 @@ interface NavItem {
 const navItems: NavItem[] = [
    {
       id: 1,
-      name: '카테고리',
+      name: '메뉴',
       path: '/category',
       icon: (
          <svg
@@ -36,7 +36,7 @@ const navItems: NavItem[] = [
    },
    {
       id: 2,
-      name: '스냅',
+      name: '커뮤니티',
       path: '/snap',
       icon: (
          <svg
@@ -61,7 +61,7 @@ const navItems: NavItem[] = [
    {
       id: 3,
       name: '홈',
-      path: '/',
+      path: ROUTES.MAIN,
       icon: (
          <svg
             width='30'
@@ -80,8 +80,8 @@ const navItems: NavItem[] = [
    },
    {
       id: 4,
-      name: '좋아요',
-      path: '/like',
+      name: '대여물품',
+      path: ROUTES.RENTAL.ROOT,
       icon: (
          <svg
             width='30'
@@ -128,7 +128,8 @@ export default function Nav() {
    return (
       // pwa인 경우: pb-[20px] h-[80px]
       <motion.nav
-         className={`w-full bg-blue-600 h-[${CONSTANTS.bottomNavSize}] left-[50%] translate-x-[-50%] fixed flex justify-between px-6 items-center max-w-3xl`}
+         className='w-full bg-blue-600 left-[50%] translate-x-[-50%] fixed flex justify-between px-6 items-center max-w-3xl'
+         style={{ height: CONSTANTS.bottomNavSize }}
          initial={{ bottom: '-60px' }}
          animate={{ bottom: '0px' }}
          exit={{ bottom: '-60px' }}

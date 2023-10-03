@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ReactComponent as BrandLogo } from 'assets/images/logo.svg';
 import { ROUTES } from 'constant';
 
@@ -98,18 +98,18 @@ Gnb.Title = function Title({ children }: { children: React.ReactNode }) {
 };
 
 Gnb.GoBack = function GoBack() {
+   const navigate = useNavigate();
    return (
-      <Link to='/'>
-         <svg
-            width='30'
-            height='30'
-            viewBox='0 0 30 30'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'
-            role='img'
-         >
-            <path d='M19 5L9 14.9994L19 25' stroke='black'></path>
-         </svg>
-      </Link>
+      <svg
+         width='30'
+         height='30'
+         viewBox='0 0 30 30'
+         fill='none'
+         xmlns='http://www.w3.org/2000/svg'
+         role='img'
+         onClick={() => navigate(-1)}
+      >
+         <path d='M19 5L9 14.9994L19 25' stroke='black'></path>
+      </svg>
    );
 };

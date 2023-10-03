@@ -1,22 +1,42 @@
-import React from 'react';
-import { useState } from 'react';
-//import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from 'constant';
+import { useAlert } from '../../hooks/useAlert';
+import Checkbox from '../../components/ui/input/checkbox';
 
 export default function SignupTerms() {
-   const [agreeCheck, setAgreeCheck] = useState([false, false]);
-   //const navigate = useNavigate();
+   const { alert } = useAlert();
 
-   const handleCheckboxChange = (index: number) => {
+   const [agreeCheck, setAgreeCheck] = useState([false, false, false]);
+   const navigate = useNavigate();
+
+   const onCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const name = e.target.name;
       const newAgreeCheck = [...agreeCheck];
-      newAgreeCheck[index] = !newAgreeCheck[index];
+      if (name === 'agree1') {
+         newAgreeCheck[0] = !newAgreeCheck[0];
+      } else if (name === 'agree2') {
+         newAgreeCheck[1] = !newAgreeCheck[1];
+      } else if (name === 'agree3') {
+         newAgreeCheck[2] = !newAgreeCheck[2];
+      }
       setAgreeCheck(newAgreeCheck);
    };
 
-   const nextHandle = () => {
+   const onAllCheckboxChange = () => {
+      if (agreeCheck[0] && agreeCheck[1] && agreeCheck[2]) {
+         const newAgreeCheck = [false, false, false];
+         setAgreeCheck(newAgreeCheck);
+      } else {
+         const newAgreeCheck = [true, true, true];
+         setAgreeCheck(newAgreeCheck);
+      }
+   };
+
+   const goNext = () => {
       // 체크 여부 확인
       if (agreeCheck[0] && agreeCheck[1] && agreeCheck[2]) {
-         // 회원가입 다음 화면으로
-         // navigate(ROUTE.);
+         navigate(ROUTES.SIGNUP.VERIFY);
       } else {
          alert('약관에 동의해야 회원가입이 가능합니다.');
       }
@@ -27,57 +47,45 @@ export default function SignupTerms() {
          <div>
             <div>
                <label>
+                  모두동의하기
                   <input
                      type='checkbox'
-                     name='agree1'
-                     checked={agreeCheck[0]}
-                     onChange={() => handleCheckboxChange(0)}
+                     checked={agreeCheck[0] && agreeCheck[1] && agreeCheck[2]}
+                     onChange={onAllCheckboxChange}
                   />
-                  <span>[필수]</span>개인정보 수집, 이용 동의
                </label>
-               <p>
-                  단국대학교 총학생회 홈페이지는 단국대학교 홈페이지 서비스 회원가입 및 본인 인증을 위하여
-                  아래와 같이 개인정보를 수집, 이용합니다.{' '}
-               </p>
+               <p />
+               <Checkbox
+                  name='agree1'
+                  checked={agreeCheck[0]}
+                  onChange={onCheckboxChange}
+                  label='단국대학교 총학생회 홈페이지는 단국대학교 홈페이지 서비스 회원가입 및 본인 인증을 위하여
+                  아래와 같이 개인정보를 수집, 이용합니다.'
+               />
             </div>
 
             <div>
-               <label>
-                  <input
-                     type='checkbox'
-                     id='2'
-                     name=''
-                     checked={agreeCheck[1]}
-                     onChange={() => handleCheckboxChange(1)}
-                  />
-                  <span>[필수]</span>개인정보 제 3자 제공 동의
-               </label>
-               <p>
-                  단국대학교 총학생회는 회원님의 개인정보를 개인정보 처리방침에서 고지한 제 3자 제공범위
-                  내에서 제공하며, 정보주체의 사전 동의 없이 범위를 초과하여 제 3자에게 제공하지 않습니다.
-               </p>
+               <Checkbox
+                  name='agree2'
+                  checked={agreeCheck[1]}
+                  onChange={onCheckboxChange}
+                  label='단국대학교 총학생회는 회원님의 개인정보를 개인정보 처리방침에서 고지한 제 3자 제공범위
+                  내에서 제공하며, 정보주체의 사전 동의 없이 범위를 초과하여 제 3자에게 제공하지 않습니다.'
+               />
             </div>
 
             <div>
-               <label>
-                  <input
-                     type='checkbox'
-                     id='3'
-                     name='xxx'
-                     value='yyy'
-                     checked={agreeCheck[2]}
-                     onChange={() => handleCheckboxChange(2)}
-                  />
-                  <span>[필수]</span>개인정보 수집, 이용 동의
-               </label>
-               <p>
-                  단국대학교 총학생회는 단국대학교 학생임을 인증하기 위하여 아래와 같이 단국대학교 홈페이지 내
-                  개인정보를 수집, 이용합니다.
-               </p>
+               <Checkbox
+                  name='agree3'
+                  checked={agreeCheck[2]}
+                  onChange={onCheckboxChange}
+                  label='단국대학교 총학생회는 단국대학교 학생임을 인증하기 위하여 아래와 같이 단국대학교 홈페이지 내
+                  개인정보를 수집, 이용합니다.'
+               />
             </div>
          </div>
 
-         <button onClick={nextHandle}>동의 완료</button>
+         <button onClick={goNext}>동의 완료</button>
       </>
    );
 }

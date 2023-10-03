@@ -46,10 +46,19 @@ export const ROUTES = {
    SIGNUP: {
       /** 루트 */
       ROOT: '/signup',
-      /** 학생 인증 */
-      VERIFY: '/signup/verify',
       /** 동의 */
       TERMS: '/signup/terms',
+      /** 학생 인증 */
+      VERIFY: '/signup/verify',
+      /** 회원 정보 입력 */
+      INFO: '/signup/info',
+   },
+   /** 대여물품 */
+   RENTAL: {
+      /** 루트 */
+      ROOT: '/rental',
+      /** 상세 품목 조회 */
+      ITEM: '/rental/:id',
    },
    PETITION: {
       ROOT: '/petition',
@@ -69,6 +78,16 @@ export const API_PATH = {
       /** 회원가입 */
       SIGNUP: {
          VERIFY: '/user/dku/verify',
+         INFO: {
+            /** 회원가입 */
+            ROOT: (signupToken: string) => `/user/${signupToken}`,
+            /** 닉네임 중복 검사 */
+            NICKNAME: '/user/valid',
+            /** 인증 SMS 전송 */
+            PHONE_VERIFICATION: (signupToken: string) => `/user/sms/${signupToken}`,
+            /** SMS 코드 확인 */
+            CODE: (signupToken: string) => `/user/sms/verify/${signupToken}`,
+         },
       },
    },
    MAIN: {
@@ -82,5 +101,11 @@ export const API_PATH = {
    POST: {
       /* 청원게시판 */
       PETITON: '/post/petition',
+      RENTAL: {
+         /** 대여물품 목록 */
+         ITEM: '/rental/item',
+         /** 대여물품 단건조회 */
+         ITEM_DETAIL: (id: string) => `/rental/${id}`,
+      },
    },
 };
