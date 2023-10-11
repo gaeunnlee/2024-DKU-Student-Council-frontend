@@ -38,8 +38,8 @@ export default function Main() {
    });
 
    return (
-      <main>
-         <div className='px-4 pt-5 pb-4'>
+      <main className='rounded-t-xl'>
+         <div className='px-6 pt-5 pb-4'>
             <h1 className='text-4xl font-bold'>Dankook University</h1>
             <h2 className='text-2xl font-medium mb-2'>도전하는 지성, 세계를 향한 창조</h2>
             <span className='text-xs'>DANKOOK UNIVERSITY STUDENT COUNCIL</span>
