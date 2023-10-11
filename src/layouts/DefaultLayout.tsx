@@ -25,11 +25,11 @@ export default function DefaultLayout({ children, className, ...props }: Default
          )}
 
          <div
-            className={`flex flex-col max-w-3xl mx-auto overflow-y-auto overflow-x-hidden ${className ?? ''}`}
+            className={`max-w-3xl mx-auto overflow-y-auto overflow-x-hidden bg-black ${className ?? ''}`}
             style={{ marginBottom: CONSTANTS.bottomNavSize }}
             {...props}
          >
-            {children}
+            <div className='flex flex-col rounded-t-xl bg-white pt-4'>{children}</div>
          </div>
          <AnimatePresence>{!fullscreen && <Nav />}</AnimatePresence>
       </>
