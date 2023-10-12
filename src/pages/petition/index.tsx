@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { API_PATH } from 'constant';
-import React, { useEffect, useRef, useState } from 'react';
+import { useInfiniteScroll } from 'hooks/useInfiniteScroll';
+import React from 'react';
 
 interface IPetitionPost {
    id: string;
@@ -18,43 +18,12 @@ interface IPetitionPost {
 }
 
 export default function PetitionBoard() {
-   const [board, setBoard] = useState<IPetitionPost[]>([]);
-   const [page, setPage] = useState(0);
-   const [loading, setLoading] = useState(true);
-   const target = useRef<HTMLDivElement>(null);
-
-   const callback = (entries: IntersectionObserverEntry[]) => {
-      if (entries[0].isIntersecting) {
-         setPage((prevPage) => prevPage + 1);
-      }
-   };
-
-   useEffect(() => {
-      const observer = new IntersectionObserver(callback);
-      if (target.current) {
-         observer.observe(target.current);
-      }
-      return () => observer.disconnect();
-   });
-
-   const fetchBoard = (boardPage: number) => {
-      setLoading(true);
-      axios.get(`${API_PATH.POST.PETITON}?page=${boardPage}&size=10&sort=id,desc`).then(({ data }) => {
-         setBoard((prev) => {
-            return page === 0 ? data.content : prev.concat(data.content);
-         });
-         setLoading(data.content.length === 0);
-      });
-   };
-
-   useEffect(() => {
-      fetchBoard(page);
-   }, [page]);
+   const { list, isLoading, bottom } = useInfiniteScroll<IPetitionPost>(API_PATH.POST.PETITON);
 
    return (
       <>
          <ul className='flex flex-col gap-20'>
-            {board.map(({ id, status, title, agreeCount, expiresAt }) => {
+            {list.map(({ id, status, title, agreeCount, expiresAt }) => {
                return (
                   <li key={id} className='grid grid-cols-5'>
                      <span>{status}</span>
@@ -65,7 +34,7 @@ export default function PetitionBoard() {
                );
             })}
          </ul>
-         {!loading && <div ref={target} />}
+         {!isLoading && <div ref={bottom} />}
       </>
    );
 }
