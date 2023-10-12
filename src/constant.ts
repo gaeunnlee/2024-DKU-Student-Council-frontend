@@ -61,7 +61,9 @@ export const ROUTES = {
       ITEM: '/rental/:id',
    },
    PETITION: {
+      /** 청원 루트 */
       ROOT: '/petition',
+      /** 청원 상세보기 */
       POST: '/petition/:id',
    },
 };
