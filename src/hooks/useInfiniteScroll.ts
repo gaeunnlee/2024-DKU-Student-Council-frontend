@@ -25,10 +25,12 @@ export const useInfiniteScroll = <T>(api: string) => {
       setFetchSuccess(false);
       try {
          const { data } = await axios.get(`${api}?page=${boardPage}&size=10&sort=id,desc`);
-         setList((prev) => {
-            return page === 0 ? data.content : prev.concat(data.content);
-         });
-         setFetchSuccess(true);
+         if (data.content.length !== 0) {
+            setList((prev) => {
+               return page === 0 ? data.content : prev.concat(data.content);
+            });
+            setFetchSuccess(true);
+         }
       } catch (error) {
          alert(error);
       }

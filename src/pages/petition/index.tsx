@@ -1,6 +1,8 @@
+import Board from 'components/common/board';
+import Text from 'components/ui/text';
 import { API_PATH } from 'constant';
 import { useInfiniteScroll } from 'hooks/useInfiniteScroll';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 interface IPetitionPost {
    id: string;
@@ -19,10 +21,30 @@ interface IPetitionPost {
 
 export default function PetitionBoard() {
    const { list, isLoading, bottom } = useInfiniteScroll<IPetitionPost>(API_PATH.POST.PETITON);
+   const [isEmpty, setIsEmpty] = React.useState(false);
+
+   useEffect(() => {
+      setIsEmpty(list && list.length === 0);
+   }, [list]);
 
    return (
       <>
-         <ul className='flex flex-col gap-20'>
+         <Board>
+            {isEmpty ? (
+               <Board.NoData />
+            ) : (
+               list?.map(({ id, status, title, agreeCount, expiresAt }) => (
+                  <Board.Cell key={id}>
+                     <Text length={4}>{status}</Text>
+                     <Text length={4}>{title}</Text>
+                     <Text length={4}>{agreeCount}</Text>
+                     <Text length={4}>{expiresAt}</Text>
+                  </Board.Cell>
+               ))
+            )}
+            {!isLoading && !isEmpty && <div ref={bottom} />}
+         </Board>
+         {/* <ul className='flex flex-col gap-20'>
             {list.map(({ id, status, title, agreeCount, expiresAt }) => {
                return (
                   <li key={id} className='grid grid-cols-5'>
@@ -33,8 +55,7 @@ export default function PetitionBoard() {
                   </li>
                );
             })}
-         </ul>
-         {!isLoading && <div ref={bottom} />}
+         </ul> */}
       </>
    );
 }
