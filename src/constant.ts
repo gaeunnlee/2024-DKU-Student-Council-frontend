@@ -101,3 +101,20 @@ export const API_PATH = {
       ITEM_DETAIL: (id: string) => `/rental/${id}`,
    },
 };
+
+/**
+ * @description API query string
+ */
+export const QUERY_STRING = {
+   PAGE: 'page',
+   SIZE: 'size',
+   SORT: 'sort',
+   KEYWORD: 'keyword',
+};
+
+/**
+ * @description Page Size
+ */
+export const PAGE_SIZE = {
+   RENTAL: 20,
+};
