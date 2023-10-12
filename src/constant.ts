@@ -60,6 +60,12 @@ export const ROUTES = {
       /** 상세 품목 조회 */
       ITEM: '/rental/:id',
    },
+   PETITION: {
+      /** 청원 루트 */
+      ROOT: '/petition',
+      /** 청원 상세보기 */
+      POST: '/petition/:id',
+   },
 };
 
 /**
@@ -94,11 +100,15 @@ export const API_PATH = {
       /** 학사일정 */
       SCHEDULE: '/main/schedule',
    },
-   RENTAL: {
-      /** 대여물품 목록 */
-      ITEM: '/rental/item',
-      /** 대여물품 단건조회 */
-      ITEM_DETAIL: (id: string) => `/rental/${id}`,
+   POST: {
+      /* 청원게시판 */
+      PETITON: '/post/petition',
+      RENTAL: {
+         /** 대여물품 목록 */
+         ITEM: '/rental/item',
+         /** 대여물품 단건조회 */
+         ITEM_DETAIL: (id: string) => `/rental/${id}`,
+      },
    },
 };
 

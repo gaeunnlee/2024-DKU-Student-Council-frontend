@@ -29,7 +29,7 @@ export default function RentalProduct() {
 
    const fetchProduct = async () => {
       try {
-         const { data } = await axios.get<IPaging<IProduct>>(API_PATH.RENTAL.ITEM_DETAIL(id ?? '0'));
+         const { data } = await axios.get<IPaging<IProduct>>(API_PATH.POST.RENTAL.ITEM_DETAIL(id ?? '0'));
          setProduct(data.content);
          setTitle(data.content[0]?.itemName ?? '');
       } catch (e) {

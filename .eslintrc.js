@@ -27,7 +27,7 @@ module.exports = {
    },
    plugins: ['@typescript-eslint', 'react', 'cypress'],
    rules: {
-      indent: ['error', 3],
+      indent: ['error', 3, { SwitchCase: 1 }],
       quotes: ['error', 'single'],
       semi: ['error', 'always'],
       'react/prop-types': 'off',
