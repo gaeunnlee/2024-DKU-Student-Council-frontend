@@ -44,18 +44,6 @@ export default function PetitionBoard() {
             )}
             {!isLoading && !isEmpty && <div ref={bottom} />}
          </Board>
-         {/* <ul className='flex flex-col gap-20'>
-            {list.map(({ id, status, title, agreeCount, expiresAt }) => {
-               return (
-                  <li key={id} className='grid grid-cols-5'>
-                     <span>{status}</span>
-                     <span>{title}</span>
-                     <span>{agreeCount}</span>
-                     <span>{expiresAt}</span>
-                  </li>
-               );
-            })}
-         </ul> */}
       </>
    );
 }
