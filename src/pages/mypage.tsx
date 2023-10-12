@@ -6,6 +6,7 @@ import Button from 'components/ui/button';
 import Text from 'components/ui/text';
 import { useLayout } from 'hooks/useLayout';
 import { useApi } from 'hooks/useApi';
+import { useAuth } from 'hooks/useAuth';
 
 interface IMyInfo {
    studentId: string;
@@ -23,6 +24,7 @@ interface IMyInfo {
 
 export default function MyPage() {
    const { setTitle } = useLayout();
+   const { logout } = useAuth();
    const [myInfo, setMyInfo] = React.useState<IMyInfo | null>(null);
    const { get } = useApi();
 
@@ -92,7 +94,9 @@ export default function MyPage() {
             </Text>
          </Box>
          <Box className='mt-4 flex flex-col'>
-            <Button variant='red'>로그아웃</Button>
+            <Button variant='red' onClick={() => logout()}>
+               로그아웃
+            </Button>
             <Button>탈퇴하기</Button>
          </Box>
       </div>

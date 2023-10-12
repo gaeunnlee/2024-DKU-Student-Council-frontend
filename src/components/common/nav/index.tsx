@@ -128,7 +128,7 @@ export default function Nav() {
    return (
       // pwa인 경우: pb-[20px] h-[80px]
       <motion.nav
-         className='w-full bg-blue-600 left-[50%] translate-x-[-50%] fixed flex justify-between px-6 items-center max-w-3xl'
+         className='w-full bg-black left-[50%] translate-x-[-50%] fixed flex justify-between px-6 items-center max-w-3xl'
          style={{ height: CONSTANTS.bottomNavSize }}
          initial={{ bottom: '-60px' }}
          animate={{ bottom: '0px' }}
