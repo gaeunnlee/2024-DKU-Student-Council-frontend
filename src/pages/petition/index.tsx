@@ -20,7 +20,7 @@ interface IPetitionPost {
 }
 
 export default function PetitionBoard() {
-   const { list, isLoading, bottom } = useInfiniteScroll<IPetitionPost>(API_PATH.POST.PETITON);
+   const { list, isLoading, bottom } = useInfiniteScroll<IPetitionPost>(API_PATH.POST.PETITION);
    const [isEmpty, setIsEmpty] = React.useState(false);
 
    useEffect(() => {

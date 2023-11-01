@@ -4,6 +4,7 @@ import { useAlert } from './useAlert';
 
 interface Options {
    authenticate?: boolean;
+   multipart?: boolean;
    log?: boolean;
    id?: string;
 }
@@ -65,6 +66,7 @@ export const useApi = () => {
          const { data } = await client.post<Res>(url, body, {
             headers: {
                Authorization: options?.authenticate && token ? `Bearer ${token}` : null,
+               'Content-Type': options?.multipart ? 'multipart/form-data' : 'application/json',
             },
          });
          options?.log && console.log(data);

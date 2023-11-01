@@ -1,0 +1,81 @@
+import React from 'react';
+import Input from 'components/ui/input';
+import Button from 'components/ui/button';
+import { useApi } from 'hooks/useApi';
+import { API_PATH } from 'constant';
+import TextEditor from 'components/common/editor/index';
+import useImageHandler from 'hooks/useImageHandler';
+
+export interface IFormInfo {
+  title: string;
+  body: string;
+  files: File[];
+}
+
+export default function PetitionForm() {
+   const [formInfo, setFormInfo] = React.useState<IFormInfo>({
+      title: '',
+      body: '',
+      files: [],
+   });
+
+   const handleBody = (value: string) => {
+      const cleanedValue = value.replaceAll(/<\/?p[^>]*>/g, '').replace(/<br>/g, '');
+      setFormInfo({
+         ...formInfo,
+         body: cleanedValue,
+      });
+   };
+
+   const { imageUrls, addImage, deleteImage } = useImageHandler();
+   const { post } = useApi();
+
+   const url = API_PATH.POST.PETITION;
+
+   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append('title', formInfo.title);
+      formData.append('body', formInfo.body);
+      for (const file of formInfo.files) {
+         formData.append('files', file);
+      }
+      post<IFormInfo, number>(url, formInfo, {
+         authenticate: true,
+         multipart: true,
+         log: true,
+      });
+   };
+
+   return (
+      <form onSubmit={handleSubmit} encType="multipart/form-data" className="flex-col">
+         <label htmlFor="title">제목</label>
+         <Input
+            type="text"
+            id="title"
+            name="title"
+            value={formInfo.title}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+               setFormInfo((prev) => {
+                  return { ... prev, title: e.target.value };
+               });
+            }}
+         />
+         <TextEditor
+            value={!formInfo.body ? '<br>' : `<p>${formInfo.body}</p>`}
+            onChange={handleBody}
+         />
+         <label htmlFor="input-file">
+               사진추가
+            <Input type="file" id="input-file" multiple onChange={(e) => addImage(e, formInfo, setFormInfo)} />
+         </label>
+         {imageUrls.map((imageUrl, id) => (
+            <div key={id}>
+               <Button onClick={() => deleteImage(id, imageUrls, formInfo, setFormInfo)} className="w-2 h-4" >x</Button>
+               <img src={imageUrl} alt={`Image-${id}`} className="w-10 h-10"/>
+            </div>
+         ))}
+         <Button type='submit'>업로드</Button>
+      </form>
+   );
+}
