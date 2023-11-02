@@ -1,37 +1,49 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import { IFormInfo } from 'pages/petition/post';
+
+export interface ImageProps {
+   add: {
+      e: React.ChangeEvent<HTMLInputElement>;
+      formInfo: IFormInfo;
+      setFormInfo: React.Dispatch<React.SetStateAction<IFormInfo>>;
+   };
+   delete: {
+      id: number;
+      setFormInfo: React.Dispatch<React.SetStateAction<IFormInfo>>;
+   };
+}
 
 const useImageHandler = () => {
    const [imageUrls, setImageUrls] = React.useState<string[]>([]);
 
-   const addImage = (e: ChangeEvent<HTMLInputElement>, formInfo: IFormInfo, setFormInfo: React.Dispatch<React.SetStateAction<IFormInfo>>) => {
+   const addImage = ({ e, formInfo, setFormInfo }: ImageProps['add']) => {
       const imageList: FileList | null = e.target.files;
-      if (imageList) {
-         const fileList = [...formInfo.files];
-         const urlList = [...imageUrls];
-         for (let i = 0; i < imageList.length; i++) {
-            fileList.push(imageList[i]);
-            const imageUrl = URL.createObjectURL(imageList[i]);
-            urlList.push(imageUrl);
-         }
-         setFormInfo({
-            ...formInfo,
+      if (imageList && imageList.length > 0) {
+         const fileList = [...formInfo.files, imageList[0]];
+         const imageUrl = URL.createObjectURL(imageList[0]);
+         setFormInfo((prevFormInfo) => ({
+            ...prevFormInfo,
             files: fileList,
-         });
-         setImageUrls(urlList);
+         }));
+         setImageUrls((prevImageUrls) => [...prevImageUrls, imageUrl]);
       }
    };
 
-   const deleteImage = (id: number, imageUrls: string[], formInfo: IFormInfo, setFormInfo: React.Dispatch<React.SetStateAction<IFormInfo>>) => {
-      URL.revokeObjectURL(imageUrls[id]);
-      const updatedImageUrls = [...imageUrls];
-      updatedImageUrls.splice(id, 1);
-      setImageUrls(updatedImageUrls);
-      const fileList = [...formInfo.files];
-      fileList.splice(id, 1);
-      setFormInfo({
-         ...formInfo,
-         files: fileList,
+   const deleteImage = ({ id, setFormInfo }: ImageProps['delete']) => {
+      setImageUrls((prevImageUrls) => {
+         URL.revokeObjectURL(prevImageUrls[id]);
+         const updatedImageUrls = [...prevImageUrls];
+         updatedImageUrls.splice(id, 1);
+         return updatedImageUrls;
+      });
+
+      setFormInfo((prevFormInfo) => {
+         const updatedFileList = [...prevFormInfo.files];
+         updatedFileList.splice(id, 1);
+         return {
+            ...prevFormInfo,
+            files: updatedFileList,
+         };
       });
    };
 

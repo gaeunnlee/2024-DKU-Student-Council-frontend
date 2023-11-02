@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useRef } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
@@ -7,20 +7,17 @@ interface TextEditorProps {
   value: string;
 }
 
-const TextEditor: React.FC<TextEditorProps> = ({ onChange, value }) => {
+export default function TextEditor({ onChange, value }: TextEditorProps) {
    const quillRef = useRef<ReactQuill | null>(null);
 
-   const modules = useMemo(
-      () => ({
-         toolbar: {
-            container: [
-               ['bold', 'italic', 'underline', 'strike'],
-               [{ size: ['small', false, 'large', 'huge'] }],
-            ],
-         },
-      }),
-      []
-   );
+   const modules = {
+      toolbar: {
+         container: [
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ size: ['small', false, 'large', 'huge'] }],
+         ],
+      },
+   };
 
    return (
       <ReactQuill
@@ -35,6 +32,4 @@ const TextEditor: React.FC<TextEditorProps> = ({ onChange, value }) => {
          theme="snow"
       />
    );
-};
-
-export default TextEditor;
+}

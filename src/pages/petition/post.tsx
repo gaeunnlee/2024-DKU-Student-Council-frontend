@@ -13,13 +13,14 @@ export interface IFormInfo {
 }
 
 export default function PetitionForm() {
-   const [formInfo, setFormInfo] = React.useState<IFormInfo>({
+   const initFormInfo: IFormInfo = {
       title: '',
       body: '',
       files: [],
-   });
+   };
+   const [formInfo, setFormInfo] = React.useState<IFormInfo>(initFormInfo);
 
-   const handleBody = (value: string) => {
+   const handleUpdate = (value: string) => {
       const cleanedValue = value.replaceAll(/<\/?p[^>]*>/g, '').replace(/<br>/g, '');
       setFormInfo({
          ...formInfo,
@@ -30,8 +31,6 @@ export default function PetitionForm() {
    const { imageUrls, addImage, deleteImage } = useImageHandler();
    const { post } = useApi();
 
-   const url = API_PATH.POST.PETITION;
-
    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const formData = new FormData();
@@ -40,9 +39,9 @@ export default function PetitionForm() {
       for (const file of formInfo.files) {
          formData.append('files', file);
       }
-      post<IFormInfo, number>(url, formInfo, {
+      post<IFormInfo, number>(API_PATH.POST.PETITION, formInfo, {
          authenticate: true,
-         multipart: true,
+         contentType: 'multipart/form-data',
          log: true,
       });
    };
@@ -63,15 +62,15 @@ export default function PetitionForm() {
          />
          <TextEditor
             value={!formInfo.body ? '<br>' : `<p>${formInfo.body}</p>`}
-            onChange={handleBody}
+            onChange={handleUpdate}
          />
          <label htmlFor="input-file">
                사진추가
-            <Input type="file" id="input-file" multiple onChange={(e) => addImage(e, formInfo, setFormInfo)} />
-         </label>
+            <Input type="file" id="input-file" multiple onChange={(e) => addImage({ e, formInfo, setFormInfo })} />
+         </label> 
          {imageUrls.map((imageUrl, id) => (
             <div key={id}>
-               <Button onClick={() => deleteImage(id, imageUrls, formInfo, setFormInfo)} className="w-2 h-4" >x</Button>
+               <Button onClick={() => deleteImage({ id, setFormInfo })} className="w-2 h-4" >x</Button>
                <img src={imageUrl} alt={`Image-${id}`} className="w-10 h-10"/>
             </div>
          ))}

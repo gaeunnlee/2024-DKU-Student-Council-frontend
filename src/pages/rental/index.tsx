@@ -22,7 +22,7 @@ export default function Rental() {
 
    const fetchRental = async () => {
       const data = await get<IPaging<Content>>(
-         API_PATH.RENTAL.ITEM + `?${QUERY_STRING.PAGE}=0&${QUERY_STRING.SIZE}=${PAGE_SIZE.RENTAL}`,
+         API_PATH.POST.RENTAL.ITEM + `?${QUERY_STRING.PAGE}=0&${QUERY_STRING.SIZE}=${PAGE_SIZE.RENTAL}`,
       );
       setRental(data);
    };
