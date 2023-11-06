@@ -13,8 +13,6 @@ import SignupVerify from 'pages/signup/verify';
 import SignupInfo from 'pages/signup/info';
 import MyPage from 'pages/mypage';
 import PrivateRoute from 'PrivateRoute';
-import Rental from 'pages/rental';
-import RentalProduct from 'pages/rental/[id]';
 
 /**
  * @description 라우터
@@ -41,8 +39,6 @@ export default function Router() {
                   <Route path={ROUTES.SIGNUP.TERMS} element={<SignupTerms />} />
                   <Route path={ROUTES.SIGNUP.INFO} element={<SignupInfo />} />
                </Route>
-               <Route path={ROUTES.RENTAL.ROOT} element={<Rental />} />
-               <Route path={ROUTES.RENTAL.ITEM} element={<RentalProduct />} />
                <Route path={ROUTES.PETITION.ROOT} element={<PetitionBoard />} />
                <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
             </Routes>
