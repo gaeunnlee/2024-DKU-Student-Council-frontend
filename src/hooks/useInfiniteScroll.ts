@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export const useInfiniteScroll = <T>(api: string) => {
    const [list, setList] = useState<T[]>([]);
@@ -21,30 +21,33 @@ export const useInfiniteScroll = <T>(api: string) => {
       return () => observer.disconnect();
    });
 
-   const fetchList = async (boardPage: number) => {
-      setFetchSuccess(false);
-      try {
-         const { data } = await axios.get(`${api}?page=${boardPage}&size=10&sort=id,desc`);
-         if (data.content.length !== 0) {
-            setList((prev) => {
-               return page === 0 ? data.content : prev.concat(data.content);
-            });
-            setFetchSuccess(true);
+   const fetchList = useCallback(
+      async (boardPage: number) => {
+         setFetchSuccess(false);
+         try {
+            const { data } = await axios.get(`${api}?page=${boardPage}&size=10&sort=id,desc`);
+            if (data.content.length !== 0) {
+               setList((prev) => {
+                  return page === 0 ? data.content : prev.concat(data.content);
+               });
+               setFetchSuccess(true);
+            }
+         } catch (error) {
+            alert(error);
          }
-      } catch (error) {
-         alert(error);
-      }
-   };
+      },
+      [api, page],
+   );
 
    // fetchList 성공시 isLoading false
    useEffect(() => {
       fetchSuccess && setIsLoading(list.length === 0);
-   }, [fetchSuccess]);
+   }, [fetchSuccess, list.length]);
 
    useEffect(() => {
       setIsLoading(true);
       fetchList(page);
-   }, [page]);
+   }, [fetchList, page]);
 
    return {
       list,
