@@ -13,7 +13,7 @@ export interface ImageProps {
    };
 }
 
-const useImageHandler = () => {
+const useImageUpload = () => {
    const [imageUrls, setImageUrls] = React.useState<string[]>([]);
 
    const addImage = ({ e, formInfo, setFormInfo }: ImageProps['add']) => {
@@ -54,4 +54,4 @@ const useImageHandler = () => {
    };
 };
 
-export default useImageHandler;
+export default useImageUpload;

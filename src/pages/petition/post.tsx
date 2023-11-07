@@ -4,7 +4,7 @@ import Button from 'components/ui/button';
 import { useApi } from 'hooks/useApi';
 import { API_PATH } from 'constant';
 import TextEditor from 'components/common/editor/index';
-import useImageHandler from 'hooks/useImageHandler';
+import useImageUpload from 'hooks/useImageUpload';
 
 export interface IFormInfo {
   title: string;
@@ -28,7 +28,7 @@ export default function PetitionForm() {
       });
    };
 
-   const { imageUrls, addImage, deleteImage } = useImageHandler();
+   const { imageUrls, addImage, deleteImage } = useImageUpload();
    const { post } = useApi();
 
    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -48,8 +48,8 @@ export default function PetitionForm() {
 
    return (
       <form onSubmit={handleSubmit} encType="multipart/form-data" className="flex-col">
-         <label htmlFor="title">제목</label>
          <Input
+            label="제목"
             type="text"
             id="title"
             name="title"
