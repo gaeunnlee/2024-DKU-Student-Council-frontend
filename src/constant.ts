@@ -66,6 +66,13 @@ export const ROUTES = {
       /** 청원 상세보기 */
       POST: '/petition/:id',
    },
+   /** 공지사항 */
+   NOTICE: {
+      /** 루트 */
+      ROOT: '/notice',
+      /** 청원 글 작성 */
+      POST: '/notice/post',
+   },
 };
 
 /**
