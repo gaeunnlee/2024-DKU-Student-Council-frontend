@@ -65,6 +65,8 @@ export const ROUTES = {
       ROOT: '/petition',
       /** 청원 상세보기 */
       POST: '/petition/:id',
+      /** 청원 글쓰기 */
+      SUBMIT: '/petition/submit',
    },
 };
 
@@ -102,7 +104,7 @@ export const API_PATH = {
    },
    POST: {
       /* 청원게시판 */
-      PETITON: '/post/petition',
+      PETITION: '/post/petition',
       RENTAL: {
          /** 대여물품 목록 */
          ITEM: '/rental/item',

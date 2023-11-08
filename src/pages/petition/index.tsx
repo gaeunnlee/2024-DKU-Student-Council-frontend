@@ -21,7 +21,7 @@ interface IPetitionPost {
 
 export default function PetitionBoard() {
    const { list, isLoading, bottom } = useInfiniteScroll<IPetitionPost>(
-      'https://dev.dkustu.com/api/' + API_PATH.POST.PETITON,
+      'https://dev.dkustu.com/api/' + API_PATH.POST.PETITION,
    );
    const [isEmpty, setIsEmpty] = React.useState(false);
 
