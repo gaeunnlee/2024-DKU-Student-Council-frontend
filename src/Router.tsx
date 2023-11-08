@@ -13,6 +13,7 @@ import SignupVerify from 'pages/signup/verify';
 import SignupInfo from 'pages/signup/info';
 import MyPage from 'pages/mypage';
 import PrivateRoute from 'PrivateRoute';
+import NoticeDetail from 'pages/notice/[id]';
 
 /**
  * @description 라우터
@@ -40,6 +41,7 @@ export default function Router() {
                   <Route path={ROUTES.SIGNUP.INFO} element={<SignupInfo />} />
                </Route>
                <Route path={ROUTES.PETITION.ROOT} element={<PetitionBoard />} />
+               <Route path={ROUTES.NOTICE.ID} element={<NoticeDetail />} />
                <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
             </Routes>
          </DefaultLayout>

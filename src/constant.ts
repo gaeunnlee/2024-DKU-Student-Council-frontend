@@ -67,11 +67,11 @@ export const ROUTES = {
       POST: '/petition/:id',
    },
    /** 공지 */
-   NEWS: {
+   NOTICE: {
       /** 공지 루트 */
-      ROOT: '/post/news',
+      ROOT: '/notice',
       /** 공지 상세보기 */
-      POST: '/post/news/:id',
+      ID: '/notice/:id',
    },
 };
 
@@ -110,6 +110,14 @@ export const API_PATH = {
    POST: {
       /* 청원게시판 */
       PETITON: '/post/petition',
+      /* 공지 */
+      NOTICE: {
+         /** 공지 목록 */
+         ROOT: '/post/news',
+         /** 공지 단건조회 */
+         ID: (id: string) => `/post/news/${id}`,
+      },
+      /* 대여물품 */
       RENTAL: {
          /** 대여물품 목록 */
          ITEM: '/rental/item',
