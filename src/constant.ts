@@ -118,6 +118,8 @@ export const API_PATH = {
          /** 대여물품 단건조회 */
          ITEM_DETAIL: (id: string) => `/rental/${id}`,
       },
+      /** 총학 게시글 */
+      NOTICE: '/post/news',
    },
 };
 
