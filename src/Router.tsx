@@ -45,10 +45,10 @@ export default function Router() {
                <Route path={ROUTES.PETITION.ROOT} element={<PetitionBoard />} />
                <Route path={ROUTES.PETITION.SUBMIT} element={<PetitionForm />} />
                <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+               <Route path={ROUTES.NOTICE.ROOT} element={<Notice />}>
+                  <Route path={ROUTES.NOTICE.POST} element={<NoticePost />} />
+               </Route>
             </Routes>
-            <Route path={ROUTES.NOTICE.ROOT} element={<Notice />}>
-               <Route path={ROUTES.NOTICE.POST} element={<NoticePost />} />
-            </Route>
          </DefaultLayout>
       </BrowserRouter>
    );
