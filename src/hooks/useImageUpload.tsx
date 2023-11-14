@@ -1,5 +1,5 @@
 import React from 'react';
-import { IFormInfo } from 'pages/petition/post';
+import { IFormInfo } from './useFormUpload';
 
 export interface ImageProps {
    add: {
