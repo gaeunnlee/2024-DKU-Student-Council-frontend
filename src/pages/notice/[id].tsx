@@ -33,23 +33,26 @@ export default function NoticeDetail() {
    const location = useLocation();
    const postId = location.pathname.split('notice/')[1];
    const fetchPost = async () => {
-      const data = await get<INotice>(API_PATH.POST.NOTICE.ID(postId));
-      setPost(data);
+      try {
+         const data = await get<INotice>(API_PATH.POST.NOTICE.ID(postId));
+         setPost(data);
+      } catch (error) {
+         alert(error);
+      }
    };
    useEffect(() => {
       fetchPost();
    }, []);
    return (
       <Box>
-         <h2>{post?.title}</h2>
-         <h2>{post?.createdAt}</h2>
-         <h2>{post?.author}</h2>
-         <h2>{post?.body}</h2>
-         <h2>
+         <p>{post?.title}</p>
+         <p>{post?.createdAt}</p>
+         <p>{post?.body}</p>
+         <div>
             {post?.files.map((file) => {
                return <img key={file.id} src={file.thumbnailUrl} />;
             })}
-         </h2>
+         </div>
       </Box>
    );
 }
