@@ -5,7 +5,7 @@ import { IFormInfo } from 'hooks/useFormUpload';
 import { useFormUpload } from 'hooks/useFormUpload';
 import Post from 'components/main/post';
 
-export default function PetitionForm() {
+export default function NoticePost() {
    const initFormInfo: IFormInfo = {
       title: '',
       body: '',
@@ -14,7 +14,7 @@ export default function PetitionForm() {
 
    const { formInfo, setFormInfo, handleUpdate, handleSubmit } = useFormUpload(
       initFormInfo,
-      API_PATH.POST.PETITION,
+      API_PATH.POST.NOTICE,
    );
 
    const { imageUrls, addImage, deleteImage } = useImageUpload();

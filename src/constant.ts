@@ -68,6 +68,13 @@ export const ROUTES = {
       /** 청원 글쓰기 */
       SUBMIT: '/petition/submit',
    },
+   /** 공지사항 */
+   NOTICE: {
+      /** 루트 */
+      ROOT: '/notice',
+      /** 청원 글 작성 */
+      POST: '/notice/post',
+   },
 };
 
 /**
@@ -111,6 +118,8 @@ export const API_PATH = {
          /** 대여물품 단건조회 */
          ITEM_DETAIL: (id: string) => `/rental/${id}`,
       },
+      /** 총학 게시글 */
+      NOTICE: '/post/news',
    },
 };
 

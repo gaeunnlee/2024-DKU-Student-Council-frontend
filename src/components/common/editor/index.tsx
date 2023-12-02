@@ -3,8 +3,8 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 interface TextEditorProps {
-  onChange: (value: string) => void;
-  value: string;
+   onChange: (value: string) => void;
+   value: string;
 }
 
 export default function TextEditor({ onChange, value }: TextEditorProps) {
@@ -29,7 +29,7 @@ export default function TextEditor({ onChange, value }: TextEditorProps) {
          value={value}
          onChange={onChange}
          modules={modules}
-         theme="snow"
+         theme='snow'
       />
    );
 }
