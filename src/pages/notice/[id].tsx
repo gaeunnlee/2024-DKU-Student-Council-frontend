@@ -1,8 +1,8 @@
-import Box from 'components/ui/box';
+import PostBox, { FileBox } from 'components/ui/box/PostBox';
 import { API_PATH } from 'constant';
 import { useParam } from 'hooks/useParam';
 import React, { useEffect, useState } from 'react';
-
+import { LuPaperclip } from 'react-icons/lu';
 interface INotice {
    id: number;
    title: string;
@@ -34,6 +34,7 @@ export default function NoticeDetail() {
       try {
          const data = await get<INotice>(API_PATH.POST.NOTICE.ID(postId));
          setPost(data);
+         console.log(data);
       } catch (error) {
          alert(error);
       }
@@ -42,11 +43,33 @@ export default function NoticeDetail() {
       fetchPost();
    }, []);
    return (
-      <Box>
-         <p>{post?.title}</p>
-         <p>{post?.createdAt}</p>
-         <p>{post?.body}</p>
-         <div>{post?.files.map((file) => <img key={file.id} src={file.thumbnailUrl} />)}</div>
-      </Box>
+      <>
+         <PostBox>
+            <p className='text-slate-400'>{post?.createdAt}</p>
+            <p>{post?.title}</p>
+            <p>{post?.body}</p>
+            {post?.files.map((file) => {
+               return file.mimeType.indexOf('image') >= 0 && <img key={file.id} src={file.thumbnailUrl} />;
+            })}
+         </PostBox>
+         <FileBox className='leading-2'>
+            {post?.files.map((file) => (
+               <>
+                  <a
+                     className='flex items-center gap-2'
+                     href={file.url}
+                     target='_blank'
+                     rel='noopener noreferrer'
+                     key={file.id}
+                  >
+                     <LuPaperclip />
+
+                     {file.originalName}
+                  </a>
+                  <br />
+               </>
+            ))}
+         </FileBox>
+      </>
    );
 }
