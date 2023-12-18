@@ -26,7 +26,7 @@ export default function DefaultLayout({ children, className, ...props }: Default
          ) : (
             <Gnb left={backButton ? <Gnb.GoBack /> : undefined} center={<Gnb.Logo />} />
          )}
-         {(heading || subHeading) && <Gnh heading={heading} subHeading={subHeading}></Gnh>}
+         {heading && (subHeading || subHeading === null) && <Gnh heading={heading} subHeading={subHeading} />}
          <div
             className={`max-w-3xl mx-auto overflow-y-auto overflow-x-hidden bg-black ${className ?? ''}`}
             style={{ marginBottom: CONSTANTS.bottomNavSize }}
