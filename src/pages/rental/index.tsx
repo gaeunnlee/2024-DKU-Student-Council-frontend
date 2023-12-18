@@ -17,7 +17,7 @@ interface Content {
 
 export default function Rental() {
    const [rental, setRental] = React.useState<IPaging<Content> | null>(null);
-   const { setTitle } = useLayout();
+   const { setLayout } = useLayout();
    const { get } = useApi();
 
    const fetchRental = async () => {
@@ -29,7 +29,11 @@ export default function Rental() {
 
    useEffectOnce(() => {
       fetchRental();
-      setTitle('대여물품');
+      setLayout({
+         title: '대여물품',
+         backButton: true,
+         fullscreen: false,
+      });
    });
 
    return (

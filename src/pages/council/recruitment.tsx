@@ -5,14 +5,16 @@ import Box from 'components/ui/box';
 import document from '../../assets/images/document.svg';
 
 export default function Recruitment() {
-   const { setFullscreen, setTitle, setHeading, setSubHeading, setBackButton } = useLayout();
+   const { setLayout } = useLayout();
 
    useEffectOnce(() => {
-      setFullscreen(false);
-      setTitle('총학생회');
-      setHeading('부원모집');
-      setSubHeading('모집요강');
-      setBackButton(true);
+      setLayout({
+         title: '총학생회',
+         backButton: true,
+         heading: '부원모집',
+         subHeading: '모집요강',
+         fullscreen: false,
+      });
    });
 
    const fileList = [

@@ -4,17 +4,17 @@ import { useLayout } from 'hooks/useLayout';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 
 export default function Greeting() {
-   const { setFullscreen, setTitle, setHeading, setSubHeading, setBackButton } = useLayout();
+   const { setLayout } = useLayout();
 
    useEffectOnce(() => {
-      setFullscreen(false);
-      setTitle('총학생회');
-      setHeading('총학생회');
-      setSubHeading('인사말');
-      setBackButton(true);
+      setLayout({
+         title: '총학생회',
+         backButton: true,
+         heading: '총학생회',
+         subHeading: '인사말',
+         fullscreen: false,
+      });
    });
-
-   console.log(setHeading);
 
    return (
       <Box>
