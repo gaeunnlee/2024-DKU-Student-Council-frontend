@@ -1,8 +1,7 @@
 import Box from 'components/ui/box';
 import { API_PATH } from 'constant';
-import { useApi } from 'hooks/useApi';
+import { useParam } from 'hooks/useParam';
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router';
 
 interface INotice {
    id: number;
@@ -28,10 +27,9 @@ interface INotice {
 }
 
 export default function NoticeDetail() {
-   const { get } = useApi();
+   const { postId, get } = useParam();
    const [post, setPost] = useState<INotice>();
-   const location = useLocation();
-   const postId = location.pathname.split('notice/')[1];
+
    const fetchPost = async () => {
       try {
          const data = await get<INotice>(API_PATH.POST.NOTICE.ID(postId));
@@ -48,11 +46,7 @@ export default function NoticeDetail() {
          <p>{post?.title}</p>
          <p>{post?.createdAt}</p>
          <p>{post?.body}</p>
-         <div>
-            {post?.files.map((file) => {
-               return <img key={file.id} src={file.thumbnailUrl} />;
-            })}
-         </div>
+         <div>{post?.files.map((file) => <img key={file.id} src={file.thumbnailUrl} />)}</div>
       </Box>
    );
 }
