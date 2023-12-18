@@ -71,6 +71,21 @@ export const ROUTES = {
       /** 상세 품목 조회 */
       ITEM: '/rental/:id',
    },
+   PETITION: {
+      /** 청원 루트 */
+      ROOT: '/petition',
+      /** 청원 상세보기 */
+      POST: '/petition/:id',
+      /** 청원 글쓰기 */
+      SUBMIT: '/petition/submit',
+   },
+   /** 공지사항 */
+   NOTICE: {
+      /** 루트 */
+      ROOT: '/notice',
+      /** 청원 글 작성 */
+      POST: '/notice/post',
+   },
 };
 
 /**
@@ -105,10 +120,33 @@ export const API_PATH = {
       /** 학사일정 */
       SCHEDULE: '/main/schedule',
    },
-   RENTAL: {
-      /** 대여물품 목록 */
-      ITEM: '/rental/item',
-      /** 대여물품 단건조회 */
-      ITEM_DETAIL: (id: string) => `/rental/${id}`,
+   POST: {
+      /* 청원게시판 */
+      PETITION: '/post/petition',
+      RENTAL: {
+         /** 대여물품 목록 */
+         ITEM: '/rental/item',
+         /** 대여물품 단건조회 */
+         ITEM_DETAIL: (id: string) => `/rental/${id}`,
+      },
+      /** 총학 게시글 */
+      NOTICE: '/post/news',
    },
+};
+
+/**
+ * @description API query string
+ */
+export const QUERY_STRING = {
+   PAGE: 'page',
+   SIZE: 'size',
+   SORT: 'sort',
+   KEYWORD: 'keyword',
+};
+
+/**
+ * @description Page Size
+ */
+export const PAGE_SIZE = {
+   RENTAL: 20,
 };

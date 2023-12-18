@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { API_PATH } from 'constant';
-import { useAlert } from 'hooks/useAlert';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { Banner, Notice, Petition } from 'components/main';
 import type { IBanner } from 'components/main/banner';
 import type { INotice } from 'components/main/notice';
 import type { IPetition } from 'components/main/petition';
+import { useApi } from 'hooks/useApi';
 
 interface IMain {
    carousels: IBanner[];
@@ -21,16 +20,12 @@ interface IMain {
 }
 
 export default function Main() {
-   const { alert } = useAlert();
    const [main, setMain] = useState<IMain | null>(null);
+   const { get } = useApi();
 
    const fetchMain = async () => {
-      try {
-         const { data } = await axios.get<IMain>(API_PATH.MAIN.ROOT);
-         setMain(data);
-      } catch (e) {
-         if (axios.isAxiosError<unknown>(e)) alert(e);
-      }
+      const data = await get<IMain>(API_PATH.MAIN.ROOT);
+      setMain(data);
    };
 
    useEffectOnce(() => {

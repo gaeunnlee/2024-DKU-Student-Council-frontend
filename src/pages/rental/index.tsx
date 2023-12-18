@@ -1,14 +1,13 @@
 import React from 'react';
-import axios from 'axios';
 import Board from 'components/common/board';
-import { API_PATH, ROUTES } from 'constant';
-import { useAlert } from 'hooks/useAlert';
+import { API_PATH, PAGE_SIZE, QUERY_STRING, ROUTES } from 'constant';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { ReactComponent as ChevronRight } from 'assets/images/chevron_right.svg';
 import SpeedDial from 'components/ui/speed-dial';
 import { Link } from 'react-router-dom';
 import { useLayout } from 'hooks/useLayout';
 import { IPaging } from 'api/axios-interface';
+import { useApi } from 'hooks/useApi';
 
 interface Content {
    id: number;
@@ -18,16 +17,14 @@ interface Content {
 
 export default function Rental() {
    const [rental, setRental] = React.useState<IPaging<Content> | null>(null);
-   const { alert } = useAlert();
    const { setTitle } = useLayout();
+   const { get } = useApi();
 
    const fetchRental = async () => {
-      try {
-         const { data } = await axios.get<IPaging<Content>>(API_PATH.RENTAL.ITEM + '?page=0&size=20');
-         setRental(data);
-      } catch (error) {
-         alert(error);
-      }
+      const data = await get<IPaging<Content>>(
+         API_PATH.POST.RENTAL.ITEM + `?${QUERY_STRING.PAGE}=0&${QUERY_STRING.SIZE}=${PAGE_SIZE.RENTAL}`,
+      );
+      setRental(data);
    };
 
    useEffectOnce(() => {

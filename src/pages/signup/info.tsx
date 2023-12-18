@@ -36,21 +36,21 @@ export default function SignupInfo() {
    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
       switch (name) {
-      case 'passwordConfirm':
-         setPasswordConfirm(value);
-         setPasswordError(signupInfo.password !== value);
-         break;
-      case 'phoneNumber':
-         setphoneNumber(value);
-         break;
-      case 'code':
-         setCode(value);
-         break;
-      default:
-         setSignupInfo({
-            ...signupInfo,
-            [name]: value,
-         });
+         case 'passwordConfirm':
+            setPasswordConfirm(value);
+            setPasswordError(signupInfo.password !== value);
+            break;
+         case 'phoneNumber':
+            setphoneNumber(value);
+            break;
+         case 'code':
+            setCode(value);
+            break;
+         default:
+            setSignupInfo({
+               ...signupInfo,
+               [name]: value,
+            });
       }
    };
 

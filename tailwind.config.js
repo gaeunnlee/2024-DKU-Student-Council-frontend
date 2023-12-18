@@ -3,7 +3,7 @@ module.exports = {
    content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
    theme: {
       extend: {
-         width : {
+         width: {
             '311': '311px',
          },
          animation: {
