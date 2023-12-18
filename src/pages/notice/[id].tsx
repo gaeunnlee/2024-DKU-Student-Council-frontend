@@ -9,7 +9,7 @@ interface INotice {
    title: string;
    body: string;
    author: string;
-   tag: [];
+   tag: [{ id: number; name: string }];
    createdAt: string;
    files: [
       {
