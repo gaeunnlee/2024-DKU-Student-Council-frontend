@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface GnhProps {
-   heading: string | null;
+   heading: string;
    subHeading: string | null;
    children?: React.ReactNode;
 }
