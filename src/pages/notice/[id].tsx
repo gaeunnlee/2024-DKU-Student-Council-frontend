@@ -52,24 +52,26 @@ export default function NoticeDetail() {
                return file.mimeType.indexOf('image') >= 0 && <img key={file.id} src={file.thumbnailUrl} />;
             })}
          </PostBox>
-         <FileBox className='leading-2'>
-            {post?.files.map((file) => (
-               <>
-                  <a
-                     className='flex items-center gap-2'
-                     href={file.url}
-                     target='_blank'
-                     rel='noopener noreferrer'
-                     key={file.id}
-                  >
-                     <LuPaperclip />
+         {post!.files.length > 0 && (
+            <FileBox className='leading-2'>
+               {post?.files.map((file) => (
+                  <>
+                     <a
+                        className='flex items-center gap-2'
+                        href={file.url}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        key={file.id}
+                     >
+                        <LuPaperclip />
 
-                     {file.originalName}
-                  </a>
-                  <br />
-               </>
-            ))}
-         </FileBox>
+                        {file.originalName}
+                     </a>
+                     <br />
+                  </>
+               ))}
+            </FileBox>
+         )}
       </>
    );
 }
