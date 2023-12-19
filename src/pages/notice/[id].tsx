@@ -34,7 +34,6 @@ export default function NoticeDetail() {
       try {
          const data = await get<INotice>(API_PATH.POST.NOTICE.ID(postId));
          setPost(data);
-         console.log(data);
       } catch (error) {
          alert(error);
       }
@@ -52,7 +51,7 @@ export default function NoticeDetail() {
                return file.mimeType.indexOf('image') >= 0 && <img key={file.id} src={file.thumbnailUrl} />;
             })}
          </PostBox>
-         {post!.files.length > 0 && (
+         {post !== undefined && post.files.length > 0 && (
             <FileBox className='leading-2'>
                {post?.files.map((file) => (
                   <>
@@ -64,7 +63,6 @@ export default function NoticeDetail() {
                         key={file.id}
                      >
                         <LuPaperclip />
-
                         {file.originalName}
                      </a>
                      <br />

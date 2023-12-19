@@ -10,9 +10,6 @@ module.exports = {
             fadeIn: 'fadeIn 0.3s ease-in-out',
             fadeOut: 'fadeOut 0.3s ease-in-out',
          },
-         boxshadow: {
-            '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
-         },
 
          // that is actual animation
          keyframes: (theme) => ({
