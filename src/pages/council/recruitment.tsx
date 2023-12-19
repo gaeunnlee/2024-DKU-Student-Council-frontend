@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import Box from 'components/ui/box';
-import document from '../../assets/images/document.svg';
+import document from '../../assets/icons/document.svg';
 
 export default function Recruitment() {
    const { setLayout } = useLayout();
