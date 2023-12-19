@@ -3,14 +3,24 @@ import React from 'react';
 interface GnhProps {
    heading: string;
    subHeading: string | null;
-   children?: React.ReactNode;
+   isMain: boolean;
 }
 
-const Gnh = ({ heading, subHeading }: GnhProps) => (
+const Gnh = ({ heading, subHeading, isMain }: GnhProps) => (
    <>
-      <div className={'w-full justify-between px-1.5 h-[80px] items-center bg-black'}>
-         <h2 className='text-2xl font-semibold mb- text-white'>{heading}</h2>
-         <h3 className='text-xl font-semibold text-white'>{subHeading}</h3>
+      <div className={'w-[390px] mx-auto px-8 py-8 justify-between h-[160px] items-center bg-black'}>
+         {heading && (
+            <h2 className={`${isMain && 'text-center'} text-2xl font-semibold mb-4 text-white`}>{heading}</h2>
+         )}
+         {subHeading && (
+            <h3
+               className={`${
+                  isMain ? 'text-base text-center font-normal' : 'text-xl font-semibold'
+               } text-white`}
+            >
+               {subHeading}
+            </h3>
+         )}
       </div>
    </>
 );
