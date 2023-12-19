@@ -50,8 +50,6 @@ export default function Router() {
                <Route path={ROUTES.COUNCIL.ORGANIZATION} element={<Organization />} />
                <Route path={ROUTES.COUNCIL.LOCATION} element={<Location />} />
                <Route path={ROUTES.COUNCIL.RECRUITMENT} element={<Recruitment />} />
-               <Route path={ROUTES.RENTAL.ROOT} element={<Rental />} />
-               <Route path={ROUTES.RENTAL.ITEM} element={<RentalProduct />} />
                <Route path={ROUTES.PETITION.ROOT} element={<PetitionBoard />} />
                <Route path={ROUTES.PETITION.SUBMIT} element={<PetitionForm />} />
                <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
