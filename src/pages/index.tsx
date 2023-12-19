@@ -36,16 +36,22 @@ export default function Main() {
    const { setLayout } = useLayout();
 
    const fetchMain = async () => {
-      const data = await get<IMain>(API_PATH.MAIN.ROOT);
+      const data = await get<IMain | null>(API_PATH.MAIN.ROOT, {
+         authenticate: true,
+         contentType: 'application/json',
+         log: true,
+      });
       setMain(data);
    };
 
    const fetchMeal = async () => {
-      const data = await get<ICafeteria | null>(API_PATH.MAIN.CAFETERIA);
+      const data = await get<ICafeteria | null>(API_PATH.MAIN.CAFETERIA, {
+         authenticate: true,
+         contentType: 'application/json',
+         log: true,
+      });
       setCafeteria(data);
    };
-
-   console.log(main);
 
    useEffectOnce(() => {
       fetchMain();
