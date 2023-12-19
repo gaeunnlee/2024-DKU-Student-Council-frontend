@@ -53,6 +53,17 @@ export const ROUTES = {
       /** 회원 정보 입력 */
       INFO: '/signup/info',
    },
+   /** 총학생회 */
+   COUNCIL: {
+      /** 인사말 */
+      GREETING: '/greeting',
+      /** 조직도 */
+      ORGANIZATION: '/organization',
+      /** 오시는 길 */
+      LOCATION: '/location',
+      /** 모집요강 */
+      RECRUITMENT: '/recruitment',
+   },
    /** 대여물품 */
    RENTAL: {
       /** 루트 */

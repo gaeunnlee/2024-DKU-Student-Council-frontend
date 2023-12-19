@@ -23,7 +23,7 @@ interface IMyInfo {
 }
 
 export default function MyPage() {
-   const { setTitle } = useLayout();
+   const { setLayout } = useLayout();
    const { logout } = useAuth();
    const [myInfo, setMyInfo] = React.useState<IMyInfo | null>(null);
    const { get } = useApi();
@@ -35,7 +35,11 @@ export default function MyPage() {
 
    useEffectOnce(() => {
       fetchMyInfo();
-      setTitle('마이페이지');
+      setLayout({
+         title: '마이페이지',
+         backButton: true,
+         fullscreen: false,
+      });
    });
 
    return (

@@ -8,7 +8,7 @@ import { useLayout } from 'hooks/useLayout';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 
 export default function Login() {
-   const { setFullscreen, setTitle, setBackButton } = useLayout();
+   const { setLayout } = useLayout();
    const initLoginInfo: IIdPassword = {
       studentId: '',
       password: '',
@@ -24,9 +24,13 @@ export default function Login() {
    };
 
    useEffectOnce(() => {
-      setFullscreen(true);
-      setTitle('로그인');
-      setBackButton(true);
+      setLayout({
+         title: '로그인',
+         backButton: true,
+         heading: 'Login',
+         subHeading: '단국대학교 총학생회 로그인',
+         fullscreen: true,
+      });
    });
 
    return (
