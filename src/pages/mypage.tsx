@@ -38,6 +38,7 @@ export default function MyPage() {
       setLayout({
          title: '마이페이지',
          backButton: true,
+         isMain: false,
          fullscreen: false,
       });
    });
