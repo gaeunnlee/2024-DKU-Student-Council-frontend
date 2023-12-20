@@ -14,7 +14,7 @@ export default function NoticePost() {
 
    const { formInfo, setFormInfo, handleUpdate, handleSubmit } = useFormUpload(
       initFormInfo,
-      API_PATH.POST.NOTICE,
+      API_PATH.POST.NOTICE.ROOT,
    );
 
    const { imageUrls, addImage, deleteImage } = useImageUpload();
