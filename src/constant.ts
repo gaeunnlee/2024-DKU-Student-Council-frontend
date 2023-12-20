@@ -53,6 +53,17 @@ export const ROUTES = {
       /** 회원 정보 입력 */
       INFO: '/signup/info',
    },
+   /** 총학생회 */
+   COUNCIL: {
+      /** 인사말 */
+      GREETING: '/greeting',
+      /** 조직도 */
+      ORGANIZATION: '/organization',
+      /** 오시는 길 */
+      LOCATION: '/location',
+      /** 모집요강 */
+      RECRUITMENT: '/recruitment',
+   },
    /** 대여물품 */
    RENTAL: {
       /** 루트 */
@@ -65,11 +76,15 @@ export const ROUTES = {
       ROOT: '/petition',
       /** 청원 상세보기 */
       POST: '/petition/:id',
+      /** 청원 글쓰기 */
+      SUBMIT: '/petition/submit',
    },
-   /** 공지 */
+   /** 공지사항 */
    NOTICE: {
-      /** 공지 루트 */
+      /** 루트 */
       ROOT: '/notice',
+      /** 청원 글 작성 */
+      POST: '/notice/post',
       /** 공지 상세보기 */
       ID: '/notice/:id',
    },
@@ -118,6 +133,7 @@ export const API_PATH = {
          ID: (id: string) => `/post/news/${id}`,
       },
       /* 대여물품 */
+      PETITION: '/post/petition',
       RENTAL: {
          /** 대여물품 목록 */
          ITEM: '/rental/item',

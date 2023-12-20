@@ -2,10 +2,12 @@ import axios from 'axios';
 import { CONSTANTS } from 'constant';
 import { useAlert } from './useAlert';
 
+type ContentType = 'multipart/form-data' | 'application/json' | 'application/x-www-form-urlencoded';
 interface Options {
    authenticate?: boolean;
    log?: boolean;
    id?: string;
+   contentType?: ContentType;
 }
 
 const client = axios.create({
@@ -65,6 +67,7 @@ export const useApi = () => {
          const { data } = await client.post<Res>(url, body, {
             headers: {
                Authorization: options?.authenticate && token ? `Bearer ${token}` : null,
+               'Content-Type': options?.contentType,
             },
          });
          options?.log && console.log(data);
