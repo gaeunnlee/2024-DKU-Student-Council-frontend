@@ -85,6 +85,8 @@ export const ROUTES = {
       ROOT: '/notice',
       /** 청원 글 작성 */
       POST: '/notice/post',
+      /** 공지 상세보기 */
+      ID: '/notice/:id',
    },
 };
 
@@ -122,6 +124,15 @@ export const API_PATH = {
    },
    POST: {
       /* 청원게시판 */
+      PETITON: '/post/petition',
+      /* 공지 */
+      NOTICE: {
+         /** 공지 목록 */
+         ROOT: '/post/news',
+         /** 공지 단건조회 */
+         ID: (id: string) => `/post/news/${id}`,
+      },
+      /* 대여물품 */
       PETITION: '/post/petition',
       RENTAL: {
          /** 대여물품 목록 */
@@ -129,8 +140,6 @@ export const API_PATH = {
          /** 대여물품 단건조회 */
          ITEM_DETAIL: (id: string) => `/rental/${id}`,
       },
-      /** 총학 게시글 */
-      NOTICE: '/post/news',
    },
 };
 
