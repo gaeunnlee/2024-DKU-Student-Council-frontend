@@ -19,8 +19,8 @@ export default function DefaultLayout({ children, className, ...props }: Default
    return (
       <>
          <Gnb
-            left={backButton ? <Gnb.GoBack /> : isMain ? <Gnb.Logo /> : undefined}
-            center={<Gnb.Title>{title === '' ? <TextSkeleton width={4} /> : title}</Gnb.Title>}
+            left={backButton ? <Gnb.GoBack /> : isMain ? <Gnb.Logo /> : null}
+            center={<Gnb.Title>{title || <TextSkeleton width={4} />}</Gnb.Title>}
          />
          {heading !== null && (subHeading !== null || subHeading === '') && (
             <Gnh heading={heading} subHeading={subHeading} isMain={isMain} />
