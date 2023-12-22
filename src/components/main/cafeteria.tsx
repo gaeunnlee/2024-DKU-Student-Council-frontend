@@ -1,7 +1,24 @@
 import React, { useState } from 'react';
-import { ICafeteria } from 'pages';
+import { useEffectOnce } from 'hooks/useEffectOnce';
+import { useApi } from 'hooks/useApi';
+import { API_PATH } from 'constant';
 
-export default function Cafeteria({ cafeteria }: { cafeteria?: ICafeteria }) {
+interface ICafeteria {
+   mealData: string;
+   breakfast: string;
+   lunch: string;
+   dinner: string;
+}
+
+const mealOptions = [
+   { key: 'breakfast', label: '아침' },
+   { key: 'lunch', label: '점심' },
+   { key: 'dinner', label: '저녁' },
+];
+
+export default function Cafeteria() {
+   const { get } = useApi();
+   const [cafeteria, setCafeteria] = useState<ICafeteria>();
    const [selectedMeal, setSelectedMeal] = useState('breakfast');
 
    const handleMealData = () => {
@@ -13,8 +30,21 @@ export default function Cafeteria({ cafeteria }: { cafeteria?: ICafeteria }) {
          case 'dinner':
             return <p>{cafeteria?.dinner}</p>;
          default:
-            return null;
+            return <></>;
       }
+   };
+
+   useEffectOnce(() => {
+      fetchMeal();
+   });
+
+   const fetchMeal = async () => {
+      const data = await get<ICafeteria>(API_PATH.MAIN.CAFETERIA, {
+         authenticate: true,
+         contentType: 'application/json',
+         log: true,
+      });
+      setCafeteria(data);
    };
 
    return (
@@ -23,39 +53,18 @@ export default function Cafeteria({ cafeteria }: { cafeteria?: ICafeteria }) {
             <h4 className='font-bold text-lg ml-4 mb-4'>오늘의 학식</h4>
             <div className='flex gap-2'>
                <ul className='flex flex-col gap-1'>
-                  <li>
-                     <button
-                        className={`${
-                           selectedMeal === 'breakfast' ? 'bg-black text-white' : 'bg-white text-black'
-                        }
-                      w-[70px] text-center text-sm py-1 rounded-xl bg-breakfast shadow-md bg-no-repeat`}
-                        onClick={() => setSelectedMeal('breakfast')}
-                     >
-                        아침
-                     </button>
-                  </li>
-                  <li>
-                     <button
-                        className={`${
-                           selectedMeal === 'lunch' ? 'bg-black text-white' : 'bg-white text-black'
-                        }
-                      w-[70px] text-center text-sm py-1 rounded-xl bg-breakfast shadow-md bg-no-repeat`}
-                        onClick={() => setSelectedMeal('lunch')}
-                     >
-                        점심
-                     </button>
-                  </li>
-                  <li>
-                     <button
-                        className={`${
-                           selectedMeal === 'dinner' ? 'bg-black text-white' : 'bg-white text-black'
-                        }
-                      w-[70px] text-center py-1 text-sm rounded-xl bg-breakfast shadow-md bg-no-repeat`}
-                        onClick={() => setSelectedMeal('dinner')}
-                     >
-                        저녁
-                     </button>
-                  </li>
+                  {mealOptions.map((option) => (
+                     <li key={option.key}>
+                        <button
+                           className={`${
+                              selectedMeal === option.key ? 'bg-black text-white' : 'bg-white text-black'
+                           } w-[70px] text-center text-sm py-1 rounded-xl bg-breakfast shadow-md bg-no-repeat`}
+                           onClick={() => setSelectedMeal(option.key)}
+                        >
+                           {option.label}
+                        </button>
+                     </li>
+                  ))}
                </ul>
                <div className='w-[250px] px-4 py-5 text-sm rounded-xl bg-white shadow-md'>
                   {handleMealData()}
