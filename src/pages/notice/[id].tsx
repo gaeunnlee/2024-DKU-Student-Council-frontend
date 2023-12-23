@@ -1,3 +1,4 @@
+import Carousel from 'components/common/carousel';
 import PostBox, { FileBox } from 'components/ui/box/PostBox';
 import { API_PATH } from 'constant';
 import { useParam } from 'hooks/useParam';
@@ -29,6 +30,7 @@ interface INotice {
 export default function NoticeDetail() {
    const { postId, get } = useParam();
    const [post, setPost] = useState<INotice>();
+   const [images, setImages] = useState<string[]>([]);
 
    const fetchPost = async () => {
       try {
@@ -38,18 +40,29 @@ export default function NoticeDetail() {
          alert(error);
       }
    };
+
    useEffect(() => {
       fetchPost();
    }, []);
+
+   useEffect(() => {
+      if (post !== undefined && post.files.length > 0) {
+         post.files.forEach((file) => {
+            if (file.mimeType.indexOf('image') >= 0) {
+               setImages((prev) => [...prev, file.url]);
+            }
+         });
+      }
+   }, [post]);
    return (
       <>
+         <PostBox>
+            <Carousel data={images} />
+         </PostBox>
          <PostBox>
             <p className='text-slate-400'>{post?.createdAt}</p>
             <p>{post?.title}</p>
             <p>{post?.body}</p>
-            {post?.files.map((file) => {
-               return file.mimeType.indexOf('image') >= 0 && <img key={file.id} src={file.thumbnailUrl} />;
-            })}
          </PostBox>
          {post !== undefined && post.files.length > 0 && (
             <FileBox className='leading-2'>
