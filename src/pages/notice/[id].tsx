@@ -4,6 +4,7 @@ import { API_PATH } from 'constant';
 import { useParam } from 'hooks/useParam';
 import React, { useEffect, useState } from 'react';
 import { LuPaperclip } from 'react-icons/lu';
+import Collapse from 'components/ui/collapse';
 interface INotice {
    id: number;
    title: string;
@@ -57,7 +58,9 @@ export default function NoticeDetail() {
    return (
       <>
          <PostBox>
-            <Carousel data={images} />
+            <Collapse status={true}>
+               <Carousel data={images} />
+            </Collapse>
          </PostBox>
          <PostBox>
             <p className='text-slate-400'>{post?.createdAt}</p>
