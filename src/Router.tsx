@@ -21,6 +21,7 @@ import Recruitment from 'pages/council/recruitment';
 import MyPage from 'pages/mypage';
 import PrivateRoute from 'PrivateRoute';
 import NoticeDetail from 'pages/notice/[id]';
+import NoticeBoard from 'pages/notice/index';
 
 /**
  * @description 라우터
@@ -54,6 +55,7 @@ export default function Router() {
                {/* <Route path={ROUTES.RENTAL.ROOT} element={<Rental />} />
                <Route path={ROUTES.RENTAL.ITEM} element={<RentalProduct />} /> */}
                <Route path={ROUTES.PETITION.ROOT} element={<PetitionBoard />} />
+               <Route path={ROUTES.NOTICE.ROOT} element={<NoticeBoard />} />
                <Route path={ROUTES.NOTICE.ID} element={<NoticeDetail />} />
                <Route path={ROUTES.PETITION.SUBMIT} element={<PetitionForm />} />
                <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
