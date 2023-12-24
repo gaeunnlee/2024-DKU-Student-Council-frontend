@@ -57,11 +57,13 @@ export default function NoticeDetail() {
    }, [post]);
    return (
       <>
-         <PostBox>
-            <Collapse status={true}>
-               <Carousel data={images} />
-            </Collapse>
-         </PostBox>
+         {images.length > 0 && (
+            <PostBox>
+               <Collapse status={true}>
+                  <Carousel data={images} />
+               </Collapse>
+            </PostBox>
+         )}
          <PostBox>
             <p className='text-slate-400'>{post?.createdAt}</p>
             <p>{post?.title}</p>
