@@ -20,6 +20,7 @@ import Location from 'pages/council/location';
 import Recruitment from 'pages/council/recruitment';
 import MyPage from 'pages/mypage';
 import PrivateRoute from 'PrivateRoute';
+import NoticeDetail from 'pages/notice/[id]';
 
 /**
  * @description 라우터
@@ -51,6 +52,7 @@ export default function Router() {
                <Route path={ROUTES.COUNCIL.LOCATION} element={<Location />} />
                <Route path={ROUTES.COUNCIL.RECRUITMENT} element={<Recruitment />} />
                <Route path={ROUTES.PETITION.ROOT} element={<PetitionBoard />} />
+               <Route path={ROUTES.NOTICE.ID} element={<NoticeDetail />} />
                <Route path={ROUTES.PETITION.SUBMIT} element={<PetitionForm />} />
                <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
                <Route path={ROUTES.NOTICE.ROOT} element={<Notice />}>
