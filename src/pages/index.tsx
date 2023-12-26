@@ -21,41 +21,22 @@ interface IMain {
    ];
 }
 
-export interface ICafeteria {
-   mealData: string;
-   breakfast: string;
-   lunch: string;
-   dinner: string;
-   other: string;
-}
-
 export default function Main() {
-   const [main, setMain] = useState<IMain | null>(null);
-   const [cafeteria, setCafeteria] = useState<ICafeteria | null>(null);
+   const [main, setMain] = useState<IMain>();
    const { get } = useApi();
    const { setLayout } = useLayout();
 
    const fetchMain = async () => {
-      const data = await get<IMain | null>(API_PATH.MAIN.ROOT, {
+      const data = await get<IMain>(API_PATH.MAIN.ROOT, {
          authenticate: true,
-         contentType: 'application/json',
          log: true,
+         contentType: 'application/json',
       });
       setMain(data);
    };
 
-   const fetchMeal = async () => {
-      const data = await get<ICafeteria | null>(API_PATH.MAIN.CAFETERIA, {
-         authenticate: true,
-         contentType: 'application/json',
-         log: true,
-      });
-      setCafeteria(data);
-   };
-
    useEffectOnce(() => {
       fetchMain();
-      fetchMeal();
       setLayout({
          title: null,
          backButton: false,
@@ -72,7 +53,7 @@ export default function Main() {
          <div className='bg-gray-100 pt-5 pb-4'>
             <Notice notices={main?.recentNotices} />
             <Petition petitions={main?.popularPetitions} />
-            <Cafeteria cafeteria={cafeteria || undefined} />
+            <Cafeteria />
             <Service />
          </div>
       </main>
