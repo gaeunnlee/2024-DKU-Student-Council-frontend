@@ -13,22 +13,20 @@ import { TextSkeleton } from 'components/ui/skeleton';
 type DefaultLayoutProps = IWithReactChildren & React.HTMLAttributes<HTMLDivElement>;
 
 export default function DefaultLayout({ children, className, ...props }: DefaultLayoutProps) {
-   const { title, backButton } = gnbState();
+   const { title, backButton, isMain } = gnbState();
    const { heading, subHeading } = gnhState();
    const { fullscreen } = navStore();
    return (
       <>
-         {title !== null ? (
-            <Gnb
-               left={backButton ? <Gnb.GoBack /> : undefined}
-               center={<Gnb.Title>{title === '' ? <TextSkeleton width={4} /> : title}</Gnb.Title>}
-            />
-         ) : (
-            <Gnb left={backButton ? <Gnb.GoBack /> : undefined} center={<Gnb.Logo />} />
+         <Gnb
+            left={backButton ? <Gnb.GoBack /> : isMain ? <Gnb.Logo /> : null}
+            center={<Gnb.Title>{title || <TextSkeleton width={4} />}</Gnb.Title>}
+         />
+         {heading !== null && (subHeading !== null || subHeading === '') && (
+            <Gnh heading={heading} subHeading={subHeading} isMain={isMain} />
          )}
-         {heading && (subHeading || subHeading === null) && <Gnh heading={heading} subHeading={subHeading} />}
          <div
-            className={`max-w-3xl mx-auto overflow-y-auto overflow-x-hidden bg-black ${className ?? ''}`}
+            className={`w-[390px] mx-auto overflow-y-auto overflow-x-hidden bg-black ${className ?? ''}`}
             style={{ marginBottom: CONSTANTS.bottomNavSize }}
             {...props}
          >

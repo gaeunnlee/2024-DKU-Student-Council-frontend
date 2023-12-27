@@ -5,6 +5,8 @@ interface GnbState {
    setTitle: (title: string | null) => void;
    backButton: boolean;
    setBackButton: (backButton: boolean) => void;
+   isMain: boolean;
+   setIsMain: (isMain: boolean) => void;
 }
 
 export const gnbState = create<GnbState>((set) => ({
@@ -12,4 +14,6 @@ export const gnbState = create<GnbState>((set) => ({
    setTitle: (title: string | null) => set({ title }),
    backButton: false,
    setBackButton: (backButton: boolean) => set({ backButton }),
+   isMain: false,
+   setIsMain: (isMain: boolean) => set({ isMain }),
 }));

@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import Box from 'components/ui/box';
-import document from '../../assets/images/document.svg';
+import document from '../../assets/icons/document.svg';
 
 export default function Recruitment() {
    const { setLayout } = useLayout();
@@ -11,6 +11,7 @@ export default function Recruitment() {
       setLayout({
          title: '총학생회',
          backButton: true,
+         isMain: false,
          heading: '부원모집',
          subHeading: '모집요강',
          fullscreen: false,

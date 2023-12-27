@@ -11,8 +11,8 @@ export interface INotice {
  */
 export default function Notice({ notices }: { notices?: INotice[] }) {
    return notices ? (
-      <div className='px-4 py-5 m-4 rounded-xl bg-gray-100'>
-         <h3 className='font-bold text-lg'>최신 공지사항</h3>
+      <section className='px-4 py-5 m-4 rounded-xl bg-white shadow-md'>
+         <h3 className='font-bold text-lg'>총학소식</h3>
          <ul className='mt-3'>
             {notices?.map((item) => (
                <li key={item.id} className='flex items-center justify-between my-1'>
@@ -20,10 +20,10 @@ export default function Notice({ notices }: { notices?: INotice[] }) {
                </li>
             ))}
          </ul>
-      </div>
+      </section>
    ) : (
       <BaseSkeleton className='px-4 py-5 m-4 rounded-xl'>
-         <h3 className='font-bold text-lg'>최신 공지사항</h3>
+         <h3 className='font-bold text-lg'>총학소식</h3>
          <ul className='mt-4'>
             <TextSkeleton className='my-3 rounded-full' width={7} />
             <TextSkeleton className='my-3 rounded-full' width={15} />

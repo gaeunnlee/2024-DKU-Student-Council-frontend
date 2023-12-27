@@ -15,8 +15,8 @@ export interface IPetition {
  */
 export default function Petition({ petitions }: { petitions?: IPetition[] }) {
    return petitions ? (
-      <div className='px-4 py-5 m-4 rounded-xl bg-gray-100'>
-         <h3 className='font-bold text-lg'>실시간 인기 청원</h3>
+      <section className='px-4 py-5 m-4 rounded-xl bg-white shadow-md'>
+         <h3 className='font-bold text-lg'>청원게시판</h3>
          <ul className='mt-3'>
             {petitions?.map((item) => (
                <li key={item.id} className='flex items-center justify-between my-1'>
@@ -25,10 +25,10 @@ export default function Petition({ petitions }: { petitions?: IPetition[] }) {
                </li>
             ))}
          </ul>
-      </div>
+      </section>
    ) : (
       <BaseSkeleton className='px-4 py-5 m-4 rounded-xl'>
-         <h3 className='font-bold text-lg'>실시간 인기 청원</h3>
+         <h3 className='font-bold text-lg'>청원게시판</h3>
          <ul className='mt-4'>
             <li className='flex items-center justify-between my-1'>
                <TextSkeleton className='my-1 rounded-full' width={7} />

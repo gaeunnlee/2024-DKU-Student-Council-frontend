@@ -121,6 +121,8 @@ export const API_PATH = {
       CAROUSEL: '/main/carousel',
       /** 학사일정 */
       SCHEDULE: '/main/schedule',
+      /** 학식 정보 */
+      CAFETERIA: '/cafeteria/meal/today',
    },
    POST: {
       /* 청원게시판 */

@@ -10,6 +10,10 @@ module.exports = {
             fadeIn: 'fadeIn 0.3s ease-in-out',
             fadeOut: 'fadeOut 0.3s ease-in-out',
          },
+         backgroundImage: {
+            breakfast: "url('./assets/icons/breakfast.svg')",
+            dinner: "url('./assets/icons/dinner.svg')",
+         },
 
          // that is actual animation
          keyframes: (theme) => ({

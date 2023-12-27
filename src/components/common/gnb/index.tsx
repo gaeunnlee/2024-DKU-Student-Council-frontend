@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ReactComponent as BrandLogo } from 'assets/images/logo.svg';
+import logo from '../../../assets/images/logo.png';
 import { ROUTES } from 'constant';
 
 interface Props extends React.ComponentProps<'header'> {
@@ -12,7 +12,7 @@ interface Props extends React.ComponentProps<'header'> {
 export default function Gnb({ left, center, right, ...props }: Props) {
    return (
       <header
-         className={`w-full flex justify-between px-1.5 h-[50px] items-center bg-black ${
+         className={`w-[390px] mx-auto px-1.5 py-1.5 h-[50px] items-center bg-black ${
             typeof props.className !== 'undefined' ? props.className : ''
          }`}
          {...props}
@@ -48,9 +48,9 @@ Gnb.Notification = function Notification() {
 
 Gnb.Logo = function Logo() {
    return (
-      <div>
+      <div className='w-8 h-4'>
          <Link to={ROUTES.MAIN}>
-            <BrandLogo height={15} />
+            <img src={logo} alt='단국대학교 로고' />
          </Link>
       </div>
    );
