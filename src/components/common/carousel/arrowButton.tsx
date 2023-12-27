@@ -7,18 +7,25 @@ export default function ArrowButton({
    setIndex,
    length,
 }: {
-   type: string;
+   type: 'previous' | 'next';
    index: number;
    setIndex: React.Dispatch<React.SetStateAction<number>>;
    length: number;
 }) {
-   const arrowStyle = 'drop-shadow-md hover:text-black cursor-pointer';
    const ArrowIcon =
       type === 'next' ? (
-         <FaChevronCircleRight className={arrowStyle} />
+         <FaChevronCircleRight className='drop-shadow-md hover:text-black cursor-pointer' />
       ) : (
-         <FaChevronCircleLeft className={arrowStyle} />
+         <FaChevronCircleLeft className='drop-shadow-md hover:text-black cursor-pointer' />
       );
+
+   const prevIndex = () => {
+      length - 1 !== index && setIndex((prev) => prev + 1);
+   };
+
+   const nextIndex = () => {
+      index !== 0 && setIndex((prev) => prev - 1);
+   };
 
    return (
       <div
@@ -27,9 +34,7 @@ export default function ArrowButton({
          }`}
          onClick={() => {
             {
-               type === 'next'
-                  ? length - 1 !== index && setIndex((prev) => prev + 1)
-                  : index !== 0 && setIndex((prev) => prev - 1);
+               type === 'next' ? prevIndex() : nextIndex();
             }
          }}
       >

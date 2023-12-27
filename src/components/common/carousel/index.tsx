@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GoDotFill } from 'react-icons/go';
-import ArrowButton from './arrowButton';
+import ArrowButton from './ArrowButton';
 
 export default function Carousel({ data }: { data: string[] }) {
    const [index, setIndex] = useState(0);
