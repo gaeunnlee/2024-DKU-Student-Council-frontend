@@ -5,6 +5,8 @@ export interface GnhState {
    setHeading: (heading: string | null) => void;
    subHeading: string | null;
    setSubHeading: (subHeading: string | null) => void;
+   rounded: boolean;
+   setRounded: (rounded: boolean) => void;
 }
 
 export const gnhState = create<GnhState>((set) => ({
@@ -12,4 +14,6 @@ export const gnhState = create<GnhState>((set) => ({
    setHeading: (heading: string | null) => set({ heading }),
    subHeading: null,
    setSubHeading: (subHeading: string | null) => set({ subHeading }),
+   rounded: true,
+   setRounded: (rounded: boolean) => set({ rounded }),
 }));
