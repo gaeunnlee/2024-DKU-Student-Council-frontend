@@ -36,6 +36,8 @@ export const CONSTANTS = {
 export const ROUTES = {
    /** 메인 화면 */
    MAIN: '/',
+   /** 사이드메뉴 */
+   MENU: '/menu',
    /** 로그인 화면 */
    LOGIN: '/login',
    /** 마이페이지 */
