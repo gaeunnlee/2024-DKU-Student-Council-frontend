@@ -11,5 +11,5 @@ export default function NoticeBoard() {
       </>
    );
 
-   return <BoardLayout api={CONSTANTS.SERVER_URL + API_PATH.POST.NOTICE.ROOT} cell={cell} />;
+   return <BoardLayout api={CONSTANTS.SERVER_URL + API_PATH.POST.NOTICE.ROOT} setCell={cell} />;
 }

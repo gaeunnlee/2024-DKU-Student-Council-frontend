@@ -130,9 +130,9 @@ export const API_PATH = {
       /* 공지 */
       NOTICE: {
          /** 공지 목록 */
-         ROOT: '/post/news',
+         ROOT: '/post/notice',
          /** 공지 단건조회 */
-         ID: (id: string) => `/post/news/${id}`,
+         ID: (id: string) => `/post/notice/${id}`,
       },
       /* 대여물품 */
       PETITION: '/post/petition',

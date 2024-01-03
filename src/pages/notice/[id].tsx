@@ -12,11 +12,19 @@ interface INotice {
    author: string;
    tag: [{ id: number; name: string }];
    createdAt: string;
-   files: [
+   images: [
       {
          id: number;
          url: string;
          thumbnailUrl: string;
+         originalName: string;
+         mimeType: string;
+      },
+   ];
+   files: [
+      {
+         id: number;
+         url: string;
          originalName: string;
          mimeType: string;
       },
@@ -47,11 +55,9 @@ export default function NoticeDetail() {
    }, []);
 
    useEffect(() => {
-      if (post !== undefined && post.files.length > 0) {
-         post.files.forEach((file) => {
-            if (file.mimeType.indexOf('image') >= 0) {
-               setImages((prev) => [...prev, file.url]);
-            }
+      if (post !== undefined && post.images.length > 0) {
+         post.images.forEach((image) => {
+            setImages((prev) => [...prev, image.url]);
          });
       }
    }, [post]);
