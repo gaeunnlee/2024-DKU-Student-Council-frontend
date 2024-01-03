@@ -11,5 +11,5 @@ export default function PetitionBoard() {
          <Text length={4}>{data.expiresAt}</Text>
       </div>
    );
-   return <BoardLayout api={CONSTANTS.SERVER_URL + API_PATH.POST.PETITION} cell={cell} />;
+   return <BoardLayout api={CONSTANTS.SERVER_URL + API_PATH.POST.PETITION} setCell={cell} />;
 }

@@ -18,7 +18,13 @@ export interface IBoardList {
    blinded: string;
 }
 
-export default function BoardLayout({ api, cell }: { api: string; cell: (data: IBoardList) => JSX.Element }) {
+export default function BoardLayout({
+   api,
+   setCell,
+}: {
+   api: string;
+   setCell: (data: IBoardList) => JSX.Element;
+}) {
    const { list, isLoading, bottom } = useInfiniteScroll<IBoardList>(api);
    const [isEmpty, setIsEmpty] = React.useState(false);
    const navigate = useNavigate();
@@ -44,7 +50,7 @@ export default function BoardLayout({ api, cell }: { api: string; cell: (data: I
                   navigate(`${data.id}`);
                }}
             >
-               {cell(data)}
+               {setCell(data)}
             </Board.Cell>
          ))}
          {!isLoading && !isEmpty && <div ref={bottom} />}
