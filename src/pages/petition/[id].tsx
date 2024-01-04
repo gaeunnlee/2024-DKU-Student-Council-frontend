@@ -1,0 +1,107 @@
+import PostBox, { FileBox } from 'components/ui/box/PostBox';
+import { API_PATH } from 'constant';
+import React, { ComponentProps, ReactNode, useEffect, useState } from 'react';
+import Collapse from 'components/ui/collapse';
+import { useFetchPost } from 'hooks/useFetchPost';
+import { getDaysBetween, getPetitionStatus } from '.';
+import { IWithReactChildren } from 'shared/interfaces/default-interfaces';
+
+export default function PetitionDetail() {
+   const { post } = useFetchPost<IPetition>({ api: API_PATH.POST.PETITION.ROOT });
+   const [petitionStatus, setPetitionStatus] = useState('');
+   const [remainingDays, setRemainingDays] = useState<number>();
+
+   useEffect(() => {
+      if (post !== undefined) {
+         setPetitionStatus(getPetitionStatus(post.status));
+         setRemainingDays(getDaysBetween(post.expiresAt));
+      }
+   }, [post]);
+
+   return (
+      post !== undefined && (
+         <>
+            {/* 청원글 */}
+            <Box>
+               <div className='flex gap-4 text-gray-400'>
+                  <span>{petitionStatus}</span>
+                  <span>{`D-${remainingDays}`}</span>
+                  <span>{`${post.agreeCount}/150`}</span>
+               </div>
+               <Title>{post.title}</Title>
+               <p>{post.body}</p>
+            </Box>
+
+            {/* 첨부파일 */}
+            {post.files.length > 0 && <FileBox className='p-0 mt-0' files={post?.files} />}
+
+            {/* 동의현황 */}
+            <PostBox className='shadow-none px-0 py-0'>
+               <Collapse status={false} size='text-2xl' title={<Title className='mr-1'>동의현황</Title>}>
+                  <PostBox className='mx-0 mt-2'>
+                     <></>
+                  </PostBox>
+               </Collapse>
+            </PostBox>
+
+            {/* 답변 */}
+            {post.answer !== null && (
+               <Box>
+                  <Title>총학생회 답변</Title>
+                  <p>{post.answer}</p>
+               </Box>
+            )}
+         </>
+      )
+   );
+}
+
+function Box({ children }: { children: ReactNode }) {
+   return <PostBox className='flex flex-col gap-3'>{children}</PostBox>;
+}
+
+function Title({ children, className }: IWithReactChildren & ComponentProps<'p'>) {
+   return <p className={`text-xl font-bold ${className ?? ''}`}>{children}</p>;
+}
+
+interface IPetition {
+   id: number;
+   title: string;
+   body: string;
+   author: string;
+   tag: [{ id: number; name: string }];
+   createdAt: string;
+   images: [
+      {
+         id: number;
+         url: string;
+         thumbnailUrl: string;
+         originalName: string;
+         mimeType: string;
+      },
+   ];
+   files: [
+      {
+         id: number;
+         url: string;
+         originalName: string;
+         mimeType: string;
+      },
+   ];
+   likes: number;
+   views: number;
+   status: string;
+   answer: null | string;
+   expiresAt: string;
+   agreeCount: number;
+   statisticList: [
+      {
+         department: string;
+         agreeCount: number;
+      },
+   ];
+   agree: true;
+   liked: boolean;
+   mine: boolean;
+   blinded: boolean;
+}

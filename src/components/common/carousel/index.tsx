@@ -6,7 +6,7 @@ export default function Carousel({ data }: { data: string[] }) {
    const [index, setIndex] = useState(0);
 
    return (
-      <div className='relative flex justify-center aspect-square overflow-hidden bg-gray-200 rounded-lg'>
+      <div className='relative flex justify-center aspect-square overflow-hidden bg-gray-200 rounded-lg mt-2'>
          <ArrowButton type='previous' index={index} setIndex={setIndex} length={data.length} />
          <img className='size-full object-cover' src={data[index]} />
          <ArrowButton type='next' index={index} setIndex={setIndex} length={data.length} />

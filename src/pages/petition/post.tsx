@@ -14,7 +14,7 @@ export default function PetitionForm() {
 
    const { formInfo, setFormInfo, handleUpdate, handleSubmit } = useFormUpload(
       initFormInfo,
-      API_PATH.POST.PETITION,
+      API_PATH.POST.PETITION.ROOT,
    );
 
    const { imageUrls, addImage, deleteImage } = useImageUpload();
