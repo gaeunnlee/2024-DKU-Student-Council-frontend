@@ -138,6 +138,10 @@ export const API_PATH = {
          ROOT: '/post/petition',
          /** 청원게시판 단건조회 */
          ID: (id: string) => `/post/petition/${id}`,
+         /** 청원글 동의 */
+         AGREE: {
+            ID: (id: string) => `/post/petition/agree/${id}`,
+         },
       },
       /* 대여물품 */
       RENTAL: {

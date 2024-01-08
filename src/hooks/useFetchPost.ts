@@ -51,5 +51,5 @@ export const useFetchPost = <T extends TPost>({ api, isCarousel }: { api: string
          images,
       };
 
-   return { post };
+   return { post, postId };
 };
