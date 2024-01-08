@@ -55,8 +55,8 @@ export function FileBox({
                   rel='noopener noreferrer'
                   key={file.id}
                >
-                  <LuPaperclip />
-                  {file.originalName}
+                  <LuPaperclip size={30} />
+                  <span className='overflow-hidden text-ellipsis truncate'>{file.originalName}</span>
                </a>
             </>
          ))}
