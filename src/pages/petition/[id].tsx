@@ -5,22 +5,27 @@ import Collapse from 'components/ui/collapse';
 import { useFetchPost } from 'hooks/useFetchPost';
 import { getDaysBetween, getPetitionStatus } from '.';
 import { IWithReactChildren } from 'shared/interfaces/default-interfaces';
+import DoughnutChart from 'components/ui/chart/DoughnutChart';
+import Text from 'components/ui/text';
+import ChartList from 'components/ui/chart/ChartList';
 
 export default function PetitionDetail() {
    const { post } = useFetchPost<IPetition>({ api: API_PATH.POST.PETITION.ROOT });
    const [petitionStatus, setPetitionStatus] = useState('');
    const [remainingDays, setRemainingDays] = useState<number>();
+   const [sum, setSum] = useState(0);
 
    useEffect(() => {
       if (post !== undefined) {
-         setPetitionStatus(getPetitionStatus(post.status));
-         setRemainingDays(getDaysBetween(post.expiresAt));
+         setPetitionStatus(getPetitionStatus(post.status)); // 청원 상태
+         setRemainingDays(getDaysBetween(post.expiresAt)); // 청원 잔여일
+         post.statisticList.forEach((item) => setSum((prev) => prev + item.agreeCount)); // 단과대 총 투표수
       }
    }, [post]);
 
    return (
       post !== undefined && (
-         <>
+         <div className='min-h-screen flex flex-col gap-2'>
             {/* 청원글 */}
             <Box>
                <div className='flex gap-4 text-gray-400'>
@@ -36,10 +41,13 @@ export default function PetitionDetail() {
             {post.files.length > 0 && <FileBox className='p-0 mt-0' files={post?.files} />}
 
             {/* 동의현황 */}
-            <PostBox className='shadow-none px-0 py-0'>
+            <PostBox className='shadow-none px-0 py-0 text-center'>
                <Collapse status={false} size='text-2xl' title={<Title className='mr-1'>동의현황</Title>}>
-                  <PostBox className='mx-0 mt-2'>
-                     <></>
+                  <PostBox className='mx-0 mt-2 flex flex-col gap-3 px-6'>
+                     <Text length={4}>어떤 과에서 가장 동의를 많이 했을까요?</Text>
+                     <hr />
+                     <DoughnutChart statisticList={post.statisticList} sum={sum} />
+                     <ChartList statisticList={post.statisticList} sum={sum} />
                   </PostBox>
                </Collapse>
             </PostBox>
@@ -51,7 +59,7 @@ export default function PetitionDetail() {
                   <p>{post.answer}</p>
                </Box>
             )}
-         </>
+         </div>
       )
    );
 }
