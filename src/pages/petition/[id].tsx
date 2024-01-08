@@ -34,6 +34,7 @@ export default function PetitionDetail() {
             authenticate: true,
          });
          console.log(data);
+         window.location.reload();
       } catch (error) {
          alert;
       }
@@ -44,7 +45,6 @@ export default function PetitionDetail() {
          alert('이미 동의하셨습니다');
       } else {
          handlePostAgree();
-         window.location.reload();
       }
    };
 

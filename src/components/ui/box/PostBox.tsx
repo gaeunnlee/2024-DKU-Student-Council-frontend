@@ -12,7 +12,7 @@ export default function PostBox({
 }: IPostBox & IWithReactChildren & ComponentProps<'div'>) {
    return (
       <div
-         className={`p-4 bg-white rounded-lg m-5 leading-8 transition-opacity animate-fadeIn shadow-[2px_2px_5px_2px_#00000010] ${
+         className={`p-4 bg-white rounded-lg m-5 leading-8 break-words transition-opacity animate-fadeIn shadow-[2px_2px_5px_2px_#00000010] ${
             className ?? ''
          }`}
          {...props}
