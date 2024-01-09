@@ -21,6 +21,7 @@ export default function NoticePost() {
 
    return (
       <Post
+         pageTitle='공지'
          formInfo={formInfo}
          setFormInfo={setFormInfo}
          handleUpdate={handleUpdate}

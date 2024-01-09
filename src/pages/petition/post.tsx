@@ -21,6 +21,7 @@ export default function PetitionForm() {
 
    return (
       <Post
+         pageTitle='청원'
          formInfo={formInfo}
          setFormInfo={setFormInfo}
          handleUpdate={handleUpdate}

@@ -1,9 +1,14 @@
-import React from 'react';
-import Input from 'components/ui/input';
+import React, { ReactNode, useEffect } from 'react';
 import Button from 'components/ui/button';
 import TextEditor from 'components/common/editor/index';
 import { ImageProps } from 'hooks/useImageUpload';
 import { IFormInfo } from 'hooks/useFormUpload';
+import FloatingButton from 'components/ui/button/FloatingButton';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from 'constant';
+import PostBox from 'components/ui/box/PostBox';
+import Title from 'components/ui/text/board';
+import { FaCamera } from 'react-icons/fa';
 
 interface PostProps {
    formInfo: IFormInfo;
@@ -13,9 +18,10 @@ interface PostProps {
    imageUrls: string[];
    addImage: (params: ImageProps['add']) => void;
    deleteImage: (params: ImageProps['delete']) => void;
+   pageTitle: string;
 }
 
-function Post({
+export default function Post({
    formInfo,
    setFormInfo,
    handleUpdate,
@@ -23,42 +29,68 @@ function Post({
    imageUrls,
    addImage,
    deleteImage,
+   pageTitle,
 }: PostProps) {
+   const navigate = useNavigate();
+   useEffect(() => {
+      console.log(imageUrls);
+   }, [imageUrls]);
+
    return (
       <form onSubmit={handleSubmit} encType='multipart/form-data' className='flex-col'>
-         <Input
-            label='제목'
-            type='text'
-            id='title'
-            name='title'
-            value={formInfo.title}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-               setFormInfo((prev) => {
-                  return { ...prev, title: e.target.value };
-               });
-            }}
-         />
-         <TextEditor value={!formInfo.body ? '<br>' : `<p>${formInfo.body}</p>`} onChange={handleUpdate} />
-         <label htmlFor='input-file'>
-            사진추가
-            <Input
-               type='file'
-               id='input-file'
-               multiple
-               onChange={(e) => addImage({ e, formInfo, setFormInfo })}
+         <Box>
+            <Title content={`${pageTitle} 제목`} />
+            <input
+               type='text'
+               id='title'
+               name='title'
+               value={formInfo.title}
+               placeholder='청원 제목을 입력해주세요'
+               className='w-full focus:outline-0'
+               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setFormInfo((prev) => {
+                     return { ...prev, title: e.target.value };
+                  });
+               }}
             />
-         </label>
-         {imageUrls.map((imageUrl, id) => (
-            <div key={id}>
-               <Button onClick={() => deleteImage({ id, setFormInfo })} className='w-2 h-4'>
-                  x
-               </Button>
-               <img src={imageUrl} alt={`Image-${id}`} className='w-10 h-10' />
-            </div>
-         ))}
-         <Button type='submit'>업로드</Button>
+         </Box>
+         <Box>
+            <Title content={`${pageTitle} 내용`} />
+            <TextEditor value={!formInfo.body ? '<br>' : `<p>${formInfo.body}</p>`} onChange={handleUpdate} />
+         </Box>
+         <Box>
+            <label htmlFor='input-file' className='flex items-center gap-3'>
+               <input
+                  type='file'
+                  id='input-file'
+                  multiple
+                  onChange={(e) => addImage({ e, formInfo, setFormInfo })}
+                  className='hidden'
+                  accept='image/png, image/jpeg'
+               />
+               <FaCamera />
+               <span>이미지를 업로드하세요.</span>
+            </label>
+            {imageUrls.map((imageUrl, id) => (
+               <div key={id}>
+                  <Button onClick={() => deleteImage({ id, setFormInfo })} className='w-2 h-4'>
+                     x
+                  </Button>
+                  <img src={imageUrl} alt={`Image-${id}`} className='w-10 h-10' />
+               </div>
+            ))}
+         </Box>
+         <FloatingButton
+            event={() => {
+               navigate(ROUTES.PETITION.SUBMIT);
+            }}
+         >
+            <p className='text-white'>Upload</p>
+         </FloatingButton>
       </form>
    );
 }
 
-export default Post;
+function Box({ children }: { children: ReactNode }) {
+   return <PostBox className='flex flex-col gap-3 px-6'>{children}</PostBox>;
+}

@@ -24,8 +24,10 @@ export const useFormUpload = (initFormInfo: IFormInfo, apiPath: string) => {
       const formData = new FormData();
       formData.append('title', formInfo.title);
       formData.append('body', formInfo.body);
-      for (const file of formInfo.files) {
-         formData.append('files', file);
+      if (formInfo.files !== undefined) {
+         for (const file of formInfo.files) {
+            formData.append('files', file);
+         }
       }
       post<IFormInfo, number>(apiPath, formInfo, {
          authenticate: true,
