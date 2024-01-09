@@ -1,7 +1,9 @@
+import FloatingButton from 'components/ui/button/FloatingButton';
 import Text from 'components/ui/text';
-import { API_PATH, CONSTANTS } from 'constant';
+import { API_PATH, CONSTANTS, ROUTES } from 'constant';
 import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const getDaysBetween = (expiresAt: string) => {
    const startDate = new Date();
@@ -18,6 +20,8 @@ export const getPetitionStatus = (status: string) => {
 };
 
 export default function PetitionBoard() {
+   const navigate = useNavigate();
+
    const setCell = (data: IBoardList) => (
       <div className='flex justify-between leading-9 px-2 gap-3 whitespace-nowrap'>
          <Text length={4}>{getPetitionStatus(data.status!)}</Text>
@@ -28,5 +32,16 @@ export default function PetitionBoard() {
       </div>
    );
 
-   return <BoardLayout api={CONSTANTS.SERVER_URL + API_PATH.POST.PETITION.ROOT} setCell={setCell} />;
+   return (
+      <>
+         <BoardLayout api={CONSTANTS.SERVER_URL + API_PATH.POST.PETITION.ROOT} setCell={setCell} />
+         <FloatingButton
+            event={() => {
+               navigate(ROUTES.PETITION.SUBMIT);
+            }}
+         >
+            <p className='text-white'>Upload</p>
+         </FloatingButton>
+      </>
+   );
 }
