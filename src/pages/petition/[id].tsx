@@ -11,6 +11,7 @@ import ChartList from 'components/ui/chart/ChartList';
 import { TbThumbUp, TbThumbUpFilled } from 'react-icons/tb';
 import { useAlert } from 'hooks/useAlert';
 import { useApi } from 'hooks/useApi';
+import FloatingButton from 'components/ui/button/FloatingButton';
 
 export default function PetitionDetail() {
    const { post: petition, postId } = useFetchPost<IPetition>({ api: API_PATH.POST.PETITION.ROOT });
@@ -86,20 +87,17 @@ export default function PetitionDetail() {
             )}
 
             {/* 플로팅 버튼 */}
-            <div className='flex justify-end'>
-               <button
-                  onClick={() => {
-                     handleAgreeButtonClick();
-                  }}
-                  className='rounded-full fixed bottom-[80px] mr-5 bg-black w-[70px] h-[70px] flex justify-center items-center'
-               >
-                  {petition.agree ? (
-                     <TbThumbUpFilled color='white' size={40} />
-                  ) : (
-                     <TbThumbUp color='white' size={40} />
-                  )}
-               </button>
-            </div>
+            <FloatingButton
+               event={() => {
+                  handleAgreeButtonClick();
+               }}
+            >
+               {petition.agree ? (
+                  <TbThumbUpFilled color='white' size={40} />
+               ) : (
+                  <TbThumbUp color='white' size={40} />
+               )}
+            </FloatingButton>
          </div>
       )
    );
