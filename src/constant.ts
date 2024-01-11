@@ -77,7 +77,7 @@ export const ROUTES = {
       /** 청원 상세보기 */
       ID: '/petition/:id',
       /** 청원 글쓰기 */
-      SUBMIT: '/petition/post',
+      POST: '/petition/post',
    },
    /** 공지사항 */
    NOTICE: {

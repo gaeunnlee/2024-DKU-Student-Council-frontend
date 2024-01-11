@@ -56,7 +56,7 @@ export default function Router() {
                <Route path={ROUTES.PETITION.ID} element={<PetitionDetail />} />
                <Route path={ROUTES.NOTICE.ROOT} element={<NoticeBoard />} />
                <Route path={ROUTES.NOTICE.ID} element={<NoticeDetail />} />
-               <Route path={ROUTES.PETITION.SUBMIT} element={<PetitionForm />} />
+               <Route path={ROUTES.PETITION.POST} element={<PetitionForm />} />
                <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
                <Route path={ROUTES.NOTICE.POST} element={<NoticePost />} />
             </Routes>

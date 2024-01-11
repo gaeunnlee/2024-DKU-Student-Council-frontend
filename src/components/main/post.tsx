@@ -1,11 +1,9 @@
 import React, { ReactNode, useEffect } from 'react';
-import Button from 'components/ui/button';
 import TextEditor from 'components/common/editor/index';
 import { ImageProps } from 'hooks/useImageUpload';
 import { IFormInfo } from 'hooks/useFormUpload';
 import FloatingButton from 'components/ui/button/FloatingButton';
 import { useNavigate } from 'react-router-dom';
-import { ROUTES } from 'constant';
 import PostBox from 'components/ui/box/PostBox';
 import Title from 'components/ui/text/board';
 import { FaCamera } from 'react-icons/fa';
@@ -15,10 +13,11 @@ interface PostProps {
    setFormInfo: React.Dispatch<React.SetStateAction<IFormInfo>>;
    handleUpdate: (value: string) => void;
    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-   imageUrls: string[];
+   imageList: { imageUrl: string; imageName: string }[];
    addImage: (params: ImageProps['add']) => void;
    deleteImage: (params: ImageProps['delete']) => void;
    pageTitle: string;
+   navigateUrl: string;
 }
 
 export default function Post({
@@ -26,15 +25,16 @@ export default function Post({
    setFormInfo,
    handleUpdate,
    handleSubmit,
-   imageUrls,
+   imageList,
    addImage,
    deleteImage,
    pageTitle,
+   navigateUrl,
 }: PostProps) {
    const navigate = useNavigate();
    useEffect(() => {
-      console.log(imageUrls);
-   }, [imageUrls]);
+      console.log(imageList);
+   }, [imageList]);
 
    return (
       <form onSubmit={handleSubmit} encType='multipart/form-data' className='flex-col'>
@@ -71,18 +71,25 @@ export default function Post({
                <FaCamera />
                <span>이미지를 업로드하세요.</span>
             </label>
-            {imageUrls.map((imageUrl, id) => (
-               <div key={id}>
-                  <Button onClick={() => deleteImage({ id, setFormInfo })} className='w-2 h-4'>
+            {imageList.map((image, id) => (
+               <div key={id} className='flex gap-3'>
+                  <img src={image.imageUrl} alt={`Image-${id}`} className='w-10 h-10' />
+                  <span className='truncate'>{image.imageName}</span>
+                  <button
+                     type='button'
+                     onClick={() => {
+                        console.log(id);
+                        deleteImage({ id, setFormInfo });
+                     }}
+                  >
                      x
-                  </Button>
-                  <img src={imageUrl} alt={`Image-${id}`} className='w-10 h-10' />
+                  </button>
                </div>
             ))}
          </Box>
          <FloatingButton
             event={() => {
-               navigate(ROUTES.PETITION.SUBMIT);
+               navigate(navigateUrl);
             }}
          >
             <p className='text-white'>Upload</p>

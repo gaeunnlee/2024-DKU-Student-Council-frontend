@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useApi } from './useApi';
 
 export interface IFormInfo {
@@ -35,6 +35,10 @@ export const useFormUpload = (initFormInfo: IFormInfo, apiPath: string) => {
          log: true,
       });
    };
+
+   useEffect(() => {
+      console.log(initFormInfo);
+   }, [initFormInfo]);
 
    return {
       formInfo,

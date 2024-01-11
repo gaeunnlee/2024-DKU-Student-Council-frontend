@@ -1,5 +1,5 @@
 import React from 'react';
-import { API_PATH } from 'constant';
+import { API_PATH, ROUTES } from 'constant';
 import useImageUpload from 'hooks/useImageUpload';
 import { IFormInfo } from 'hooks/useFormUpload';
 import { useFormUpload } from 'hooks/useFormUpload';
@@ -17,16 +17,17 @@ export default function NoticePost() {
       API_PATH.POST.NOTICE.ROOT,
    );
 
-   const { imageUrls, addImage, deleteImage } = useImageUpload();
+   const { imageList, addImage, deleteImage } = useImageUpload();
 
    return (
       <Post
          pageTitle='공지'
+         navigateUrl={ROUTES.NOTICE.POST}
          formInfo={formInfo}
          setFormInfo={setFormInfo}
          handleUpdate={handleUpdate}
          handleSubmit={handleSubmit}
-         imageUrls={imageUrls}
+         imageList={imageList}
          addImage={addImage}
          deleteImage={deleteImage}
       />

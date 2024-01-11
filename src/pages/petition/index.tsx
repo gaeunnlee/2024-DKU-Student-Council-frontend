@@ -37,7 +37,7 @@ export default function PetitionBoard() {
          <BoardLayout api={CONSTANTS.SERVER_URL + API_PATH.POST.PETITION.ROOT} setCell={setCell} />
          <FloatingButton
             event={() => {
-               navigate(ROUTES.PETITION.SUBMIT);
+               navigate(ROUTES.PETITION.POST);
             }}
          >
             <p className='text-white'>Upload</p>
