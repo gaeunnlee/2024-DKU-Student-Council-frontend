@@ -14,28 +14,36 @@ import { useApi } from 'hooks/useApi';
 import FloatingButton from 'components/ui/button/FloatingButton';
 
 export default function PetitionDetail() {
-   const { post: petition, postId } = useFetchPost<IPetition>({ api: API_PATH.POST.PETITION.ROOT });
+   const [updatePost, setUpdatePost] = useState(false);
+   const { post: petition, postId } = useFetchPost<IPetition>({
+      api: API_PATH.POST.PETITION.ROOT,
+      update: updatePost,
+   });
    const [petitionStatus, setPetitionStatus] = useState('');
    const [remainingDays, setRemainingDays] = useState<number>();
    const [sum, setSum] = useState(0);
    const { alert } = useAlert();
    const { post } = useApi();
 
+   const getSum = (post: IPetition) => {
+      setSum(0);
+      return post.statisticList.forEach((item) => setSum((prev) => prev + item.agreeCount)); // 단과대 총 투표수
+   };
+
    useEffect(() => {
       if (petition !== undefined) {
          setPetitionStatus(getPetitionStatus(petition.status)); // 청원 상태
          setRemainingDays(getDaysBetween(petition.expiresAt)); // 청원 잔여일
-         petition.statisticList.forEach((item) => setSum((prev) => prev + item.agreeCount)); // 단과대 총 투표수
+         getSum(petition);
       }
-   }, [petition]);
+   }, [petition, updatePost]);
 
    const handlePostAgree = async () => {
       try {
-         const data = await post(`${API_PATH.POST.PETITION.AGREE.ID(postId!)}`, null, {
+         await post(`${API_PATH.POST.PETITION.AGREE.ID(postId!)}`, null, {
             authenticate: true,
          });
-         console.log(data);
-         window.location.reload();
+         setUpdatePost(true);
       } catch (error) {
          alert;
       }

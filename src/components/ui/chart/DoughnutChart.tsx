@@ -17,7 +17,6 @@ export default function DoughnutChart({
 }) {
    const [chartData, setChartData] = useState({ labels: [''], data: [0] });
    ChartJS.register(ArcElement, Tooltip, Legend, Title, ChartDataLabels);
-
    useEffect(() => {
       setChartData({ labels: [], data: [] }); // 차트 초기화
 
@@ -55,7 +54,6 @@ export default function DoughnutChart({
          },
       ],
    };
-
    // 차트 중앙에 총 투표 수 배치
    const textCenter = {
       id: 'textCenter',
@@ -63,11 +61,18 @@ export default function DoughnutChart({
          const ctx = chart.ctx;
          const xCoor = chart.chartArea.left + (chart.chartArea.right - chart.chartArea.left) / 2;
          const yCoor = chart.chartArea.top + (chart.chartArea.bottom - chart.chartArea.top) / 2;
+         // prop으로 받아온 총 투표 수가 업데이트시 반영되지 않아 다시 작성
+         let total = 0;
+         chart.data.datasets[0].data.forEach((item) => {
+            if (typeof item === 'number') {
+               total += item;
+            }
+         });
          ctx.save();
          ctx.font = 'bold 20px sans-serif';
          ctx.textAlign = 'center';
          ctx.textBaseline = 'middle';
-         ctx.fillText(`${sum}명`, xCoor, yCoor);
+         ctx.fillText(`${total}명`, xCoor, yCoor);
       },
    };
 

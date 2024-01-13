@@ -14,7 +14,15 @@ type TPost = {
    ];
 };
 
-export const useFetchPost = <T extends TPost>({ api, isCarousel }: { api: string; isCarousel?: boolean }) => {
+export const useFetchPost = <T extends TPost>({
+   api,
+   update,
+   isCarousel,
+}: {
+   api: string;
+   update?: boolean;
+   isCarousel?: boolean;
+}) => {
    const { postId, get } = useParam();
    const [post, setPost] = useState<T>();
    const [images, setImages] = useState<string[]>([]);
@@ -36,6 +44,12 @@ export const useFetchPost = <T extends TPost>({ api, isCarousel }: { api: string
    useEffect(() => {
       fetchPost();
    }, []);
+
+   useEffect(() => {
+      if (update) {
+         fetchPost();
+      }
+   }, [update]);
 
    useEffect(() => {
       if (post !== undefined && post!.images.length > 0) {
