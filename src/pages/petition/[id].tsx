@@ -7,7 +7,7 @@ import { getDaysBetween, getPetitionStatus } from '.';
 import { IWithReactChildren } from 'shared/interfaces/default-interfaces';
 import DoughnutChart from 'components/ui/chart/DoughnutChart';
 import Text from 'components/ui/text';
-import ChartList from 'components/ui/chart/ChartList';
+import PetitonChartList from 'components/ui/chart/PetitionChartList';
 import { TbThumbUp, TbThumbUpFilled } from 'react-icons/tb';
 import { useAlert } from 'hooks/useAlert';
 import { useApi } from 'hooks/useApi';
@@ -81,7 +81,7 @@ export default function PetitionDetail() {
                      <Text length={4}>어떤 과에서 가장 동의를 많이 했을까요?</Text>
                      <hr />
                      <DoughnutChart statisticList={petition.statisticList} sum={sum} />
-                     <ChartList statisticList={petition.statisticList} sum={sum} />
+                     <PetitonChartList statisticList={petition.statisticList} sum={sum} />
                   </PostBox>
                </Collapse>
             </PostBox>

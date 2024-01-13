@@ -1,7 +1,7 @@
 import React from 'react';
 import { IPetitionStatistic } from './DoughnutChart';
 
-export default function ChartList({
+export default function PetitionChartList({
    statisticList,
    sum,
 }: {
