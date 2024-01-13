@@ -15,6 +15,7 @@ import FloatingButton from 'components/ui/button/FloatingButton';
 
 export default function PetitionDetail() {
    const [updatePost, setUpdatePost] = useState(false);
+   const [chartData, setChartData] = useState({ labels: [''], data: [0] });
    const { post: petition, postId } = useFetchPost<IPetition>({
       api: API_PATH.POST.PETITION.ROOT,
       update: updatePost,
@@ -35,8 +36,22 @@ export default function PetitionDetail() {
          setPetitionStatus(getPetitionStatus(petition.status)); // 청원 상태
          setRemainingDays(getDaysBetween(petition.expiresAt)); // 청원 잔여일
          getSum(petition);
+         processData(petition.statisticList);
       }
    }, [petition, updatePost]);
+
+   const processData = (data: IPetitionStatistic[]) => {
+      setChartData({ labels: [], data: [] }); // 차트 초기화
+      /* 단과대 투표 데이터 가공 */
+      data.forEach((item) => {
+         setChartData((prev) => {
+            return {
+               labels: [...prev.labels, item.department],
+               data: [...prev.data, item.agreeCount],
+            };
+         });
+      });
+   };
 
    const handlePostAgree = async () => {
       try {
@@ -80,7 +95,7 @@ export default function PetitionDetail() {
                   <PostBox className='mx-0 mt-2 flex flex-col gap-3 px-6'>
                      <Text length={4}>어떤 과에서 가장 동의를 많이 했을까요?</Text>
                      <hr />
-                     <DoughnutChart statisticList={petition.statisticList} sum={sum} />
+                     <DoughnutChart chartData={chartData} sum={sum} />
                      <PetitonChartList statisticList={petition.statisticList} sum={sum} />
                   </PostBox>
                </Collapse>
@@ -149,14 +164,14 @@ interface IPetition {
    answer: null | string;
    expiresAt: string;
    agreeCount: number;
-   statisticList: [
-      {
-         department: string;
-         agreeCount: number;
-      },
-   ];
+   statisticList: IPetitionStatistic[];
    agree: true;
    liked: boolean;
    mine: boolean;
    blinded: boolean;
+}
+
+export interface IPetitionStatistic {
+   agreeCount: number;
+   department: string;
 }

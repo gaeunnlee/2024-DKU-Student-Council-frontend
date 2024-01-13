@@ -1,5 +1,5 @@
+import { IPetitionStatistic } from 'pages/petition/[id]';
 import React from 'react';
-import { IPetitionStatistic } from './DoughnutChart';
 
 export default function PetitionChartList({
    statisticList,

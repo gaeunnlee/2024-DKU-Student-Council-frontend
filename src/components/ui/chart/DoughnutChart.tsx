@@ -1,35 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
-export interface IPetitionStatistic {
-   agreeCount: number;
-   department: string;
+export interface IChartData {
+   labels: string[];
+   data: number[];
 }
 
-export default function DoughnutChart({
-   statisticList,
-   sum,
-}: {
-   statisticList: IPetitionStatistic[];
-   sum: number;
-}) {
-   const [chartData, setChartData] = useState({ labels: [''], data: [0] });
+export default function DoughnutChart({ chartData, sum }: { chartData: IChartData; sum: number }) {
    ChartJS.register(ArcElement, Tooltip, Legend, Title, ChartDataLabels);
-   useEffect(() => {
-      setChartData({ labels: [], data: [] }); // 차트 초기화
-
-      /* 단과대 투표 데이터 가공 */
-      statisticList.forEach((item) => {
-         setChartData((prev) => {
-            return {
-               labels: [...prev.labels, item.department],
-               data: [...prev.data, item.agreeCount],
-            };
-         });
-      });
-   }, [statisticList]);
 
    const data = {
       labels: chartData.labels,
@@ -61,7 +41,7 @@ export default function DoughnutChart({
          const ctx = chart.ctx;
          const xCoor = chart.chartArea.left + (chart.chartArea.right - chart.chartArea.left) / 2;
          const yCoor = chart.chartArea.top + (chart.chartArea.bottom - chart.chartArea.top) / 2;
-         // prop으로 받아온 총 투표 수가 업데이트시 반영되지 않아 다시 작성
+         // props으로 받아온 총 투표 수가 업데이트시 반영되지 않아 다시 작성
          let total = 0;
          chart.data.datasets[0].data.forEach((item) => {
             if (typeof item === 'number') {
