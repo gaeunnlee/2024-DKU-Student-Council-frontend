@@ -12,17 +12,19 @@ import { AnimatePresence } from 'framer-motion';
 type DefaultLayoutProps = IWithReactChildren & React.HTMLAttributes<HTMLDivElement>;
 
 export default function DefaultLayout({ children, className, ...props }: DefaultLayoutProps) {
-   const { title, backButton, isMain } = gnbState();
-   const { heading, subHeading } = gnhState();
+   const { topHeader, title, backButton, isMain } = gnbState();
+   const { heading, subHeading, rounded } = gnhState();
    const { fullscreen } = navStore();
 
    return (
       <>
-         <Gnb
-            left={backButton ? <Gnb.GoBack /> : isMain ? <Gnb.Logo /> : null}
-            center={title ? <Gnb.Title>{title}</Gnb.Title> : null}
-         />
-         {heading !== null && (subHeading !== null || subHeading === '') && (
+         {topHeader && (
+            <Gnb
+               left={backButton ? <Gnb.GoBack /> : isMain ? <Gnb.Logo /> : null}
+               center={title ? <Gnb.Title>{title}</Gnb.Title> : null}
+            />
+         )}
+         {heading !== null && subHeading !== null && (
             <Gnh heading={heading} subHeading={subHeading} isMain={isMain} />
          )}
          <div
@@ -30,9 +32,15 @@ export default function DefaultLayout({ children, className, ...props }: Default
             style={{ marginBottom: CONSTANTS.bottomNavSize }}
             {...props}
          >
-            <div className='flex flex-col rounded-t-xl bg-white pt-4'>{children}</div>
+            <div className={`${rounded && 'rounded-t-xl pt-4'} flex flex-col bg-white`}>{children}</div>
          </div>
-         <AnimatePresence>{!fullscreen && <Nav />}</AnimatePresence>
+         <AnimatePresence>
+            {!fullscreen && (
+               <>
+                  <Nav />
+               </>
+            )}
+         </AnimatePresence>
       </>
    );
 }
