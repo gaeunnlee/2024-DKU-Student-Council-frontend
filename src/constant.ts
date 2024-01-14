@@ -88,6 +88,11 @@ export const ROUTES = {
       /** 공지 상세보기 */
       ID: '/notice/:id',
    },
+   /** 회의록 */
+   CONFERENCE: {
+      /** 루트 */
+      ROOT: '/conference',
+   },
 };
 
 /**
@@ -149,6 +154,11 @@ export const API_PATH = {
          ITEM: '/rental/item',
          /** 대여물품 단건조회 */
          ITEM_DETAIL: (id: string) => `/rental/${id}`,
+      },
+      /** 회의록 */
+      CONFERENCE: {
+         /** 회의록 목록 */
+         ROOT: '/post/conference',
       },
    },
 };
