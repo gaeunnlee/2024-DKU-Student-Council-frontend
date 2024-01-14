@@ -93,6 +93,11 @@ export const ROUTES = {
       /** 루트 */
       ROOT: '/conference',
    },
+   /** 회칙 */
+   RULE: {
+      /** 루트 */
+      ROOT: '/rule',
+   },
 };
 
 /**
@@ -159,6 +164,11 @@ export const API_PATH = {
       CONFERENCE: {
          /** 회의록 목록 */
          ROOT: '/post/conference',
+      },
+      /** 회칙 */
+      RULE: {
+         /** 회칙 목록 */
+         ROOT: '/post/rule',
       },
    },
 };
