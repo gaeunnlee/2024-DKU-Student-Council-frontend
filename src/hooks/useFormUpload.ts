@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useApi } from './useApi';
 
 export interface IFormInfo {
@@ -24,8 +24,10 @@ export const useFormUpload = (initFormInfo: IFormInfo, apiPath: string) => {
       const formData = new FormData();
       formData.append('title', formInfo.title);
       formData.append('body', formInfo.body);
-      for (const file of formInfo.files) {
-         formData.append('files', file);
+      if (formInfo.files !== undefined) {
+         for (const file of formInfo.files) {
+            formData.append('files', file);
+         }
       }
       post<IFormInfo, number>(apiPath, formInfo, {
          authenticate: true,
@@ -33,6 +35,10 @@ export const useFormUpload = (initFormInfo: IFormInfo, apiPath: string) => {
          log: true,
       });
    };
+
+   useEffect(() => {
+      console.log(initFormInfo);
+   }, [initFormInfo]);
 
    return {
       formInfo,

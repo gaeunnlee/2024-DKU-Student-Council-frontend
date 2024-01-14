@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IFormInfo } from './useFormUpload';
 
 export interface ImageProps {
@@ -14,41 +14,36 @@ export interface ImageProps {
 }
 
 const useImageUpload = () => {
-   const [imageUrls, setImageUrls] = React.useState<string[]>([]);
+   const [imageList, setImageList] = React.useState([{ imageUrl: '', imageName: '' }]);
+
+   useEffect(() => {
+      setImageList([]);
+   }, []);
 
    const addImage = ({ e, formInfo, setFormInfo }: ImageProps['add']) => {
       const imageList: FileList | null = e.target.files;
-      if (imageList && imageList.length > 0) {
-         const fileList = [...formInfo.files, imageList[0]];
-         const imageUrl = URL.createObjectURL(imageList[0]);
+      const fileList = formInfo.files;
+
+      Array.from(imageList!).forEach((item) => {
+         const imageUrl = URL.createObjectURL(item);
          setFormInfo((prevFormInfo) => ({
             ...prevFormInfo,
-            files: fileList,
+            files: [...fileList, item],
          }));
-         setImageUrls((prevImageUrls) => [...prevImageUrls, imageUrl]);
-      }
+         setImageList((prev) => [...prev, { imageUrl: imageUrl, imageName: item.name }]);
+      });
    };
 
    const deleteImage = ({ id, setFormInfo }: ImageProps['delete']) => {
-      setImageUrls((prevImageUrls) => {
-         URL.revokeObjectURL(prevImageUrls[id]);
-         const updatedImageUrls = [...prevImageUrls];
-         updatedImageUrls.splice(id, 1);
-         return updatedImageUrls;
-      });
-
-      setFormInfo((prevFormInfo) => {
-         const updatedFileList = [...prevFormInfo.files];
-         updatedFileList.splice(id, 1);
-         return {
-            ...prevFormInfo,
-            files: updatedFileList,
-         };
-      });
+      setImageList((prev) => prev.filter((_, index) => index !== id));
+      setFormInfo((prev) => ({
+         ...prev,
+         files: prev.files.filter((_, index) => index !== id),
+      }));
    };
 
    return {
-      imageUrls,
+      imageList,
       addImage,
       deleteImage,
    };

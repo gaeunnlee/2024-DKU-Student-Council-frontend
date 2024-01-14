@@ -75,9 +75,9 @@ export const ROUTES = {
       /** 청원 루트 */
       ROOT: '/petition',
       /** 청원 상세보기 */
-      POST: '/petition/:id',
+      ID: '/petition/:id',
       /** 청원 글쓰기 */
-      SUBMIT: '/petition/submit',
+      POST: '/petition/post',
    },
    /** 공지사항 */
    NOTICE: {
@@ -125,8 +125,6 @@ export const API_PATH = {
       CAFETERIA: '/cafeteria/meal/today',
    },
    POST: {
-      /* 청원게시판 */
-      PETITON: '/post/petition',
       /* 공지 */
       NOTICE: {
          /** 공지 목록 */
@@ -134,8 +132,18 @@ export const API_PATH = {
          /** 공지 단건조회 */
          ID: (id: string) => `/post/notice/${id}`,
       },
+      /* 청원게시판 */
+      PETITION: {
+         /** 청원게시판 목록 */
+         ROOT: '/post/petition',
+         /** 청원게시판 단건조회 */
+         ID: (id: string) => `/post/petition/${id}`,
+         /** 청원글 동의 */
+         AGREE: {
+            ID: (id: string) => `/post/petition/agree/${id}`,
+         },
+      },
       /* 대여물품 */
-      PETITION: '/post/petition',
       RENTAL: {
          /** 대여물품 목록 */
          ITEM: '/rental/item',

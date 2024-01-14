@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ROUTES } from './constant';
 import DefaultLayout from 'layouts/DefaultLayout';
 import PetitionBoard from 'pages/petition';
-import Notice from 'pages/notice/index';
 import NoticePost from 'pages/notice/post';
 import PetitionForm from 'pages/petition/post';
 
@@ -22,6 +21,7 @@ import MyPage from 'pages/mypage';
 import PrivateRoute from 'PrivateRoute';
 import NoticeDetail from 'pages/notice/[id]';
 import NoticeBoard from 'pages/notice/index';
+import PetitionDetail from 'pages/petition/[id]';
 
 /**
  * @description 라우터
@@ -53,13 +53,12 @@ export default function Router() {
                <Route path={ROUTES.COUNCIL.LOCATION} element={<Location />} />
                <Route path={ROUTES.COUNCIL.RECRUITMENT} element={<Recruitment />} />
                <Route path={ROUTES.PETITION.ROOT} element={<PetitionBoard />} />
+               <Route path={ROUTES.PETITION.ID} element={<PetitionDetail />} />
                <Route path={ROUTES.NOTICE.ROOT} element={<NoticeBoard />} />
                <Route path={ROUTES.NOTICE.ID} element={<NoticeDetail />} />
-               <Route path={ROUTES.PETITION.SUBMIT} element={<PetitionForm />} />
+               <Route path={ROUTES.PETITION.POST} element={<PetitionForm />} />
                <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
-               <Route path={ROUTES.NOTICE.ROOT} element={<Notice />}>
-                  <Route path={ROUTES.NOTICE.POST} element={<NoticePost />} />
-               </Route>
+               <Route path={ROUTES.NOTICE.POST} element={<NoticePost />} />
             </Routes>
          </DefaultLayout>
       </BrowserRouter>
