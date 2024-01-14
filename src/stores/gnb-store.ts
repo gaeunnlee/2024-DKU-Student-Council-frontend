@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 
 interface GnbState {
+   topHeader: boolean;
+   setTopHeader: (topHeader: boolean) => void;
    title: string | null;
    setTitle: (title: string | null) => void;
    backButton: boolean;
@@ -10,6 +12,8 @@ interface GnbState {
 }
 
 export const gnbState = create<GnbState>((set) => ({
+   topHeader: true,
+   setTopHeader: (topHeader: boolean) => set({ topHeader }),
    title: null,
    setTitle: (title: string | null) => set({ title }),
    backButton: false,
