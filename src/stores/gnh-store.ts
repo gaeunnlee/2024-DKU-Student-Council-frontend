@@ -14,6 +14,6 @@ export const gnhState = create<GnhState>((set) => ({
    setHeading: (heading: string | null) => set({ heading }),
    subHeading: null,
    setSubHeading: (subHeading: string | null) => set({ subHeading }),
-   rounded: true,
+   rounded: false,
    setRounded: (rounded: boolean) => set({ rounded }),
 }));
