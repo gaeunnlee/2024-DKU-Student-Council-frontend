@@ -9,7 +9,7 @@ export interface IBoardList {
    author: string;
    body: string;
    createdAt: string;
-   files: string;
+   files: [{ id: number; url: string; originalName: string; mimeType: string }];
    views: string;
    tag: string;
    status?: string;
@@ -21,9 +21,11 @@ export interface IBoardList {
 export default function BoardLayout({
    api,
    setCell,
+   isLink,
 }: {
    api: string;
    setCell: (data: IBoardList) => JSX.Element;
+   isLink?: boolean;
 }) {
    const { list, isLoading, bottom } = useInfiniteScroll<IBoardList>(api);
    const [isEmpty, setIsEmpty] = React.useState(false);
@@ -47,7 +49,7 @@ export default function BoardLayout({
             <Board.Cell
                key={data.id}
                onClick={() => {
-                  navigate(`${data.id}`);
+                  isLink && navigate(`${data.id}`);
                }}
             >
                {setCell(data)}
