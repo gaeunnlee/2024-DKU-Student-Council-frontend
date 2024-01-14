@@ -7,12 +7,14 @@ export default function Organization() {
 
    useEffectOnce(() => {
       setLayout({
+         topHeader: true,
          title: '총학생회',
          backButton: true,
          isMain: false,
          heading: '총학생회',
          subHeading: '조직도',
          fullscreen: false,
+         rounded: true,
       });
    });
 

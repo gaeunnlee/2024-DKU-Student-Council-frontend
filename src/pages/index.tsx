@@ -38,12 +38,14 @@ export default function Main() {
    useEffectOnce(() => {
       fetchMain();
       setLayout({
+         topHeader: true,
          title: null,
          backButton: false,
          isMain: true,
          fullscreen: false,
          heading: 'DANKOOK UNIVERSITY',
          subHeading: 'DANKOOK UNIV STUDENT COUNCIL',
+         rounded: false,
       });
    });
 

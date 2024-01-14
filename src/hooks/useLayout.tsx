@@ -4,6 +4,7 @@ import { gnhState } from 'stores/gnh-store';
 import { navStore } from 'stores/nav-store';
 
 interface HeaderTabLayoutProps {
+   topHeader: boolean;
    title: string | null;
    backButton: boolean;
    isMain: boolean;
@@ -14,46 +15,53 @@ interface HeadingLayoutProps {
    heading?: string | null;
    subHeading?: string | null;
    isMain: boolean;
+   rounded: boolean;
 }
 
 export const useLayout = () => {
-   const { setTitle, setBackButton, setIsMain } = gnbState();
+   const { setTopHeader, setTitle, setBackButton, setIsMain } = gnbState();
    const { setFullscreen } = navStore();
-   const { setHeading, setSubHeading } = gnhState();
+   const { setHeading, setSubHeading, setRounded } = gnhState();
 
-   const setHeaderLayout = ({ title, backButton, isMain, fullscreen }: HeaderTabLayoutProps) => {
+   const setHeaderLayout = ({ topHeader, title, backButton, isMain, fullscreen }: HeaderTabLayoutProps) => {
+      setTopHeader(topHeader);
       title && setTitle(title);
       setBackButton(backButton);
       setIsMain(isMain);
       setFullscreen(fullscreen);
    };
 
-   const setHeadingLayout = ({ heading, subHeading }: HeadingLayoutProps) => {
+   const setHeadingLayout = ({ heading, subHeading, rounded }: HeadingLayoutProps) => {
       heading && setHeading(heading);
       subHeading && setSubHeading(subHeading);
+      rounded && setRounded(rounded);
    };
 
    const setLayout = ({
+      topHeader,
       title,
       backButton,
       isMain,
       fullscreen,
       heading,
       subHeading,
+      rounded,
    }: HeaderTabLayoutProps & HeadingLayoutProps) => {
-      setHeaderLayout({ title, backButton, isMain, fullscreen });
-      setHeadingLayout({ heading, subHeading, isMain });
+      setHeaderLayout({ topHeader, title, backButton, isMain, fullscreen });
+      setHeadingLayout({ heading, subHeading, isMain, rounded });
    };
 
    useEffectOnce(() => {
       return () => {
          setLayout({
+            topHeader: true,
             title: null,
             backButton: true,
             isMain: false,
             fullscreen: false,
             heading: null,
             subHeading: null,
+            rounded: true,
          });
       };
    });

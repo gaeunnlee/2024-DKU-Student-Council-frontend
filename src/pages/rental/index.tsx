@@ -30,10 +30,12 @@ export default function Rental() {
    useEffectOnce(() => {
       fetchRental();
       setLayout({
+         topHeader: true,
          title: '대여물품',
          backButton: true,
          isMain: false,
          fullscreen: false,
+         rounded: true,
       });
    });
 

@@ -8,12 +8,14 @@ export default function Greeting() {
 
    useEffectOnce(() => {
       setLayout({
+         topHeader: true,
          title: '총학생회',
          backButton: true,
          isMain: false,
          heading: '총학생회',
          subHeading: '인사말',
          fullscreen: false,
+         rounded: true,
       });
    });
 

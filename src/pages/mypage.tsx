@@ -36,10 +36,12 @@ export default function MyPage() {
    useEffectOnce(() => {
       fetchMyInfo();
       setLayout({
+         topHeader: true,
          title: '마이페이지',
          backButton: true,
          isMain: false,
          fullscreen: false,
+         rounded: true,
       });
    });
 
