@@ -12,6 +12,7 @@ interface HeaderTabLayoutProps {
 }
 
 interface HeadingLayoutProps {
+   background: boolean;
    heading?: string | null;
    subHeading?: string | null;
    isMain: boolean;
@@ -21,7 +22,7 @@ interface HeadingLayoutProps {
 export const useLayout = () => {
    const { setTopHeader, setTitle, setBackButton, setIsMain } = gnbState();
    const { setFullscreen } = navStore();
-   const { setHeading, setSubHeading, setRounded } = gnhState();
+   const { setBackground, setHeading, setSubHeading, setRounded } = gnhState();
 
    const setHeaderLayout = ({ topHeader, title, backButton, isMain, fullscreen }: HeaderTabLayoutProps) => {
       setTopHeader(topHeader);
@@ -31,10 +32,11 @@ export const useLayout = () => {
       setFullscreen(fullscreen);
    };
 
-   const setHeadingLayout = ({ heading, subHeading, rounded }: HeadingLayoutProps) => {
+   const setHeadingLayout = ({ background, heading, subHeading, rounded }: HeadingLayoutProps) => {
+      setBackground(background);
       heading && setHeading(heading);
       subHeading && setSubHeading(subHeading);
-      rounded && setRounded(rounded);
+      setRounded(rounded);
    };
 
    const setLayout = ({
@@ -43,12 +45,13 @@ export const useLayout = () => {
       backButton,
       isMain,
       fullscreen,
+      background,
       heading,
       subHeading,
       rounded,
    }: HeaderTabLayoutProps & HeadingLayoutProps) => {
       setHeaderLayout({ topHeader, title, backButton, isMain, fullscreen });
-      setHeadingLayout({ heading, subHeading, isMain, rounded });
+      setHeadingLayout({ background, heading, subHeading, isMain, rounded });
    };
 
    useEffectOnce(() => {
@@ -59,6 +62,7 @@ export const useLayout = () => {
             backButton: true,
             isMain: false,
             fullscreen: false,
+            background: false,
             heading: null,
             subHeading: null,
             rounded: true,

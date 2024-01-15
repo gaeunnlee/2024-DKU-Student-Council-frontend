@@ -13,7 +13,7 @@ type DefaultLayoutProps = IWithReactChildren & React.HTMLAttributes<HTMLDivEleme
 
 export default function DefaultLayout({ children, className, ...props }: DefaultLayoutProps) {
    const { topHeader, title, backButton, isMain } = gnbState();
-   const { heading, subHeading, rounded } = gnhState();
+   const { background, heading, subHeading, rounded } = gnhState();
    const { fullscreen } = navStore();
 
    return (
@@ -24,9 +24,7 @@ export default function DefaultLayout({ children, className, ...props }: Default
                center={title ? <Gnb.Title>{title}</Gnb.Title> : null}
             />
          )}
-         {heading !== null && subHeading !== null && (
-            <Gnh heading={heading} subHeading={subHeading} isMain={isMain} />
-         )}
+         {background && <Gnh heading={heading} subHeading={subHeading} isMain={isMain} />}
          <div
             className={`w-[390px] mx-auto overflow-y-auto overflow-x-hidden bg-black ${className ?? ''}`}
             style={{ marginBottom: CONSTANTS.bottomNavSize }}

@@ -36,6 +36,7 @@ export default function Rental() {
          isMain: false,
          fullscreen: false,
          rounded: true,
+         background: false,
       });
    });
 

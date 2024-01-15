@@ -40,6 +40,7 @@ export default function MyPage() {
          title: '마이페이지',
          backButton: true,
          isMain: false,
+         background: true,
          fullscreen: false,
          rounded: true,
       });

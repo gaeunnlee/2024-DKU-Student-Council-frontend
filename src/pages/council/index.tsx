@@ -12,6 +12,7 @@ export default function Greeting() {
          title: '총학생회',
          backButton: true,
          isMain: false,
+         background: true,
          heading: '총학생회',
          subHeading: '인사말',
          fullscreen: false,

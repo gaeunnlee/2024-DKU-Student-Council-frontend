@@ -29,6 +29,7 @@ export default function Login() {
          title: null,
          backButton: true,
          isMain: false,
+         background: true,
          heading: 'Login',
          subHeading: '단국대학교 총학생회 로그인',
          fullscreen: true,

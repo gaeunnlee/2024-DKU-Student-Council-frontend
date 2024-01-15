@@ -43,6 +43,7 @@ export default function Main() {
          backButton: false,
          isMain: true,
          fullscreen: false,
+         background: true,
          heading: 'DANKOOK UNIVERSITY',
          subHeading: 'DANKOOK UNIV STUDENT COUNCIL',
          rounded: false,
