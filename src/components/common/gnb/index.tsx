@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import SvgIcon from '../icon/SvgIcon';
 import logo from '../../../assets/images/logo.png';
-import back from '../../../assets/icons/go_back.svg';
 import { ROUTES } from 'constant';
 
 interface Props extends React.ComponentProps<'header'> {
@@ -37,7 +37,7 @@ Gnb.GoBack = function GoBack() {
    const navigate = useNavigate();
    return (
       <button onClick={() => navigate(-1)}>
-         <img src={back} alt='뒤로가기 버튼' className='ml-4' />
+         <SvgIcon id='arrowBack' width={15} height={10} />
       </button>
    );
 };

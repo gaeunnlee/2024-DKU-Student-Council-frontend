@@ -1,11 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ReactComponent as MenuIcon } from '../../../assets/icons/menu.svg';
-import { ReactComponent as WithDankookIcon } from '../../../assets/icons/with_dankook.svg';
-import { ReactComponent as HomeIcon } from '../../../assets/icons/home.svg';
-import { ReactComponent as PartnershipIcon } from '../../../assets/icons/partnership.svg';
-import { ReactComponent as MyPageIcon } from '../../../assets/icons/mypage.svg';
+import SvgIcon from '../icon/SvgIcon';
 import { CONSTANTS } from 'constant';
 
 interface NavItem {
@@ -20,31 +16,31 @@ const navItems: NavItem[] = [
       id: 1,
       name: 'Menu',
       path: '/menu',
-      icon: <MenuIcon />,
+      icon: <SvgIcon id='menu' width={18.58} height={14.35} />,
    },
    {
       id: 2,
       name: 'With_dankook',
       path: '/snap',
-      icon: <WithDankookIcon />,
+      icon: <SvgIcon id='with_dankook' width={19.53} height={18.77} />,
    },
    {
       id: 3,
       name: 'Home',
       path: '/home',
-      icon: <HomeIcon />,
+      icon: <SvgIcon id='home' width={19.53} height={19.6} />,
    },
    {
       id: 4,
       name: '제휴사업',
       path: '/partnership',
-      icon: <PartnershipIcon />,
+      icon: <SvgIcon id='partnership' width={17.54} height={19.6} />,
    },
    {
       id: 5,
       name: 'My page',
       path: '/mypage',
-      icon: <MyPageIcon />,
+      icon: <SvgIcon id='mypage' width={20.06} height={20.13} />,
    },
 ];
 
@@ -52,7 +48,7 @@ export default function Nav() {
    return (
       <>
          <motion.nav
-            className='w-[390px] bg-black left-[50%] translate-x-[-50%] fixed flex justify-between px-6 items-center max-w-3xl'
+            className='w-[390px] bg-black left-[50%] translate-x-[-50%] fixed flex justify-between p-6 items-center max-w-3xl'
             style={{ height: CONSTANTS.bottomNavSize }}
             initial={{ bottom: '-60px' }}
             animate={{ bottom: '0px' }}
