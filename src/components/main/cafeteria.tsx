@@ -58,7 +58,9 @@ export default function Cafeteria() {
                         <button
                            className={`${
                               selectedMeal === option.key ? 'bg-black text-white' : 'bg-white text-black'
-                           } w-[70px] text-center text-sm py-1 rounded-xl bg-breakfast shadow-md bg-no-repeat`}
+                           } w-[70px] text-center text-sm p-1 rounded-xl bg-${
+                              option.key
+                           } shadow-md bg-no-repeat`}
                            onClick={() => setSelectedMeal(option.key)}
                         >
                            {option.label}
