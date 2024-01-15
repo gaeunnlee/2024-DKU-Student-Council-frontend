@@ -35,7 +35,7 @@ const MenuItem = ({ title, onClick, isOpen, subItems }: MenuItemProps) => (
    <>
       <section
          className='flex justify-between items-center text-white bg-black 
-         py-[15px] pl-[17px] pr-[27px] cursor-pointer'
+         py-[15px] pl-[17px] pr-[27px] cursor-pointer shadow-custom mb-[1px] mt-[2px]'
          onClick={onClick}
       >
          <h2>{title}</h2>
@@ -84,8 +84,6 @@ const Menu = () => {
    );
 
    const [activeMenus, setActiveMenus] = useState<string[]>([]);
-
-   console.log(activeMenus);
 
    const handleMenuClick = (menu: string) => {
       setActiveMenus((prevMenus) => {
