@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 interface DelayProps {
-   children: React.ReactNode;
+   children: JSX.Element;
    delay?: number;
 }
 

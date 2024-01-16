@@ -73,56 +73,58 @@ export default function PetitionDetail() {
    };
 
    return (
-      petition !== undefined && (
-         <div className='min-h-screen flex flex-col gap-2'>
-            {/* 청원글 */}
-            <Box>
-               <div className='flex gap-4 text-gray-400'>
-                  <span>{petitionStatus}</span>
-                  <span>{`D-${remainingDays}`}</span>
-                  <span>{`${petition.agreeCount}/150`}</span>
-               </div>
-               <Title>{petition.title}</Title>
-               <p>{petition.body}</p>
-            </Box>
-
-            {/* 첨부파일 */}
-            {petition.files.length > 0 && <FileBox className='p-0 mt-0' files={petition?.files} />}
-
-            {/* 동의현황 */}
-            <PostBox className='shadow-none px-0 py-0 text-center'>
-               <Collapse status={false} size='text-2xl' title={<Title className='mr-1'>동의현황</Title>}>
-                  <PostBox className='mx-0 mt-2 flex flex-col gap-3 px-6'>
-                     <Text length={4}>어떤 과에서 가장 동의를 많이 했을까요?</Text>
-                     <hr />
-                     <DoughnutChart chartData={chartData} sum={sum} />
-                     <PetitonChartList statisticList={petition.statisticList} sum={sum} />
-                  </PostBox>
-               </Collapse>
-            </PostBox>
-
-            {/* 답변 */}
-            {petition.answer !== null && (
+      <>
+         {petition !== undefined && (
+            <div className='min-h-screen flex flex-col gap-2'>
+               {/* 청원글 */}
                <Box>
-                  <Title>총학생회 답변</Title>
-                  <p>{petition.answer}</p>
+                  <div className='flex gap-4 text-gray-400'>
+                     <span>{petitionStatus}</span>
+                     <span>{`D-${remainingDays}`}</span>
+                     <span>{`${petition.agreeCount}/150`}</span>
+                  </div>
+                  <Title>{petition.title}</Title>
+                  <p>{petition.body}</p>
                </Box>
-            )}
 
-            {/* 플로팅 버튼 */}
-            <FloatingButton
-               event={() => {
-                  handleAgreeButtonClick();
-               }}
-            >
-               {petition.agree ? (
-                  <TbThumbUpFilled color='white' size={40} />
-               ) : (
-                  <TbThumbUp color='white' size={40} />
+               {/* 첨부파일 */}
+               {petition.files.length > 0 && <FileBox className='p-0 mt-0' files={petition?.files} />}
+
+               {/* 동의현황 */}
+               <PostBox className='shadow-none px-0 py-0 text-center'>
+                  <Collapse status={false} size='text-2xl' title={<Title className='mr-1'>동의현황</Title>}>
+                     <PostBox className='mx-0 mt-2 flex flex-col gap-3 px-6'>
+                        <Text length={4}>어떤 과에서 가장 동의를 많이 했을까요?</Text>
+                        <hr />
+                        <DoughnutChart chartData={chartData} sum={sum} />
+                        <PetitonChartList statisticList={petition.statisticList} sum={sum} />
+                     </PostBox>
+                  </Collapse>
+               </PostBox>
+
+               {/* 답변 */}
+               {petition.answer !== null && (
+                  <Box>
+                     <Title>총학생회 답변</Title>
+                     <p>{petition.answer}</p>
+                  </Box>
                )}
-            </FloatingButton>
-         </div>
-      )
+
+               {/* 플로팅 버튼 */}
+               <FloatingButton
+                  event={() => {
+                     handleAgreeButtonClick();
+                  }}
+               >
+                  {petition.agree ? (
+                     <TbThumbUpFilled color='white' size={40} />
+                  ) : (
+                     <TbThumbUp color='white' size={40} />
+                  )}
+               </FloatingButton>
+            </div>
+         )}
+      </>
    );
 }
 
