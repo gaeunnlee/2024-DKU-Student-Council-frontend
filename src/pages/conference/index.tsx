@@ -1,6 +1,7 @@
 import { API_PATH, CONSTANTS } from 'constant';
 import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
 import React from 'react';
+import generateDate from 'shared/function/generateDate';
 
 export default function ConferenceBoard() {
    const Cell = ({ data }: { data: IBoardList }) => (
@@ -21,6 +22,4 @@ export default function ConferenceBoard() {
 const Title = ({ children }: { children: React.ReactNode }) => (
    <div className='grow text-center truncate'>{children}</div>
 );
-const Date = ({ children }: { children: React.ReactNode }) => (
-   <div>{String(children).slice(0, 10).replaceAll('-', '.')}</div>
-);
+const Date = ({ children }: { children: React.ReactNode }) => <div>{generateDate(String(children))}</div>;

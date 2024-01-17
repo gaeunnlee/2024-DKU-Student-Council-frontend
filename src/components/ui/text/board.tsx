@@ -1,5 +1,6 @@
 import React from 'react';
 import Text from 'components/ui/text';
+import generateDate from 'shared/function/generateDate';
 
 export default function Title({ content }: { content: string }) {
    return (
@@ -12,7 +13,7 @@ export default function Title({ content }: { content: string }) {
 export function Date({ content }: { content: string }) {
    return (
       <Text className='text-gray-400' length={4}>
-         {content.slice(0, 10).replaceAll('-', '.')}
+         {generateDate(content)}
       </Text>
    );
 }
