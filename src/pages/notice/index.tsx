@@ -4,12 +4,17 @@ import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
 import React from 'react';
 
 export default function NoticeBoard() {
-   const setCell = (data: IBoardList) => (
+   const Cell = ({ data }: { data: IBoardList }) => (
       <>
          <Title content={data.title} />
          <Date content={data.createdAt} />
       </>
    );
 
-   return <BoardLayout api={CONSTANTS.SERVER_URL + API_PATH.POST.NOTICE.ROOT} setCell={setCell} />;
+   return (
+      <BoardLayout
+         api={CONSTANTS.SERVER_URL + API_PATH.POST.NOTICE.ROOT}
+         setCell={(data: IBoardList) => <Cell data={data} />}
+      />
+   );
 }

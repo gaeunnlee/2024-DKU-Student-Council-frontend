@@ -3,14 +3,18 @@ import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
 import React from 'react';
 
 export default function RuleBoard() {
-   const setCell = (data: IBoardList) => (
+   const Cell = ({ data }: { data: IBoardList }) => (
       <a href={data.files[0].url} target='_blank' rel='noopener noreferrer' className='flex gap-2'>
          <Title>{data.title}</Title>
          <Date>{data.createdAt}</Date>
       </a>
    );
    return (
-      <BoardLayout api={CONSTANTS.SERVER_URL + API_PATH.POST.RULE.ROOT} setCell={setCell} isLink={false} />
+      <BoardLayout
+         api={CONSTANTS.SERVER_URL + API_PATH.POST.RULE.ROOT}
+         setCell={(data: IBoardList) => <Cell data={data} />}
+         isLink={false}
+      />
    );
 }
 

@@ -22,7 +22,7 @@ export const getPetitionStatus = (status: string) => {
 export default function PetitionBoard() {
    const navigate = useNavigate();
 
-   const setCell = (data: IBoardList) => (
+   const Cell = ({ data }: { data: IBoardList }) => (
       <div className='flex justify-between leading-9 px-2 gap-3 whitespace-nowrap'>
          <Text length={4}>{getPetitionStatus(data.status!)}</Text>
          <Text length={4} className='text-ellipsis overflow-hidden'>
@@ -34,7 +34,10 @@ export default function PetitionBoard() {
 
    return (
       <>
-         <BoardLayout api={CONSTANTS.SERVER_URL + API_PATH.POST.PETITION.ROOT} setCell={setCell} />
+         <BoardLayout
+            api={CONSTANTS.SERVER_URL + API_PATH.POST.PETITION.ROOT}
+            setCell={(data: IBoardList) => <Cell data={data} />}
+         />
          <FloatingButton
             event={() => {
                navigate(ROUTES.PETITION.POST);
