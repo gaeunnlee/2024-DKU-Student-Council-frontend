@@ -3,18 +3,18 @@ import { API_PATH, CONSTANTS } from 'constant';
 import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
 import React from 'react';
 
-export default function NoticeBoard() {
+export default function ConferenceBoard() {
    const Cell = ({ data }: { data: IBoardList }) => (
-      <>
-         <Title content={data.title} className='text-xl font-bold' />
-         <Date content={data.createdAt} className='text-gray-400' />
-      </>
+      <div className='flex gap-2'>
+         <Title content={data.title} className='grow text-center truncate' />
+         <Date content={data.createdAt} />
+      </div>
    );
-
    return (
       <BoardLayout
-         api={CONSTANTS.SERVER_URL + API_PATH.POST.NOTICE.ROOT}
+         api={CONSTANTS.SERVER_URL + API_PATH.POST.CONFERENCE.ROOT}
          setCell={(data: IBoardList) => <Cell data={data} />}
+         isFileLink={true}
       />
    );
 }

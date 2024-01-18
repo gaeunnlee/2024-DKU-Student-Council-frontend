@@ -32,9 +32,9 @@ export const useAlert = () => {
       if (typeof error === 'string') {
          console.log(1);
          open(alertModal(error), alertOption);
-      } else if (error instanceof AxiosError && error.response?.data.msg) {
+      } else if (error instanceof AxiosError && error.response?.data.message) {
          console.log(2);
-         open(alertModal(error.response?.data.msg), alertOption);
+         open(alertModal(error.response?.data.message), alertOption);
       } else if (isAxiosError(error)) {
          console.log(3);
          open(alertModal(error.message), alertOption);

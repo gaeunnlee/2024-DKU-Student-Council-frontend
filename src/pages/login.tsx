@@ -64,7 +64,7 @@ export default function Login() {
                type='password'
                placeholder='비밀번호'
             />
-            <button data-testid='login-button'>로그인</button>
+            <input type='submit' data-testid='login-button' value='로그인' />
          </form>
          {/* ROUTES에 아래 페이지 경로 업데이트시 변경 예정 */}
          <Link to={ROUTES.NOT_FOUND}>회원가입</Link>

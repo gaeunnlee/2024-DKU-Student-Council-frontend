@@ -30,17 +30,28 @@ export default function Board({ children, className, ...props }: BoardProps) {
 }
 
 Board.Loading = function Loading({ size = 10 }: LoadingProps) {
-   return Array.from({ length: size }).map((_, idx) => (
-      <BaseSkeleton key={idx} className='p-4 my-[1px] rounded-lg h-full flex justify-between items-center'>
-         <TextSkeleton className='rounded-full' width={4} height={1} />
-      </BaseSkeleton>
-   ));
+   return (
+      <>
+         {Array.from({ length: size }).map((_, idx) => (
+            <BaseSkeleton
+               key={idx}
+               className='p-4 my-[1px] rounded-lg h-full flex justify-between items-center'
+            >
+               <TextSkeleton className='rounded-full' width={4} height={1} />
+            </BaseSkeleton>
+         ))}
+      </>
+   );
 };
 
 Board.Cell = function Cell({ children, className, ...props }: CellProps) {
    return (
       <li {...props}>
-         <Box className={className}>{children}</Box>
+         <Box
+            className={className + ' rounded-xl shadow-[2px_2px_5px_2px_#00000010] leading-8 cursor-pointer'}
+         >
+            {children}
+         </Box>
       </li>
    );
 };

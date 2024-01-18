@@ -7,5 +7,5 @@ import { ROUTES } from 'constant';
 export default function PrivateRoute({ children }: IWithReactChildren) {
    const { isLoggedIn } = useAuth();
 
-   return isLoggedIn ? children : <Navigate to={ROUTES.LOGIN} replace={true} />;
+   return isLoggedIn ? <>{children}</> : <Navigate to={ROUTES.LOGIN} replace={true} />;
 }
