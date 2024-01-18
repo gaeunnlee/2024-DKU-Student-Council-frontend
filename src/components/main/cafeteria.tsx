@@ -48,29 +48,31 @@ export default function Cafeteria() {
    };
 
    return (
-      cafeteria && (
-         <section className='px-4 py-5 m-4'>
-            <h4 className='font-bold text-lg ml-4 mb-4'>오늘의 학식</h4>
-            <div className='flex gap-2'>
-               <ul className='flex flex-col gap-1'>
-                  {mealOptions.map((option) => (
-                     <li key={option.key}>
-                        <button
-                           className={`${
-                              selectedMeal === option.key ? 'bg-black text-white' : 'bg-white text-black'
-                           } w-[70px] text-center text-sm py-1 rounded-xl bg-breakfast shadow-md bg-no-repeat`}
-                           onClick={() => setSelectedMeal(option.key)}
-                        >
-                           {option.label}
-                        </button>
-                     </li>
-                  ))}
-               </ul>
-               <div className='w-[250px] px-4 py-5 text-sm rounded-xl bg-white shadow-md'>
-                  {handleMealData()}
+      <>
+         {cafeteria && (
+            <section className='px-4 py-5 m-4'>
+               <h4 className='font-bold text-lg ml-4 mb-4'>오늘의 학식</h4>
+               <div className='flex gap-2'>
+                  <ul className='flex flex-col gap-1'>
+                     {mealOptions.map((option) => (
+                        <li key={option.key}>
+                           <button
+                              className={`${
+                                 selectedMeal === option.key ? 'bg-black text-white' : 'bg-white text-black'
+                              } w-[70px] text-center text-sm py-1 rounded-xl bg-breakfast shadow-md bg-no-repeat`}
+                              onClick={() => setSelectedMeal(option.key)}
+                           >
+                              {option.label}
+                           </button>
+                        </li>
+                     ))}
+                  </ul>
+                  <div className='w-[250px] px-4 py-5 text-sm rounded-xl bg-white shadow-md'>
+                     {handleMealData()}
+                  </div>
                </div>
-            </div>
-         </section>
-      )
+            </section>
+         )}
+      </>
    );
 }
