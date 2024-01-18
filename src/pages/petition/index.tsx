@@ -1,5 +1,6 @@
 import FloatingButton from 'components/ui/button/FloatingButton';
 import Text from 'components/ui/text';
+import Title from 'components/ui/text/board';
 import { API_PATH, CONSTANTS, ROUTES } from 'constant';
 import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
 import React from 'react';
@@ -25,9 +26,7 @@ export default function PetitionBoard() {
    const Cell = ({ data }: { data: IBoardList }) => (
       <div className='flex justify-between leading-9 px-2 gap-3 whitespace-nowrap'>
          <Text length={4}>{getPetitionStatus(data.status!)}</Text>
-         <Text length={4} className='text-ellipsis overflow-hidden'>
-            {data.title}
-         </Text>
+         <Title content={data.title} className='text-ellipsis overflow-hidden' />
          <Text length={4}>{`D-${getDaysBetween(data.expiresAt!)}`}</Text>
       </div>
    );

@@ -1,13 +1,13 @@
+import Title, { Date } from 'components/ui/text/board';
 import { API_PATH, CONSTANTS } from 'constant';
 import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
 import React from 'react';
-import generateDate from 'shared/function/generateDate';
 
 export default function RuleBoard() {
    const Cell = ({ data }: { data: IBoardList }) => (
       <div className='flex gap-2'>
-         <Title>{data.title}</Title>
-         <Date>{data.createdAt}</Date>
+         <Title content={data.title} className='grow text-center truncate' />
+         <Date content={data.createdAt} />
       </div>
    );
    return (
@@ -18,8 +18,3 @@ export default function RuleBoard() {
       />
    );
 }
-
-const Title = ({ children }: { children: React.ReactNode }) => (
-   <div className='grow text-center truncate'>{children}</div>
-);
-const Date = ({ children }: { children: React.ReactNode }) => <div>{generateDate(String(children))}</div>;

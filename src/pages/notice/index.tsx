@@ -6,8 +6,8 @@ import React from 'react';
 export default function NoticeBoard() {
    const Cell = ({ data }: { data: IBoardList }) => (
       <>
-         <Title content={data.title} />
-         <Date content={data.createdAt} />
+         <Title content={data.title} className='text-xl font-bold' />
+         <Date content={data.createdAt} className='text-gray-400' />
       </>
    );
 
