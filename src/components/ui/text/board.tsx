@@ -1,18 +1,19 @@
 import React from 'react';
 import Text from 'components/ui/text';
+import generateDate from 'shared/function/generateDate';
 
-export default function Title({ content }: { content: string }) {
+export default function Title({ content, className }: { content: string; className?: string }) {
    return (
-      <Text className='text-xl font-bold' length={4}>
+      <Text className={`${className}`} length={4}>
          {content}
       </Text>
    );
 }
 
-export function Date({ content }: { content: string }) {
+export function Date({ content, className }: { content: string; className?: string }) {
    return (
-      <Text className='text-gray-400' length={4}>
-         {content.slice(0, 10).replaceAll('-', '.')}
+      <Text className={`${className}`} length={4}>
+         {generateDate(content)}
       </Text>
    );
 }

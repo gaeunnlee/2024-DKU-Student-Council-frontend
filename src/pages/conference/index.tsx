@@ -1,26 +1,20 @@
+import Title, { Date } from 'components/ui/text/board';
 import { API_PATH, CONSTANTS } from 'constant';
 import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
 import React from 'react';
 
 export default function ConferenceBoard() {
-   const setCell = (data: IBoardList) => (
-      <a href={data.files[0].url} target='_blank' rel='noopener noreferrer' className='flex gap-2'>
-         <Title>{data.title}</Title>
-         <Date>{data.createdAt}</Date>
-      </a>
+   const Cell = ({ data }: { data: IBoardList }) => (
+      <div className='flex gap-2'>
+         <Title content={data.title} className='grow text-center truncate' />
+         <Date content={data.createdAt} />
+      </div>
    );
    return (
       <BoardLayout
          api={CONSTANTS.SERVER_URL + API_PATH.POST.CONFERENCE.ROOT}
-         setCell={setCell}
-         isLink={false}
+         setCell={(data: IBoardList) => <Cell data={data} />}
+         isFileLink={true}
       />
    );
 }
-
-const Title = ({ children }: { children: React.ReactNode }) => (
-   <div className='grow text-center truncate'>{children}</div>
-);
-const Date = ({ children }: { children: React.ReactNode }) => (
-   <div>{String(children).slice(0, 10).replaceAll('-', '.')}</div>
-);

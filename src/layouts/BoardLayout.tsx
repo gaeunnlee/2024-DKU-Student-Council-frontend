@@ -21,11 +21,11 @@ export interface IBoardList {
 export default function BoardLayout({
    api,
    setCell,
-   isLink,
+   isFileLink, // 페이지 이동 없이 파일 링크만 새탭에서 여는 경우
 }: {
    api: string;
    setCell: (data: IBoardList) => JSX.Element;
-   isLink?: boolean;
+   isFileLink?: boolean;
 }) {
    const { list, isLoading, bottom } = useInfiniteScroll<IBoardList>(api);
    const [isEmpty, setIsEmpty] = React.useState(false);
@@ -49,7 +49,7 @@ export default function BoardLayout({
             <Board.Cell
                key={data.id}
                onClick={() => {
-                  isLink && navigate(`${data.id}`);
+                  isFileLink ? window.open(data.files[0].url) : navigate(`${data.id}`);
                }}
             >
                {setCell(data)}
