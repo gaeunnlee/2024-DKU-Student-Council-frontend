@@ -18,7 +18,14 @@ interface IMyInfo {
    admin: boolean;
 }
 
-export default function MyPageLayout({ children }: { children: React.ReactNode }) {
+export default function MyPageLayout({
+   children,
+   getStudentId,
+}: {
+   children: React.ReactNode;
+   studentId?: number;
+   getStudentId?: (id: string) => void;
+}) {
    const { setLayout } = useLayout();
    const [myInfo, setMyInfo] = React.useState<IMyInfo | null>(null);
    const { get } = useApi();
@@ -26,8 +33,8 @@ export default function MyPageLayout({ children }: { children: React.ReactNode }
    const fetchMyInfo = async () => {
       const data = await get<IMyInfo>(API_PATH.USER.ME, { authenticate: true });
       setMyInfo(data);
+      getStudentId && getStudentId(data.studentId);
    };
-
    useEffectOnce(() => {
       fetchMyInfo();
       setLayout({
@@ -44,7 +51,7 @@ export default function MyPageLayout({ children }: { children: React.ReactNode }
 
    return (
       <div className='h-[calc(100vh-110px)]'>
-         <div className='flex justify-between px-8 pt-4 pb-14 bg-black text-white h-[200px]'>
+         <div className='flex justify-between px-8 pt-4 pb-14 bg-black text-white'>
             <div className='flex flex-col justify-evenly'>
                <strong className='text-2xl'>{myInfo?.nickname}</strong>
                <p>
