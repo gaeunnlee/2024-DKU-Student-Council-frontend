@@ -23,7 +23,6 @@ export default function MyPageLayout({
    getStudentId,
 }: {
    children: React.ReactNode;
-   studentId?: number;
    getStudentId?: (id: string) => void;
 }) {
    const { setLayout } = useLayout();
@@ -59,13 +58,17 @@ export default function MyPageLayout({
                   {myInfo?.department} {myInfo?.major}
                </p>
             </div>
-            <div className='rounded-full bg-slate-300 w-[7rem] h-[7rem] aspect-square overflow-hidden'>
-               <img
-                  src={''} // API 미완료
-               />
-            </div>
+            <ProfileImage />
          </div>
          {children}
       </div>
    );
 }
+
+export const ProfileImage = () => (
+   <div className='rounded-full bg-slate-300 w-[7rem] h-[7rem] aspect-square overflow-hidden'>
+      <img
+         src={''} // API 미완료
+      />
+   </div>
+);

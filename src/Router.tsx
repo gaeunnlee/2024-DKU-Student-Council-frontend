@@ -26,6 +26,7 @@ import PetitionDetail from 'pages/petition/[id]';
 import ConferenceBoard from 'pages/conference';
 import RuleBoard from 'pages/rule';
 import MyPagePassword from 'pages/mypage/password';
+import MyPageEdit from 'pages/mypage/edit';
 
 /**
  * @description 라우터
@@ -53,6 +54,14 @@ export default function Router() {
                   element={
                      <PrivateRoute>
                         <MyPagePassword />
+                     </PrivateRoute>
+                  }
+               />
+               <Route
+                  path={ROUTES.MYPAGE.EDIT}
+                  element={
+                     <PrivateRoute>
+                        <MyPageEdit />
                      </PrivateRoute>
                   }
                />

@@ -9,6 +9,7 @@ export const ROUTES = {
    MYPAGE: {
       INDEX: '/mypage',
       PASSWORD: '/mypage/password',
+      EDIT: '/mypage/edit',
    },
    /** 404 화면 */
    NOT_FOUND: '*',
