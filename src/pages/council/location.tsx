@@ -11,9 +11,13 @@ export default function Location() {
          title: '총학생회',
          backButton: true,
          isMain: false,
+         fullscreen: false,
          heading: '총학생회',
          subHeading: '오시는 길',
-         fullscreen: false,
+         headingStyle: '',
+         subHeadingStyle: '',
+         margin: '',
+         rounded: true,
       });
    });
 

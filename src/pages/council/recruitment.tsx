@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import Box from 'components/ui/box';
-import document from '../../assets/icons/document.svg';
+import SvgIcon from 'components/common/icon/SvgIcon';
 
 export default function Recruitment() {
    const { setLayout } = useLayout();
@@ -12,9 +12,13 @@ export default function Recruitment() {
          title: '총학생회',
          backButton: true,
          isMain: false,
+         fullscreen: false,
          heading: '부원모집',
          subHeading: '모집요강',
-         fullscreen: false,
+         headingStyle: '',
+         subHeadingStyle: '',
+         margin: '',
+         rounded: true,
       });
    });
 
@@ -51,7 +55,7 @@ export default function Recruitment() {
             <ul>
                {fileList.map((file, index) => (
                   <li key={index} className='flex'>
-                     <img src={document} alt='모집요강' className='mr-2' />
+                     <SvgIcon id='document' width={18.93} height={18} />
                      <a href={`${file.name}`} download={file.name}>
                         {file.name} ({file.type})
                      </a>

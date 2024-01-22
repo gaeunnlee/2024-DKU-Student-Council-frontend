@@ -1,5 +1,5 @@
 import React from 'react';
-import { API_PATH } from 'constant';
+import { API_PATH } from 'constants/api';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import Box from 'components/ui/box';
 import Button from 'components/ui/button';
@@ -40,6 +40,10 @@ export default function MyPage() {
          backButton: true,
          isMain: false,
          fullscreen: false,
+         headingStyle: '',
+         subHeadingStyle: '',
+         margin: '',
+         rounded: true,
       });
    });
 

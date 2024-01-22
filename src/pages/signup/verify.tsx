@@ -1,6 +1,7 @@
 import React, { FormEvent, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { API_PATH, ROUTES } from 'constant';
+import { API_PATH } from 'constants/api';
+import { ROUTES } from 'constants/route';
 import axios from 'axios';
 import { Regex } from 'utils/regex';
 import Input from 'components/ui/input';

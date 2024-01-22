@@ -1,6 +1,7 @@
 import React from 'react';
 import Board from 'components/common/board';
-import { API_PATH, PAGE_SIZE, QUERY_STRING, ROUTES } from 'constant';
+import { API_PATH, PAGE_SIZE, QUERY_STRING } from 'constants/api';
+import { ROUTES } from 'constants/route';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { ReactComponent as ChevronRight } from 'assets/images/chevron_right.svg';
 import SpeedDial from 'components/ui/speed-dial';
@@ -34,6 +35,10 @@ export default function Rental() {
          backButton: true,
          isMain: false,
          fullscreen: false,
+         headingStyle: '',
+         subHeadingStyle: '',
+         margin: '',
+         rounded: true,
       });
    });
 

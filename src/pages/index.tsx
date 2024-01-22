@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { API_PATH } from 'constant';
+import { API_PATH } from 'constants/api';
+import { HeadingStyle } from 'constants/style';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { Banner, Notice, Petition, Cafeteria } from 'components/main';
 import type { IBanner } from 'components/main/banner';
@@ -8,6 +8,7 @@ import type { IPetition } from 'components/main/petition';
 import { useApi } from 'hooks/useApi';
 import { useLayout } from 'hooks/useLayout';
 import Service from 'components/main/service';
+import React, { useState } from 'react';
 
 interface IMain {
    carousels: IBanner[];
@@ -22,7 +23,7 @@ interface IMain {
 }
 
 export default function Main() {
-   const [main, setMain] = useState<IMain>();
+   const [main, setMain] = useState<IMain | null>();
    const { get } = useApi();
    const { setLayout } = useLayout();
 
@@ -44,6 +45,10 @@ export default function Main() {
          fullscreen: false,
          heading: 'DANKOOK UNIVERSITY',
          subHeading: 'DANKOOK UNIV STUDENT COUNCIL',
+         headingStyle: HeadingStyle.main.HeadingStyle,
+         subHeadingStyle: HeadingStyle.main.subHeadingStyle,
+         margin: '',
+         rounded: false,
       });
    });
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import { API_PATH, ROUTES } from 'constant';
+import { API_PATH } from 'constants/api';
+import { ROUTES } from 'constants/route';
 import useImageUpload from 'hooks/useImageUpload';
 import { IFormInfo } from 'hooks/useFormUpload';
 import { useFormUpload } from 'hooks/useFormUpload';
