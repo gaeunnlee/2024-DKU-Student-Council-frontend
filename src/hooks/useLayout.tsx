@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { gnbState } from 'stores/gnb-store';
 import { gnhState } from 'stores/gnh-store';
 import { navStore } from 'stores/nav-store';
@@ -25,6 +26,10 @@ export const useLayout = () => {
    const { setTitle, setBackButton, setIsMain } = gnbState();
    const { setHeading, setSubHeading, setHeadingStyle, setsubHeadingStyle } = gnhState();
    const { setFullscreen, setRounded, setMargin } = navStore();
+
+   useEffect(() => {
+      setHeadingLayout({ heading: ' ', subHeading: ' ', headingStyle: ' ', subHeadingStyle: ' ' });
+   }, []);
 
    const setTopHeader = ({ title, backButton, isMain }: TopHeaderLayoutProps) => {
       setTitle(title);
