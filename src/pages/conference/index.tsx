@@ -1,5 +1,5 @@
 import Title, { Date } from 'components/ui/text/board';
-import { API_PATH, CONSTANTS } from 'constant';
+import { API_PATH, CONSTANTS } from 'constants/api';
 import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
 import React from 'react';
 

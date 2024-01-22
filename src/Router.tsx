@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ROUTES } from './constant';
+import { ROUTES } from 'constants/route';
 import DefaultLayout from 'layouts/DefaultLayout';
 import PetitionBoard from 'pages/petition';
 import NoticePost from 'pages/notice/post';

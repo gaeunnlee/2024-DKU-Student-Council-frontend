@@ -2,7 +2,7 @@ import React from 'react';
 import { useAuth } from 'hooks/useAuth';
 import { IWithReactChildren } from 'shared/interfaces/default-interfaces';
 import { Navigate } from 'react-router-dom';
-import { ROUTES } from 'constant';
+import { ROUTES } from 'constants/route';
 
 export default function PrivateRoute({ children }: IWithReactChildren) {
    const { isLoggedIn } = useAuth();

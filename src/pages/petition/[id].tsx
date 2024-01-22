@@ -1,5 +1,5 @@
 import PostBox, { FileBox } from 'components/ui/box/PostBox';
-import { API_PATH } from 'constant';
+import { API_PATH } from 'constants/api';
 import React, { ComponentProps, ReactNode, useEffect, useState } from 'react';
 import Collapse from 'components/ui/collapse';
 import { useFetchPost } from 'hooks/useFetchPost';

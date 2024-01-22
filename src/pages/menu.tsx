@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLayout } from 'hooks/useLayout';
 import SvgIcon from 'components/common/icon/SvgIcon';
 import { useEffectOnce } from 'hooks/useEffectOnce';
-import { ROUTES } from 'constant';
+import { ROUTES } from 'constants/route';
 
 interface MenuItemProps {
    title: string;
@@ -71,15 +71,16 @@ const Menu = () => {
 
    useEffectOnce(() =>
       setLayout({
-         topHeader: true,
          title: null,
          backButton: false,
          isMain: true,
          fullscreen: true,
-         background: false,
          heading: null,
          subHeading: null,
-         rounded: false,
+         headingStyle: '',
+         subHeadingStyle: '',
+         margin: '',
+         rounded: true,
       }),
    );
 

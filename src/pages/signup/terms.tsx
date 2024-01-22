@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ROUTES } from 'constant';
+import { ROUTES } from 'constants/route';
 import { useAlert } from '../../hooks/useAlert';
 import Checkbox from '../../components/ui/input/checkbox';
 

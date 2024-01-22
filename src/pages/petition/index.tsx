@@ -1,10 +1,11 @@
 import FloatingButton from 'components/ui/button/FloatingButton';
 import Text from 'components/ui/text';
 import Title from 'components/ui/text/board';
-import { API_PATH, CONSTANTS, ROUTES } from 'constant';
+import { API_PATH, CONSTANTS } from 'constants/api';
+import { ROUTES } from 'constants/route';
 import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 export const getDaysBetween = (expiresAt: string) => {
    const startDate = new Date();

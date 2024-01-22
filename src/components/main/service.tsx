@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ROUTES } from 'constant';
+import { ROUTES } from 'constants/route';
 import SvgIcon from 'components/common/icon/SvgIcon';
 
 interface ServItem {

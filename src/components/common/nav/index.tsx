@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SvgIcon from '../icon/SvgIcon';
-import { CONSTANTS } from 'constant';
+import { bottomNavSize } from 'constants/style';
 
 interface NavItem {
    id: number;
@@ -49,7 +49,7 @@ export default function Nav() {
       <>
          <motion.nav
             className='w-[390px] bg-black left-[50%] translate-x-[-50%] fixed flex justify-between p-6 items-center max-w-3xl'
-            style={{ height: CONSTANTS.bottomNavSize }}
+            style={{ height: bottomNavSize }}
             initial={{ bottom: '-60px' }}
             animate={{ bottom: '0px' }}
             exit={{ bottom: '-60px' }}
