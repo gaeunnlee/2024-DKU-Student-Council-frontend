@@ -25,6 +25,7 @@ import NoticeBoard from 'pages/notice/index';
 import PetitionDetail from 'pages/petition/[id]';
 import ConferenceBoard from 'pages/conference';
 import RuleBoard from 'pages/rule';
+import MyPagePassword from 'pages/mypage/password';
 
 /**
  * @description 라우터
@@ -40,10 +41,18 @@ export default function Router() {
                <Route path={ROUTES.MENU} element={<Menu />} />
                <Route path={ROUTES.LOGIN} element={<Login />} />
                <Route
-                  path={ROUTES.MYPAGE}
+                  path={ROUTES.MYPAGE.INDEX}
                   element={
                      <PrivateRoute>
                         <MyPage />
+                     </PrivateRoute>
+                  }
+               />
+               <Route
+                  path={ROUTES.MYPAGE.PASSWORD}
+                  element={
+                     <PrivateRoute>
+                        <MyPagePassword />
                      </PrivateRoute>
                   }
                />

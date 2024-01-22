@@ -6,7 +6,10 @@ export const ROUTES = {
    /** 로그인 화면 */
    LOGIN: '/login',
    /** 마이페이지 */
-   MYPAGE: '/mypage',
+   MYPAGE: {
+      INDEX: '/mypage',
+      PASSWORD: '/mypage/password',
+   },
    /** 404 화면 */
    NOT_FOUND: '*',
    /** 회원가입 */

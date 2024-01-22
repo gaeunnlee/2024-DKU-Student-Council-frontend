@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { API_PATH } from 'constants/api';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
@@ -30,9 +30,6 @@ export default function MyPageLayout({ children }: { children: React.ReactNode }
 
    useEffectOnce(() => {
       fetchMyInfo();
-   });
-
-   useEffect(() => {
       setLayout({
          title: '',
          backButton: true,
@@ -43,11 +40,11 @@ export default function MyPageLayout({ children }: { children: React.ReactNode }
          margin: '',
          rounded: false,
       });
-   }, []);
+   });
 
    return (
-      <>
-         <div className='flex justify-between px-8 pt-4 pb-14 bg-black text-white'>
+      <div className='h-[calc(100vh-110px)]'>
+         <div className='flex justify-between px-8 pt-4 pb-14 bg-black text-white h-[200px]'>
             <div className='flex flex-col justify-evenly'>
                <strong className='text-2xl'>{myInfo?.nickname}</strong>
                <p>
@@ -55,13 +52,13 @@ export default function MyPageLayout({ children }: { children: React.ReactNode }
                   {myInfo?.department} {myInfo?.major}
                </p>
             </div>
-            <div className='rounded-full bg-slate-300 w-[7rem] aspect-square overflow-hidden'>
+            <div className='rounded-full bg-slate-300 w-[7rem] h-[7rem] aspect-square overflow-hidden'>
                <img
                   src={''} // API 미완료
                />
             </div>
          </div>
          {children}
-      </>
+      </div>
    );
 }

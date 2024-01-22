@@ -13,38 +13,34 @@ export default function MyPage() {
    const navigate = useNavigate();
 
    return (
-      <>
-         {/* 네비게이션 */}
-
-         <MyPageLayout>
-            <>
-               <nav className='flex justify-center sticky mt-[-35px]'>
-                  <ul
-                     className={`bg-white flex justify-between ${shadowStyle.default} rounded-[40px] w-11/12 px-10 pt-3 pb-2`}
-                  >
-                     {NavContent.map(({ id, name, icon }) => (
-                        <li
-                           key={id}
-                           className='flex flex-col items-center text-4xl cursor-pointer'
-                           onClick={() => {
-                              id === 'edit' ? navigate('password') : navigate(id);
-                           }}
-                        >
-                           {icon}
-                           <p className='text-[0.6rem] leading-5'>{name}</p>
-                        </li>
-                     ))}
-                  </ul>
-               </nav>
-               <div className='p-4 flex flex-col'>
-                  <Button variant='red' onClick={() => logout()}>
-                     로그아웃
-                  </Button>
-                  <Button>탈퇴하기</Button>
-               </div>
-            </>
-         </MyPageLayout>
-      </>
+      <MyPageLayout>
+         <>
+            <nav className='flex justify-center sticky mt-[-35px]'>
+               <ul
+                  className={`bg-white flex justify-between ${shadowStyle.default} rounded-[40px] w-11/12 px-10 pt-3 pb-2`}
+               >
+                  {NavContent.map(({ id, name, icon }) => (
+                     <li
+                        key={id}
+                        className='flex flex-col items-center text-4xl cursor-pointer'
+                        onClick={() => {
+                           id === 'edit' ? navigate('password') : navigate(id);
+                        }}
+                     >
+                        {icon}
+                        <p className='text-[0.6rem] leading-5'>{name}</p>
+                     </li>
+                  ))}
+               </ul>
+            </nav>
+            <div className='p-4 flex flex-col'>
+               <Button variant='red' onClick={() => logout()}>
+                  로그아웃
+               </Button>
+               <Button>탈퇴하기</Button>
+            </div>
+         </>
+      </MyPageLayout>
    );
 }
 
