@@ -18,7 +18,7 @@ import Greeting from 'pages/council';
 import Organization from 'pages/council/organization';
 import Location from 'pages/council/location';
 import Recruitment from 'pages/council/recruitment';
-import MyPage from 'pages/mypage';
+import MyPage from 'pages/mypage/index';
 import PrivateRoute from 'PrivateRoute';
 import NoticeDetail from 'pages/notice/[id]';
 import NoticeBoard from 'pages/notice/index';
