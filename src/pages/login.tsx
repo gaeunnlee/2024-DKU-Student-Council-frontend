@@ -1,7 +1,7 @@
 import React, { FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from 'hooks/useAuth';
-import { ROUTES } from 'constant';
+import { ROUTES } from 'constants/route';
 import { IIdPassword } from 'shared/interfaces/default-interfaces';
 import Input from 'components/ui/input';
 import { useLayout } from 'hooks/useLayout';
@@ -23,16 +23,20 @@ export default function Login() {
       },
    };
 
+   const headingStyle = 'mt-[30px] mb-[19px] text-center text-[25px]';
+   const subHeadingStyle = 'mb-[51px] text-center text-base font-extrabold';
+
    useEffectOnce(() => {
       setLayout({
-         topHeader: true,
          title: null,
          backButton: true,
          isMain: false,
-         background: true,
+         fullscreen: false,
          heading: 'Login',
          subHeading: '단국대학교 총학생회 로그인',
-         fullscreen: true,
+         headingStyle: headingStyle,
+         subHeadingStyle: subHeadingStyle,
+         margin: '',
          rounded: true,
       });
    });

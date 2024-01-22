@@ -1,74 +1,66 @@
-import { useEffectOnce } from './useEffectOnce';
 import { gnbState } from 'stores/gnb-store';
 import { gnhState } from 'stores/gnh-store';
 import { navStore } from 'stores/nav-store';
 
-interface HeaderTabLayoutProps {
-   topHeader: boolean;
+interface TopHeaderLayoutProps {
    title: string | null;
    backButton: boolean;
    isMain: boolean;
-   fullscreen: boolean;
 }
 
 interface HeadingLayoutProps {
-   background: boolean;
    heading?: string | null;
    subHeading?: string | null;
-   isMain: boolean;
+   headingStyle: string;
+   subHeadingStyle: string;
+}
+
+interface NavLayoutProps {
+   margin: string;
+   fullscreen: boolean;
    rounded: boolean;
 }
 
 export const useLayout = () => {
-   const { setTopHeader, setTitle, setBackButton, setIsMain } = gnbState();
-   const { setFullscreen } = navStore();
-   const { setBackground, setHeading, setSubHeading, setRounded } = gnhState();
+   const { setTitle, setBackButton, setIsMain } = gnbState();
+   const { setHeading, setSubHeading, setHeadingStyle, setsubHeadingStyle } = gnhState();
+   const { setFullscreen, setRounded, setMargin } = navStore();
 
-   const setHeaderLayout = ({ topHeader, title, backButton, isMain, fullscreen }: HeaderTabLayoutProps) => {
-      setTopHeader(topHeader);
-      title && setTitle(title);
+   const setTopHeader = ({ title, backButton, isMain }: TopHeaderLayoutProps) => {
+      setTitle(title);
       setBackButton(backButton);
       setIsMain(isMain);
-      setFullscreen(fullscreen);
    };
 
-   const setHeadingLayout = ({ background, heading, subHeading, rounded }: HeadingLayoutProps) => {
-      setBackground(background);
+   const setHeadingLayout = ({ heading, subHeading, headingStyle, subHeadingStyle }: HeadingLayoutProps) => {
       heading && setHeading(heading);
       subHeading && setSubHeading(subHeading);
+      setHeadingStyle(headingStyle);
+      setsubHeadingStyle(subHeadingStyle);
+   };
+
+   const setNavLayout = ({ margin, fullscreen, rounded }: NavLayoutProps) => {
+      setMargin(margin);
+      setFullscreen(fullscreen);
       setRounded(rounded);
    };
 
    const setLayout = ({
-      topHeader,
       title,
       backButton,
       isMain,
       fullscreen,
-      background,
       heading,
       subHeading,
+      headingStyle,
+      subHeadingStyle,
+      margin,
       rounded,
-   }: HeaderTabLayoutProps & HeadingLayoutProps) => {
-      setHeaderLayout({ topHeader, title, backButton, isMain, fullscreen });
-      setHeadingLayout({ background, heading, subHeading, isMain, rounded });
+   }: TopHeaderLayoutProps & HeadingLayoutProps & NavLayoutProps) => {
+      setTopHeader({ title, backButton, isMain });
+      setHeadingLayout({ heading, subHeading, headingStyle, subHeadingStyle });
+      setNavLayout({ margin, fullscreen, rounded });
    };
-
-   useEffectOnce(() => {
-      return () => {
-         setLayout({
-            topHeader: true,
-            title: null,
-            backButton: true,
-            isMain: false,
-            fullscreen: false,
-            background: false,
-            heading: null,
-            subHeading: null,
-            rounded: true,
-         });
-      };
-   });
 
    return { setLayout };
 };

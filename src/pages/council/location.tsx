@@ -8,14 +8,15 @@ export default function Location() {
 
    useEffectOnce(() => {
       setLayout({
-         topHeader: true,
          title: '총학생회',
          backButton: true,
          isMain: false,
-         background: true,
+         fullscreen: false,
          heading: '총학생회',
          subHeading: '오시는 길',
-         fullscreen: false,
+         headingStyle: '',
+         subHeadingStyle: '',
+         margin: '',
          rounded: true,
       });
    });

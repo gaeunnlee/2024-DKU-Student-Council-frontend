@@ -9,14 +9,15 @@ export default function Recruitment() {
 
    useEffectOnce(() => {
       setLayout({
-         topHeader: true,
          title: '총학생회',
          backButton: true,
          isMain: false,
-         background: true,
+         fullscreen: false,
          heading: '부원모집',
          subHeading: '모집요강',
-         fullscreen: false,
+         headingStyle: '',
+         subHeadingStyle: '',
+         margin: '',
          rounded: true,
       });
    });
