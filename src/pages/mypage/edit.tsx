@@ -40,10 +40,12 @@ export default function MyPageEdit() {
    const [myInfo, setMyInfo] = useState<IMyInfo | null>(null);
    const { get } = useApi();
 
+   // 회원정보 가져오기
    const fetchMyInfo = async () => {
       const data = await get<IMyInfo>(API_PATH.USER.ME, { authenticate: true });
       setMyInfo(data);
    };
+
    useEffectOnce(() => {
       fetchMyInfo();
       setLayout({
@@ -58,6 +60,7 @@ export default function MyPageEdit() {
       });
    });
 
+   // 닉네임과 전공의 placeholder값을 myInfo(회원정보)에서 가져오기
    useEffect(() => {
       myInfo &&
          setFormInfo(
