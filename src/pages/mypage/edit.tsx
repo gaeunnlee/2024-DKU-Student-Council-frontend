@@ -47,11 +47,11 @@ export default function MyPageEdit() {
    return (
       <>
          {myInfo && (
-            <div className='px-3 pb-5 flex items-center flex-col'>
+            <div className='px-3 pb-5 flex items-center flex-col w-full'>
                <div className='flex justify-center py-10'>
                   <ProfileImage />
                </div>
-               <div className='flex flex-col gap-5'>
+               <div className='flex flex-col gap-5 w-full'>
                   {formInfo?.map((box, i) => (
                      <Box key={i}>
                         {box.map((item: IFormInfo) => (
@@ -69,9 +69,17 @@ export default function MyPageEdit() {
                                  )}
                               </InputBox>
                               {item.bigButton && <InputButton text={item.bigButton} type='big' />}
-                              {item.validation?.defaultMessage && (
+                              {item.validation?.defaultMessage && item.validation.result === null && (
                                  <Message text={item.validation?.defaultMessage} />
                               )}
+                              {item.validation !== undefined &&
+                                 (item.validation.result ? (
+                                    <Message text={item.validation.successMessage} />
+                                 ) : (
+                                    item.validation.result !== null && (
+                                       <Message text={item.validation.errorMessage} />
+                                    )
+                                 ))}
                            </div>
                         ))}
                      </Box>
@@ -80,7 +88,7 @@ export default function MyPageEdit() {
                <InputButton
                   text='완료'
                   type='big'
-                  style='mt-6 py-6 flex items-center flex-row justify-center'
+                  style='mt-6 py-2 flex items-center flex-row justify-center'
                />
             </div>
          )}
@@ -89,7 +97,7 @@ export default function MyPageEdit() {
 }
 
 const Box = ({ children, key }: { children: React.ReactNode; key: number }) => (
-   <div key={key} className='rounded-lg bg-[#f4f4f4] p-4 flex flex-col gap-5'>
+   <div key={key} className='w-full rounded-lg bg-[#f4f4f4] p-4 flex flex-col gap-5'>
       {children}
    </div>
 );
@@ -131,11 +139,13 @@ const ValidationIcon = ({ validation }: { validation: null | boolean }) => (
 );
 const InputButton = ({ text, type, style }: { text: string; type?: string; style?: string }) => (
    <button
-      className={`bg-black text-white rounded-lg px-3 h-full ${type === 'big' && 'w-full h-8 mt-3'} ${style}`}
+      className={`bg-black text-white rounded-lg px-3 h-full ${
+         type === 'big' && 'w-full h-8 py-1 mt-3'
+      } ${style}`}
    >
       {text}
    </button>
 );
 const Message = ({ text }: { text: string }) => (
-   <p className='text-[#626262] text-[0.7rem] mt-1 pl-3'>{text}</p>
+   <p className='text-[#626262] text-[0.6rem] mt-1 px-3 break-words'>{text}</p>
 );

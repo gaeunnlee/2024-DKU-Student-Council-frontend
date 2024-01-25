@@ -55,6 +55,7 @@ const validationInfo = {
    password: {
       result: null,
       defaultMessage: '비밀번호는 영문과 숫자를 1자 이상 포함하는 8-16 자리여야 합니다.',
+      successMessage: '알맞게 입력하였습니다.',
       errorMessage: '비밀번호는 영문과 숫자를 1자 이상 포함하는 8-16 자리여야 합니다.',
    },
    passwordConfirm: {

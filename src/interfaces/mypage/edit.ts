@@ -24,6 +24,6 @@ export interface IFormInfo {
 export interface IValidationInfo {
    result: null | boolean;
    defaultMessage?: string;
-   errorMessage?: string;
-   successMessage?: string;
+   errorMessage: string;
+   successMessage: string;
 }
