@@ -43,6 +43,10 @@ export const API_PATH = {
             CODE: (signupToken: string) => `/user/sms/verify/${signupToken}`,
          },
       },
+      /** 닉네임 변경 */
+      CHANGE: {
+         NICKNAME: '/user/change/nickname',
+      },
    },
    MAIN: {
       /** 메인페이지 모든 데이터 */

@@ -12,7 +12,16 @@ export interface IMyInfo {
    admin: boolean;
 }
 
+export interface IInputValue {
+   nickname: string;
+   password: string;
+   passwordConfirm: string;
+   major: string;
+   phoneNumber: string;
+   verficationCode: string;
+}
 export interface IFormInfo {
+   id: string;
    title: string;
    inputType: string;
    placeholder?: string;

@@ -21,11 +21,13 @@ export const InputText = ({
    type,
    value,
    disabled,
+   onChange,
 }: {
    placeholder?: string;
    type: string;
    value?: string;
    disabled: boolean;
+   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => (
    <input
       className={`outline-none h-10 border-none p-2 w-[250px] text-[0.9rem] ${
@@ -36,6 +38,7 @@ export const InputText = ({
       value={value}
       disabled={disabled}
       placeholder={placeholder}
+      onChange={onChange}
    />
 );
 export const ValidationIcon = ({ validation }: { validation: null | boolean }) => (
@@ -44,11 +47,22 @@ export const ValidationIcon = ({ validation }: { validation: null | boolean }) =
          (validation ? <FaCheckCircle color='green' /> : <FaCircleExclamation color='#c73a4a' />)}
    </div>
 );
-export const InputButton = ({ text, type, style }: { text: string; type?: string; style?: string }) => (
+export const InputButton = ({
+   text,
+   type,
+   style,
+   onClick,
+}: {
+   text: string;
+   type?: string;
+   style?: string;
+   onClick?: () => void;
+}) => (
    <button
       className={`bg-black text-white rounded-lg px-3 h-full text-sm ${
          type === 'big' && 'w-full h-8 py-2 mt-3'
       } ${style}`}
+      onClick={onClick}
    >
       {text}
    </button>
