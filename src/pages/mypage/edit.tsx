@@ -4,7 +4,7 @@ import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import { useApi } from 'hooks/useApi';
 import { ProfileImage } from 'layouts/MyPageLayout';
-import { IFormInfo, IMyInfo } from 'interfaces/mypage/edit';
+import { IFormInfo, IInputValue, IMyInfo } from 'interfaces/mypage/edit';
 import { defaultFormInfo } from 'data/mypage/edit/defaultFormInfo';
 import {
    Box,
@@ -17,31 +17,22 @@ import {
 } from 'components/mypage/edit';
 import { useAlert } from 'hooks/useAlert';
 
-interface IInputValue {
-   nickname: string;
-   password: string;
-   passwordConfirm: string;
-   major: string;
-   phoneNumber: string;
-   verficationCode: string;
-}
-
 export default function MyPageEdit() {
    const { setLayout } = useLayout();
-   const [formInfo, setFormInfo] = useState<IFormInfo[][]>(
-      defaultFormInfo({ originNickname: '', originMajor: '' }),
-   );
    const [myInfo, setMyInfo] = useState<IMyInfo | null>(null);
    const { get, patch } = useApi();
    const { alert } = useAlert();
    const [inputsValue, setInputsValue] = useState<IInputValue>({
-      nickname: '',
-      password: '',
-      passwordConfirm: '',
-      major: '',
-      phoneNumber: '',
-      verficationCode: '',
+      nickname: { value: '', validation: null },
+      password: { value: '', validation: null },
+      passwordConfirm: { value: '', validation: null },
+      major: { value: '' },
+      phoneNumber: { value: '' },
+      verficationCode: { value: '', validation: null },
    });
+   const [formInfo, setFormInfo] = useState<IFormInfo[][]>(
+      defaultFormInfo({ originNickname: '', originMajor: '', inputsValue }),
+   );
 
    // 회원정보 가져오기
    const fetchMyInfo = async () => {
@@ -70,32 +61,47 @@ export default function MyPageEdit() {
             defaultFormInfo({
                originNickname: myInfo.nickname,
                originMajor: `${myInfo.department} ${myInfo.major}`,
+               inputsValue,
             }),
          );
-   }, [myInfo]);
+   }, [myInfo, inputsValue]);
 
-   const handleButtonEvent = (id: string) => {
-      const event = {
-         nickname: async () => {
-            try {
-               await patch(
-                  `${CONSTANTS.SERVER_URL}${API_PATH.USER.CHANGE.NICKNAME}`,
-                  { nickname: inputsValue.nickname },
-                  { authenticate: true },
-               );
-               fetchMyInfo();
-               setInputsValue((prev) => ({ ...prev, nickname: '' }));
-               alert('변경완료');
-            } catch (error) {
-               alert(error);
-            }
+   const handleEvent = (item: IFormInfo, eventType: string, value?: string) => {
+      const events = {
+         nickname: {
+            onClick: async () => {
+               if (item.validation?.result) {
+                  try {
+                     await patch(
+                        `${CONSTANTS.SERVER_URL}${API_PATH.USER.CHANGE.NICKNAME}`,
+                        { nickname: inputsValue.nickname.value },
+                        { authenticate: true },
+                     );
+                     fetchMyInfo();
+                     setInputsValue((prev) => ({ ...prev, nickname: { ...prev.nickname, value: '' } }));
+                     alert('변경완료');
+                  } catch (error) {
+                     alert(error);
+                  }
+               } else {
+                  alert(item.validation?.errorMessage);
+               }
+            },
+            onChange: (value: string) => {
+               return value.length > 2 && value.length < 17;
+            },
          },
       };
-      Object.entries(event).filter((entry) => {
-         if (entry[0] === id) {
-            return entry[1]();
-         }
-      });
+
+      const eventData = Object.getOwnPropertyDescriptor(events, item.id)?.value;
+      const triggerEvent = Object.getOwnPropertyDescriptor(eventData, eventType)?.value;
+
+      switch (eventType) {
+         case 'onClick':
+            return triggerEvent();
+         case 'onChange':
+            return triggerEvent(value);
+      }
    };
 
    return (
@@ -116,17 +122,15 @@ export default function MyPageEdit() {
                                     type={item.inputType}
                                     placeholder={item.placeholder}
                                     disabled={item.title === '학과 및 재학 여부'}
-                                    value={(function () {
-                                       let result = '';
-                                       Object.entries(inputsValue).filter((entry) => {
-                                          if (entry[0] === item.id) {
-                                             result = entry[1];
-                                          }
-                                       });
-                                       return result;
-                                    })()}
+                                    value={Object.getOwnPropertyDescriptor(inputsValue, item.id)?.value.value}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                       setInputsValue((prev) => ({ ...prev, [item.id]: e.target.value }));
+                                       setInputsValue((prev) => ({
+                                          ...prev,
+                                          [item.id]: {
+                                             value: e.target.value,
+                                             validation: handleEvent(item, 'onChange', e.target.value),
+                                          },
+                                       }));
                                     }}
                                  />
                                  {item.button && <InputButton text={item.button} />}
@@ -137,7 +141,7 @@ export default function MyPageEdit() {
                               {item.bigButton && (
                                  <InputButton
                                     onClick={() => {
-                                       handleButtonEvent(item.id);
+                                       handleEvent(item, 'onClick');
                                     }}
                                     text={item.bigButton}
                                     type='big'

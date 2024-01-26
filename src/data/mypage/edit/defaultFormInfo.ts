@@ -1,9 +1,13 @@
+import { IInputValue, IValidationInfo } from 'interfaces/mypage/edit';
+
 export const defaultFormInfo = ({
    originNickname,
    originMajor,
+   inputsValue,
 }: {
    originNickname: string;
    originMajor: string;
+   inputsValue: IInputValue;
 }) => [
    [
       {
@@ -12,7 +16,7 @@ export const defaultFormInfo = ({
          inputType: 'text',
          placeholder: originNickname,
          bigButton: '변경',
-         validation: validationInfo.nickname,
+         validation: checkValidation('nickname', inputsValue.nickname.validation),
          value: null,
       },
    ],
@@ -22,7 +26,7 @@ export const defaultFormInfo = ({
          title: '비밀번호 변경',
          inputType: 'password',
          placeholder: '새로운 비밀번호를 입력해주세요',
-         validation: validationInfo.password,
+         validation: checkValidation('password', inputsValue.password.validation),
          value: null,
       },
       {
@@ -31,7 +35,7 @@ export const defaultFormInfo = ({
          inputType: 'password',
          placeholder: '새로운 비밀번호를 재입력해주세요',
          bigButton: '변경',
-         validation: validationInfo.passwordConfirm,
+         validation: checkValidation('passwordConfirm', inputsValue.passwordConfirm.validation),
          value: null,
       },
    ],
@@ -58,17 +62,25 @@ export const defaultFormInfo = ({
          title: '인증번호 입력',
          inputType: 'number',
          bigButton: '확인',
-         validation: validationInfo.verficationCode,
+         validation: checkValidation('verficationCode', inputsValue.verficationCode.validation),
          value: null,
       },
    ],
 ];
 
+const checkValidation = (name: string, value: boolean | null): IValidationInfo | undefined => {
+   return {
+      result: value,
+      successMessage: Object.getOwnPropertyDescriptor(validationInfo, name)?.value.successMessage,
+      errorMessage: Object.getOwnPropertyDescriptor(validationInfo, name)?.value.errorMessage,
+   };
+};
+
 const validationInfo = {
    nickname: {
       result: null,
-      successMessage: '사용 가능한 닉네임입니다',
-      errorMessage: '사용 불가능한 닉네임입니다',
+      successMessage: '',
+      errorMessage: '3자 이상, 16자 이하의 닉네임을 입력해주세요.',
    },
    password: {
       result: null,
@@ -78,7 +90,6 @@ const validationInfo = {
    },
    passwordConfirm: {
       result: null,
-      bigButton: '확인',
       errorMessage: '비밀번호가 같지 않습니다.',
       successMessage: '비밀번호가 변경되었습니다.',
    },

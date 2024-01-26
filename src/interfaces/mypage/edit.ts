@@ -13,12 +13,12 @@ export interface IMyInfo {
 }
 
 export interface IInputValue {
-   nickname: string;
-   password: string;
-   passwordConfirm: string;
-   major: string;
-   phoneNumber: string;
-   verficationCode: string;
+   nickname: { value: string; validation: null | boolean };
+   password: { value: string; validation: null | boolean };
+   passwordConfirm: { value: string; validation: null | boolean };
+   major: { value: string };
+   phoneNumber: { value: string };
+   verficationCode: { value: string; validation: null | boolean };
 }
 export interface IFormInfo {
    id: string;
