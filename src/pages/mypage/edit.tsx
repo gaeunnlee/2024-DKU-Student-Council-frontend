@@ -89,8 +89,8 @@ export default function MyPageEdit() {
                         { authenticate: true },
                      );
                      fetchMyInfo();
-                     setInputsValue((prev) => ({ ...prev, nickname: { ...prev.nickname, value: '' } }));
-                     alert('변경완료');
+                     setInputsValue((prev) => ({ ...prev, nickname: { value: '', validation: null } }));
+                     alert('변경 완료');
                   } catch (error) {
                      alert(error);
                   }
@@ -111,7 +111,41 @@ export default function MyPageEdit() {
             },
          },
          passwordConfirm: {
+            onClick: async () => {
+               if (
+                  inputsValue.originPassword.value.length > 0 &&
+                  inputsValue.password.validation &&
+                  inputsValue.passwordConfirm.validation
+               ) {
+                  try {
+                     await patch(
+                        `${CONSTANTS.SERVER_URL}${API_PATH.USER.CHANGE.PASSWORD}`,
+                        {
+                           password: inputsValue.originPassword.value,
+                           newPassword: inputsValue.passwordConfirm.value,
+                        },
+                        { authenticate: true },
+                     );
+                     fetchMyInfo();
+                     setInputsValue((prev) => ({
+                        ...prev,
+                        originPassword: { value: '', validation: null },
+                        password: { value: '', validation: null },
+                        passwordConfirm: { value: '', validation: null },
+                     }));
+                     alert('변경 완료');
+                  } catch (error) {
+                     alert(error);
+                  }
+               } else {
+                  alert('모두 알맞게 입력해주세요.');
+               }
+            },
             onChange: (value: string) => {
+               if (!inputsValue.password.validation) {
+                  setInputsValue((prev) => ({ ...prev, passwordConfirm: { value: '', validation: null } }));
+                  alert('비밀번호는 영문과 숫자를 1자 이상 포함하는 8-16 자리여야 합니다.');
+               }
                return value === Object.getOwnPropertyDescriptor(inputsValue, 'password')?.value.value;
             },
          },

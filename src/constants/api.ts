@@ -46,6 +46,7 @@ export const API_PATH = {
       /** 닉네임 변경 */
       CHANGE: {
          NICKNAME: '/user/change/nickname',
+         PASSWORD: '/user/change/password',
       },
    },
    MAIN: {
