@@ -104,7 +104,15 @@ export default function MyPageEdit() {
          },
          password: {
             onChange: (value: string) => {
-               return value.length > 3 && value.length < 200;
+               setInputsValue((prev) => ({ ...prev, passwordConfirm: { value: '', validation: null } }));
+               return (
+                  value.length > 7 && value.length < 17 && /^(?=.*[a-zA-Z])(?=.*[0-9]).{7,17}$/.test(value)
+               );
+            },
+         },
+         passwordConfirm: {
+            onChange: (value: string) => {
+               return value === Object.getOwnPropertyDescriptor(inputsValue, 'password')?.value.value;
             },
          },
       };
@@ -150,20 +158,18 @@ export default function MyPageEdit() {
                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                           setInputsValue((prev) => ({
                                              ...prev,
-                                             [id]: { value: e.target.value },
-                                          }));
-                                          validation !== undefined &&
-                                             setInputsValue((prev) => ({
-                                                ...prev,
-                                                [id]: {
-                                                   validation: handleEvent({
+                                             [id]: {
+                                                value: e.target.value,
+                                                validation:
+                                                   validation !== undefined &&
+                                                   handleEvent({
                                                       eventType: 'onChange',
                                                       id,
                                                       validation: validation!,
                                                       value: e.target.value,
                                                    }),
-                                                },
-                                             }));
+                                             },
+                                          }));
                                        }}
                                     />
                                     {button && <InputButton text={button} />}
