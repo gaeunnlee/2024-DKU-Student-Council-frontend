@@ -4,7 +4,7 @@ import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import { useApi } from 'hooks/useApi';
 import { ProfileImage } from 'layouts/MyPageLayout';
-import { IFormInfo, IInputValue, IMyInfo } from 'interfaces/mypage/edit';
+import { IFormInfo, IInputValue, IMyInfo, IValidationInfo } from 'interfaces/mypage/edit';
 import { defaultFormInfo } from 'data/mypage/edit/defaultFormInfo';
 import {
    Box,
@@ -66,11 +66,21 @@ export default function MyPageEdit() {
          );
    }, [myInfo, inputsValue]);
 
-   const handleEvent = (item: IFormInfo, eventType: string, value?: string) => {
+   const handleEvent = ({
+      eventType,
+      id,
+      validation,
+      value,
+   }: {
+      eventType: string;
+      id: string;
+      validation: IValidationInfo;
+      value?: string;
+   }) => {
       const events = {
          nickname: {
             onClick: async () => {
-               if (item.validation?.result) {
+               if (validation?.result) {
                   try {
                      await patch(
                         `${CONSTANTS.SERVER_URL}${API_PATH.USER.CHANGE.NICKNAME}`,
@@ -84,7 +94,7 @@ export default function MyPageEdit() {
                      alert(error);
                   }
                } else {
-                  alert(item.validation?.errorMessage);
+                  alert(validation?.errorMessage);
                }
             },
             onChange: (value: string) => {
@@ -93,7 +103,7 @@ export default function MyPageEdit() {
          },
       };
 
-      const eventData = Object.getOwnPropertyDescriptor(events, item.id)?.value;
+      const eventData = Object.getOwnPropertyDescriptor(events, id)?.value;
       const triggerEvent = Object.getOwnPropertyDescriptor(eventData, eventType)?.value;
 
       switch (eventType) {
@@ -114,52 +124,71 @@ export default function MyPageEdit() {
                <div className='flex flex-col gap-5 w-full'>
                   {formInfo?.map((box, i) => (
                      <Box key={i}>
-                        {box.map((item: IFormInfo) => (
-                           <div key={item.title}>
-                              <Label text={item.title} />
-                              <InputBox>
-                                 <InputText
-                                    type={item.inputType}
-                                    placeholder={item.placeholder}
-                                    disabled={item.title === '학과 및 재학 여부'}
-                                    value={Object.getOwnPropertyDescriptor(inputsValue, item.id)?.value.value}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                       setInputsValue((prev) => ({
-                                          ...prev,
-                                          [item.id]: {
-                                             value: e.target.value,
-                                             validation: handleEvent(item, 'onChange', e.target.value),
-                                          },
-                                       }));
-                                    }}
-                                 />
-                                 {item.button && <InputButton text={item.button} />}
-                                 {item.validation !== undefined && (
-                                    <ValidationIcon validation={item.validation.result} />
+                        {box.map(
+                           ({
+                              id,
+                              title,
+                              inputType,
+                              placeholder,
+                              button,
+                              bigButton,
+                              validation,
+                           }: IFormInfo) => (
+                              <div key={title}>
+                                 <Label text={title} />
+                                 <InputBox>
+                                    <InputText
+                                       type={inputType}
+                                       placeholder={placeholder}
+                                       disabled={title === '학과 및 재학 여부'}
+                                       value={Object.getOwnPropertyDescriptor(inputsValue, id)?.value.value}
+                                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                          setInputsValue((prev) => ({
+                                             ...prev,
+                                             [id]: {
+                                                value: e.target.value,
+                                                validation: handleEvent({
+                                                   eventType: 'onChange',
+                                                   id,
+                                                   validation: validation!,
+                                                   value: e.target.value,
+                                                }),
+                                             },
+                                          }));
+                                       }}
+                                    />
+                                    {button && <InputButton text={button} />}
+                                    {validation !== undefined && (
+                                       <ValidationIcon validation={validation.result} />
+                                    )}
+                                 </InputBox>
+                                 {bigButton && (
+                                    <InputButton
+                                       onClick={() => {
+                                          handleEvent({
+                                             eventType: 'onClick',
+                                             id,
+                                             validation: validation!,
+                                          });
+                                       }}
+                                       text={bigButton}
+                                       type='big'
+                                    />
                                  )}
-                              </InputBox>
-                              {item.bigButton && (
-                                 <InputButton
-                                    onClick={() => {
-                                       handleEvent(item, 'onClick');
-                                    }}
-                                    text={item.bigButton}
-                                    type='big'
-                                 />
-                              )}
-                              {item.validation?.defaultMessage && item.validation.result === null && (
-                                 <Message text={item.validation?.defaultMessage} />
-                              )}
-                              {item.validation !== undefined &&
-                                 (item.validation.result ? (
-                                    <Message text={item.validation.successMessage} />
-                                 ) : (
-                                    item.validation.result !== null && (
-                                       <Message text={item.validation.errorMessage} />
-                                    )
-                                 ))}
-                           </div>
-                        ))}
+                                 {validation?.defaultMessage && validation.result === null && (
+                                    <Message text={validation?.defaultMessage} />
+                                 )}
+                                 {validation !== undefined &&
+                                    (validation.result ? (
+                                       <Message text={validation.successMessage} />
+                                    ) : (
+                                       validation.result !== null && (
+                                          <Message text={validation.errorMessage} />
+                                       )
+                                    ))}
+                              </div>
+                           ),
+                        )}
                      </Box>
                   ))}
                </div>

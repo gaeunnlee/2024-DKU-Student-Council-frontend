@@ -68,7 +68,7 @@ export const defaultFormInfo = ({
    ],
 ];
 
-const checkValidation = (name: string, value: boolean | null): IValidationInfo | undefined => {
+const checkValidation = (name: string, value: boolean | null): IValidationInfo => {
    return {
       result: value,
       successMessage: Object.getOwnPropertyDescriptor(validationInfo, name)?.value.successMessage,
