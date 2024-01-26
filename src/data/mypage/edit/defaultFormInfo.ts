@@ -22,6 +22,13 @@ export const defaultFormInfo = ({
    ],
    [
       {
+         id: 'originPassword',
+         title: '기존 비밀번호 입력',
+         inputType: 'password',
+         placeholder: '기존 비밀번호를 입력해주세요',
+         value: null,
+      },
+      {
          id: 'password',
          title: '비밀번호 변경',
          inputType: 'password',

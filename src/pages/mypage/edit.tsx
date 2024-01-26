@@ -24,6 +24,7 @@ export default function MyPageEdit() {
    const { alert } = useAlert();
    const [inputsValue, setInputsValue] = useState<IInputValue>({
       nickname: { value: '', validation: null },
+      originPassword: { value: '' },
       password: { value: '', validation: null },
       passwordConfirm: { value: '', validation: null },
       major: { value: '' },
@@ -101,6 +102,11 @@ export default function MyPageEdit() {
                return value.length > 2 && value.length < 17;
             },
          },
+         password: {
+            onChange: (value: string) => {
+               return value.length > 3 && value.length < 200;
+            },
+         },
       };
 
       const eventData = Object.getOwnPropertyDescriptor(events, id)?.value;
@@ -113,7 +119,6 @@ export default function MyPageEdit() {
             return triggerEvent(value);
       }
    };
-
    return (
       <>
          {myInfo && (
@@ -145,16 +150,20 @@ export default function MyPageEdit() {
                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                           setInputsValue((prev) => ({
                                              ...prev,
-                                             [id]: {
-                                                value: e.target.value,
-                                                validation: handleEvent({
-                                                   eventType: 'onChange',
-                                                   id,
-                                                   validation: validation!,
-                                                   value: e.target.value,
-                                                }),
-                                             },
+                                             [id]: { value: e.target.value },
                                           }));
+                                          validation !== undefined &&
+                                             setInputsValue((prev) => ({
+                                                ...prev,
+                                                [id]: {
+                                                   validation: handleEvent({
+                                                      eventType: 'onChange',
+                                                      id,
+                                                      validation: validation!,
+                                                      value: e.target.value,
+                                                   }),
+                                                },
+                                             }));
                                        }}
                                     />
                                     {button && <InputButton text={button} />}

@@ -14,6 +14,7 @@ export interface IMyInfo {
 
 export interface IInputValue {
    nickname: { value: string; validation: null | boolean };
+   originPassword: { value: string };
    password: { value: string; validation: null | boolean };
    passwordConfirm: { value: string; validation: null | boolean };
    major: { value: string };
