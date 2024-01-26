@@ -177,6 +177,17 @@ export default function MyPageEdit() {
                                        <ValidationIcon validation={validation.result} />
                                     )}
                                  </InputBox>
+                                 {validation?.defaultMessage && validation.result === null && (
+                                    <Message text={validation?.defaultMessage} />
+                                 )}
+                                 {validation !== undefined &&
+                                    (validation.result ? (
+                                       <Message text={validation.successMessage} />
+                                    ) : (
+                                       validation.result !== null && (
+                                          <Message text={validation.errorMessage} />
+                                       )
+                                    ))}
                                  {bigButton && (
                                     <InputButton
                                        onClick={() => {
@@ -190,17 +201,6 @@ export default function MyPageEdit() {
                                        type='big'
                                     />
                                  )}
-                                 {validation?.defaultMessage && validation.result === null && (
-                                    <Message text={validation?.defaultMessage} />
-                                 )}
-                                 {validation !== undefined &&
-                                    (validation.result ? (
-                                       <Message text={validation.successMessage} />
-                                    ) : (
-                                       validation.result !== null && (
-                                          <Message text={validation.errorMessage} />
-                                       )
-                                    ))}
                               </div>
                            ),
                         )}

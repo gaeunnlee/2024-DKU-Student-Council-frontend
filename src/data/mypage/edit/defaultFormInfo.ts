@@ -98,7 +98,7 @@ const validationInfo = {
    passwordConfirm: {
       result: null,
       errorMessage: '비밀번호가 같지 않습니다.',
-      successMessage: '비밀번호가 변경되었습니다.',
+      successMessage: '알맞게 입력하였습니다.',
    },
    verficationCode: {
       result: null,
