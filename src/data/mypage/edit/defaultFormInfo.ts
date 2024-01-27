@@ -3,10 +3,12 @@ import { IInputValue, IValidationInfo } from 'interfaces/mypage/edit';
 export const defaultFormInfo = ({
    originNickname,
    originMajor,
+   originPhoneNumber,
    inputsValue,
 }: {
    originNickname: string;
    originMajor: string;
+   originPhoneNumber: string;
    inputsValue: IInputValue;
 }) => [
    [
@@ -61,7 +63,9 @@ export const defaultFormInfo = ({
          id: 'phoneNumber',
          title: '휴대폰번호 변경',
          inputType: 'number',
+         placeholder: originPhoneNumber,
          bigButton: '인증번호 전송',
+         validation: checkValidation('phoneNumber', inputsValue.phoneNumber.validation),
          value: null,
       },
       {
@@ -69,7 +73,6 @@ export const defaultFormInfo = ({
          title: '인증번호 입력',
          inputType: 'number',
          bigButton: '확인',
-         validation: checkValidation('verficationCode', inputsValue.verficationCode.validation),
          value: null,
       },
    ],
@@ -78,6 +81,7 @@ export const defaultFormInfo = ({
 const checkValidation = (name: string, value: boolean | null): IValidationInfo => {
    return {
       result: value,
+      defaultMessage: Object.getOwnPropertyDescriptor(validationInfo, name)?.value.defaultMessage,
       successMessage: Object.getOwnPropertyDescriptor(validationInfo, name)?.value.successMessage,
       errorMessage: Object.getOwnPropertyDescriptor(validationInfo, name)?.value.errorMessage,
    };
@@ -100,9 +104,10 @@ const validationInfo = {
       errorMessage: '비밀번호가 같지 않습니다.',
       successMessage: '알맞게 입력하였습니다.',
    },
-   verficationCode: {
+   phoneNumber: {
       result: null,
-      errorMessage: '인증번호를 다시 입력해주세요',
-      successMessage: '인증 완료되었습니다',
+      defaultMessage: '숫자만 입력해주세요 (11자리 숫자)',
+      errorMessage: '숫자만 입력해주세요 (11자리 숫자)',
+      successMessage: '알맞게 입력하였습니다.',
    },
 };

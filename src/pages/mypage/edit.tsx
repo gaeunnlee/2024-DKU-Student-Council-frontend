@@ -28,11 +28,11 @@ export default function MyPageEdit() {
       password: { value: '', validation: null },
       passwordConfirm: { value: '', validation: null },
       major: { value: '' },
-      phoneNumber: { value: '' },
-      verficationCode: { value: '', validation: null },
+      phoneNumber: { value: '', validation: null },
+      verficationCode: { value: '' },
    });
    const [formInfo, setFormInfo] = useState<IFormInfo[][]>(
-      defaultFormInfo({ originNickname: '', originMajor: '', inputsValue }),
+      defaultFormInfo({ originNickname: '', originMajor: '', originPhoneNumber: '', inputsValue }),
    );
 
    // 회원정보 가져오기
@@ -62,6 +62,7 @@ export default function MyPageEdit() {
             defaultFormInfo({
                originNickname: myInfo.nickname,
                originMajor: `${myInfo.department} ${myInfo.major}`,
+               originPhoneNumber: `${myInfo.phoneNumber}`,
                inputsValue,
             }),
          );
@@ -147,6 +148,14 @@ export default function MyPageEdit() {
                   alert('비밀번호는 영문과 숫자를 1자 이상 포함하는 8-16 자리여야 합니다.');
                }
                return value === Object.getOwnPropertyDescriptor(inputsValue, 'password')?.value.value;
+            },
+         },
+         phoneNumber: {
+            onClick: () => {
+               console.log('인증번호 전송');
+            }, // API 미비
+            onChange: (value: string) => {
+               return value.length === 11 && /^[0-9]*$/.test(value);
             },
          },
       };
