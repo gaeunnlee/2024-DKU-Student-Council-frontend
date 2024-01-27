@@ -16,12 +16,14 @@ import {
    ValidationIcon,
 } from 'components/mypage/edit';
 import { useAlert } from 'hooks/useAlert';
+import { useNavigate } from 'react-router-dom';
 
 export default function MyPageEdit() {
    const { setLayout } = useLayout();
    const [myInfo, setMyInfo] = useState<IMyInfo | null>(null);
    const { get, patch } = useApi();
    const { alert } = useAlert();
+   const navigate = useNavigate();
    const [inputsValue, setInputsValue] = useState<IInputValue>({
       nickname: { value: '', validation: null },
       originPassword: { value: '' },
@@ -254,6 +256,9 @@ export default function MyPageEdit() {
                   text='완료'
                   type='big'
                   style='mt-6 py-2 flex items-center flex-row justify-center'
+                  onClick={() => {
+                     navigate('/mypage');
+                  }}
                />
             </div>
          )}
