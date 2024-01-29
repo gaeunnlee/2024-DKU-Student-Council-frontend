@@ -17,6 +17,7 @@ import {
 } from 'components/mypage/edit';
 import { useAlert } from 'hooks/useAlert';
 import { useNavigate } from 'react-router-dom';
+import { checkInputRegex } from 'utils/checkInputRegex';
 
 export default function MyPageEdit() {
    const { setLayout } = useLayout();
@@ -206,7 +207,10 @@ export default function MyPageEdit() {
                                           setInputsValue((prev) => ({
                                              ...prev,
                                              [id]: {
-                                                value: e.target.value,
+                                                value:
+                                                   inputType === 'number'
+                                                      ? checkInputRegex(e.target.value, 'number')
+                                                      : e.target.value,
                                                 validation:
                                                    validation !== undefined &&
                                                    handleEvent({
