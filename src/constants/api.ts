@@ -48,6 +48,7 @@ export const API_PATH = {
          NICKNAME: '/user/change/nickname',
          PASSWORD: '/user/change/password',
          PHONE: {
+            INDEX: '/user/change/phone',
             VERIFY: '/user/change/phone/verify',
          },
       },

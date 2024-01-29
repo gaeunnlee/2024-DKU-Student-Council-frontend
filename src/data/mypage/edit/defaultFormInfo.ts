@@ -70,11 +70,13 @@ export const defaultFormInfo = ({
          maxLength: 11,
       },
       {
-         id: 'verficationCode',
+         id: 'verificationCode',
          title: '인증번호 입력',
          inputType: 'number',
          bigButton: '확인',
+         validation: checkValidation('verificationCode', inputsValue.verificationCode.validation),
          value: null,
+         maxLength: 6,
       },
    ],
 ];
@@ -110,5 +112,11 @@ const validationInfo = {
       defaultMessage: '숫자만 입력해주세요 (11자리 숫자)',
       errorMessage: '숫자만 입력해주세요 (11자리 숫자)',
       successMessage: '알맞게 입력하였습니다.',
+   },
+   verificationCode: {
+      result: null,
+      defaultMessage: '6자리 숫자를 입력해주세요.',
+      errorMessage: '6자리 숫자를 입력해주세요.',
+      successMessage: '아래 확인 버튼을 눌러주세요.',
    },
 };

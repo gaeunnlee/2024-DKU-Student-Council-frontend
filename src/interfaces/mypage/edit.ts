@@ -19,7 +19,7 @@ export interface IInputValue {
    passwordConfirm: { value: string; validation: null | boolean };
    major: { value: string };
    phoneNumber: { value: string; validation: null | boolean };
-   verficationCode: { value: string };
+   verificationCode: { value: string; validation: null | boolean };
 }
 export interface IFormInfo {
    id: string;

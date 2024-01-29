@@ -32,11 +32,12 @@ export default function MyPageEdit() {
       passwordConfirm: { value: '', validation: null },
       major: { value: '' },
       phoneNumber: { value: '', validation: null },
-      verficationCode: { value: '' },
+      verificationCode: { value: '', validation: null },
    });
    const [formInfo, setFormInfo] = useState<IFormInfo[][]>(
       defaultFormInfo({ originNickname: '', originMajor: '', originPhoneNumber: '', inputsValue }),
    );
+   const [verificationToken, setVerificationToken] = useState('');
 
    // 회원정보 가져오기
    const fetchMyInfo = async () => {
@@ -157,21 +158,49 @@ export default function MyPageEdit() {
             onClick: async () => {
                if (inputsValue.phoneNumber.validation) {
                   try {
-                     await post(
+                     const data: { token: string } = await post(
                         `${CONSTANTS.SERVER_URL}${API_PATH.USER.CHANGE.PHONE.VERIFY}`,
                         { phoneNumber: inputsValue.phoneNumber.value },
                         { authenticate: true },
                      );
                      alert('인증번호가 전송되었습니다.');
+                     setVerificationToken(data.token);
                   } catch (error) {
                      alert(error);
                   }
                } else {
-                  alert('모두 알맞게 입력해주세요.');
+                  alert('알맞게 입력해주세요.');
                }
             },
             onChange: (value: string) => {
                return value.length === 11 && /^[0-9]*$/.test(value);
+            },
+         },
+         verificationCode: {
+            onClick: async () => {
+               if (inputsValue.verificationCode.validation) {
+                  try {
+                     await patch(
+                        `${CONSTANTS.SERVER_URL}${API_PATH.USER.CHANGE.PHONE.INDEX}`,
+                        { token: verificationToken, code: inputsValue.verificationCode.value },
+                        { authenticate: true },
+                     );
+                     alert('휴대폰번호 변경 완료');
+                     fetchMyInfo();
+                     setInputsValue((prev) => ({
+                        ...prev,
+                        phoneNumber: { value: '', validation: null },
+                        verificationCode: { value: '', validation: null },
+                     }));
+                  } catch (error) {
+                     alert(error);
+                  }
+               } else {
+                  alert('알맞게 입력해주세요.');
+               }
+            },
+            onChange: (value: string) => {
+               return value.length === 6 && /^[0-9]*$/.test(value);
             },
          },
       };
