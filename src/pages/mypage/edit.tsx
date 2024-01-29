@@ -191,6 +191,7 @@ export default function MyPageEdit() {
                               button,
                               bigButton,
                               validation,
+                              maxLength,
                            }: IFormInfo) => (
                               <div key={title}>
                                  <Label text={title} />
@@ -200,6 +201,7 @@ export default function MyPageEdit() {
                                        placeholder={placeholder}
                                        disabled={title === '학과 및 재학 여부'}
                                        value={Object.getOwnPropertyDescriptor(inputsValue, id)?.value.value}
+                                       maxLength={maxLength}
                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                           setInputsValue((prev) => ({
                                              ...prev,

@@ -67,6 +67,7 @@ export const defaultFormInfo = ({
          bigButton: '인증번호 전송',
          validation: checkValidation('phoneNumber', inputsValue.phoneNumber.validation),
          value: null,
+         maxLength: 11,
       },
       {
          id: 'verficationCode',

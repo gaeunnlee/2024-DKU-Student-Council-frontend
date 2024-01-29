@@ -21,12 +21,14 @@ export const InputText = ({
    type,
    value,
    disabled,
+   maxLength,
    onChange,
 }: {
    placeholder?: string;
    type: string;
    value?: string;
    disabled: boolean;
+   maxLength?: number;
    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => (
    <input
@@ -34,9 +36,11 @@ export const InputText = ({
          type === 'number' &&
          '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
       }`}
-      type={type}
+      type={type === 'number' ? 'text' : type}
+      pattern={type === 'number' ? 'd*' : ''}
       value={value}
       disabled={disabled}
+      maxLength={maxLength}
       placeholder={placeholder}
       onChange={onChange}
    />

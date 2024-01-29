@@ -29,6 +29,7 @@ export interface IFormInfo {
    button?: string;
    bigButton?: string;
    validation?: IValidationInfo;
+   maxLength?: number;
 }
 
 export interface IValidationInfo {
