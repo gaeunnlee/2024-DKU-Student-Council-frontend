@@ -22,7 +22,7 @@ import { checkInputRegex } from 'utils/checkInputRegex';
 export default function MyPageEdit() {
    const { setLayout } = useLayout();
    const [myInfo, setMyInfo] = useState<IMyInfo | null>(null);
-   const { get, patch } = useApi();
+   const { get, post, patch } = useApi();
    const { alert } = useAlert();
    const navigate = useNavigate();
    const [inputsValue, setInputsValue] = useState<IInputValue>({
@@ -154,9 +154,22 @@ export default function MyPageEdit() {
             },
          },
          phoneNumber: {
-            onClick: () => {
-               console.log('인증번호 전송');
-            }, // API 미비
+            onClick: async () => {
+               if (inputsValue.phoneNumber.validation) {
+                  try {
+                     await post(
+                        `${CONSTANTS.SERVER_URL}${API_PATH.USER.CHANGE.PHONE.VERIFY}`,
+                        { phoneNumber: inputsValue.phoneNumber.value },
+                        { authenticate: true },
+                     );
+                     alert('인증번호가 전송되었습니다.');
+                  } catch (error) {
+                     alert(error);
+                  }
+               } else {
+                  alert('모두 알맞게 입력해주세요.');
+               }
+            },
             onChange: (value: string) => {
                return value.length === 11 && /^[0-9]*$/.test(value);
             },

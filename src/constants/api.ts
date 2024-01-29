@@ -47,6 +47,9 @@ export const API_PATH = {
       CHANGE: {
          NICKNAME: '/user/change/nickname',
          PASSWORD: '/user/change/password',
+         PHONE: {
+            VERIFY: '/user/change/phone/verify',
+         },
       },
    },
    MAIN: {
