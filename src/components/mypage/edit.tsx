@@ -1,7 +1,9 @@
 import { shadowStyle } from 'constants/style';
+import { IFormInfo, IInputValue } from 'interfaces/mypage/edit';
 import React from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { FaCircleExclamation } from 'react-icons/fa6';
+import { checkInputRegex } from 'utils/checkInputRegex';
 
 export const Box = ({ children, key }: { children: React.ReactNode; key: number }) => (
    <div key={key} className='w-full rounded-lg bg-[#f4f4f4] p-4 flex flex-col gap-5'>
@@ -16,32 +18,36 @@ export const InputBox = ({ children }: { children: React.ReactNode }) => (
       {children}
    </div>
 );
+
 export const InputText = ({
-   placeholder,
-   type,
+   item,
    value,
-   disabled,
-   maxLength,
-   onChange,
+   setInputsValue,
 }: {
-   placeholder?: string;
-   type: string;
-   value?: string;
-   disabled: boolean;
-   maxLength?: number;
-   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+   item: IFormInfo;
+   value: string;
+   setInputsValue: React.Dispatch<React.SetStateAction<IInputValue>>;
 }) => (
    <input
       className={`outline-none h-10 border-none p-2 w-[250px] text-[0.9rem] ${
-         type === 'number' &&
+         item.inputType === 'number' &&
          '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
       }`}
-      type={type === 'number' ? 'text' : type}
+      type={item.inputType === 'number' ? 'text' : item.inputType}
       value={value}
-      disabled={disabled}
-      maxLength={maxLength}
-      placeholder={placeholder}
-      onChange={onChange}
+      disabled={item.title === '학과 및 재학 여부'}
+      maxLength={item.maxLength}
+      placeholder={item.placeholder}
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+         setInputsValue((prev) => ({
+            ...prev,
+            [item.id]: {
+               value:
+                  item.inputType === 'number' ? checkInputRegex(e.target.value, 'number') : e.target.value,
+               validation: item.validation,
+            },
+         }));
+      }}
    />
 );
 export const ValidationIcon = ({ validation }: { validation: null | boolean }) => (
