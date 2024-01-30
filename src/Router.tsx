@@ -18,13 +18,15 @@ import Greeting from 'pages/council';
 import Organization from 'pages/council/organization';
 import Location from 'pages/council/location';
 import Recruitment from 'pages/council/recruitment';
-import MyPage from 'pages/mypage';
+import MyPage from 'pages/mypage/index';
 import PrivateRoute from 'PrivateRoute';
 import NoticeDetail from 'pages/notice/[id]';
 import NoticeBoard from 'pages/notice/index';
 import PetitionDetail from 'pages/petition/[id]';
 import ConferenceBoard from 'pages/conference';
 import RuleBoard from 'pages/rule';
+import MyPagePassword from 'pages/mypage/password';
+import MyPageEdit from 'pages/mypage/edit';
 
 /**
  * @description 라우터
@@ -40,10 +42,26 @@ export default function Router() {
                <Route path={ROUTES.MENU} element={<Menu />} />
                <Route path={ROUTES.LOGIN} element={<Login />} />
                <Route
-                  path={ROUTES.MYPAGE}
+                  path={ROUTES.MYPAGE.INDEX}
                   element={
                      <PrivateRoute>
                         <MyPage />
+                     </PrivateRoute>
+                  }
+               />
+               <Route
+                  path={ROUTES.MYPAGE.PASSWORD}
+                  element={
+                     <PrivateRoute>
+                        <MyPagePassword />
+                     </PrivateRoute>
+                  }
+               />
+               <Route
+                  path={ROUTES.MYPAGE.EDIT}
+                  element={
+                     <PrivateRoute>
+                        <MyPageEdit />
                      </PrivateRoute>
                   }
                />

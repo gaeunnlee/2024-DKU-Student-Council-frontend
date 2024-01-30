@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
    content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
+   mode: 'jit', // calc 사용 모드
    theme: {
       extend: {
          width: {

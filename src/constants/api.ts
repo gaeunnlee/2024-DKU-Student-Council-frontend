@@ -43,6 +43,20 @@ export const API_PATH = {
             CODE: (signupToken: string) => `/user/sms/verify/${signupToken}`,
          },
       },
+      /** 회원정보 수정 */
+      CHANGE: {
+         /** 닉네임 변경 */
+         NICKNAME: '/user/change/nickname',
+         /** 패스워드 변경 */
+         PASSWORD: '/user/change/password',
+         /** 휴대폰번호 변경 */
+         PHONE: {
+            /** 인증번호 확인 */
+            INDEX: '/user/change/phone',
+            /** 인증번호 전송 */
+            VERIFY: '/user/change/phone/verify',
+         },
+      },
    },
    MAIN: {
       /** 메인페이지 모든 데이터 */

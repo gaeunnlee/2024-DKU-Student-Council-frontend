@@ -28,7 +28,7 @@ export default function Input({
          {label && <label className={'block text-gray-600 text-sm ml-5 mb-1'}>{label}</label>}
          <input
             className={`w-311 border-none rounded-full bg-gray-200 text-sm px-6 py-5 focus:outline-none 
-            ${className}::placeholder text-gray-600 mb-2`}
+            ${className} ::placeholder text-gray-600 mb-2`}
             type={type}
             placeholder={placeholder}
             name={name}
