@@ -10,6 +10,7 @@ export interface IMyInfo {
    commentedPostCount: number;
    likedPostCount: number;
    admin: boolean;
+   profileImage: string;
 }
 
 export interface IInputValue {
