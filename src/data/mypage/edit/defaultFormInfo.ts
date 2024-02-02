@@ -109,8 +109,8 @@ const validationInfo = {
    },
    phoneNumber: {
       result: null,
-      defaultMessage: '숫자만 입력해주세요 (11자리 숫자)',
-      errorMessage: '숫자만 입력해주세요 (11자리 숫자)',
+      defaultMessage: '형식에 알맞게 숫자만 입력해주세요.',
+      errorMessage: '형식에 알맞게 숫자만 입력해주세요.',
       successMessage: '알맞게 입력하였습니다.',
    },
    verificationCode: {

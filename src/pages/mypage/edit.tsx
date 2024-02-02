@@ -173,12 +173,14 @@ export default function MyPageEdit() {
                }
             },
             onChange: (value: string) => {
-               return value.length === 11 && /^[0-9]*$/.test(value);
+               setVerificationToken('');
+               setInputsValue((prev) => ({ ...prev, verificationCode: { value: '', validation: null } }));
+               return value.length === 11 && /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/.test(value);
             },
          },
          verificationCode: {
             onClick: async () => {
-               if (inputsValue.verificationCode.validation) {
+               if (inputsValue.verificationCode.validation && verificationToken.length > 0) {
                   try {
                      await patch(
                         `${CONSTANTS.SERVER_URL}${API_PATH.USER.CHANGE.PHONE.INDEX}`,
@@ -187,6 +189,7 @@ export default function MyPageEdit() {
                      );
                      alert('휴대폰번호 변경 완료');
                      fetchMyInfo();
+                     setVerificationToken('');
                      setInputsValue((prev) => ({
                         ...prev,
                         phoneNumber: { value: '', validation: null },
@@ -196,7 +199,11 @@ export default function MyPageEdit() {
                      alert(error);
                   }
                } else {
-                  alert('알맞게 입력해주세요.');
+                  if (verificationToken.length === 0) {
+                     alert('인증번호를 전송해주세요.');
+                  } else {
+                     alert('알맞게 입력해주세요.');
+                  }
                }
             },
             onChange: (value: string) => {
@@ -215,6 +222,9 @@ export default function MyPageEdit() {
             return triggerEvent(value);
       }
    };
+   useEffect(() => {
+      console.log(verificationToken);
+   }, [verificationToken]);
    return (
       <>
          {myInfo && (
