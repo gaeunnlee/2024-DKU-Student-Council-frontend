@@ -11,6 +11,7 @@ export interface IMyInfo {
    likedPostCount: number;
    admin: boolean;
    profileImage: string;
+   dkuChecked: boolean;
 }
 
 export interface IInputValue {

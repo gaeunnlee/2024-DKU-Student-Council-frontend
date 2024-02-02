@@ -17,6 +17,7 @@ export const InputBox = ({ children }: { children: React.ReactNode }) => (
    </div>
 );
 export const InputText = ({
+   clasName,
    placeholder,
    type,
    value,
@@ -24,6 +25,7 @@ export const InputText = ({
    maxLength,
    onChange,
 }: {
+   clasName?: string;
    placeholder?: string;
    type: string;
    value?: string;
@@ -32,7 +34,7 @@ export const InputText = ({
    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => (
    <input
-      className={`outline-none h-10 border-none p-2 w-[250px] text-[0.9rem] ${
+      className={`outline-none h-10 border-none p-2 w-[250px] text-[0.9rem] ${clasName} ${
          type === 'number' &&
          '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
       }`}
@@ -62,7 +64,7 @@ export const InputButton = ({
    onClick?: () => void;
 }) => (
    <button
-      className={`bg-black text-white rounded-lg px-3 h-full text-sm ${
+      className={`bg-black text-white rounded-lg px-3 h-full text-sm break-keep ${
          type === 'big' && 'w-full h-8 py-2 mt-3'
       } ${style}`}
       onClick={onClick}

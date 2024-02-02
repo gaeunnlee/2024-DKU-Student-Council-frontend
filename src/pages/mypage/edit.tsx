@@ -240,8 +240,16 @@ export default function MyPageEdit() {
                                  <Label text={title} />
                                  <InputBox>
                                     <InputText
+                                       clasName={title === '학과 및 재학 여부' ? 'text-xs w-full' : ''}
                                        type={inputType}
-                                       placeholder={placeholder}
+                                       placeholder={
+                                          placeholder &&
+                                          `${placeholder} ${
+                                             title === '학과 및 재학 여부' && myInfo.dkuChecked
+                                                ? '[재학]'
+                                                : ''
+                                          }`
+                                       }
                                        disabled={title === '학과 및 재학 여부'}
                                        value={Object.getOwnPropertyDescriptor(inputsValue, id)?.value.value}
                                        maxLength={maxLength}
