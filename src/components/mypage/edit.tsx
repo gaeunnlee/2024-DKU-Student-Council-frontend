@@ -1,5 +1,5 @@
 import { shadowStyle } from 'constants/style';
-import { IFormInfo, IInputValue } from 'interfaces/mypage/edit';
+import { IEvent, IFormInfo, IInputValue } from 'interfaces/mypage/edit';
 import React from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { FaCircleExclamation } from 'react-icons/fa6';
@@ -24,11 +24,13 @@ export const InputText = ({
    item,
    value,
    setInputsValue,
+   setOnChangeEvent,
 }: {
    clasName?: string;
    item: IFormInfo;
    value: string;
    setInputsValue: React.Dispatch<React.SetStateAction<IInputValue>>;
+   setOnChangeEvent: React.Dispatch<React.SetStateAction<IEvent>>;
 }) => (
    <input
       className={`outline-none h-10 border-none p-2 w-[250px] text-[0.9rem] ${clasName} ${
@@ -41,12 +43,18 @@ export const InputText = ({
       maxLength={item.maxLength}
       placeholder={item.placeholder}
       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+         setOnChangeEvent({
+            eventType: 'onChange',
+            id: item.id,
+            validation: item.validation!,
+            value: e.target.value,
+         });
          setInputsValue((prev) => ({
             ...prev,
             [item.id]: {
+               validation: Object.getOwnPropertyDescriptor(prev, item.id)?.value.validation,
                value:
                   item.inputType === 'number' ? checkInputRegex(e.target.value, 'number') : e.target.value,
-               validation: item.validation,
             },
          }));
       }}

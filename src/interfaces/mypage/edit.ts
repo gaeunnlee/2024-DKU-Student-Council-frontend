@@ -40,3 +40,10 @@ export interface IValidationInfo {
    errorMessage: string;
    successMessage: string;
 }
+
+export interface IEvent {
+   eventType: string;
+   id: string;
+   validation: IValidationInfo;
+   value?: string;
+}

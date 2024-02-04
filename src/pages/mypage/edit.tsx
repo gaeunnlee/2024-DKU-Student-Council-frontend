@@ -4,7 +4,7 @@ import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import { useApi } from 'hooks/useApi';
 import { ProfileImage } from 'layouts/MyPageLayout';
-import { IFormInfo, IInputValue, IMyInfo, IValidationInfo } from 'interfaces/mypage/edit';
+import { IEvent, IFormInfo, IInputValue, IMyInfo, IValidationInfo } from 'interfaces/mypage/edit';
 import { defaultFormInfo } from 'data/mypage/edit/defaultFormInfo';
 import {
    Box,
@@ -37,6 +37,17 @@ export default function MyPageEdit() {
       defaultFormInfo({ originNickname: '', originMajor: '', originPhoneNumber: '', inputsValue }),
    );
    const [verificationToken, setVerificationToken] = useState('');
+   const [onChangeEvent, setOnChangeEvent] = useState<IEvent>({
+      eventType: 'onChange',
+      id: 'default',
+      validation: {
+         result: false,
+         defaultMessage: '',
+         errorMessage: '',
+         successMessage: '',
+      },
+      value: '',
+   });
 
    // 회원정보 가져오기
    const fetchMyInfo = async () => {
@@ -180,7 +191,9 @@ export default function MyPageEdit() {
    }) => {
       const events = {
          nickname: {
-            onClick: changeNickname(validation),
+            onClick: () => {
+               changeNickname(validation);
+            },
             onChange: (value: string) => {
                return value.length > 2 && value.length < 17;
             },
@@ -194,17 +207,20 @@ export default function MyPageEdit() {
             },
          },
          passwordConfirm: {
-            onClick: changePassword(),
+            onClick: changePassword,
             onChange: (value: string) => {
                if (!inputsValue.password.validation) {
-                  setInputsValue((prev) => ({ ...prev, passwordConfirm: { value: '', validation: null } }));
+                  setInputsValue((prev) => ({
+                     ...prev,
+                     passwordConfirm: { value: '', validation: null },
+                  }));
                   alert('비밀번호는 영문과 숫자를 1자 이상 포함하는 8-16 자리여야 합니다.');
                }
                return value === Object.getOwnPropertyDescriptor(inputsValue, 'password')?.value.value;
             },
          },
          phoneNumber: {
-            onClick: changePhoneNumber(),
+            onClick: changePhoneNumber,
             onChange: (value: string) => {
                setVerificationToken('');
                setInputsValue((prev) => ({ ...prev, verificationCode: { value: '', validation: null } }));
@@ -212,16 +228,21 @@ export default function MyPageEdit() {
             },
          },
          verificationCode: {
-            onClick: checkVerificationCode(),
+            onClick: checkVerificationCode,
             onChange: (value: string) => {
                return value.length === 6 && /^[0-9]*$/.test(value);
             },
+         },
+         originPassword: {
+            onChange: () => {},
+         },
+         default: {
+            onChange: () => {},
          },
       };
 
       const eventData = Object.getOwnPropertyDescriptor(events, id)?.value;
       const triggerEvent = Object.getOwnPropertyDescriptor(eventData, eventType)?.value;
-
       switch (eventType) {
          case 'onClick':
             return triggerEvent();
@@ -229,6 +250,16 @@ export default function MyPageEdit() {
             return triggerEvent(value);
       }
    };
+
+   useEffect(() => {
+      setInputsValue((prev) => ({
+         ...prev,
+         [onChangeEvent.id]: {
+            value: Object.getOwnPropertyDescriptor(prev, onChangeEvent.id)?.value.value,
+            validation: handleEvent(onChangeEvent),
+         },
+      }));
+   }, [onChangeEvent]);
 
    return (
       <>
@@ -248,6 +279,7 @@ export default function MyPageEdit() {
                                     item={item}
                                     value={Object.getOwnPropertyDescriptor(inputsValue, item.id)?.value.value}
                                     setInputsValue={setInputsValue}
+                                    setOnChangeEvent={setOnChangeEvent}
                                  />
                                  {item.button && <InputButton text={item.button} />}
                                  {item.validation !== undefined && (
