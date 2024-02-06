@@ -37,7 +37,7 @@ export const useAuth = () => {
       try {
          localStorage.removeItem(CONSTANTS.atk_key);
          localStorage.removeItem(CONSTANTS.rtk_key);
-         setEnrollment(false);
+         setEnrollment(null);
          navigate(ROUTES.MAIN);
       } catch (error) {
          alert(error);

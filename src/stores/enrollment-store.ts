@@ -1,13 +1,13 @@
 import { create } from 'zustand';
 
 interface EnrollmentState {
-   enrollment: boolean;
-   setEnrollment: (data: boolean) => void;
+   enrollment: boolean | null;
+   setEnrollment: (data: boolean | null) => void;
 }
 
 export const useEnrollmentStore = create<EnrollmentState>((set) => ({
-   enrollment: false,
-   setEnrollment: (data: boolean) => {
+   enrollment: null,
+   setEnrollment: (data: boolean | null) => {
       set({ enrollment: data });
    },
 }));

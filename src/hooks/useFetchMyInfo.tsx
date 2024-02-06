@@ -19,7 +19,6 @@ export const useFetchMyInfo = () => {
             const data = await get<IMyInfo>(API_PATH.USER.ME, { authenticate: true });
             setMyInfo(data);
             setEnrollmet(data.dkuChecked);
-            localStorage.setItem('enrollment', String(data.dkuChecked));
          } catch (error) {
             alert(error);
          }

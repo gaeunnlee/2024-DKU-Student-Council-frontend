@@ -28,7 +28,7 @@ export default function DefaultLayout({ children, ...props }: DefaultLayoutProps
    const { pathname } = useLocation();
 
    useEffect(() => {
-      if (pathname !== '/mypage/update' && !enrollment && isLoggedIn) {
+      if (pathname !== '/mypage/update' && enrollment === false && isLoggedIn) {
          modal({
             content: '회원 정보 업데이트 후 이용 가능합니다.',
             acceptEvent: '/mypage/update',
