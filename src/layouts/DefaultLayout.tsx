@@ -7,7 +7,11 @@ import { gnbState } from 'stores/gnb-store';
 import { gnhState } from 'stores/gnh-store';
 import { navStore } from 'stores/nav-store';
 import { AnimatePresence } from 'framer-motion';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDefaultModal } from 'components/ui/modal/DefaultModal';
+import { useEnrollmentStore } from 'stores/enrollment-store';
+import { useAuth } from 'hooks/useAuth';
+import { useLocation } from 'react-router-dom';
 
 type DefaultLayoutProps = IWithReactChildren & React.HTMLAttributes<HTMLDivElement>;
 
@@ -17,6 +21,21 @@ export default function DefaultLayout({ children, ...props }: DefaultLayoutProps
    const { fullscreen, rounded, margin } = navStore();
 
    const defaultStyle = 'w-[390px] mx-auto bg-black';
+
+   const enrollment = useEnrollmentStore((state) => state.enrollment);
+   const { modal } = useDefaultModal();
+   const { isLoggedIn } = useAuth();
+   const { pathname } = useLocation();
+
+   useEffect(() => {
+      if (pathname !== '/mypage/update' && !enrollment && isLoggedIn) {
+         modal({
+            content: '회원 정보 업데이트 후 이용 가능합니다.',
+            acceptEvent: '/mypage/update',
+            disableCancle: true,
+         });
+      }
+   }, [pathname]);
 
    return (
       <div className={defaultStyle}>

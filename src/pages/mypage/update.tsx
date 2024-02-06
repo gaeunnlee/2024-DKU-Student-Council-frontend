@@ -53,7 +53,7 @@ export default function MyPageUpdate() {
             handleSubmit(e);
          }}
       >
-         <Title className='text-2xl font-bold'>회원 정보 갱신</Title>
+         <Title className='text-2xl font-bold'>회원 정보 업데이트</Title>
          <Text length={4} className='flex text-sm items-center'>
             <GoDotFill />
             학생 인증

@@ -13,15 +13,23 @@ export interface ModalProps {
    cancel?: {
       text: string;
       onClick: () => void;
+      disable?: boolean;
    };
+   disableCancle?: boolean;
 }
 
-export default function Modal({ title, children, accept, cancel }: ModalProps & IWithReactChildren) {
+export default function Modal({
+   title,
+   children,
+   accept,
+   cancel,
+   disableCancle,
+}: ModalProps & IWithReactChildren) {
    const { close } = useModal();
 
    return (
       <>
-         <Modal.Overlay />
+         <Modal.Overlay disableCancle={disableCancle ?? false} />
          <motion.div
             className='absolute top-[50%] z-50 min-w-[300px] max-w-[calc(100%-1rem)] rounded-md bg-white p-4 shadow-sm'
             animate={{
@@ -66,12 +74,12 @@ export default function Modal({ title, children, accept, cancel }: ModalProps & 
    );
 }
 
-Modal.Overlay = function Overlay() {
+Modal.Overlay = function Overlay({ disableCancle }: { disableCancle: boolean }) {
    const { close } = useModal();
    return (
       <motion.div
          className='absolute right-0 top-0 z-0 h-full w-full bg-black'
-         onClick={close}
+         onClick={disableCancle ? () => {} : close}
          animate={{ opacity: [0, 0.2] }}
       />
    );

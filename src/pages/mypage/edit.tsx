@@ -51,6 +51,7 @@ export default function MyPageEdit() {
    });
 
    useEffectOnce(() => {
+      fetchMyInfo();
       setLayout({
          title: '',
          backButton: true,

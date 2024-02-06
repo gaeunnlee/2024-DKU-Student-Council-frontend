@@ -6,12 +6,14 @@ import { ROUTES } from 'constants/route';
 import type { IIdPassword } from 'shared/interfaces/default-interfaces';
 import type { ILoginResponse } from 'api/axios-interface';
 import { useState } from 'react';
+import { useEnrollmentStore } from 'stores/enrollment-store';
 
 export const useAuth = () => {
    const navigate = useNavigate();
    const { alert } = useAlert();
    const { pathname } = useLocation();
    const [verification, setVerification] = useState(false);
+   const setEnrollment = useEnrollmentStore((state) => state.setEnrollment);
 
    const login = async (loginInfo: IIdPassword) => {
       try {
@@ -35,6 +37,7 @@ export const useAuth = () => {
       try {
          localStorage.removeItem(CONSTANTS.atk_key);
          localStorage.removeItem(CONSTANTS.rtk_key);
+         setEnrollment(false);
          navigate(ROUTES.MAIN);
       } catch (error) {
          alert(error);
