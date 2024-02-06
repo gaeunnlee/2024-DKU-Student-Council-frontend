@@ -10,6 +10,7 @@ export const ROUTES = {
       INDEX: '/mypage',
       PASSWORD: '/mypage/password',
       EDIT: '/mypage/edit',
+      UPDATE: '/mypage/update',
    },
    /** 404 화면 */
    NOT_FOUND: '*',

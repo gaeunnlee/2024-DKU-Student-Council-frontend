@@ -4,7 +4,7 @@ import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import { useApi } from 'hooks/useApi';
 import { ProfileImage } from 'layouts/MyPageLayout';
-import { IEvent, IFormInfo, IInputValue, IMyInfo, IValidationInfo } from 'interfaces/mypage/edit';
+import { IEvent, IFormInfo, IInputValue, IValidationInfo } from 'interfaces/mypage/edit';
 import { defaultFormInfo } from 'data/mypage/edit/defaultFormInfo';
 import {
    Box,
@@ -17,11 +17,12 @@ import {
 } from 'components/mypage/edit';
 import { useAlert } from 'hooks/useAlert';
 import { useNavigate } from 'react-router-dom';
+import { useFetchMyInfo } from 'hooks/useFetchMyInfo';
 
 export default function MyPageEdit() {
    const { setLayout } = useLayout();
-   const [myInfo, setMyInfo] = useState<IMyInfo | null>(null);
-   const { get, post, patch } = useApi();
+   const { myInfo, fetchMyInfo } = useFetchMyInfo();
+   const { post, patch } = useApi();
    const { alert } = useAlert();
    const navigate = useNavigate();
    const [inputsValue, setInputsValue] = useState<IInputValue>({
@@ -48,12 +49,6 @@ export default function MyPageEdit() {
       },
       value: '',
    });
-
-   // 회원정보 가져오기
-   const fetchMyInfo = async () => {
-      const data = await get<IMyInfo>(API_PATH.USER.ME, { authenticate: true });
-      setMyInfo(data);
-   };
 
    useEffectOnce(() => {
       fetchMyInfo();

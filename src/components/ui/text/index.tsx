@@ -13,3 +13,11 @@ export default function Text({ length, height, children, ...props }: Props) {
       </div>
    );
 }
+
+export function Title({ className, children }: { className?: string; children: React.ReactNode }) {
+   return (
+      <Text className={`${className}`} length={4}>
+         {children}
+      </Text>
+   );
+}
