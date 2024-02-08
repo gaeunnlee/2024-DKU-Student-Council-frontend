@@ -11,14 +11,14 @@ export const useFetchMyInfo = () => {
    const [myInfo, setMyInfo] = useState<IMyInfo>();
    const { alert } = useAlert();
    const { isLoggedIn } = useAuth();
-   const setEnrollmet = useEnrollmentStore((state) => state.setEnrollment);
+   const { setEnrollment } = useEnrollmentStore();
 
    const fetchMyInfo = async () => {
       if (isLoggedIn) {
          try {
             const data = await get<IMyInfo>(API_PATH.USER.ME, { authenticate: true });
             setMyInfo(data);
-            setEnrollmet(data.dkuChecked);
+            setEnrollment(data.dkuChecked);
          } catch (error) {
             alert(error);
          }

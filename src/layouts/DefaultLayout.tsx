@@ -22,7 +22,7 @@ export default function DefaultLayout({ children, ...props }: DefaultLayoutProps
 
    const defaultStyle = 'w-[390px] mx-auto bg-black';
 
-   const enrollment = useEnrollmentStore((state) => state.enrollment);
+   const { enrollment } = useEnrollmentStore();
    const { modal } = useDefaultModal();
    const { isLoggedIn } = useAuth();
    const { pathname } = useLocation();
