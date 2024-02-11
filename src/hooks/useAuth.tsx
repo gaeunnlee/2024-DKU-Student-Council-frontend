@@ -13,7 +13,7 @@ export const useAuth = () => {
    const { alert } = useAlert();
    const { pathname } = useLocation();
    const [verification, setVerification] = useState(false);
-   const setEnrollment = useEnrollmentStore((state) => state.setEnrollment);
+   const { setEnrollment } = useEnrollmentStore();
 
    const login = async (loginInfo: IIdPassword) => {
       try {
@@ -37,7 +37,7 @@ export const useAuth = () => {
       try {
          localStorage.removeItem(CONSTANTS.atk_key);
          localStorage.removeItem(CONSTANTS.rtk_key);
-         setEnrollment(null);
+         setEnrollment(undefined);
          navigate(ROUTES.MAIN);
       } catch (error) {
          alert(error);

@@ -1,13 +1,22 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+const StorageKey = 'storage-key';
 
 interface EnrollmentState {
-   enrollment: boolean | null;
-   setEnrollment: (data: boolean | null) => void;
+   enrollment: boolean | undefined;
+   setEnrollment: (data: boolean | undefined) => void;
 }
 
-export const useEnrollmentStore = create<EnrollmentState>((set) => ({
-   enrollment: null,
-   setEnrollment: (data: boolean | null) => {
-      set({ enrollment: data });
-   },
-}));
+export const useEnrollmentStore = create(
+   persist<EnrollmentState>(
+      (set) => ({
+         enrollment: undefined,
+         setEnrollment: (data: boolean | undefined) => {
+            set({ enrollment: data });
+         },
+      }),
+      {
+         name: StorageKey,
+      },
+   ),
+);

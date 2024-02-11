@@ -7,8 +7,8 @@ import { gnbState } from 'stores/gnb-store';
 import { gnhState } from 'stores/gnh-store';
 import { navStore } from 'stores/nav-store';
 import { AnimatePresence } from 'framer-motion';
-import React, { useEffect } from 'react';
-import { useDefaultModal } from 'components/ui/modal/DefaultModal';
+import React, { useEffect, useState } from 'react';
+import { Modal } from 'components/ui/modal/Modal';
 import { useEnrollmentStore } from 'stores/enrollment-store';
 import { useAuth } from 'hooks/useAuth';
 import { useLocation } from 'react-router-dom';
@@ -23,22 +23,21 @@ export default function DefaultLayout({ children, ...props }: DefaultLayoutProps
    const defaultStyle = 'w-[390px] mx-auto bg-black';
 
    const { enrollment } = useEnrollmentStore();
-   const { modal } = useDefaultModal();
    const { isLoggedIn } = useAuth();
    const { pathname } = useLocation();
+   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
    useEffect(() => {
-      if (pathname !== '/mypage/update' && enrollment === false && isLoggedIn) {
-         modal({
-            content: '회원 정보 업데이트 후 이용 가능합니다.',
-            acceptEvent: '/mypage/update',
-            disableCancle: true,
-         });
-      }
-   }, [pathname]);
+      setTimeout(() => {
+         setModalOpen(pathname.indexOf('/mypage') === -1 && enrollment === false && isLoggedIn);
+      }, 500);
+   }, [pathname, enrollment]);
 
    return (
       <div className={defaultStyle}>
+         <Modal isShowing={modalOpen} target='/mypage/update'>
+            회원 정보 업데이트 후 이용 가능합니다.
+         </Modal>
          <Gnb
             left={backButton ? <Gnb.GoBack /> : isMain ? <Gnb.Logo /> : null}
             center={title ? <Gnb.Title>{title}</Gnb.Title> : null}
