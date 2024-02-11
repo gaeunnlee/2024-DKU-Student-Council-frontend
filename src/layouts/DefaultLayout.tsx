@@ -35,7 +35,7 @@ export default function DefaultLayout({ children, ...props }: DefaultLayoutProps
 
    return (
       <div className={defaultStyle}>
-         <Modal isShowing={modalOpen} target='/mypage/update'>
+         <Modal isShowing={modalOpen} target='/mypage/update' disableCancle>
             회원 정보 업데이트 후 이용 가능합니다.
          </Modal>
          <Gnb

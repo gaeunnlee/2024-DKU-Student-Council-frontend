@@ -6,10 +6,12 @@ export const Modal = ({
    children,
    isShowing,
    target,
+   disableCancle,
 }: {
    children: React.ReactNode;
    isShowing: boolean;
    target?: string;
+   disableCancle?: boolean;
 }) => {
    const { open } = useModal();
    const navigate = useNavigate();
@@ -28,7 +30,7 @@ export const Modal = ({
    };
 
    useEffect(() => {
-      isShowing && open(children, alertOption({ target, disableCancle: true }));
+      isShowing && open(children, alertOption({ target, disableCancle }));
    }, [isShowing]);
 
    return <></>;
