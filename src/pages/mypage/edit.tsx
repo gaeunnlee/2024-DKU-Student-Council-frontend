@@ -231,6 +231,11 @@ export default function MyPageEdit() {
          originPassword: {
             onChange: () => {},
          },
+         major: {
+            onClick: () => {
+               navigate('/mypage/update');
+            },
+         },
          default: {
             onChange: () => {},
          },
@@ -276,7 +281,18 @@ export default function MyPageEdit() {
                                     setInputsValue={setInputsValue}
                                     setOnChangeEvent={setOnChangeEvent}
                                  />
-                                 {item.button && <InputButton text={item.button} />}
+                                 {item.button && (
+                                    <InputButton
+                                       onClick={() => {
+                                          handleEvent({
+                                             eventType: 'onClick',
+                                             id: item.id,
+                                             validation: item.validation!,
+                                          });
+                                       }}
+                                       text={item.button}
+                                    />
+                                 )}
                                  {item.validation !== undefined && (
                                     <ValidationIcon validation={item.validation.result} />
                                  )}

@@ -27,8 +27,12 @@ export const API_PATH = {
    USER: {
       /** 내 정보 조회 */
       ME: '/user',
-      /** 단국대학교 학생 정보 업데이트 */
-      DKU: '/user/dku',
+      DKU: {
+         /** 단국대학교 학생 정보 업데이트 */
+         INDEX: '/user/dku',
+         /** 단국대학교 학생 인증 갱신 */
+         REFRESH: '/user/dku/refresh',
+      },
       /** 로그인 */
       LOGIN: '/user/login',
       /** 회원가입 */

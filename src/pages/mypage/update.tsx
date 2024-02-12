@@ -9,14 +9,16 @@ import { useLayout } from 'hooks/useLayout';
 import React, { useState } from 'react';
 import { GoDotFill } from 'react-icons/go';
 import { useNavigate } from 'react-router-dom';
+import { useEnrollmentStore } from 'stores/enrollment-store';
 import { checkInputRegex } from 'utils/checkInputRegex';
 
 export default function MyPageUpdate() {
    const { setLayout } = useLayout();
    const [loginInfo, setLoginInfo] = useState({ dkuStudentId: '', dkuPassword: '' });
-   const { patch } = useApi();
+   const { post, patch } = useApi();
    const { alert } = useAlert();
    const navigate = useNavigate();
+   const { setEnrollment } = useEnrollmentStore();
 
    useEffectOnce(() => {
       setLayout({
@@ -35,9 +37,15 @@ export default function MyPageUpdate() {
       e.preventDefault();
       if (loginInfo.dkuStudentId.length > 0 && loginInfo.dkuPassword.length > 0) {
          try {
-            await patch(`${CONSTANTS.SERVER_URL}${API_PATH.USER.DKU}`, loginInfo, { authenticate: true });
+            await patch(`${CONSTANTS.SERVER_URL}${API_PATH.USER.DKU.INDEX}`, loginInfo, {
+               authenticate: true,
+            });
+            await post(`${CONSTANTS.SERVER_URL}${API_PATH.USER.DKU.REFRESH}`, loginInfo, {
+               authenticate: true,
+            });
             alert('인증되었습니다.');
             navigate('/mypage');
+            setEnrollment(true);
          } catch (error) {
             alert(error);
          }
