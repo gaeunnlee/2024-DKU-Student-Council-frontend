@@ -1,7 +1,9 @@
 import { shadowStyle } from 'constants/style';
+import { IEvent, IFormInfo, IInputValue } from 'interfaces/mypage/edit';
 import React from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { FaCircleExclamation } from 'react-icons/fa6';
+import { checkInputRegex } from 'utils/checkInputRegex';
 
 export const Box = ({ children, key }: { children: React.ReactNode; key: number }) => (
    <div key={key} className='w-full rounded-lg bg-[#f4f4f4] p-4 flex flex-col gap-5'>
@@ -16,32 +18,46 @@ export const InputBox = ({ children }: { children: React.ReactNode }) => (
       {children}
    </div>
 );
+
 export const InputText = ({
-   placeholder,
-   type,
+   clasName,
+   item,
    value,
-   disabled,
-   maxLength,
-   onChange,
+   setInputsValue,
+   setOnChangeEvent,
 }: {
-   placeholder?: string;
-   type: string;
-   value?: string;
-   disabled: boolean;
-   maxLength?: number;
-   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+   clasName?: string;
+   item: IFormInfo;
+   value: string;
+   setInputsValue: React.Dispatch<React.SetStateAction<IInputValue>>;
+   setOnChangeEvent: React.Dispatch<React.SetStateAction<IEvent>>;
 }) => (
    <input
-      className={`outline-none h-10 border-none p-2 w-[250px] text-[0.9rem] ${
-         type === 'number' &&
+      className={`outline-none h-10 border-none p-2 w-[250px] text-[0.9rem] ${clasName} ${
+         item.inputType === 'number' &&
          '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
       }`}
-      type={type === 'number' ? 'text' : type}
+      type={item.inputType === 'number' ? 'text' : item.inputType}
       value={value}
-      disabled={disabled}
-      maxLength={maxLength}
-      placeholder={placeholder}
-      onChange={onChange}
+      disabled={item.title === '학과 및 재학 여부'}
+      maxLength={item.maxLength}
+      placeholder={item.placeholder}
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+         setOnChangeEvent({
+            eventType: 'onChange',
+            id: item.id,
+            validation: item.validation!,
+            value: e.target.value,
+         });
+         setInputsValue((prev) => ({
+            ...prev,
+            [item.id]: {
+               validation: Object.getOwnPropertyDescriptor(prev, item.id)?.value.validation,
+               value:
+                  item.inputType === 'number' ? checkInputRegex(e.target.value, 'number') : e.target.value,
+            },
+         }));
+      }}
    />
 );
 export const ValidationIcon = ({ validation }: { validation: null | boolean }) => (
@@ -62,7 +78,7 @@ export const InputButton = ({
    onClick?: () => void;
 }) => (
    <button
-      className={`bg-black text-white rounded-lg px-3 h-full text-sm ${
+      className={`bg-black text-white rounded-lg px-3 h-full text-sm break-keep ${
          type === 'big' && 'w-full h-8 py-2 mt-3'
       } ${style}`}
       onClick={onClick}

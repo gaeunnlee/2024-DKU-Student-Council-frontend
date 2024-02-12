@@ -9,6 +9,7 @@ import { useApi } from 'hooks/useApi';
 import { useLayout } from 'hooks/useLayout';
 import Service from 'components/main/service';
 import React, { useState } from 'react';
+import { useFetchMyInfo } from 'hooks/useFetchMyInfo';
 
 interface IMain {
    carousels: IBanner[];
@@ -26,6 +27,7 @@ export default function Main() {
    const [main, setMain] = useState<IMain | null>();
    const { get } = useApi();
    const { setLayout } = useLayout();
+   const { fetchMyInfo } = useFetchMyInfo();
 
    const fetchMain = async () => {
       const data = await get<IMain>(API_PATH.MAIN.ROOT, {
@@ -38,6 +40,7 @@ export default function Main() {
 
    useEffectOnce(() => {
       fetchMain();
+      fetchMyInfo();
       setLayout({
          title: null,
          backButton: false,

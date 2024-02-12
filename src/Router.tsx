@@ -27,6 +27,7 @@ import ConferenceBoard from 'pages/conference';
 import RuleBoard from 'pages/rule';
 import MyPagePassword from 'pages/mypage/password';
 import MyPageEdit from 'pages/mypage/edit';
+import MyPageUpdate from 'pages/mypage/update';
 
 /**
  * @description 라우터
@@ -62,6 +63,14 @@ export default function Router() {
                   element={
                      <PrivateRoute>
                         <MyPageEdit />
+                     </PrivateRoute>
+                  }
+               />
+               <Route
+                  path={ROUTES.MYPAGE.UPDATE}
+                  element={
+                     <PrivateRoute>
+                        <MyPageUpdate />
                      </PrivateRoute>
                   }
                />

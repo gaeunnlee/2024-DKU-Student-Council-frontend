@@ -7,10 +7,24 @@ import { BiSolidCalendarStar } from 'react-icons/bi';
 import { shadowStyle } from 'constants/style';
 import { useNavigate } from 'react-router-dom';
 import MyPageLayout from 'layouts/MyPageLayout';
+import { API_PATH, CONSTANTS } from 'constants/api';
+import { useAlert } from 'hooks/useAlert';
+import { useApi } from 'hooks/useApi';
 
 export default function MyPage() {
    const { logout } = useAuth();
+   const { alert } = useAlert();
+   const { delete: axiosDelte } = useApi();
    const navigate = useNavigate();
+   const deleteAccount = async () => {
+      try {
+         await axiosDelte(CONSTANTS.SERVER_URL + API_PATH.USER.ME, { authenticate: true });
+         alert('탈퇴하였습니다.');
+         logout();
+      } catch (error) {
+         alert(error);
+      }
+   };
 
    return (
       <MyPageLayout>
@@ -36,7 +50,7 @@ export default function MyPage() {
             <Button variant='red' onClick={() => logout()}>
                로그아웃
             </Button>
-            <Button>탈퇴하기</Button>
+            <Button onClick={() => deleteAccount()}>탈퇴하기</Button>
          </div>
       </MyPageLayout>
    );

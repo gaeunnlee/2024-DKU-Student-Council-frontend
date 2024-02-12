@@ -10,6 +10,8 @@ export interface IMyInfo {
    commentedPostCount: number;
    likedPostCount: number;
    admin: boolean;
+   profileImage: string;
+   dkuChecked: boolean;
 }
 
 export interface IInputValue {
@@ -37,4 +39,11 @@ export interface IValidationInfo {
    defaultMessage?: string;
    errorMessage: string;
    successMessage: string;
+}
+
+export interface IEvent {
+   eventType: string;
+   id: string;
+   validation: IValidationInfo;
+   value?: string;
 }

@@ -4,7 +4,7 @@ import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import { useApi } from 'hooks/useApi';
 import { ProfileImage } from 'layouts/MyPageLayout';
-import { IFormInfo, IInputValue, IMyInfo, IValidationInfo } from 'interfaces/mypage/edit';
+import { IEvent, IFormInfo, IInputValue, IValidationInfo } from 'interfaces/mypage/edit';
 import { defaultFormInfo } from 'data/mypage/edit/defaultFormInfo';
 import {
    Box,
@@ -17,12 +17,12 @@ import {
 } from 'components/mypage/edit';
 import { useAlert } from 'hooks/useAlert';
 import { useNavigate } from 'react-router-dom';
-import { checkInputRegex } from 'utils/checkInputRegex';
+import { useFetchMyInfo } from 'hooks/useFetchMyInfo';
 
 export default function MyPageEdit() {
    const { setLayout } = useLayout();
-   const [myInfo, setMyInfo] = useState<IMyInfo | null>(null);
-   const { get, post, patch } = useApi();
+   const { myInfo, fetchMyInfo } = useFetchMyInfo();
+   const { post, patch } = useApi();
    const { alert } = useAlert();
    const navigate = useNavigate();
    const [inputsValue, setInputsValue] = useState<IInputValue>({
@@ -38,12 +38,17 @@ export default function MyPageEdit() {
       defaultFormInfo({ originNickname: '', originMajor: '', originPhoneNumber: '', inputsValue }),
    );
    const [verificationToken, setVerificationToken] = useState('');
-
-   // 회원정보 가져오기
-   const fetchMyInfo = async () => {
-      const data = await get<IMyInfo>(API_PATH.USER.ME, { authenticate: true });
-      setMyInfo(data);
-   };
+   const [onChangeEvent, setOnChangeEvent] = useState<IEvent>({
+      eventType: 'onChange',
+      id: 'default',
+      validation: {
+         result: false,
+         defaultMessage: '',
+         errorMessage: '',
+         successMessage: '',
+      },
+      value: '',
+   });
 
    useEffectOnce(() => {
       fetchMyInfo();
@@ -72,6 +77,102 @@ export default function MyPageEdit() {
          );
    }, [myInfo, inputsValue]);
 
+   const changeNickname = async (validation: IValidationInfo) => {
+      if (validation?.result) {
+         try {
+            await patch(
+               `${CONSTANTS.SERVER_URL}${API_PATH.USER.CHANGE.NICKNAME}`,
+               { nickname: inputsValue.nickname.value },
+               { authenticate: true },
+            );
+            fetchMyInfo();
+            setInputsValue((prev) => ({ ...prev, nickname: { value: '', validation: null } }));
+            alert('변경 완료');
+         } catch (error) {
+            alert(error);
+         }
+      } else {
+         alert(validation?.errorMessage);
+      }
+   };
+
+   const changePassword = async () => {
+      if (
+         inputsValue.originPassword.value.length > 0 &&
+         inputsValue.password.validation &&
+         inputsValue.passwordConfirm.validation
+      ) {
+         try {
+            await patch(
+               `${CONSTANTS.SERVER_URL}${API_PATH.USER.CHANGE.PASSWORD}`,
+               {
+                  password: inputsValue.originPassword.value,
+                  newPassword: inputsValue.passwordConfirm.value,
+               },
+               { authenticate: true },
+            );
+            fetchMyInfo();
+            setInputsValue((prev) => ({
+               ...prev,
+               originPassword: { value: '', validation: null },
+               password: { value: '', validation: null },
+               passwordConfirm: { value: '', validation: null },
+            }));
+            alert('변경 완료');
+         } catch (error) {
+            alert(error);
+         }
+      } else {
+         alert('모두 알맞게 입력해주세요.');
+      }
+   };
+
+   const changePhoneNumber = async () => {
+      if (inputsValue.phoneNumber.validation) {
+         try {
+            const data: { token: string } = await post(
+               `${CONSTANTS.SERVER_URL}${API_PATH.USER.CHANGE.PHONE.VERIFY}`,
+               { phoneNumber: inputsValue.phoneNumber.value },
+               { authenticate: true },
+            );
+            alert('인증번호가 전송되었습니다.');
+            setVerificationToken(data.token);
+         } catch (error) {
+            alert(error);
+         }
+      } else {
+         alert('알맞게 입력해주세요.');
+      }
+   };
+
+   const checkVerificationCode = async () => {
+      if (inputsValue.verificationCode.validation && verificationToken.length > 0) {
+         try {
+            await patch(
+               `${CONSTANTS.SERVER_URL}${API_PATH.USER.CHANGE.PHONE.INDEX}`,
+               { token: verificationToken, code: inputsValue.verificationCode.value },
+               { authenticate: true },
+            );
+            alert('휴대폰번호 변경 완료');
+            fetchMyInfo();
+            setVerificationToken('');
+            setInputsValue((prev) => ({
+               ...prev,
+               phoneNumber: { value: '', validation: null },
+               verificationCode: { value: '', validation: null },
+            }));
+         } catch (error) {
+            alert(error);
+         }
+      } else {
+         if (verificationToken.length === 0) {
+            alert('인증번호를 전송해주세요.');
+         } else {
+            alert('알맞게 입력해주세요.');
+         }
+      }
+   };
+
    const handleEvent = ({
       eventType,
       id,
@@ -85,23 +186,8 @@ export default function MyPageEdit() {
    }) => {
       const events = {
          nickname: {
-            onClick: async () => {
-               if (validation?.result) {
-                  try {
-                     await patch(
-                        `${CONSTANTS.SERVER_URL}${API_PATH.USER.CHANGE.NICKNAME}`,
-                        { nickname: inputsValue.nickname.value },
-                        { authenticate: true },
-                     );
-                     fetchMyInfo();
-                     setInputsValue((prev) => ({ ...prev, nickname: { value: '', validation: null } }));
-                     alert('변경 완료');
-                  } catch (error) {
-                     alert(error);
-                  }
-               } else {
-                  alert(validation?.errorMessage);
-               }
+            onClick: () => {
+               changeNickname(validation);
             },
             onChange: (value: string) => {
                return value.length > 2 && value.length < 17;
@@ -116,98 +202,47 @@ export default function MyPageEdit() {
             },
          },
          passwordConfirm: {
-            onClick: async () => {
-               if (
-                  inputsValue.originPassword.value.length > 0 &&
-                  inputsValue.password.validation &&
-                  inputsValue.passwordConfirm.validation
-               ) {
-                  try {
-                     await patch(
-                        `${CONSTANTS.SERVER_URL}${API_PATH.USER.CHANGE.PASSWORD}`,
-                        {
-                           password: inputsValue.originPassword.value,
-                           newPassword: inputsValue.passwordConfirm.value,
-                        },
-                        { authenticate: true },
-                     );
-                     fetchMyInfo();
-                     setInputsValue((prev) => ({
-                        ...prev,
-                        originPassword: { value: '', validation: null },
-                        password: { value: '', validation: null },
-                        passwordConfirm: { value: '', validation: null },
-                     }));
-                     alert('변경 완료');
-                  } catch (error) {
-                     alert(error);
-                  }
-               } else {
-                  alert('모두 알맞게 입력해주세요.');
-               }
-            },
+            onClick: changePassword,
             onChange: (value: string) => {
                if (!inputsValue.password.validation) {
-                  setInputsValue((prev) => ({ ...prev, passwordConfirm: { value: '', validation: null } }));
+                  setInputsValue((prev) => ({
+                     ...prev,
+                     passwordConfirm: { value: '', validation: null },
+                  }));
                   alert('비밀번호는 영문과 숫자를 1자 이상 포함하는 8-16 자리여야 합니다.');
                }
                return value === Object.getOwnPropertyDescriptor(inputsValue, 'password')?.value.value;
             },
          },
          phoneNumber: {
-            onClick: async () => {
-               if (inputsValue.phoneNumber.validation) {
-                  try {
-                     const data: { token: string } = await post(
-                        `${CONSTANTS.SERVER_URL}${API_PATH.USER.CHANGE.PHONE.VERIFY}`,
-                        { phoneNumber: inputsValue.phoneNumber.value },
-                        { authenticate: true },
-                     );
-                     alert('인증번호가 전송되었습니다.');
-                     setVerificationToken(data.token);
-                  } catch (error) {
-                     alert(error);
-                  }
-               } else {
-                  alert('알맞게 입력해주세요.');
-               }
-            },
+            onClick: changePhoneNumber,
             onChange: (value: string) => {
-               return value.length === 11 && /^[0-9]*$/.test(value);
+               setVerificationToken('');
+               setInputsValue((prev) => ({ ...prev, verificationCode: { value: '', validation: null } }));
+               return value.length === 11 && /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/.test(value);
             },
          },
          verificationCode: {
-            onClick: async () => {
-               if (inputsValue.verificationCode.validation) {
-                  try {
-                     await patch(
-                        `${CONSTANTS.SERVER_URL}${API_PATH.USER.CHANGE.PHONE.INDEX}`,
-                        { token: verificationToken, code: inputsValue.verificationCode.value },
-                        { authenticate: true },
-                     );
-                     alert('휴대폰번호 변경 완료');
-                     fetchMyInfo();
-                     setInputsValue((prev) => ({
-                        ...prev,
-                        phoneNumber: { value: '', validation: null },
-                        verificationCode: { value: '', validation: null },
-                     }));
-                  } catch (error) {
-                     alert(error);
-                  }
-               } else {
-                  alert('알맞게 입력해주세요.');
-               }
-            },
+            onClick: checkVerificationCode,
             onChange: (value: string) => {
                return value.length === 6 && /^[0-9]*$/.test(value);
             },
+         },
+         originPassword: {
+            onChange: () => {},
+         },
+         major: {
+            onClick: () => {
+               navigate('/mypage/update');
+            },
+         },
+         default: {
+            onChange: () => {},
          },
       };
 
       const eventData = Object.getOwnPropertyDescriptor(events, id)?.value;
       const triggerEvent = Object.getOwnPropertyDescriptor(eventData, eventType)?.value;
-
       switch (eventType) {
          case 'onClick':
             return triggerEvent();
@@ -215,88 +250,79 @@ export default function MyPageEdit() {
             return triggerEvent(value);
       }
    };
+
+   useEffect(() => {
+      setInputsValue((prev) => ({
+         ...prev,
+         [onChangeEvent.id]: {
+            value: Object.getOwnPropertyDescriptor(prev, onChangeEvent.id)?.value.value,
+            validation: handleEvent(onChangeEvent),
+         },
+      }));
+   }, [onChangeEvent]);
+
    return (
       <>
          {myInfo && (
             <div className='px-3 pb-5 flex items-center flex-col w-full'>
                <div className='flex justify-center py-10'>
-                  <ProfileImage />
+                  <ProfileImage src={myInfo.profileImage} />
                </div>
                <div className='flex flex-col gap-5 w-full'>
                   {formInfo?.map((box, i) => (
                      <Box key={i}>
-                        {box.map(
-                           ({
-                              id,
-                              title,
-                              inputType,
-                              placeholder,
-                              button,
-                              bigButton,
-                              validation,
-                              maxLength,
-                           }: IFormInfo) => (
-                              <div key={title}>
-                                 <Label text={title} />
-                                 <InputBox>
-                                    <InputText
-                                       type={inputType}
-                                       placeholder={placeholder}
-                                       disabled={title === '학과 및 재학 여부'}
-                                       value={Object.getOwnPropertyDescriptor(inputsValue, id)?.value.value}
-                                       maxLength={maxLength}
-                                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                          setInputsValue((prev) => ({
-                                             ...prev,
-                                             [id]: {
-                                                value:
-                                                   inputType === 'number'
-                                                      ? checkInputRegex(e.target.value, 'number')
-                                                      : e.target.value,
-                                                validation:
-                                                   validation !== undefined &&
-                                                   handleEvent({
-                                                      eventType: 'onChange',
-                                                      id,
-                                                      validation: validation!,
-                                                      value: e.target.value,
-                                                   }),
-                                             },
-                                          }));
-                                       }}
-                                    />
-                                    {button && <InputButton text={button} />}
-                                    {validation !== undefined && (
-                                       <ValidationIcon validation={validation.result} />
-                                    )}
-                                 </InputBox>
-                                 {validation?.defaultMessage && validation.result === null && (
-                                    <Message text={validation?.defaultMessage} />
-                                 )}
-                                 {validation !== undefined &&
-                                    (validation.result ? (
-                                       <Message text={validation.successMessage} />
-                                    ) : (
-                                       validation.result !== null && (
-                                          <Message text={validation.errorMessage} />
-                                       )
-                                    ))}
-                                 {bigButton && (
+                        {box.map((item: IFormInfo) => (
+                           <div key={item.title}>
+                              <Label text={item.title} />
+                              <InputBox>
+                                 <InputText
+                                    item={item}
+                                    value={Object.getOwnPropertyDescriptor(inputsValue, item.id)?.value.value}
+                                    setInputsValue={setInputsValue}
+                                    setOnChangeEvent={setOnChangeEvent}
+                                 />
+                                 {item.button && (
                                     <InputButton
                                        onClick={() => {
                                           handleEvent({
                                              eventType: 'onClick',
-                                             id,
-                                             validation: validation!,
+                                             id: item.id,
+                                             validation: item.validation!,
                                           });
                                        }}
-                                       text={bigButton}
-                                       type='big'
+                                       text={item.button}
                                     />
                                  )}
-                              </div>
-                           ),
-                        )}
+                                 {item.validation !== undefined && (
+                                    <ValidationIcon validation={item.validation.result} />
+                                 )}
+                              </InputBox>
+                              {item.validation?.defaultMessage && item.validation.result === null && (
+                                 <Message text={item.validation?.defaultMessage} />
+                              )}
+                              {item.validation !== undefined &&
+                                 (item.validation.result ? (
+                                    <Message text={item.validation.successMessage} />
+                                 ) : (
+                                    item.validation.result !== null && (
+                                       <Message text={item.validation.errorMessage} />
+                                    )
+                                 ))}
+                              {item.bigButton && (
+                                 <InputButton
+                                    onClick={() => {
+                                       handleEvent({
+                                          eventType: 'onClick',
+                                          id: item.id,
+                                          validation: item.validation!,
+                                       });
+                                    }}
+                                    text={item.bigButton}
+                                    type='big'
+                                 />
+                              )}
+                           </div>
+                        ))}
                      </Box>
                   ))}
                </div>
