@@ -57,7 +57,7 @@ export default function Main() {
 
    return (
       <main>
-         <Banner banners={main?.carousels} />
+         <Banner banners={main?.carousels ?? []} />
          <div className='bg-gray-100 pt-5 pb-4'>
             <Notice notices={main?.recentNotices} />
             <Petition petitions={main?.popularPetitions} />
