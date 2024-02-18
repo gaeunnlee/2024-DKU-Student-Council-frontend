@@ -5,9 +5,7 @@ import DefaultLayout from 'layouts/DefaultLayout';
 import PetitionBoard from 'pages/petition';
 import NoticePost from 'pages/notice/post';
 import PetitionForm from 'pages/petition/post';
-
 import Main from 'pages';
-import Menu from 'pages/menu';
 import NotFound from 'pages/404';
 import Login from 'pages/login';
 import Signup from 'pages/signup';
@@ -40,7 +38,6 @@ export default function Router() {
          <DefaultLayout>
             <Routes>
                <Route path={ROUTES.MAIN} element={<Main />} />
-               <Route path={ROUTES.MENU} element={<Menu />} />
                <Route path={ROUTES.LOGIN} element={<Login />} />
                <Route
                   path={ROUTES.MYPAGE.INDEX}
