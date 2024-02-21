@@ -2,16 +2,17 @@ import React from 'react';
 
 interface CheckboxProps {
    name: string;
-   checked: boolean;
-   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+   checked?: boolean;
+   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
    label: string;
+   className?: string;
 }
 
-function Checkbox({ name, checked, onChange, label }: CheckboxProps) {
+function Checkbox({ name, checked, onChange, label, className }: CheckboxProps) {
    return (
-      <label>
+      <label className={`flex items-center gap-1 ${className}`}>
          <input type='checkbox' name={name} checked={checked} onChange={onChange} />
-         <span>{label}</span>
+         <span className='text-xs'>{label}</span>
       </label>
    );
 }
