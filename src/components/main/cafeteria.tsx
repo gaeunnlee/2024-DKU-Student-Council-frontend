@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useApi } from 'hooks/useApi';
 import { API_PATH } from 'constants/api';
+import SvgIcon from 'components/common/icon/SvgIcon';
 
 interface ICafeteria {
    mealData: string;
@@ -12,9 +13,9 @@ interface ICafeteria {
 }
 
 const mealOptions = [
-   { key: 'breakfast', label: '아침' },
-   { key: 'lunch', label: '점심' },
-   { key: 'dinner', label: '저녁' },
+   { key: 'breakfast', icon: 'lunch', label: '아침' },
+   { key: 'lunch', icon: 'lunch', label: '점심' },
+   { key: 'dinner', icon: 'dinner', label: '저녁' },
 ];
 
 export default function Cafeteria() {
@@ -40,7 +41,7 @@ export default function Cafeteria() {
    };
 
    return (
-      <section className='px-4 py-5 m-4'>
+      <section className='px-4 py-5 m-4 rounded-xl bg-white shadow-md'>
          <h4 className='font-bold text-lg ml-4 mb-4'>오늘의 학식</h4>
          <div className='flex gap-2'>
             <ul className='flex flex-col gap-1'>
@@ -49,19 +50,23 @@ export default function Cafeteria() {
                      <button
                         className={`${
                            selectedMeal === option.key ? 'bg-black text-white' : 'bg-white text-black'
-                        } w-[70px] text-center text-sm p-1 rounded-xl bg-${
+                        } flex items-center gap-[2px] w-[70px] h-6 text-center text-sm px-3 rounded-xl bg-${
                            option.key
                         } shadow-md bg-no-repeat`}
                         onClick={() => setSelectedMeal(option.key)}
                      >
+                        <SvgIcon
+                           id={option.icon}
+                           width={15}
+                           height={15}
+                           color={`${selectedMeal === option.key ? 'white' : 'black'}`}
+                        />
                         {option.label}
                      </button>
                   </li>
                ))}
             </ul>
-            <div className='w-[250px] px-4 py-5 text-sm rounded-xl bg-white shadow-md'>
-               {handleMealData()}
-            </div>
+            <div className='w-[250px] px-4 py-5'>{handleMealData()}</div>
          </div>
       </section>
    );
