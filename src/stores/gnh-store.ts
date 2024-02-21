@@ -7,8 +7,10 @@ export interface GnhState {
    setSubHeading: (subHeading: string | null) => void;
    headingStyle: string;
    setHeadingStyle: (headingStyle: string) => void;
-   subHeadingStyle: string;
-   setsubHeadingStyle: (subHeadingStyle: string) => void;
+   headingText: string;
+   setHeadingText: (headingText: string) => void;
+   subHeadingText: string;
+   setsubHeadingText: (subHeadingText: string) => void;
 }
 
 export const gnhState = create<GnhState>((set) => ({
@@ -18,6 +20,8 @@ export const gnhState = create<GnhState>((set) => ({
    setSubHeading: (subHeading: string | null) => set({ subHeading }),
    headingStyle: '',
    setHeadingStyle: (headingStyle: string) => set({ headingStyle }),
-   subHeadingStyle: '',
-   setsubHeadingStyle: (subHeadingStyle: string) => set({ subHeadingStyle }),
+   headingText: '',
+   setHeadingText: (headingText: string) => set({ headingText }),
+   subHeadingText: '',
+   setsubHeadingText: (subHeadingText: string) => set({ subHeadingText }),
 }));
