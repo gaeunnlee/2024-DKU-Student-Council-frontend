@@ -27,7 +27,8 @@ export default function MyPageUpdate() {
          isMain: false,
          fullscreen: false,
          headingStyle: 'h-[15vh]',
-         subHeadingStyle: '',
+         headingText: '',
+         subHeadingText: '',
          margin: '',
          rounded: true,
       });

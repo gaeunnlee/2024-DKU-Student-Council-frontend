@@ -12,8 +12,9 @@ interface TopHeaderLayoutProps {
 interface HeadingLayoutProps {
    heading?: string | null;
    subHeading?: string | null;
-   headingStyle: string;
-   subHeadingStyle: string;
+   headingStyle?: string;
+   headingText?: string;
+   subHeadingText?: string;
 }
 
 interface NavLayoutProps {
@@ -24,11 +25,17 @@ interface NavLayoutProps {
 
 export const useLayout = () => {
    const { setTitle, setBackButton, setIsMain } = gnbState();
-   const { setHeading, setSubHeading, setHeadingStyle, setsubHeadingStyle } = gnhState();
+   const { setHeading, setSubHeading, setHeadingStyle, setHeadingText, setsubHeadingText } = gnhState();
    const { setFullscreen, setRounded, setMargin } = navStore();
 
    useEffect(() => {
-      setHeadingLayout({ heading: ' ', subHeading: ' ', headingStyle: ' ', subHeadingStyle: ' ' });
+      setHeadingLayout({
+         heading: ' ',
+         subHeading: ' ',
+         headingStyle: ' ',
+         headingText: '',
+         subHeadingText: ' ',
+      });
    }, []);
 
    const setTopHeader = ({ title, backButton, isMain }: TopHeaderLayoutProps) => {
@@ -37,11 +44,18 @@ export const useLayout = () => {
       setIsMain(isMain);
    };
 
-   const setHeadingLayout = ({ heading, subHeading, headingStyle, subHeadingStyle }: HeadingLayoutProps) => {
+   const setHeadingLayout = ({
+      heading,
+      subHeading,
+      headingStyle,
+      headingText,
+      subHeadingText,
+   }: HeadingLayoutProps) => {
       heading && setHeading(heading);
       subHeading && setSubHeading(subHeading);
-      setHeadingStyle(headingStyle);
-      setsubHeadingStyle(subHeadingStyle);
+      headingStyle && setHeadingStyle(headingStyle);
+      headingText && setHeadingText(headingText);
+      subHeadingText && setsubHeadingText(subHeadingText);
    };
 
    const setNavLayout = ({ margin, fullscreen, rounded }: NavLayoutProps) => {
@@ -58,12 +72,13 @@ export const useLayout = () => {
       heading,
       subHeading,
       headingStyle,
-      subHeadingStyle,
+      headingText,
+      subHeadingText,
       margin,
       rounded,
    }: TopHeaderLayoutProps & HeadingLayoutProps & NavLayoutProps) => {
       setTopHeader({ title, backButton, isMain });
-      setHeadingLayout({ heading, subHeading, headingStyle, subHeadingStyle });
+      setHeadingLayout({ heading, subHeading, headingStyle, headingText, subHeadingText });
       setNavLayout({ margin, fullscreen, rounded });
    };
 

@@ -18,7 +18,8 @@ export default function Greeting() {
          heading: '총학생회',
          subHeading: '인사말',
          headingStyle: headingStyle,
-         subHeadingStyle: subHeadingStyle,
+         headingText: '',
+         subHeadingText: subHeadingStyle,
          margin: '',
          rounded: true,
       });

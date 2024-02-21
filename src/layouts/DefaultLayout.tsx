@@ -19,7 +19,7 @@ type DefaultLayoutProps = IWithReactChildren & React.HTMLAttributes<HTMLDivEleme
 
 export default function DefaultLayout({ children, ...props }: DefaultLayoutProps) {
    const { title, backButton, isMain } = gnbState();
-   const { heading, subHeading, headingStyle, subHeadingStyle } = gnhState();
+   const { heading, subHeading, headingStyle, headingText, subHeadingText } = gnhState();
    const { fullscreen, rounded, margin } = navStore();
    const { menuOpen } = menuStore();
    const defaultStyle = 'w-[390px] mx-auto bg-black';
@@ -56,7 +56,8 @@ export default function DefaultLayout({ children, ...props }: DefaultLayoutProps
                      heading={heading}
                      subHeading={subHeading}
                      headingStyle={headingStyle}
-                     subHeadingStyle={subHeadingStyle}
+                     headingText={headingText}
+                     subHeadingText={subHeadingText}
                   />
                )}
                <div
@@ -65,7 +66,7 @@ export default function DefaultLayout({ children, ...props }: DefaultLayoutProps
                   {...props}
                >
                   <div
-                     className={`${rounded && 'rounded-t-xl pt-4'} 
+                     className={`${rounded && 'rounded-t-3xl pt-4'} 
                   ${margin} flex flex-col bg-white`}
                   >
                      {children}

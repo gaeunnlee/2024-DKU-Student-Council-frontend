@@ -1,12 +1,14 @@
-import React, { FormEvent, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { API_PATH } from 'constants/api';
+import { CONSTANTS, API_PATH } from 'constants/api';
 import { ROUTES } from 'constants/route';
 import axios from 'axios';
 import { Regex } from 'utils/regex';
 import Input from 'components/ui/input';
 import { useAlert } from 'hooks/useAlert';
-import Button from 'components/ui/button';
+import Button from 'components/common/button';
+import { useEffectOnce } from 'hooks/useEffectOnce';
+import { useLayout } from 'hooks/useLayout';
 
 interface StudentVerifyResponse {
    signupToken: string;
@@ -24,6 +26,7 @@ interface IVerifyInfo {
 
 export default function SignupVerify() {
    const navigate = useNavigate();
+   const { setLayout } = useLayout();
 
    const [verifyInfo, setVerifyInfo] = useState<IVerifyInfo>({
       dkuStudentId: '',
@@ -36,7 +39,10 @@ export default function SignupVerify() {
 
    const verify = async (verifyInfo: IVerifyInfo) => {
       try {
-         const { data } = await axios.post<StudentVerifyResponse>(API_PATH.USER.SIGNUP.VERIFY, verifyInfo);
+         const { data } = await axios.post<StudentVerifyResponse>(
+            CONSTANTS.SERVER_URL + API_PATH.USER.SIGNUP.VERIFY,
+            verifyInfo,
+         );
          navigate(ROUTES.SIGNUP.INFO, { state: { data } });
       } catch (error) {
          alert(error);
@@ -57,13 +63,27 @@ export default function SignupVerify() {
       setIsFormValid(isStudentIdValid && isPasswordValid);
    }, [verifyInfo]);
 
-   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
+   const handleSubmit = () => {
       verify(verifyInfo);
    };
 
+   useEffectOnce(() => {
+      setLayout({
+         title: null,
+         backButton: true,
+         isMain: false,
+         fullscreen: false,
+         headingStyle: '',
+         margin: '',
+         rounded: true,
+      });
+   });
+
    return (
-      <div className='flex items-center justify-center min-h-screen'>
+      <div className='flex flex-col'>
+         <h1 className='text-2xl font-extrabold mb-[14px]'>Sign up</h1>
+         <h2 className='text-base font-extrabold mb-6'>단국대학교 총학생회 회원가입</h2>
+         <h3 className="text-sm before:content-['●'] flex items-center gap-1">학생 인증</h3>
          <form onSubmit={handleSubmit} className='max-w-md mx-auto'>
             <Input
                type='number'
@@ -86,10 +106,9 @@ export default function SignupVerify() {
                후 즉시 폐기됩니다)
             </p>
             <Button
-               type='submit'
-               variant={isFormValid ? 'primary' : 'red'}
-               className='w-full p-2 rounded'
-               disabled={!isFormValid}
+               className='w-[311px] rounded-2xl py-3 text-base font-bold'
+               isDisabled={!isFormValid}
+               onClick={handleSubmit}
             >
                인증
             </Button>

@@ -48,8 +48,9 @@ export default function Main() {
          fullscreen: false,
          heading: 'DANKOOK UNIVERSITY',
          subHeading: 'DANKOOK UNIV STUDENT COUNCIL',
-         headingStyle: HeadingStyle.main.HeadingStyle,
-         subHeadingStyle: HeadingStyle.main.subHeadingStyle,
+         headingStyle: HeadingStyle.main.size,
+         headingText: HeadingStyle.main.headingStyle,
+         subHeadingText: HeadingStyle.main.subHeadingStyle,
          margin: '',
          rounded: false,
       });

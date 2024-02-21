@@ -3,9 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'constants/route';
 import { useAlert } from '../../hooks/useAlert';
 import Checkbox from '../../components/ui/input/checkbox';
+import { useEffectOnce } from 'hooks/useEffectOnce';
+import { useLayout } from 'hooks/useLayout';
+import Button from 'components/common/button';
 
 export default function SignupTerms() {
    const { alert } = useAlert();
+   const { setLayout } = useLayout();
 
    const [agreeCheck, setAgreeCheck] = useState([false, false, false]);
    const navigate = useNavigate();
@@ -22,6 +26,18 @@ export default function SignupTerms() {
       }
       setAgreeCheck(newAgreeCheck);
    };
+
+   useEffectOnce(() => {
+      setLayout({
+         title: null,
+         backButton: true,
+         isMain: false,
+         fullscreen: false,
+         headingStyle: '',
+         margin: '',
+         rounded: true,
+      });
+   });
 
    const onAllCheckboxChange = () => {
       if (agreeCheck[0] && agreeCheck[1] && agreeCheck[2]) {
@@ -44,16 +60,18 @@ export default function SignupTerms() {
 
    return (
       <>
+         <h1 className='text-2xl font-extrabold mb-[14px]'>Sign up</h1>
+         <h2 className='text-base font-extrabold mb-6'>단국대학교 총학생회 회원가입</h2>
+         <h3 className="text-sm before:content-['●'] flex items-center gap-1">이용약관동의</h3>
          <div>
             <div>
-               <label>
-                  모두동의하기
-                  <input
-                     type='checkbox'
-                     checked={agreeCheck[0] && agreeCheck[1] && agreeCheck[2]}
-                     onChange={onAllCheckboxChange}
-                  />
-               </label>
+               <Checkbox
+                  name='AllAgree'
+                  label='전체동의하기'
+                  checked={agreeCheck[0] && agreeCheck[1] && agreeCheck[2]}
+                  onChange={onAllCheckboxChange}
+                  className='ml-auto'
+               />
                <p />
                <Checkbox
                   name='agree1'
@@ -85,7 +103,9 @@ export default function SignupTerms() {
             </div>
          </div>
 
-         <button onClick={goNext}>동의 완료</button>
+         <Button onClick={goNext} className='rounded-2xl py-3 text-base font-bold'>
+            동의 완료
+         </Button>
       </>
    );
 }

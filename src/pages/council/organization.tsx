@@ -17,7 +17,8 @@ export default function Organization() {
          heading: '총학생회',
          subHeading: '조직도',
          headingStyle: headingStyle,
-         subHeadingStyle: subHeadingStyle,
+         headingText: '',
+         subHeadingText: subHeadingStyle,
          margin: '',
          rounded: true,
       });

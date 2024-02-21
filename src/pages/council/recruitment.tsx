@@ -16,7 +16,8 @@ export default function Recruitment() {
          heading: '부원모집',
          subHeading: '모집요강',
          headingStyle: '',
-         subHeadingStyle: '',
+         headingText: '',
+         subHeadingText: '',
          margin: '',
          rounded: true,
       });
