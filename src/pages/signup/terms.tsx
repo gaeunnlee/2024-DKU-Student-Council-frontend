@@ -5,7 +5,7 @@ import { useAlert } from '../../hooks/useAlert';
 import Checkbox from '../../components/ui/input/checkbox';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
-import Button from 'components/common/button';
+import Button from 'components/ui/button';
 
 export default function SignupTerms() {
    const { alert } = useAlert();

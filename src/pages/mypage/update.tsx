@@ -95,9 +95,7 @@ export default function MyPageUpdate() {
             단국대학교 웹정보 로그인 시 사용 되는 ID, PW를 통해 학생인증이 진행됩니다. (입력한 정보는 인증 후
             즉시 폐기됩니다)
          </Text>
-         <Button variant='black' className='w-full'>
-            인증
-         </Button>
+         <Button className='w-full'>인증</Button>
       </form>
    );
 }
