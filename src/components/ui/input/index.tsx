@@ -27,7 +27,7 @@ export default function Input({
       <div className={'flex flex-col'}>
          {label && <label className={'block text-gray-600 text-sm ml-5 mb-1'}>{label}</label>}
          <input
-            className={`w-[336px] border-none rounded-[10px] bg-[#EDEDED] text-sm px-6 py-4 focus:outline-none 
+            className={`border-none rounded-[10px] bg-[#EDEDED] text-sm px-6 py-4 focus:outline-none 
             ${className} ::placeholder text-[#868686]`}
             type={type}
             placeholder={placeholder}
