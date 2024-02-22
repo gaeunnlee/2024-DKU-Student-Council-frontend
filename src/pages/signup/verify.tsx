@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Regex } from 'utils/regex';
 import Input from 'components/ui/input';
 import { useAlert } from 'hooks/useAlert';
-import Button from 'components/common/button';
+import Button from 'components/ui/button';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 
@@ -72,19 +72,19 @@ export default function SignupVerify() {
          title: null,
          backButton: true,
          isMain: false,
-         fullscreen: false,
+         fullscreen: true,
          headingStyle: '',
-         margin: '',
+         margin: 'mt-[140px]',
          rounded: true,
       });
    });
 
    return (
-      <div className='flex flex-col'>
+      <div className='flex flex-col px-10 pt-12'>
          <h1 className='text-2xl font-extrabold mb-[14px]'>Sign up</h1>
          <h2 className='text-base font-extrabold mb-6'>단국대학교 총학생회 회원가입</h2>
-         <h3 className="text-sm before:content-['●'] flex items-center gap-1">학생 인증</h3>
-         <form onSubmit={handleSubmit} className='max-w-md mx-auto'>
+         <h3 className="text-sm before:content-['●'] flex items-center gap-1 mb-8">학생 인증</h3>
+         <form onSubmit={handleSubmit} className='flex flex-col gap-2 max-w-md mx-auto'>
             <Input
                type='number'
                name='dkuStudentId'
@@ -101,9 +101,10 @@ export default function SignupVerify() {
                onChange={handleInputChange}
                className='w-full'
             />
-            <p className='mb-4 text-gray-400 text-xs'>
-               단국대학교 웹정보 로그인 시 사용 되는 ID, PW를 통해 학생인증이 진행됩니다. (입력한 정보는 인증
-               후 즉시 폐기됩니다)
+            <p className="mb-8 text-[#868686] text-[10.5px] whitespace-pre-wrap mt-2 before:content-['●'] before:mr-1">
+               {
+                  '단국대학교 웹정보 로그인 시 사용 되는 ID, PW를 통해\n 학생인증이 진행됩니다. (입력한 정보는 인증 후 즉시 폐기됩니다)'
+               }
             </p>
             <Button
                className='w-[311px] rounded-2xl py-3 text-base font-bold'
