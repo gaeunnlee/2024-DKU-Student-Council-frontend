@@ -11,6 +11,7 @@ import Login from 'pages/login';
 import Signup from 'pages/signup';
 import SignupTerms from 'pages/signup/terms';
 import SignupVerify from 'pages/signup/verify';
+import SignupSuccess from 'pages/signup/success';
 import SignupInfo from 'pages/signup/info';
 import Greeting from 'pages/council';
 import Organization from 'pages/council/organization';
@@ -75,6 +76,7 @@ export default function Router() {
                   <Route index path={ROUTES.SIGNUP.VERIFY} element={<SignupVerify />} />
                   <Route path={ROUTES.SIGNUP.TERMS} element={<SignupTerms />} />
                   <Route path={ROUTES.SIGNUP.INFO} element={<SignupInfo />} />
+                  <Route path={ROUTES.SIGNUP.SUCCESS} element={<SignupSuccess />} />
                </Route>
                <Route path={ROUTES.COUNCIL.GREETING} element={<Greeting />} />
                <Route path={ROUTES.COUNCIL.ORGANIZATION} element={<Organization />} />

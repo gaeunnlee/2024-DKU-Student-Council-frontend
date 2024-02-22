@@ -22,6 +22,8 @@ export const ROUTES = {
       VERIFY: '/signup/verify',
       /** 회원 정보 입력 */
       INFO: '/signup/info',
+      /** 회원가입 성공 */
+      SUCCESS: '/signup/success',
    },
    /** 총학생회 */
    COUNCIL: {
