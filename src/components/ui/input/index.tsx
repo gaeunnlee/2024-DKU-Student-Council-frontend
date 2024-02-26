@@ -1,42 +1,36 @@
+import { Input as ChakraInput } from '@chakra-ui/react';
+import { InputProps as ChakraInputProps } from '@chakra-ui/react';
+import Text from 'components/ui/typo/text';
 import React from 'react';
 
-interface InputProps extends React.ComponentProps<'input'> {
+interface InputProps extends ChakraInputProps {
+   size?: 'md' | 'lg';
    label?: string;
-   placeholder?: string;
-   value?: string;
-   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-   message?: string | null;
+   children?: string;
+   className?: string;
    isSuccess?: boolean;
+   message?: string | null;
 }
 
 export default function Input({
-   className,
-   type,
    label,
-   placeholder,
-   name,
-   value,
-   onChange,
-   message,
+   size,
+   children,
+   className,
    isSuccess,
+   message,
    ...props
 }: InputProps) {
-   const messageClassName = isSuccess ? 'text-blue-500' : 'text-red-500';
+   console.log(isSuccess);
+   const sizeClass = size === 'md' ? 'w-[311px] py-4' : 'w-[336px] py-4';
 
    return (
-      <div className={'flex flex-col'}>
-         {label && <label className={'block text-gray-600 text-sm ml-5 mb-1'}>{label}</label>}
-         <input
-            className={`border-none rounded-[10px] bg-[#EDEDED] text-sm px-6 py-4 focus:outline-none 
-            ${className} ::placeholder text-[#868686]`}
-            type={type}
-            placeholder={placeholder}
-            name={name}
-            value={value}
-            onChange={onChange || (() => {})}
-            {...props}
-         />
-         {message && <p className={`text-xs text-center ${messageClassName}`}>{message}</p>}
+      <div className='flex flex-col gap-[2px]'>
+         {label && <Text className='text-gray02 text-[15px]'>{label}</Text>}
+         <ChakraInput className={`${className} ${sizeClass} bg-gray01 pl-5`} {...props}>
+            {children}
+         </ChakraInput>
+         {message && <Text className='text-center text-[11px]'>{message}</Text>}
       </div>
    );
 }
