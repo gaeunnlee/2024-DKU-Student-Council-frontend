@@ -5,6 +5,8 @@ import { ROUTES } from 'constants/route';
 import axios from 'axios';
 import Input from 'components/ui/input';
 import Button from 'components/ui/button';
+import Text from 'components/ui/typo/text';
+import Heading from 'components/ui/typo/heading';
 import { useAlert } from 'hooks/useAlert';
 import { useLayout } from 'hooks/useLayout';
 import { useEffectOnce } from 'hooks/useEffectOnce';
@@ -163,10 +165,16 @@ export default function SignupInfo() {
 
    return (
       <div className='flex flex-col px-10 pt-12'>
-         <h1 className='text-2xl font-extrabold mb-[14px]'>Sign up</h1>
-         <h2 className='text-base font-extrabold mb-6'>단국대학교 총학생회 회원가입</h2>
-         <h3 className="text-sm before:content-['●'] flex items-center gap-1 mb-8">회원 정보 입력</h3>
-         <form onSubmit={handleSubmit} className={'mx-auto'}>
+         <Heading as='h1' className='text-2xl font-extrabold mb-[14px]'>
+            Sign up
+         </Heading>
+         <Heading as='h2' className='text-base font-extrabold mb-6'>
+            단국대학교 총학생회 회원가입
+         </Heading>
+         <Heading as='h3' className="text-sm before:content-['●'] flex items-center gap-1 mb-8">
+            회원 정보 입력
+         </Heading>
+         <form className={'mx-auto'}>
             <section className='flex flex-col gap-2 mb-6'>
                <Input
                   label='비밀번호'
@@ -175,6 +183,7 @@ export default function SignupInfo() {
                   name='password'
                   value={signupInfo.password}
                   onChange={handleInputChange}
+                  className='rounded-[10px]'
                />
                <Input
                   type='password'
@@ -184,6 +193,7 @@ export default function SignupInfo() {
                   onChange={handleInputChange}
                   isSuccess={!passwordMismatch}
                   message={passwordMismatch ? '비밀번호가 일치하지 않습니다.' : null}
+                  className='rounded-[10px]'
                />
             </section>
             <section className={'flex mb-6'}>
@@ -192,19 +202,20 @@ export default function SignupInfo() {
                   type='text'
                   placeholder='닉네임 입력'
                   name='nickname'
-                  className='w-[311px]'
                   value={signupInfo.nickname}
                   onChange={handleInputChange}
                   isSuccess={isNicknameValid}
-                  message={isNicknameValid ? '사용가능한 닉네임입니다.' : '이미 존재하는 닉네임입니다.'}
+                  message={isNicknameValid ? '사용가능한 닉네임입니다.' : null}
+                  className='rounded-[10px]'
                />
-               <button
+               <Button
+                  variant='naked'
                   type='button'
                   className={'h-4 ml-[-5rem] mt-11 text-blue-600 text-sm'}
                   onClick={() => nicknameVeriication(signupInfo.nickname)}
                >
-                  중복확인
-               </button>
+                  <Text className='text-black'>중복확인</Text>
+               </Button>
             </section>
             <section className='flex flex-col gap-2'>
                <div className='flex'>
@@ -217,15 +228,16 @@ export default function SignupInfo() {
                      onChange={handleInputChange}
                      isSuccess={isPhoneVerified}
                      message={isPhoneVerified ? '인증번호가 전송되었습니다.' : null}
-                     className='w-[311px]'
+                     className='rounded-[10px]'
                   />
-                  <button
+                  <Button
                      type='button'
+                     variant='naked'
                      className={'h-4 ml-[-5rem] mt-11 text-blue-600 text-sm'}
                      onClick={() => phoneVerification(phoneNumber)}
                   >
-                     인증요청
-                  </button>
+                     <Text className='text-black'>인증요청</Text>
+                  </Button>
                </div>
                <div className={'flex'}>
                   <Input
@@ -236,24 +248,26 @@ export default function SignupInfo() {
                      onChange={handleInputChange}
                      isSuccess={isCodeVerified}
                      message={isCodeVerified ? '인증번호가 일치합니다' : '인증번호가 일치하지 않습니다.'}
-                     className='w-[311px]'
+                     className='rounded-[10px]'
                   />
-                  <button
+                  <Button
                      type='button'
+                     variant='naked'
                      className={'h-4 ml-[-3rem] mt-5 text-blue-600 text-sm'}
                      onClick={() => confirmCode(code)}
                   >
-                     확인
-                  </button>
+                     <Text className='text-black'>확인</Text>
+                  </Button>
                </div>
             </section>
             <Button
                type='submit'
-               className={`w-full p-2 rounded ${isFormValid ? 'bg-blue-600' : 'bg-gray-400'}`}
+               className={`w-full py-3 rounded-[10px] mt-4 ${isFormValid ? 'bg-blue-600' : 'bg-gray-400'}`}
                disabled={!isFormValid}
                onClick={handleSubmit}
+               variant='default'
             >
-               확인
+               <Text className='text-base font-bold'>확인</Text>
             </Button>
          </form>
       </div>

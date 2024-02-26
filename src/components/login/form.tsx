@@ -3,9 +3,10 @@ import Button from 'components/ui/button';
 import { useAuth } from 'hooks/useAuth';
 import React from 'react';
 import { IIdPassword } from 'shared/interfaces/default-interfaces';
-import Checkbox from 'components/ui/input/checkbox';
+import Checkbox from 'components/ui/checkbox';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'constants/route';
+import Text from 'components/ui/typo/text';
 
 export default function LoginForm() {
    const initLoginInfo: IIdPassword = {
@@ -30,10 +31,10 @@ export default function LoginForm() {
                   });
                }
             }}
-            data-testid='id-input'
             type='number'
             placeholder='Student ID'
-            className='w-[311px]'
+            className='rounded-[10px]'
+            size='lg'
          />
          <Input
             value={loginInfo.password}
@@ -42,19 +43,21 @@ export default function LoginForm() {
                   return { ...prev, password: e.target.value };
                });
             }}
-            data-testid='password-input'
             type='password'
             placeholder='Password'
-            className='w-[311px]'
+            className='rounded-[10px]'
+            size='lg'
          />
-         <div className='flex justify-between'>
-            <Checkbox name='Save ID' label='Save ID' />
+         <div className='flex justify-between mb-1'>
+            <Checkbox>
+               <Text className='text-xs'>Save ID</Text>
+            </Checkbox>
             <Link to={ROUTES.SIGNUP.INFO}>
                <p className='text-xs'>Forgot password?</p>
             </Link>
          </div>
-         <Button type='submit' onClick={handleLogin} className='py-3 rounded-[15px]'>
-            로그인
+         <Button variant='default' type='submit' onClick={handleLogin} className='py-3 rounded-[15px]'>
+            <Text className='text-base font-bold'>로그인</Text>
          </Button>
       </form>
    );
