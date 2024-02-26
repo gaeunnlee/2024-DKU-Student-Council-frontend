@@ -1,3 +1,5 @@
+import { Palette } from './src/constants/style';
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
    content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
@@ -7,6 +9,7 @@ module.exports = {
          width: {
             '311': '311px',
          },
+         colors: { ...Palette },
          animation: {
             fadeIn: 'fadeIn 0.3s ease-in-out',
             fadeOut: 'fadeOut 0.3s ease-in-out',
@@ -15,7 +18,6 @@ module.exports = {
             breakfast: "url('./assets/icons/breakfast.svg')",
             dinner: "url('./assets/icons/dinner.svg')",
          },
-
          // that is actual animation
          keyframes: (theme) => ({
             fadeIn: {
