@@ -8,29 +8,29 @@ interface InputProps extends ChakraInputProps {
    label?: string;
    children?: string;
    className?: string;
-   isSuccess?: boolean;
-   message?: string | null;
 }
 
-export default function Input({
-   label,
-   size,
-   children,
-   className,
-   isSuccess,
-   message,
-   ...props
-}: InputProps) {
-   console.log(isSuccess);
-   const sizeClass = size === 'md' ? 'w-[311px] py-4' : 'w-[336px] py-4';
+export default function Input({ label, size, children, className, ...props }: InputProps) {
+   const sizeClass = size === 'md' ? '311px' : '336px';
 
    return (
       <div className='flex flex-col gap-[2px]'>
-         {label && <Text className='text-gray02 text-[15px]'>{label}</Text>}
-         <ChakraInput className={`${className} ${sizeClass} bg-gray01 pl-5`} {...props}>
+         {label && (
+            <Text color='gray02' className='ml-2'>
+               {label}
+            </Text>
+         )}
+         <ChakraInput
+            bg='gray01'
+            fontSize='14px'
+            width={sizeClass}
+            padding='py-4'
+            focusBorderColor='transparent'
+            className={`${className} ${sizeClass} pl-5 placeholder:text-[14px]`}
+            {...props}
+         >
             {children}
          </ChakraInput>
-         {message && <Text className='text-center text-[11px]'>{message}</Text>}
       </div>
    );
 }
