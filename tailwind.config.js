@@ -1,4 +1,4 @@
-import { Palette } from './src/constants/style';
+import { Palette } from './src/constants/colors';
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -6,9 +6,6 @@ module.exports = {
    mode: 'jit', // calc 사용 모드
    theme: {
       extend: {
-         width: {
-            '311': '311px',
-         },
          colors: { ...Palette },
          animation: {
             fadeIn: 'fadeIn 0.3s ease-in-out',
