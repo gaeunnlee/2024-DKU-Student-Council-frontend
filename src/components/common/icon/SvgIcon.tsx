@@ -11,7 +11,7 @@ interface IconProps {
 const SvgIcon = ({ id, width, height, color }: IconProps) => {
    return (
       <svg width={width} height={height} fill={color}>
-         <use href={`${IconSprite}#${id}`} />
+         <use href={`${IconSprite}#${id}`} className={`text-${color}`} />
       </svg>
    );
 };
