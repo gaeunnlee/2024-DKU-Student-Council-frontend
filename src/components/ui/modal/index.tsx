@@ -49,6 +49,7 @@ export default function Modal({
             <div className='flex flex-col gap-2'>
                {accept && (
                   <Button
+                     size='md'
                      onClick={() => {
                         accept?.onClick();
                         close();
@@ -59,6 +60,7 @@ export default function Modal({
                )}
                {cancel && (
                   <Button
+                     size='md'
                      onClick={() => {
                         cancel?.onClick();
                         close();

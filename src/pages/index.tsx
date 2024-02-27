@@ -1,5 +1,5 @@
 import { API_PATH } from 'constants/api';
-import { HeadingStyle } from 'constants/style';
+import { HeadingStyle } from 'constants/heading';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { Banner, Notice, Petition, Cafeteria } from 'components/main';
 import type { IBanner } from 'components/main/banner';

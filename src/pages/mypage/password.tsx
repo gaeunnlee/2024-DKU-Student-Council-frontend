@@ -37,7 +37,7 @@ export default function MyPagePassword() {
                   setLoginInfo((prev) => ({ ...prev, password: e.target.value }));
                }}
             />
-            <Button variant='black' className='rounded-lg'>
+            <Button size='md' onClick={() => console.log('hi')} className='rounded-lg'>
                확인
             </Button>
          </form>
