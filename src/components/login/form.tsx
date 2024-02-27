@@ -21,7 +21,7 @@ export default function LoginForm() {
    };
 
    return (
-      <form className='flex flex-col mx-auto gap-3 mt-[76px]'>
+      <form className='w-[336px] flex flex-col mx-auto gap-3 mt-[76px]'>
          <Input
             value={loginInfo.studentId}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,9 +32,10 @@ export default function LoginForm() {
                }
             }}
             type='number'
-            placeholder='Student ID'
-            className='rounded-[10px]'
+            placeholder='Student ID              @dankook.ac.kr'
+            className='placeholder:text-[14px]'
             size='lg'
+            fontSize='14px'
          />
          <Input
             value={loginInfo.password}
@@ -45,19 +46,19 @@ export default function LoginForm() {
             }}
             type='password'
             placeholder='Password'
-            className='rounded-[10px]'
+            className='placeholder:text-[14px]'
             size='lg'
          />
          <div className='flex justify-between mb-1'>
             <Checkbox>
-               <Text className='text-xs'>Save ID</Text>
+               <Text fontSize='12px'>Save ID</Text>
             </Checkbox>
-            <Link to={ROUTES.SIGNUP.INFO}>
-               <p className='text-xs'>Forgot password?</p>
+            <Link to={ROUTES.RESET.INDEX}>
+               <Text fontSize='12px'>Forgot password?</Text>
             </Link>
          </div>
-         <Button variant='default' type='submit' onClick={handleLogin} className='py-3 rounded-[15px]'>
-            <Text className='text-base font-bold'>로그인</Text>
+         <Button variant='default' type='submit' rounded='15px' size='lg' onClick={handleLogin}>
+            로그인
          </Button>
       </form>
    );
