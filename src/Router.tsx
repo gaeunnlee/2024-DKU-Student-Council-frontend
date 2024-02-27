@@ -27,6 +27,10 @@ import RuleBoard from 'pages/rule';
 import MyPagePassword from 'pages/mypage/password';
 import MyPageEdit from 'pages/mypage/edit';
 import MyPageUpdate from 'pages/mypage/update';
+import ResetIdPw from 'pages/reset/resetIdPw';
+import ResetId from 'pages/reset/resetId';
+import VerifyPw from 'pages/reset/verifyPw';
+import ResetPw from 'pages/reset/resetPw';
 
 /**
  * @description 라우터
@@ -40,6 +44,10 @@ export default function Router() {
             <Routes>
                <Route path={ROUTES.MAIN} element={<Main />} />
                <Route path={ROUTES.LOGIN} element={<Login />} />
+               <Route path={ROUTES.RESET.INDEX} element={<ResetIdPw />} />
+               <Route path={ROUTES.RESET.ID} element={<ResetId />} />
+               <Route path={ROUTES.RESET.PW_VERIFY} element={<VerifyPw />} />
+               <Route path={ROUTES.RESET.PW} element={<ResetPw />} />
                <Route
                   path={ROUTES.MYPAGE.INDEX}
                   element={

@@ -25,6 +25,13 @@ export const ROUTES = {
       /** 회원가입 성공 */
       SUCCESS: '/signup/success',
    },
+   /** 아이디 및 비밀번호 재설정 */
+   RESET: {
+      INDEX: '/reset/idpw',
+      ID: '/reset/id',
+      PW_VERIFY: '/reset/pw/verify',
+      PW: '/reset/pw',
+   },
    /** 총학생회 */
    COUNCIL: {
       /** 인사말 */
