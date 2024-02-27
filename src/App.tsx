@@ -1,14 +1,14 @@
 import React from 'react';
 import Router from './Router';
 import ModalProvider from 'components/ui/modal/modal-provider';
-import { ChakraBaseProvider } from '@chakra-ui/react';
+import ChakraUIProvider from 'components/common/chakra';
 
 export default function App() {
    return (
       <ModalProvider>
-         <ChakraBaseProvider>
+         <ChakraUIProvider>
             <Router />
-         </ChakraBaseProvider>
+         </ChakraUIProvider>
       </ModalProvider>
    );
 }

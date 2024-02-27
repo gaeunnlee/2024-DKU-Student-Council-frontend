@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SvgIcon from '../icon/SvgIcon';
-import { bottomNavSize } from 'constants/style';
+import { bottomNavSize } from 'constants/nav';
 import { menuStore } from 'stores/menu-store';
 
 interface NavItem {

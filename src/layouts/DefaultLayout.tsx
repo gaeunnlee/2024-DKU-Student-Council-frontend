@@ -2,7 +2,7 @@ import Gnb from 'components/common/gnb';
 import Gnh from 'components/common/gnh';
 import Menu from 'components/main/menu';
 import Nav from 'components/common/nav';
-import { bottomNavSize } from 'constants/style';
+import { bottomNavSize } from 'constants/nav';
 import { IWithReactChildren } from 'shared/interfaces/default-interfaces';
 import { gnbState } from 'stores/gnb-store';
 import { gnhState } from 'stores/gnh-store';
