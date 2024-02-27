@@ -31,7 +31,7 @@ export default function Modal({
       <>
          <Modal.Overlay disableCancle={disableCancle ?? false} />
          <motion.div
-            className='absolute top-[50%] z-50 min-w-[300px] max-w-[calc(100%-1rem)] rounded-md bg-white p-4 shadow-sm'
+            className='fixed top-[50%] z-50 min-w-[300px] max-w-[calc(100%-1rem)] rounded-md bg-white p-4 shadow-sm'
             animate={{
                scale: [0, 1],
                translateY: '-50%',
@@ -78,7 +78,7 @@ Modal.Overlay = function Overlay({ disableCancle }: { disableCancle: boolean }) 
    const { close } = useModal();
    return (
       <motion.div
-         className='absolute right-0 top-0 z-0 h-full w-full bg-black'
+         className='fixed right-0 top-0 z-0 h-full w-full bg-black'
          onClick={disableCancle ? () => {} : close}
          animate={{ opacity: [0, 0.2] }}
       />
