@@ -16,12 +16,18 @@ export default function LoginForm() {
    const [loginInfo, setLoginInfo] = React.useState<IIdPassword>(initLoginInfo);
    const { login } = useAuth();
 
-   const handleLogin = () => {
+   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
       login(loginInfo);
    };
 
    return (
-      <form className='w-[336px] flex flex-col mx-auto gap-3 mt-[76px]'>
+      <form
+         className='w-[336px] flex flex-col mx-auto gap-3 mt-[76px]'
+         onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+            handleLogin(e);
+         }}
+      >
          <Input
             value={loginInfo.studentId}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +63,7 @@ export default function LoginForm() {
                <Text fontSize='12px'>Forgot password?</Text>
             </Link>
          </div>
-         <Button variant='default' type='submit' rounded='15px' size='lg' onClick={handleLogin}>
+         <Button variant='default' type='submit' rounded='15px' size='lg'>
             로그인
          </Button>
       </form>
