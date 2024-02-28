@@ -4,14 +4,18 @@ import Text from 'components/ui/typo/text';
 import React from 'react';
 
 interface InputProps extends ChakraInputProps {
-   size?: 'md' | 'lg';
+   size?: 'md' | 'lg' | 'full';
    label?: string;
    children?: string;
    className?: string;
 }
 
 export default function Input({ label, size, children, className, ...props }: InputProps) {
-   const sizeClass = size === 'md' ? '311px' : '336px';
+   const sizeClass = {
+      md: '311px',
+      lg: '336px',
+      full: '100%',
+   };
 
    return (
       <div className='flex flex-col gap-[2px]'>
@@ -23,7 +27,7 @@ export default function Input({ label, size, children, className, ...props }: In
          <ChakraInput
             bg='gray01'
             fontSize='14px'
-            width={sizeClass}
+            width={sizeClass[size ?? 'md']}
             padding='py-4'
             focusBorderColor='transparent'
             className={`${className} ${sizeClass} pl-5 placeholder:text-[14px]`}

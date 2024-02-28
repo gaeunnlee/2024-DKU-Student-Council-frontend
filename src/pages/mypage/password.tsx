@@ -31,13 +31,13 @@ export default function MyPagePassword() {
             <Input
                type='password'
                placeholder='password'
-               className='rounded-lg w-full'
                value={loginInfo.password}
+               size='full'
                onChange={(e) => {
                   setLoginInfo((prev) => ({ ...prev, password: e.target.value }));
                }}
             />
-            <Button size='md' onClick={() => console.log('hi')} className='rounded-lg'>
+            <Button size='full' className='rounded-lg'>
                확인
             </Button>
          </form>

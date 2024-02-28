@@ -63,7 +63,7 @@ export default function LoginForm() {
                <Text fontSize='12px'>Forgot password?</Text>
             </Link>
          </div>
-         <Button variant='default' type='submit' rounded='15px' size='lg'>
+         <Button variant='default' type='submit' rounded='15px' size='full'>
             로그인
          </Button>
       </form>

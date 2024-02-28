@@ -46,11 +46,11 @@ export default function MyPage() {
                ))}
             </ul>
          </nav>
-         <div className='p-4 flex flex-col'>
-            <Button size='md' variant='default' onClick={() => logout()}>
+         <div className='p-4 flex flex-col gap-3'>
+            <Button size='full' variant='default' onClick={() => logout()}>
                로그아웃
             </Button>
-            <Button size='md' onClick={() => deleteAccount()}>
+            <Button size='full' onClick={() => deleteAccount()}>
                탈퇴하기
             </Button>
          </div>
