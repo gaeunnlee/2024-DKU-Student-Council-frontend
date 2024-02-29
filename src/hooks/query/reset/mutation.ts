@@ -8,15 +8,14 @@ export const usePostFindId = () => {
    const { alert } = useAlert();
    return useMutation({
       mutationFn: findId,
-      onSuccess: () => {
-         alert('문자로 ID를 전송하였습니다.');
+      onSuccess: (data) => {
+         data.message === 'ok' && alert('문자로 ID를 전송하였습니다.');
       },
    });
 };
 
 export const usePostPhoneVerify = (setToken: React.Dispatch<React.SetStateAction<string>>) => {
-   return useMutation({
-      mutationFn: phoneVerification,
+   return useMutation(phoneVerification, {
       onSuccess: (data) => {
          setToken(data.token);
       },
@@ -28,8 +27,10 @@ export const usePostPhoneConfirmCode = (token: string) => {
 
    return useMutation({
       mutationFn: confirmCode,
-      onSuccess: () => {
-         navigate(ROUTES.RESET.PW, { state: token });
+      onSuccess: (data) => {
+         if (data.message === 'ok') {
+            navigate(ROUTES.RESET.PW, { state: token });
+         }
       },
    });
 };

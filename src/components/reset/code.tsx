@@ -3,11 +3,13 @@ import Input from 'components/ui/input';
 import Message from 'components/ui/typo/message';
 import { usePostPhoneVerify } from 'hooks/query/reset/mutation';
 import { usePostPhoneConfirmCode } from 'hooks/query/reset/mutation';
+import { useAlert } from 'hooks/useAlert';
 import React from 'react';
 
 export default function PwVerifyForm() {
    const [pwVerifyInfo, setPwVerifyInfo] = React.useState({ phoneNumber: '', code: '' });
    const [token, setToken] = React.useState<string>('');
+   const { alert } = useAlert();
 
    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
@@ -21,11 +23,23 @@ export default function PwVerifyForm() {
    const { mutate: confirmCode } = usePostPhoneConfirmCode(token);
 
    const handlePhoneVerify = () => {
-      phoneVerify(pwVerifyInfo.phoneNumber);
+      if (pwVerifyInfo.phoneNumber.length === 11) {
+         phoneVerify(pwVerifyInfo.phoneNumber);
+      } else {
+         alert('올바른 휴대폰번호를 입력해주세요.');
+      }
    };
 
    const handleConfirmCode = () => {
-      confirmCode({ token, code: pwVerifyInfo.code });
+      if (verifySuccess) {
+         if (pwVerifyInfo.code.length !== 6) {
+            alert('올바른 인증번호를 입력해주세요.');
+         } else {
+            confirmCode({ token, code: pwVerifyInfo.code });
+         }
+      } else {
+         alert('인증 후 이용 가능합니다.');
+      }
    };
 
    return (

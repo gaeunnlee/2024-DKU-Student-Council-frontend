@@ -1,12 +1,14 @@
 import Button from 'components/ui/button';
 import Input from 'components/ui/input';
 import { usePostFindId } from 'hooks/query/reset/mutation';
+import { useAlert } from 'hooks/useAlert';
 import React, { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function IdForm() {
    const [phoneNumber, setPhoneNumber] = React.useState<string>('');
    const navigate = useNavigate();
+   const { alert } = useAlert();
 
    const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
       setPhoneNumber(e.target.value);
@@ -16,7 +18,11 @@ export default function IdForm() {
 
    const handleFindId = (e: React.FormEvent) => {
       e.preventDefault();
-      mutate(phoneNumber);
+      if (phoneNumber.length === 11) {
+         mutate(phoneNumber);
+      } else {
+         alert('올바른 휴대폰번호를 입력해주세요.');
+      }
    };
 
    return (

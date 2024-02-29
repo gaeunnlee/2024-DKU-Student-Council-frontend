@@ -28,7 +28,16 @@ export default function ResetPwForm({ token }: { token: string }) {
    };
 
    const handleResetPw = () => {
-      mutate({ token, password });
+      if (
+         password.length > 7 &&
+         password.length < 17 &&
+         !passwordMismatch &&
+         /^(?=.*[a-zA-Z])(?=.*[0-9]).{7,17}$/.test(password)
+      ) {
+         mutate({ token, password });
+      } else {
+         alert('비밀번호를 올바르게 입력해주세요.');
+      }
    };
 
    useEffect(() => {
