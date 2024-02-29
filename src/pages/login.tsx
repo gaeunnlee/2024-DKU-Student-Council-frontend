@@ -71,7 +71,7 @@ export default function Login() {
             <input type='submit' data-testid='login-button' value='로그인' />
          </form>
          {/* ROUTES에 아래 페이지 경로 업데이트시 변경 예정 */}
-         <Link to={ROUTES.NOT_FOUND}>회원가입</Link>
+         <Link to={ROUTES.SIGNUP.TERMS}>회원가입</Link>
          <Link to={ROUTES.NOT_FOUND}>ID/PW 찾기</Link>
       </>
    );
