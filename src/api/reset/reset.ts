@@ -16,11 +16,8 @@ export const findId = async (phoneNumber: string) => {
 };
 
 export const phoneVerification = async (phoneNumber: string) => {
-   const formattedPhoneNumber = formatphoneNumber(phoneNumber);
    try {
-      const { data } = await client.post(API_PATH.USER.RESET.PHONE_VERIFY, {
-         phoneNumber: formattedPhoneNumber,
-      });
+      const { data } = await client.post(API_PATH.USER.RESET.PHONE_VERIFY, { phoneNumber });
       return data;
    } catch (error) {
       console.error(error);
@@ -41,7 +38,7 @@ export const confirmCode = async ({ token, code }: VerifyCodeParams) => {
 
 export const resetPw = async ({ token, password }: ResetPwParams) => {
    try {
-      const { data } = await client.post(API_PATH.USER.RESET.RESET_PW, {
+      const { data } = await client.patch(API_PATH.USER.RESET.RESET_PW, {
          token: token,
          password: password,
       });

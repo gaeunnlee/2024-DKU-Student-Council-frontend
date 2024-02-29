@@ -3,14 +3,18 @@ import Input from 'components/ui/input';
 import Message from 'components/ui/typo/message';
 import Text from 'components/ui/typo/text';
 import { usePostResetPw } from 'hooks/query/reset/mutation';
-import React, { ChangeEvent, useState } from 'react';
+import { useAlert } from 'hooks/useAlert';
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function ResetPwForm({ token }: { token: string }) {
    const [password, setPassword] = useState<string>('');
    const [passwordConfirm, setPasswordConfirm] = useState<string>('');
    const [passwordMismatch, setPasswordMismatch] = useState<boolean>(false);
+   const navigate = useNavigate();
+   const { alert } = useAlert();
 
-   const { mutate } = usePostResetPw();
+   const { mutate, isSuccess: resetSuccess } = usePostResetPw();
 
    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
@@ -26,6 +30,13 @@ export default function ResetPwForm({ token }: { token: string }) {
    const handleResetPw = () => {
       mutate({ token, password });
    };
+
+   useEffect(() => {
+      if (resetSuccess) {
+         alert('비밀번호가 변경되었습니다.');
+         navigate('/login');
+      }
+   }, [resetSuccess]);
 
    return (
       <form className='flex flex-col mx-auto w-[311px]'>

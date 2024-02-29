@@ -59,9 +59,11 @@ export default function LoginForm() {
             <Checkbox>
                <Text fontSize='12px'>Save ID</Text>
             </Checkbox>
-            <Link to={ROUTES.RESET.INDEX}>
-               <Text fontSize='12px'>Forgot password?</Text>
-            </Link>
+            <div className='flex text-[12px] gap-2'>
+               <Link to={ROUTES.SIGNUP.VERIFY}>회원가입</Link>
+               <span> | </span>
+               <Link to={ROUTES.RESET.INDEX}>Forgot ID/PW?</Link>
+            </div>
          </div>
          <Button variant='default' type='submit' rounded='15px' size='full'>
             로그인

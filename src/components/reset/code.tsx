@@ -4,7 +4,7 @@ import Message from 'components/ui/typo/message';
 import { usePostPhoneVerify } from 'hooks/query/reset/mutation';
 import { usePostPhoneConfirmCode } from 'hooks/query/reset/mutation';
 import { useNavigate } from 'react-router-dom';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ROUTES } from 'constants/route';
 
 export default function PwVerifyForm() {
@@ -25,17 +25,19 @@ export default function PwVerifyForm() {
 
    const handlePhoneVerify = () => {
       phoneVerify(pwVerifyInfo.phoneNumber);
-      if (verifySuccess) {
-         setToken(data.token);
-      }
    };
+
+   useEffect(() => {
+      verifySuccess && setToken(data.token);
+   }, [verifySuccess]);
 
    const handleConfirmCode = () => {
       confirmCode({ token, code: pwVerifyInfo.code });
-      if (codeSuccess) {
-         navigate(ROUTES.RESET.PW, { state: token });
-      }
    };
+
+   useEffect(() => {
+      codeSuccess && navigate(ROUTES.RESET.PW, { state: token });
+   }, [codeSuccess]);
 
    return (
       <form className='flex flex-col mx-auto w-[311px]'>
