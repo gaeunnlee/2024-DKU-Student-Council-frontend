@@ -49,6 +49,13 @@ export const API_PATH = {
             CODE: (signupToken: string) => `/user/sms/verify/${signupToken}`,
          },
       },
+      /** 아이디와 비밀번호 재설정 */
+      RESET: {
+         FIND_ID: '/user/find/id',
+         PHONE_VERIFY: '/user/find/pwd',
+         PHONE_VERIFY_CODE: '/user/find/pwd/verify',
+         RESET_PW: '/user/find/pwd/reset',
+      },
       /** 회원정보 수정 */
       CHANGE: {
          /** 닉네임 변경 */

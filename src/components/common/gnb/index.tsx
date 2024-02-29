@@ -37,7 +37,7 @@ Gnb.GoBack = function GoBack() {
    const navigate = useNavigate();
    return (
       <button onClick={() => navigate(-1)}>
-         <SvgIcon id='arrow_back' width={18} height={22} />
+         <SvgIcon id='arrow_back' width={18} height={22} color='white' />
       </button>
    );
 };

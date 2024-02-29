@@ -1,7 +1,7 @@
 import React from 'react';
 import { useModal } from 'hooks/useModal';
 import { IWithReactChildren } from 'shared/interfaces/default-interfaces';
-import Button from '../button';
+import Button from 'components/ui/button';
 import { motion } from 'framer-motion';
 
 export interface ModalProps {
@@ -49,7 +49,7 @@ export default function Modal({
             <div className='flex flex-col gap-2'>
                {accept && (
                   <Button
-                     variant='primary'
+                     size='md'
                      onClick={() => {
                         accept?.onClick();
                         close();
@@ -60,6 +60,7 @@ export default function Modal({
                )}
                {cancel && (
                   <Button
+                     size='md'
                      onClick={() => {
                         cancel?.onClick();
                         close();

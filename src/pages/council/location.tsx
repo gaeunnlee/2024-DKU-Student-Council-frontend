@@ -15,7 +15,8 @@ export default function Location() {
          heading: '총학생회',
          subHeading: '오시는 길',
          headingStyle: '',
-         subHeadingStyle: '',
+         headingText: '',
+         subHeadingText: '',
          margin: '',
          rounded: true,
       });

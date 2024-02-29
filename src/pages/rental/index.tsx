@@ -36,7 +36,8 @@ export default function Rental() {
          isMain: false,
          fullscreen: false,
          headingStyle: '',
-         subHeadingStyle: '',
+         headingText: '',
+         subHeadingText: '',
          margin: '',
          rounded: true,
       });

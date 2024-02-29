@@ -5,14 +5,13 @@ import DefaultLayout from 'layouts/DefaultLayout';
 import PetitionBoard from 'pages/petition';
 import NoticePost from 'pages/notice/post';
 import PetitionForm from 'pages/petition/post';
-
 import Main from 'pages';
-import Menu from 'pages/menu';
 import NotFound from 'pages/404';
 import Login from 'pages/login';
 import Signup from 'pages/signup';
 import SignupTerms from 'pages/signup/terms';
 import SignupVerify from 'pages/signup/verify';
+import SignupSuccess from 'pages/signup/success';
 import SignupInfo from 'pages/signup/info';
 import Greeting from 'pages/council';
 import Organization from 'pages/council/organization';
@@ -28,6 +27,10 @@ import RuleBoard from 'pages/rule';
 import MyPagePassword from 'pages/mypage/password';
 import MyPageEdit from 'pages/mypage/edit';
 import MyPageUpdate from 'pages/mypage/update';
+import ResetIdPw from 'pages/reset/resetIdPw';
+import ResetId from 'pages/reset/resetId';
+import VerifyPw from 'pages/reset/verifyPw';
+import ResetPw from 'pages/reset/resetPw';
 
 /**
  * @description 라우터
@@ -40,8 +43,11 @@ export default function Router() {
          <DefaultLayout>
             <Routes>
                <Route path={ROUTES.MAIN} element={<Main />} />
-               <Route path={ROUTES.MENU} element={<Menu />} />
                <Route path={ROUTES.LOGIN} element={<Login />} />
+               <Route path={ROUTES.RESET.INDEX} element={<ResetIdPw />} />
+               <Route path={ROUTES.RESET.ID} element={<ResetId />} />
+               <Route path={ROUTES.RESET.PW_VERIFY} element={<VerifyPw />} />
+               <Route path={ROUTES.RESET.PW} element={<ResetPw />} />
                <Route
                   path={ROUTES.MYPAGE.INDEX}
                   element={
@@ -78,6 +84,7 @@ export default function Router() {
                   <Route index path={ROUTES.SIGNUP.VERIFY} element={<SignupVerify />} />
                   <Route path={ROUTES.SIGNUP.TERMS} element={<SignupTerms />} />
                   <Route path={ROUTES.SIGNUP.INFO} element={<SignupInfo />} />
+                  <Route path={ROUTES.SIGNUP.SUCCESS} element={<SignupSuccess />} />
                </Route>
                <Route path={ROUTES.COUNCIL.GREETING} element={<Greeting />} />
                <Route path={ROUTES.COUNCIL.ORGANIZATION} element={<Organization />} />

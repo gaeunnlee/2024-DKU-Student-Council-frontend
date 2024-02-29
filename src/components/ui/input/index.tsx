@@ -1,42 +1,40 @@
+import { Input as ChakraInput } from '@chakra-ui/react';
+import { InputProps as ChakraInputProps } from '@chakra-ui/react';
+import Text from 'components/ui/typo/text';
 import React from 'react';
 
-interface InputProps extends React.ComponentProps<'input'> {
+interface InputProps extends ChakraInputProps {
+   size?: 'md' | 'lg' | 'full';
    label?: string;
-   placeholder?: string;
-   value?: string;
-   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-   message?: string | null;
-   isSuccess?: boolean;
+   children?: string;
+   className?: string;
 }
 
-export default function Input({
-   className,
-   type,
-   label,
-   placeholder,
-   name,
-   value,
-   onChange,
-   message,
-   isSuccess,
-   ...props
-}: InputProps) {
-   const messageClassName = isSuccess ? 'text-blue-500' : 'text-red-500';
+export default function Input({ label, size, children, className, ...props }: InputProps) {
+   const sizeClass = {
+      md: '311px',
+      lg: '336px',
+      full: '100%',
+   };
 
    return (
-      <div className={'flex flex-col'}>
-         {label && <label className={'block text-gray-600 text-sm ml-5 mb-1'}>{label}</label>}
-         <input
-            className={`w-311 border-none rounded-full bg-gray-200 text-sm px-6 py-5 focus:outline-none 
-            ${className} ::placeholder text-gray-600 mb-2`}
-            type={type}
-            placeholder={placeholder}
-            name={name}
-            value={value}
-            onChange={onChange || (() => {})}
+      <div className='flex flex-col gap-[2px]'>
+         {label && (
+            <Text color='gray02' className='ml-2'>
+               {label}
+            </Text>
+         )}
+         <ChakraInput
+            bg='gray01'
+            fontSize='14px'
+            width={sizeClass[size ?? 'md']}
+            padding='py-4'
+            focusBorderColor='transparent'
+            className={`${className} ${sizeClass} pl-5 placeholder:text-[14px]`}
             {...props}
-         />
-         {message && <p className={`text-xs text-center ${messageClassName}`}>{message}</p>}
+         >
+            {children}
+         </ChakraInput>
       </div>
    );
 }

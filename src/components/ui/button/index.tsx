@@ -1,20 +1,36 @@
 import React from 'react';
-import clsx from 'clsx';
+import { Button as ChakraButton } from '@chakra-ui/react';
+import Text from '../typo/text';
+import { ButtonProps as ChakraButtonProps } from '@chakra-ui/react';
 
-interface Props extends React.ComponentProps<'button'> {
-   variant?: 'primary' | 'red' | 'black';
+interface ButtonProps extends ChakraButtonProps {
+   size: 'full' | 'xl' | 'lg' | 'md';
+   variant?: 'default' | 'white';
+   children: string;
+   className?: string;
+   onClick?: () => void;
 }
 
-export default function Button({ variant, className, ...props }: Props) {
-   const style = {
-      primary: 'text-white bg-blue-600',
-      red: 'text-white bg-red-700',
-      black: 'text-white bg-black',
+export default function Button({ size, variant, className, children, onClick, ...props }: ButtonProps) {
+   const buttonVariant = variant === 'default' ? 'black' : 'gray01';
+   const textColor = variant === 'default' ? 'white' : 'black';
+   const buttonSize = {
+      full: '100%',
+      xl: '349px',
+      lg: '336px',
+      md: '316px',
    };
    return (
-      <button
-         className={`${clsx('rounded-full px-4 py-2', className)} ${variant && style[variant]}`}
+      <ChakraButton
+         bg={`${buttonVariant}`}
+         _focus={{ bg: 'current', textColor: 'black' }}
+         _hover={{ bg: 'current' }}
+         width={buttonSize[size]}
+         className={`${className}`}
+         onClick={onClick}
          {...props}
-      />
+      >
+         <Text textColor={textColor}>{children}</Text>
+      </ChakraButton>
    );
 }

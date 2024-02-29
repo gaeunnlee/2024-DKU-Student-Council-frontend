@@ -1,4 +1,4 @@
-import { shadowStyle } from 'constants/style';
+import { shadowStyle } from 'constants/shadow';
 import { IEvent, IFormInfo, IInputValue } from 'interfaces/mypage/edit';
 import React from 'react';
 import { FaCheckCircle } from 'react-icons/fa';

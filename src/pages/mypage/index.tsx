@@ -4,7 +4,7 @@ import { useAuth } from 'hooks/useAuth';
 import { FaUser } from 'react-icons/fa6';
 import { IoIosListBox } from 'react-icons/io';
 import { BiSolidCalendarStar } from 'react-icons/bi';
-import { shadowStyle } from 'constants/style';
+import { shadowStyle } from 'constants/shadow';
 import { useNavigate } from 'react-router-dom';
 import MyPageLayout from 'layouts/MyPageLayout';
 import { API_PATH, CONSTANTS } from 'constants/api';
@@ -46,11 +46,13 @@ export default function MyPage() {
                ))}
             </ul>
          </nav>
-         <div className='p-4 flex flex-col'>
-            <Button variant='red' onClick={() => logout()}>
+         <div className='p-4 flex flex-col gap-3'>
+            <Button size='full' variant='default' onClick={() => logout()}>
                로그아웃
             </Button>
-            <Button onClick={() => deleteAccount()}>탈퇴하기</Button>
+            <Button size='full' onClick={() => deleteAccount()}>
+               탈퇴하기
+            </Button>
          </div>
       </MyPageLayout>
    );

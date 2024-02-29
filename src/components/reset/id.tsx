@@ -1,0 +1,51 @@
+import Button from 'components/ui/button';
+import Input from 'components/ui/input';
+import { usePostFindId } from 'hooks/query/reset/mutation';
+import { useAlert } from 'hooks/useAlert';
+import React, { ChangeEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+export default function IdForm() {
+   const [phoneNumber, setPhoneNumber] = React.useState<string>('');
+   const navigate = useNavigate();
+   const { alert } = useAlert();
+
+   const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
+      setPhoneNumber(e.target.value);
+   };
+
+   const { mutate } = usePostFindId();
+
+   const handleFindId = (e: React.FormEvent) => {
+      e.preventDefault();
+      if (phoneNumber.length === 11) {
+         mutate(phoneNumber);
+      } else {
+         alert('올바른 휴대폰번호를 입력해주세요.');
+      }
+   };
+
+   return (
+      <form onSubmit={handleFindId} className='flex flex-col items-center gap-16'>
+         <div className='flex mx-auto'>
+            <Input
+               size='md'
+               type='number'
+               value={phoneNumber}
+               placeholder='가입시 입력한 휴대전화번호 입력'
+               onChange={handlePhoneChange}
+            />
+            <button className='ml-[-40px] z-10 text-[13px]'>요청</button>
+         </div>
+         <Button
+            onClick={() => navigate('/login')}
+            size='md'
+            variant='default'
+            borderRadius='30px'
+            className='!w-[311px]'
+         >
+            확인
+         </Button>
+      </form>
+   );
+}

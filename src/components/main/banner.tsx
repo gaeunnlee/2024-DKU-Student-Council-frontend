@@ -1,10 +1,12 @@
 import React from 'react';
+import SwiperCore from 'swiper';
+import { Pagination } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
 import 'swiper/css';
 import { BaseSkeleton } from 'components/ui/skeleton';
 
-export const BannerSize = 'w-full h-[120px]';
+export const BannerSize = 'w-[322px] h-[322px] absolute top-44';
 
 export interface IBanner {
    id: number;
@@ -12,25 +14,28 @@ export interface IBanner {
    redirectUrl: string | null;
 }
 
-/**
- * @description 메인 페이지의 배너 컴포넌트
- */
-export default function Banner({ banners }: { banners?: IBanner[] }) {
-   return banners ? (
-      <Swiper
-         autoplay={{ delay: 1000 }}
-         navigation
-         pagination={{ clickable: true }}
-         className={BannerSize}
-         spaceBetween={16}
-      >
-         {banners?.map((item) => (
-            <SwiperSlide key={item.id} className='w-full overflow-hidden'>
-               <img src={item.url} alt='banner' className='h-full w-full object-cover shadow-md' />
-            </SwiperSlide>
-         ))}
-      </Swiper>
-   ) : (
-      <BaseSkeleton className={`${BannerSize}`} />
+export default function Banner({ banners }: { banners: IBanner[] }) {
+   SwiperCore.use([Autoplay]);
+
+   return (
+      <div className='w-full h-[337px] flex justify-center'>
+         {banners.length > 0 ? (
+            <Swiper
+               autoplay={{ delay: 2000, disableOnInteraction: false }}
+               modules={[Autoplay, Pagination]}
+               pagination={{ clickable: true }}
+               className={BannerSize}
+               spaceBetween={16}
+            >
+               {banners?.map((item) => (
+                  <SwiperSlide key={item.id}>
+                     <img src={item.url} alt='banner' className='w-full h-full object-cover rounded-lg' />
+                  </SwiperSlide>
+               ))}
+            </Swiper>
+         ) : (
+            <BaseSkeleton className={`${BannerSize} rounded-lg`} />
+         )}
+      </div>
    );
 }

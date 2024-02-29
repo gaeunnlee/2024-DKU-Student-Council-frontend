@@ -1,8 +1,6 @@
 export const ROUTES = {
    /** 메인 화면 */
    MAIN: '/',
-   /** 사이드메뉴 */
-   MENU: '/menu',
    /** 로그인 화면 */
    LOGIN: '/login',
    /** 마이페이지 */
@@ -24,6 +22,15 @@ export const ROUTES = {
       VERIFY: '/signup/verify',
       /** 회원 정보 입력 */
       INFO: '/signup/info',
+      /** 회원가입 성공 */
+      SUCCESS: '/signup/success',
+   },
+   /** 아이디 및 비밀번호 재설정 */
+   RESET: {
+      INDEX: '/reset/idpw',
+      ID: '/reset/id',
+      PW_VERIFY: '/reset/pw/verify',
+      PW: '/reset/pw',
    },
    /** 총학생회 */
    COUNCIL: {

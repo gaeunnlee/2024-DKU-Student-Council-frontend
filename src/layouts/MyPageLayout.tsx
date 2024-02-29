@@ -29,7 +29,8 @@ export default function MyPageLayout({
          isMain: false,
          fullscreen: false,
          headingStyle: '',
-         subHeadingStyle: '',
+         headingText: '',
+         subHeadingText: '',
          margin: '',
          rounded: false,
       });
