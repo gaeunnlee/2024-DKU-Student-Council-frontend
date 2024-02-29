@@ -77,7 +77,7 @@ export default function MyPageUpdate() {
                }}
                maxLength={8}
                placeholder='학번 입력'
-               className='w-full rounded-lg'
+               className='w-full rounded-lg mb-3'
                value={loginInfo.dkuStudentId}
             />
             <Input
@@ -95,7 +95,7 @@ export default function MyPageUpdate() {
             단국대학교 웹정보 로그인 시 사용 되는 ID, PW를 통해 학생인증이 진행됩니다. (입력한 정보는 인증 후
             즉시 폐기됩니다)
          </Text>
-         <Button size='md' className='w-full'>
+         <Button type='submit' size='md' className='w-full'>
             인증
          </Button>
       </form>
