@@ -1,21 +1,36 @@
 import { useMutation } from 'react-query';
 import { confirmCode, findId, phoneVerification, resetPw } from 'api/reset/reset';
+import { useAlert } from 'hooks/useAlert';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from 'constants/route';
 
 export const usePostFindId = () => {
+   const { alert } = useAlert();
    return useMutation({
       mutationFn: findId,
+      onSuccess: () => {
+         alert('문자로 ID를 전송하였습니다.');
+      },
    });
 };
 
-export const usePostPhoneVerify = () => {
+export const usePostPhoneVerify = (setToken: React.Dispatch<React.SetStateAction<string>>) => {
    return useMutation({
       mutationFn: phoneVerification,
+      onSuccess: (data) => {
+         setToken(data.token);
+      },
    });
 };
 
-export const usePostPhoneConfirmCode = () => {
+export const usePostPhoneConfirmCode = (token: string) => {
+   const navigate = useNavigate();
+
    return useMutation({
       mutationFn: confirmCode,
+      onSuccess: () => {
+         navigate(ROUTES.RESET.PW, { state: token });
+      },
    });
 };
 

@@ -3,14 +3,11 @@ import Input from 'components/ui/input';
 import Message from 'components/ui/typo/message';
 import { usePostPhoneVerify } from 'hooks/query/reset/mutation';
 import { usePostPhoneConfirmCode } from 'hooks/query/reset/mutation';
-import { useNavigate } from 'react-router-dom';
-import React, { useEffect } from 'react';
-import { ROUTES } from 'constants/route';
+import React from 'react';
 
 export default function PwVerifyForm() {
    const [pwVerifyInfo, setPwVerifyInfo] = React.useState({ phoneNumber: '', code: '' });
    const [token, setToken] = React.useState<string>('');
-   const navigate = useNavigate();
 
    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
@@ -20,24 +17,16 @@ export default function PwVerifyForm() {
       });
    };
 
-   const { mutate: phoneVerify, isSuccess: verifySuccess, data } = usePostPhoneVerify();
-   const { mutate: confirmCode, isSuccess: codeSuccess } = usePostPhoneConfirmCode();
+   const { mutate: phoneVerify, isSuccess: verifySuccess } = usePostPhoneVerify(setToken);
+   const { mutate: confirmCode } = usePostPhoneConfirmCode(token);
 
    const handlePhoneVerify = () => {
       phoneVerify(pwVerifyInfo.phoneNumber);
    };
 
-   useEffect(() => {
-      verifySuccess && setToken(data.token);
-   }, [verifySuccess]);
-
    const handleConfirmCode = () => {
       confirmCode({ token, code: pwVerifyInfo.code });
    };
-
-   useEffect(() => {
-      codeSuccess && navigate(ROUTES.RESET.PW, { state: token });
-   }, [codeSuccess]);
 
    return (
       <form className='flex flex-col mx-auto w-[311px]'>
