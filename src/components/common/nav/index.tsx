@@ -20,24 +20,18 @@ const navItems: NavItem[] = [
    },
    {
       id: 2,
-      name: 'With_dankook',
-      path: '/snap',
-      icon: <SvgIcon id='with_dankook' width={19.53} height={18.77} />,
-   },
-   {
-      id: 3,
       name: 'Home',
       path: '/',
       icon: <SvgIcon id='home' width={19.53} height={19.6} />,
    },
    {
-      id: 4,
+      id: 3,
       name: '제휴사업',
       path: '/partnership',
       icon: <SvgIcon id='partnership' width={17.54} height={19.6} />,
    },
    {
-      id: 5,
+      id: 4,
       name: 'My page',
       path: '/mypage',
       icon: <SvgIcon id='mypage' width={20.06} height={20.13} />,
