@@ -1,5 +1,5 @@
 import React, { ComponentProps } from 'react';
-import { LuPaperclip } from 'react-icons/lu';
+import { PiPaperclipFill } from 'react-icons/pi';
 import { IWithReactChildren } from 'shared/interfaces/default-interfaces';
 interface IPostBox {
    shadow?: boolean;
@@ -41,7 +41,7 @@ export function FileBox({
 }: IFileBox & IWithReactChildren & ComponentProps<'div'>) {
    return (
       <div
-         className={`px-4 py-5 bg-white rounded-lg shadow-[2px_2px_5px_2px_#00000010] m-5 leading-5 transition-opacity animate-fadeIn ${
+         className={`text-sm px-4 py-5 bg-white rounded-lg shadow-[2px_2px_5px_2px_#00000010] leading-5 transition-opacity animate-fadeIn ${
             className ?? ''
          }`}
          {...props}
@@ -55,7 +55,7 @@ export function FileBox({
                   rel='noopener noreferrer'
                   key={file.id}
                >
-                  <LuPaperclip size={30} />
+                  <PiPaperclipFill style={{ fontSize: '20px' }} />
                   <span className='overflow-hidden text-ellipsis truncate'>{file.originalName}</span>
                </a>
             </>
