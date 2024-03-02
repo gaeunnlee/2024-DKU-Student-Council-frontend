@@ -3,6 +3,7 @@ import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import Box from 'components/ui/box';
 import SvgIcon from 'components/common/icon/SvgIcon';
+import { HeadingStyle } from 'constants/heading';
 
 export default function Recruitment() {
    const { setLayout } = useLayout();
@@ -15,9 +16,9 @@ export default function Recruitment() {
          fullscreen: false,
          heading: '부원모집',
          subHeading: '모집요강',
-         headingStyle: '',
-         headingText: '',
-         subHeadingText: '',
+         headingStyle: HeadingStyle.default.header,
+         headingText: HeadingStyle.default.heading,
+         subHeadingText: HeadingStyle.default.subHeading,
          margin: '',
          rounded: true,
       });

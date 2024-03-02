@@ -1,12 +1,10 @@
 import React from 'react';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
+import { HeadingStyle } from 'constants/heading';
 
 export default function Organization() {
    const { setLayout } = useLayout();
-
-   const headingStyle = 'mt-[38px] mb-[5px] ml-[29px]';
-   const subHeadingStyle = 'ml-[29px] mb-[30px] font-semibold';
 
    useEffectOnce(() => {
       setLayout({
@@ -16,9 +14,9 @@ export default function Organization() {
          fullscreen: false,
          heading: '총학생회',
          subHeading: '조직도',
-         headingStyle: headingStyle,
-         headingText: '',
-         subHeadingText: subHeadingStyle,
+         headingStyle: HeadingStyle.default.header,
+         headingText: HeadingStyle.default.heading,
+         subHeadingText: HeadingStyle.default.subHeading,
          margin: '',
          rounded: true,
       });

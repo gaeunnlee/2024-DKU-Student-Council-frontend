@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import map from '../../assets/images/map.png';
+import { HeadingStyle } from 'constants/heading';
 
 export default function Location() {
    const { setLayout } = useLayout();
@@ -14,9 +15,9 @@ export default function Location() {
          fullscreen: false,
          heading: '총학생회',
          subHeading: '오시는 길',
-         headingStyle: '',
-         headingText: '',
-         subHeadingText: '',
+         headingStyle: HeadingStyle.default.header,
+         headingText: HeadingStyle.default.heading,
+         subHeadingText: HeadingStyle.default.subHeading,
          margin: '',
          rounded: true,
       });

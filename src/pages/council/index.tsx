@@ -2,12 +2,10 @@ import React from 'react';
 import Box from 'components/ui/box';
 import { useLayout } from 'hooks/useLayout';
 import { useEffectOnce } from 'hooks/useEffectOnce';
+import { HeadingStyle } from 'constants/heading';
 
 export default function Greeting() {
    const { setLayout } = useLayout();
-
-   const headingStyle = 'mt-[38px] mb-[5px] ml-[29px]';
-   const subHeadingStyle = 'ml-[29px] mb-[30px] font-semibold';
 
    useEffectOnce(() => {
       setLayout({
@@ -17,9 +15,9 @@ export default function Greeting() {
          fullscreen: false,
          heading: '총학생회',
          subHeading: '인사말',
-         headingStyle: headingStyle,
-         headingText: '',
-         subHeadingText: subHeadingStyle,
+         headingStyle: HeadingStyle.default.header,
+         headingText: HeadingStyle.default.heading,
+         subHeadingText: HeadingStyle.default.subHeading,
          margin: '',
          rounded: true,
       });
