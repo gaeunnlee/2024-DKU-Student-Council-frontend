@@ -28,7 +28,7 @@ export default function ConferenceBoard() {
    const Cell = ({ data }: { data: IBoardList }) => (
       <div className='flex gap-2'>
          <Title content={data.title} className='grow text-center truncate' />
-         <Date content={data.createdAt} />
+         <Date content={data.createdAt} className='font-semibold' />
       </div>
    );
    return (

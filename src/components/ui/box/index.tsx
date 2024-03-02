@@ -14,7 +14,7 @@ export default function Box({
 
    return (
       <div
-         className={`p-4 bg-white border border-gray-200 rounded-lg shadow-sm transition-opacity animate-fadeIn ${
+         className={`p-4 bg-white border border-gray-200 rounded-lg transition-opacity animate-fadeIn ${
             className ?? ''
          }`}
          style={type && boxType[type]}
