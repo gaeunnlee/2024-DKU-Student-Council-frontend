@@ -26,16 +26,10 @@ export default function Greeting() {
 
    return (
       <SinglePageLayout>
-         <Box
-            className='overflow-hidden'
-            style={{ padding: '0', boxShadow: '1px 1px 3px 0px rgba(0, 0, 0, 0.25)' }}
-         >
+         <Box className='overflow-hidden' type='shadowImage'>
             <img className='w-full h-[calc(100vw*0.2)] border-none bg-neutral-300' src={''} />
          </Box>
-         <Box
-            className='text-sm leading-5 flex flex-col gap-5'
-            style={{ boxShadow: '1px 1px 3px 0px rgba(0, 0, 0, 0.25)', border: 'none' }}
-         >
+         <Box className='text-sm leading-5 flex flex-col gap-5' type='shadow'>
             <header>
                <h1>그대의 청춘에 단국을 담다,</h1>
             </header>
