@@ -13,10 +13,11 @@ export default function NoticePost() {
       files: [],
    };
 
-   const { formInfo, setFormInfo, handleUpdate, handleSubmit } = useFormUpload(
-      initFormInfo,
-      API_PATH.POST.NOTICE.ROOT,
-   );
+   const { formInfo, setFormInfo, handleUpdate, handleSubmit } = useFormUpload({
+      initFormInfo: initFormInfo,
+      API_PATH: API_PATH.POST.NOTICE.ROOT,
+      NAVIGATE_PATH: ROUTES.NOTICE.ROOT,
+   });
 
    const { imageList, addImage, deleteImage } = useImageUpload();
 

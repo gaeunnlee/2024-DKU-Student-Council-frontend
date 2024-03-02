@@ -46,7 +46,9 @@ export default function PetitionBoard() {
       <div className='flex justify-between leading-9 px-2 gap-3 whitespace-nowrap'>
          <Text length={4}>{getPetitionStatus(data.status!)}</Text>
          <Title content={data.title} className='text-ellipsis overflow-hidden' />
-         <Text length={4}>{`D-${getDaysBetween(data.expiresAt!)}`}</Text>
+         <Text length={4}>
+            {getDaysBetween(data.expiresAt!) > 0 ? `D-${getDaysBetween(data.expiresAt!)}` : '만료'}
+         </Text>
       </div>
    );
 

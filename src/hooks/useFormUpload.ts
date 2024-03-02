@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useApi } from './useApi';
+import { useNavigate } from 'react-router-dom';
 
 export interface IFormInfo {
    title: string;
@@ -7,8 +8,17 @@ export interface IFormInfo {
    files: File[];
 }
 
-export const useFormUpload = (initFormInfo: IFormInfo, apiPath: string) => {
+export const useFormUpload = ({
+   initFormInfo,
+   API_PATH,
+   NAVIGATE_PATH,
+}: {
+   initFormInfo: IFormInfo;
+   API_PATH: string;
+   NAVIGATE_PATH: string;
+}) => {
    const [formInfo, setFormInfo] = React.useState<IFormInfo>(initFormInfo);
+   const navigate = useNavigate();
 
    const handleUpdate = (value: string) => {
       const cleanedValue = value.replaceAll(/<\/?p[^>]*>/g, '').replace(/<br>/g, '');
@@ -19,7 +29,7 @@ export const useFormUpload = (initFormInfo: IFormInfo, apiPath: string) => {
    };
    const { post } = useApi();
 
-   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const formData = new FormData();
       formData.append('title', formInfo.title);
@@ -29,16 +39,18 @@ export const useFormUpload = (initFormInfo: IFormInfo, apiPath: string) => {
             formData.append('files', file);
          }
       }
-      post<IFormInfo, number>(apiPath, formInfo, {
-         authenticate: true,
-         contentType: 'multipart/form-data',
-         log: true,
-      });
+      try {
+         const data = await post<IFormInfo, number>(API_PATH, formInfo, {
+            authenticate: true,
+            contentType: 'multipart/form-data',
+            log: true,
+         });
+         navigate(NAVIGATE_PATH);
+         return data;
+      } catch (e) {
+         console.log(e);
+      }
    };
-
-   useEffect(() => {
-      console.log(initFormInfo);
-   }, [initFormInfo]);
 
    return {
       formInfo,

@@ -13,17 +13,18 @@ export default function PetitionForm() {
       files: [],
    };
 
-   const { formInfo, setFormInfo, handleUpdate, handleSubmit } = useFormUpload(
-      initFormInfo,
-      API_PATH.POST.PETITION.ROOT,
-   );
+   const { formInfo, setFormInfo, handleUpdate, handleSubmit } = useFormUpload({
+      initFormInfo: initFormInfo,
+      API_PATH: API_PATH.POST.PETITION.ROOT,
+      NAVIGATE_PATH: ROUTES.PETITION.ROOT,
+   });
 
    const { imageList, addImage, deleteImage } = useImageUpload();
 
    return (
       <Post
          pageTitle='청원'
-         navigateUrl={ROUTES.PETITION.POST}
+         navigateUrl={ROUTES.PETITION.ROOT}
          formInfo={formInfo}
          setFormInfo={setFormInfo}
          handleUpdate={handleUpdate}

@@ -1,9 +1,8 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode } from 'react';
 import TextEditor from 'components/common/editor/index';
 import { ImageProps } from 'hooks/useImageUpload';
 import { IFormInfo } from 'hooks/useFormUpload';
 import FloatingButton from 'components/ui/button/FloatingButton';
-import { useNavigate } from 'react-router-dom';
 import PostBox from 'components/ui/box/PostBox';
 import Title from 'components/ui/text/board';
 import { FaCamera } from 'react-icons/fa';
@@ -29,13 +28,7 @@ export default function Post({
    addImage,
    deleteImage,
    pageTitle,
-   navigateUrl,
 }: PostProps) {
-   const navigate = useNavigate();
-   useEffect(() => {
-      console.log(imageList);
-   }, [imageList]);
-
    return (
       <form onSubmit={handleSubmit} encType='multipart/form-data' className='flex-col'>
          <Box>
@@ -45,7 +38,7 @@ export default function Post({
                id='title'
                name='title'
                value={formInfo.title}
-               placeholder='청원 제목을 입력해주세요'
+               placeholder='제목을 입력해주세요'
                className='w-full focus:outline-0'
                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setFormInfo((prev) => {
@@ -87,11 +80,7 @@ export default function Post({
                </div>
             ))}
          </Box>
-         <FloatingButton
-            event={() => {
-               navigate(navigateUrl);
-            }}
-         >
+         <FloatingButton event={() => {}}>
             <p className='text-white'>Upload</p>
          </FloatingButton>
       </form>
