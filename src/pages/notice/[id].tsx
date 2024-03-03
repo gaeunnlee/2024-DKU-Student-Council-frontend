@@ -4,11 +4,12 @@ import { API_PATH } from 'constants/api';
 import React from 'react';
 import Collapse from 'components/ui/collapse';
 import { useFetchPost } from 'hooks/useFetchPost';
+import PostDetailLayout from 'layouts/PostDetailLayout';
 
 export default function NoticeDetail() {
    const { post, images } = useFetchPost<INotice>({ api: API_PATH.POST.NOTICE.ROOT, isCarousel: true });
    return (
-      <>
+      <PostDetailLayout>
          {images!.length > 0 && (
             <PostBox>
                <Collapse status={true}>
@@ -22,7 +23,7 @@ export default function NoticeDetail() {
             <p>{post?.body}</p>
          </PostBox>
          {post !== undefined && post.files.length > 0 && <FileBox files={post?.files} />}
-      </>
+      </PostDetailLayout>
    );
 }
 
