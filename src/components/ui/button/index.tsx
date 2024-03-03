@@ -4,7 +4,7 @@ import Text from '../typo/text';
 import { ButtonProps as ChakraButtonProps } from '@chakra-ui/react';
 
 interface ButtonProps extends ChakraButtonProps {
-   size: 'xl' | 'lg' | 'md';
+   size: 'full' | 'xl' | 'lg' | 'md';
    variant?: 'default' | 'white';
    children: string;
    className?: string;
@@ -15,6 +15,7 @@ export default function Button({ size, variant, className, children, onClick, ..
    const buttonVariant = variant === 'default' ? 'black' : 'gray01';
    const textColor = variant === 'default' ? 'white' : 'black';
    const buttonSize = {
+      full: '100%',
       xl: '349px',
       lg: '336px',
       md: '316px',

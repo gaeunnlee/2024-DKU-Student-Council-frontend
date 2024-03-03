@@ -10,8 +10,8 @@ export default function ResetPw() {
    const location = useLocation();
    const navigate = useNavigate();
    const { state } = location;
-   const data = state?.data ?? null;
-   const token = data?.token;
+   // const data = state?.data ?? null;
+   // const token = data?.token;
    const { setLayout } = useLayout();
 
    useEffectOnce(() => {
@@ -26,11 +26,11 @@ export default function ResetPw() {
    });
 
    useEffect(() => {
-      if (!data) {
+      if (!state) {
          alert('휴대폰 인증을 먼저 해주세요');
          navigate(ROUTES.RESET.PW_VERIFY);
       }
-   }, [data, navigate]);
+   }, [state, navigate]);
 
    return (
       <>
@@ -40,7 +40,7 @@ export default function ResetPw() {
          <Heading as='h2' size='md' className='text-base ml-10 font-extrabold mb-6'>
             PW 재설정
          </Heading>
-         <ResetPwForm token={token} />
+         <ResetPwForm token={state} />
       </>
    );
 }

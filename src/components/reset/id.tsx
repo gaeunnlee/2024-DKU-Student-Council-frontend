@@ -1,10 +1,14 @@
 import Button from 'components/ui/button';
 import Input from 'components/ui/input';
 import { usePostFindId } from 'hooks/query/reset/mutation';
+import { useAlert } from 'hooks/useAlert';
 import React, { ChangeEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function IdForm() {
    const [phoneNumber, setPhoneNumber] = React.useState<string>('');
+   const navigate = useNavigate();
+   const { alert } = useAlert();
 
    const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
       setPhoneNumber(e.target.value);
@@ -14,7 +18,11 @@ export default function IdForm() {
 
    const handleFindId = (e: React.FormEvent) => {
       e.preventDefault();
-      mutate(phoneNumber);
+      if (phoneNumber.length === 11) {
+         mutate(phoneNumber);
+      } else {
+         alert('올바른 휴대폰번호를 입력해주세요.');
+      }
    };
 
    return (
@@ -29,7 +37,13 @@ export default function IdForm() {
             />
             <button className='ml-[-40px] z-10 text-[13px]'>요청</button>
          </div>
-         <Button type='submit' size='md' variant='default' borderRadius='30px' className='!w-[311px]'>
+         <Button
+            onClick={() => navigate('/login')}
+            size='md'
+            variant='default'
+            borderRadius='30px'
+            className='!w-[311px]'
+         >
             확인
          </Button>
       </form>
