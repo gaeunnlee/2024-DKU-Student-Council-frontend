@@ -1,7 +1,7 @@
-/* eslint-disable react/no-unescaped-entities */
-import React from 'react';
 import { BaseSkeleton, TextSkeleton } from 'components/ui/skeleton';
 import type { PetitionType } from 'shared/enum/petition';
+import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 export interface IPetition {
    id: number;
@@ -10,17 +10,33 @@ export interface IPetition {
    d_day: number;
 }
 
-/**
- * @description 메인 페이지의 인기청원 컴포넌트
- */
 export default function Petition({ petitions }: { petitions?: IPetition[] }) {
+   const navigate = useNavigate();
+
+   const handlePetitionItem = (id: number) => {
+      navigate(`/petition/${id}`);
+   };
+
+   const handlePetition = () => {
+      navigate('/petition');
+   };
+
    return petitions ? (
       <section className='px-4 py-5 m-4 rounded-xl bg-white shadow-md'>
-         <h3 className='font-bold text-lg'>청원게시판</h3>
-         <ul className='mt-3'>
+         <div className='flex items-center justify-between'>
+            <h3 className='font-bold text-lg'>청원게시판</h3>
+            <button className='text-[13px]' onClick={handlePetition}>
+               더보기
+            </button>
+         </div>
+         <ul className='mt-3 flex flex-col gap-2'>
             {petitions?.map((item) => (
-               <li key={item.id} className='flex items-center justify-between my-1'>
-                  <span className='text-sm'>{item.title}</span>
+               <li
+                  key={item.id}
+                  className='flex items-center justify-between'
+                  onClick={() => handlePetitionItem(item.id)}
+               >
+                  <span className='text-sm cursor-pointer'>{item.title}</span>
                   <span className='text-xs text-gray-500'>D-{item.d_day}</span>
                </li>
             ))}
