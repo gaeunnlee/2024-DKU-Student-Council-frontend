@@ -26,10 +26,21 @@ export default function NoticeBoard() {
    });
 
    const Cell = ({ data }: { data: IBoardList }) => (
-      <>
-         <Title content={data.title} className='text-xl font-bold' />
-         <Date content={data.createdAt} className='text-gray-400' />
-      </>
+      <div className='flex gap-4 overflow-hidden '>
+         <div
+            className='w-[40%] h-[100px] overflow-hidden'
+            style={{ background: 'linear-gradient(131.53deg, #01060B 0%, #084287 100%)' }}
+         >
+            <img
+               className='w-full'
+               src={data.images !== undefined && data.images.length > 0 ? data.images[0].url : ''}
+            />
+         </div>
+         <div className='w-[60%] h-[100px] flex flex-col gap-3 justify-center'>
+            <Title content={data.title} className=' font-bold text-base line-clamp-2' />
+            <Date content={data.createdAt} className='text-gray-400 text-xs' />
+         </div>
+      </div>
    );
 
    return (
