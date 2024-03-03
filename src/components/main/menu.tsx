@@ -36,7 +36,14 @@ export default function Menu() {
    return (
       <Fragment>
          <header className='px-[22px] py-1.5 h-[50px] flex items-center mx-auto'>
-            <img src={logo} alt='단국대학교 로고' />
+            <img
+               className='cursor-pointer'
+               onClick={() => {
+                  setMenuOpen(false);
+               }}
+               src={logo}
+               alt='단국대학교 로고'
+            />
          </header>
          <Accordion defaultIndex={[0]} allowMultiple>
             {menuItems.map((item, index) => (
