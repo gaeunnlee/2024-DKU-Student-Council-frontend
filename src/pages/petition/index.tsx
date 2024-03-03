@@ -43,7 +43,7 @@ export default function PetitionBoard() {
    });
 
    const Cell = ({ data }: { data: IBoardList }) => (
-      <div className='flex justify-between leading-9 px-2 gap-3 whitespace-nowrap'>
+      <div className=' py-3 flex justify-between leading-9 px-6 gap-3 whitespace-nowrap'>
          <Text length={4}>{getPetitionStatus(data.status!)}</Text>
          <Title content={data.title} className='text-ellipsis overflow-hidden' />
          <Text length={4}>

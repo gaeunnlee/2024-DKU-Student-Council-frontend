@@ -48,7 +48,8 @@ Board.Cell = function Cell({ children, className, ...props }: CellProps) {
    return (
       <li {...props}>
          <Box
-            padding='fajkljkfd'
+            padding='0'
+            border='border-none'
             className={className + 'rounded-xl shadow-[2px_2px_5px_2px_#00000010] text-sm cursor-pointer'}
          >
             {children}

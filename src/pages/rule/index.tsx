@@ -26,7 +26,7 @@ export default function RuleBoard() {
    });
 
    const Cell = ({ data }: { data: IBoardList }) => (
-      <div className='flex gap-2'>
+      <div className='flex gap-2 p-3'>
          <Title content={data.title} className='grow text-center truncate' />
          <Date content={data.createdAt} />
       </div>
