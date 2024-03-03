@@ -80,7 +80,11 @@ export default function PetitionDetail() {
                <Box>
                   <div className='flex gap-4 text-gray-400'>
                      <span>{petitionStatus}</span>
-                     <span>{`D-${remainingDays}`}</span>
+                     <span>
+                        {remainingDays !== undefined && remainingDays > 0
+                           ? `D-${remainingDays}`
+                           : '기간 만료'}
+                     </span>
                      <span>{`${petition.agreeCount}/150`}</span>
                   </div>
                   <Title>{petition.title}</Title>
