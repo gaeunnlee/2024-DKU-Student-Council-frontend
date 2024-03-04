@@ -1,12 +1,7 @@
 import React from 'react';
-import { useApi } from './useApi';
-import { useNavigate } from 'react-router-dom';
-
-export interface IFormInfo {
-   title: string;
-   body: string;
-   files: File[];
-}
+import { IFormInfo } from 'api/upload/types/upload';
+import { usePostFormUpload } from './query/upload/mutation';
+import { useAlert } from './useAlert';
 
 export const useFormUpload = ({
    initFormInfo,
@@ -18,7 +13,8 @@ export const useFormUpload = ({
    NAVIGATE_PATH: string;
 }) => {
    const [formInfo, setFormInfo] = React.useState<IFormInfo>(initFormInfo);
-   const navigate = useNavigate();
+   const { mutate } = usePostFormUpload(NAVIGATE_PATH);
+   const { alert } = useAlert();
 
    const handleUpdate = (value: string) => {
       const cleanedValue = value.replaceAll(/<\/?p[^>]*>/g, '').replace(/<br>/g, '');
@@ -27,7 +23,6 @@ export const useFormUpload = ({
          body: cleanedValue,
       });
    };
-   const { post } = useApi();
 
    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -39,16 +34,10 @@ export const useFormUpload = ({
             formData.append('files', file);
          }
       }
-      try {
-         const data = await post<IFormInfo, number>(API_PATH, formInfo, {
-            authenticate: true,
-            contentType: 'multipart/form-data',
-            log: true,
-         });
-         navigate(NAVIGATE_PATH);
-         return data;
-      } catch (e) {
-         console.log(e);
+      if (formInfo.title.length > 0 && formInfo.body.length > 0) {
+         mutate({ formInfo, API_PATH });
+      } else {
+         alert('제목과 내용을 입력해주세요');
       }
    };
 

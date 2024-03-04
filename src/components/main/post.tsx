@@ -1,11 +1,11 @@
 import React, { ReactNode } from 'react';
 import TextEditor from 'components/common/editor/index';
 import { ImageProps } from 'hooks/useImageUpload';
-import { IFormInfo } from 'hooks/useFormUpload';
 import FloatingButton from 'components/ui/button/FloatingButton';
 import PostBox from 'components/ui/box/PostBox';
 import Title from 'components/ui/text/board';
 import { FaCamera } from 'react-icons/fa';
+import { IFormInfo } from 'api/upload/types/upload';
 
 interface PostProps {
    formInfo: IFormInfo;
