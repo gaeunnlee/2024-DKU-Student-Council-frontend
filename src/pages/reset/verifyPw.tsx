@@ -23,7 +23,7 @@ export default function VerifyPw() {
          <Heading as='h1' size='lg' className='font-extrabold ml-10 mb-[14px] mt-[52px]'>
             Login
          </Heading>
-         <Heading as='h2' size='md' className='text-base ml-10 font-extrabold mb-6'>
+         <Heading as='h2' size='sm' className='ml-10 font-extrabold mb-6'>
             PW 재설정
          </Heading>
          <PwVerifyForm />
