@@ -2,7 +2,6 @@ import React from 'react';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import Box from 'components/ui/box';
-import { HeadingStyle } from 'constants/heading';
 import SinglePageLayout from 'layouts/SinglePageLayout';
 import { FileBox } from 'components/ui/box/PostBox';
 
@@ -15,12 +14,8 @@ export default function Recruitment() {
          backButton: true,
          isMain: false,
          fullscreen: false,
-         heading: '부원모집',
-         subHeading: '모집요강',
-         headingStyle: HeadingStyle.default.header,
-         headingText: HeadingStyle.default.heading,
-         subHeadingText: HeadingStyle.default.subHeading,
-         margin: '',
+         headingText: '부원모집',
+         subHeadingText: '모집요강',
          rounded: true,
       });
    });

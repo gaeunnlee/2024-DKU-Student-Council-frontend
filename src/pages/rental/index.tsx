@@ -38,7 +38,6 @@ export default function Rental() {
          headingStyle: '',
          headingText: '',
          subHeadingText: '',
-         margin: '',
          rounded: true,
       });
    });

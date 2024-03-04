@@ -7,20 +7,13 @@ import React from 'react';
 export default function ResetId() {
    const { setLayout } = useLayout();
 
-   const headingStyle = 'mt-7 box-content h-[126px] text-center font-extrabold';
-
    useEffectOnce(() => {
       setLayout({
          title: null,
          backButton: true,
          isMain: false,
          fullscreen: false,
-         heading: '',
-         subHeading: '',
-         headingStyle: headingStyle,
-         headingText: 'text-2xl mb-[19px]',
-         subHeadingText: 'text-base',
-         margin: '',
+         margin: '[139px]',
          rounded: true,
       });
    });

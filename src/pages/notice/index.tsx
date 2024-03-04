@@ -1,6 +1,5 @@
 import Title, { Date } from 'components/ui/text/board';
 import { API_PATH, CONSTANTS } from 'constants/api';
-import { HeadingStyle } from 'constants/heading';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
@@ -15,12 +14,11 @@ export default function NoticeBoard() {
          backButton: true,
          isMain: false,
          fullscreen: false,
-         heading: '총학생회',
-         subHeading: '공지',
-         headingStyle: HeadingStyle.default.header,
-         headingText: HeadingStyle.default.heading,
-         subHeadingText: HeadingStyle.default.subHeading,
-         margin: '',
+         headingText: '총학생회',
+         subHeadingText: '공지',
+         headingStyle: 'text-[25px] font-extrabold mb-[5px] mt-[37px]',
+         subHeadingStyle: 'text-[20px] font-extrabold mb-[24px]',
+         margin: '130px',
          rounded: true,
       });
    });

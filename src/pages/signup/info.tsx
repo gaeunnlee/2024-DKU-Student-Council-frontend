@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ROUTES } from 'constants/route';
 import Heading from 'components/ui/typo/heading';
@@ -10,11 +10,10 @@ import InfoForm from 'components/signup/info';
 export default function SignupInfo() {
    const navigate = useNavigate();
    const location = useLocation();
-
    const { alert } = useAlert();
-   const { state } = location;
-   const data = state.data ?? null;
-   const signupToken = data?.signupToken;
+   const { state } = location || {};
+   const data = state?.data ?? null;
+   const signupToken = data?.signupToken ?? null;
    const { setLayout } = useLayout();
 
    useEffectOnce(() => {
@@ -23,22 +22,21 @@ export default function SignupInfo() {
          backButton: true,
          isMain: false,
          fullscreen: true,
-         heading: '',
-         subHeading: '',
-         headingStyle: '',
-         headingText: '',
-         subHeadingText: '',
          margin: 'mt-[41px]',
          rounded: true,
       });
    });
 
-   useEffect(() => {
+   const handleVerify = useCallback(() => {
       if (!data) {
          alert('학생 인증을 완료해주세요');
          navigate(ROUTES.SIGNUP.VERIFY);
       }
-   }, [data, navigate]);
+   }, [data, alert, navigate]);
+
+   useEffect(() => {
+      handleVerify();
+   }, [handleVerify]);
 
    return (
       <div className='flex flex-col px-10 pt-12'>

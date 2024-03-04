@@ -46,12 +46,10 @@ export default function Main() {
          backButton: false,
          isMain: true,
          fullscreen: false,
-         heading: 'DANKOOK UNIVERSITY',
-         subHeading: 'DANKOOK UNIV STUDENT COUNCIL',
-         headingStyle: HeadingStyle.main.size,
-         headingText: HeadingStyle.main.headingStyle,
-         subHeadingText: HeadingStyle.main.subHeadingStyle,
-         margin: '',
+         headingText: 'DANKOOK UNIVERSITY',
+         subHeadingText: 'DANKOOK UNIV STUDENT COUNCIL',
+         headingStyle: HeadingStyle.main.headingStyle,
+         subHeadingStyle: HeadingStyle.main.subHeadingStyle,
          rounded: false,
       });
    });

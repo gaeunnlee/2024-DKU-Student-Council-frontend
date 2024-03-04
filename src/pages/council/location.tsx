@@ -2,7 +2,6 @@ import React from 'react';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import map from '../../assets/images/map.png';
-import { HeadingStyle } from 'constants/heading';
 import SinglePageLayout from 'layouts/SinglePageLayout';
 
 export default function Location() {
@@ -14,12 +13,9 @@ export default function Location() {
          backButton: true,
          isMain: false,
          fullscreen: false,
-         heading: '총학생회',
-         subHeading: '오시는 길',
-         headingStyle: HeadingStyle.default.header,
-         headingText: HeadingStyle.default.heading,
-         subHeadingText: HeadingStyle.default.subHeading,
-         margin: '',
+         headingText: '총학생회',
+         subHeadingText: '오시는 길',
+         headingStyle: '',
          rounded: true,
       });
    });

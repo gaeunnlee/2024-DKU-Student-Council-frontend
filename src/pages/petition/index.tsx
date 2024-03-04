@@ -34,9 +34,9 @@ export default function PetitionBoard() {
          backButton: true,
          isMain: false,
          fullscreen: false,
-         heading: '청원게시판',
+         headingText: '청원게시판',
          headingStyle: `${HeadingStyle.default.header} mb-2`,
-         headingText: HeadingStyle.default.heading,
+         subHeadingStyle: HeadingStyle.default.heading,
          margin: '',
          rounded: true,
       });

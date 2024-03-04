@@ -1,23 +1,17 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 interface GnhProps {
-   heading: string;
-   subHeading: string | null;
-   headingStyle: string;
    headingText: string;
-   subHeadingText: string;
+   subHeadingText?: string;
+   subHeadingStyle: string;
+   headingStyle: string;
 }
 
-const Gnh = ({ heading, subHeading, headingStyle, headingText, subHeadingText }: GnhProps) => (
-   <div className={`${headingStyle}`}>
-      <h2
-         className={`${headingText} text-2xl font-extrabold text-white`}
-         style={headingText.indexOf('text-xl') !== -1 ? { fontSize: '1.25rem' } : {}}
-      >
-         {heading}
-      </h2>
-      {subHeading && <h3 className={`${subHeadingText} text-white`}>{subHeading}</h3>}
-   </div>
+const Gnh = ({ headingText, subHeadingText, headingStyle, subHeadingStyle }: GnhProps) => (
+   <Fragment>
+      {headingText && <h1 className={`${headingStyle} text-2xl font-extrabold text-white`}>{headingText}</h1>}
+      <h2 className={`${subHeadingStyle} text-white`}>{subHeadingText}</h2>
+   </Fragment>
 );
 
 export default Gnh;

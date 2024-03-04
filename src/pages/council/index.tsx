@@ -2,7 +2,6 @@ import React from 'react';
 import Box from 'components/ui/box';
 import { useLayout } from 'hooks/useLayout';
 import { useEffectOnce } from 'hooks/useEffectOnce';
-import { HeadingStyle } from 'constants/heading';
 import SinglePageLayout from 'layouts/SinglePageLayout';
 
 export default function Greeting() {
@@ -14,12 +13,10 @@ export default function Greeting() {
          backButton: true,
          isMain: false,
          fullscreen: false,
-         heading: '총학생회',
-         subHeading: '인사말',
-         headingStyle: HeadingStyle.default.header,
-         headingText: HeadingStyle.default.heading,
-         subHeadingText: HeadingStyle.default.subHeading,
-         margin: '',
+         headingText: '총학생회',
+         subHeadingText: '인사말',
+         headingStyle: '',
+         subHeadingStyle: '',
          rounded: true,
       });
    });
