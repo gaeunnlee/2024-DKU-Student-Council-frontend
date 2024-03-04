@@ -31,6 +31,9 @@ export const HEADING_TEXT = {
    LOCATION: {
       SUBHEAD: '오시는 길',
    },
+   GREETING: {
+      SUBHEAD: '인사말',
+   },
    RECRUIT: {
       HEAD: '부원모집',
       SUBHEAD: '모집요강',
