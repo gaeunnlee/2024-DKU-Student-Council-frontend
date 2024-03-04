@@ -10,7 +10,12 @@ interface GnhProps {
 
 const Gnh = ({ heading, subHeading, headingStyle, headingText, subHeadingText }: GnhProps) => (
    <div className={`${headingStyle}`}>
-      <h2 className={`${headingText} text-2xl font-extrabold text-white`}>{heading}</h2>
+      <h2
+         className={`${headingText} text-2xl font-extrabold text-white`}
+         style={headingText.indexOf('text-xl') !== -1 ? { fontSize: '1.25rem' } : {}}
+      >
+         {heading}
+      </h2>
       {subHeading && <h3 className={`${subHeadingText} text-white`}>{subHeading}</h3>}
    </div>
 );

@@ -15,7 +15,7 @@ export default function PetitionChartList({
                <span>
                   {idx + 1}. {item.department}
                </span>
-               <span>({(item.agreeCount / sum) * 100}%)</span>
+               <span>({Math.floor((item.agreeCount / sum) * 100)}%)</span>
             </li>
          ))}
       </ol>

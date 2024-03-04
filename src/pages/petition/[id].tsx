@@ -12,6 +12,7 @@ import { TbThumbUp, TbThumbUpFilled } from 'react-icons/tb';
 import { useAlert } from 'hooks/useAlert';
 import { useApi } from 'hooks/useApi';
 import FloatingButton from 'components/ui/button/FloatingButton';
+import PostDetailLayout from 'layouts/PostDetailLayout';
 
 export default function PetitionDetail() {
    const [updatePost, setUpdatePost] = useState(false);
@@ -75,12 +76,16 @@ export default function PetitionDetail() {
    return (
       <>
          {petition !== undefined && (
-            <div className='min-h-screen flex flex-col gap-2'>
+            <PostDetailLayout>
                {/* 청원글 */}
                <Box>
                   <div className='flex gap-4 text-gray-400'>
                      <span>{petitionStatus}</span>
-                     <span>{`D-${remainingDays}`}</span>
+                     <span>
+                        {remainingDays !== undefined && remainingDays > 0
+                           ? `D-${remainingDays}`
+                           : '기간 만료'}
+                     </span>
                      <span>{`${petition.agreeCount}/150`}</span>
                   </div>
                   <Title>{petition.title}</Title>
@@ -122,7 +127,7 @@ export default function PetitionDetail() {
                      <TbThumbUp color='white' size={40} />
                   )}
                </FloatingButton>
-            </div>
+            </PostDetailLayout>
          )}
       </>
    );
