@@ -16,6 +16,7 @@ export interface IBoardList {
    expiresAt?: string;
    agreeCount?: string;
    blinded: string;
+   images?: [{ id: number; url: string; originalName: string; mimeType: string; thumbnailUrl: string }];
 }
 
 export default function BoardLayout({

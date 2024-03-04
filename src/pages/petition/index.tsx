@@ -6,6 +6,9 @@ import { ROUTES } from 'constants/route';
 import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
+import { useLayout } from 'hooks/useLayout';
+import { useEffectOnce } from 'hooks/useEffectOnce';
+import { HeadingStyle } from 'constants/heading';
 
 export const getDaysBetween = (expiresAt: string) => {
    const startDate = new Date();
@@ -23,12 +26,29 @@ export const getPetitionStatus = (status: string) => {
 
 export default function PetitionBoard() {
    const navigate = useNavigate();
+   const { setLayout } = useLayout();
+
+   useEffectOnce(() => {
+      setLayout({
+         title: '',
+         backButton: true,
+         isMain: false,
+         fullscreen: false,
+         heading: '청원게시판',
+         headingStyle: `${HeadingStyle.default.header} mb-2`,
+         headingText: HeadingStyle.default.heading,
+         margin: '',
+         rounded: true,
+      });
+   });
 
    const Cell = ({ data }: { data: IBoardList }) => (
-      <div className='flex justify-between leading-9 px-2 gap-3 whitespace-nowrap'>
+      <div className=' py-3 flex justify-between leading-9 px-6 gap-3 whitespace-nowrap'>
          <Text length={4}>{getPetitionStatus(data.status!)}</Text>
          <Title content={data.title} className='text-ellipsis overflow-hidden' />
-         <Text length={4}>{`D-${getDaysBetween(data.expiresAt!)}`}</Text>
+         <Text length={4}>
+            {getDaysBetween(data.expiresAt!) > 0 ? `D-${getDaysBetween(data.expiresAt!)}` : '만료'}
+         </Text>
       </div>
    );
 

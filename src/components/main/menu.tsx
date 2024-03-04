@@ -15,8 +15,8 @@ export default function Menu() {
             { title: '조직도', path: ROUTES.COUNCIL.ORGANIZATION },
             { title: '오시는 길', path: ROUTES.COUNCIL.LOCATION },
             { title: '공지', path: ROUTES.NOTICE.ROOT },
-            { title: '회의록', path: ROUTES.NOTICE.ROOT },
-            { title: '회칙', path: ROUTES.NOTICE.ROOT },
+            { title: '회의록', path: ROUTES.CONFERENCE.ROOT },
+            { title: '회칙', path: ROUTES.RULE.ROOT },
             { title: '청원게시판', path: ROUTES.PETITION.ROOT },
          ],
       },
@@ -36,7 +36,14 @@ export default function Menu() {
    return (
       <Fragment>
          <header className='px-[22px] py-1.5 h-[50px] flex items-center mx-auto'>
-            <img src={logo} alt='단국대학교 로고' />
+            <img
+               className='cursor-pointer'
+               onClick={() => {
+                  setMenuOpen(false);
+               }}
+               src={logo}
+               alt='단국대학교 로고'
+            />
          </header>
          <Accordion defaultIndex={[0]} allowMultiple>
             {menuItems.map((item, index) => (

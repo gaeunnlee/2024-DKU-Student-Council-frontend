@@ -2,6 +2,8 @@ import React from 'react';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import map from '../../assets/images/map.png';
+import { HeadingStyle } from 'constants/heading';
+import SinglePageLayout from 'layouts/SinglePageLayout';
 
 export default function Location() {
    const { setLayout } = useLayout();
@@ -14,18 +16,18 @@ export default function Location() {
          fullscreen: false,
          heading: '총학생회',
          subHeading: '오시는 길',
-         headingStyle: '',
-         headingText: '',
-         subHeadingText: '',
+         headingStyle: HeadingStyle.default.header,
+         headingText: HeadingStyle.default.heading,
+         subHeadingText: HeadingStyle.default.subHeading,
          margin: '',
          rounded: true,
       });
    });
 
    return (
-      <>
+      <SinglePageLayout>
          <img className='w-[366px] h-[240px] mx-auto' src={map} />
-         <ul>
+         <ul className='flex flex-col gap-4'>
             <li>
                <h2 className='font-semibold'>위치</h2>
                <span>혜당관 406호 총학생회실</span>
@@ -47,6 +49,6 @@ export default function Location() {
                <span>@dku_damda</span>
             </li>
          </ul>
-      </>
+      </SinglePageLayout>
    );
 }
