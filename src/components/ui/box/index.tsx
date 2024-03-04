@@ -1,15 +1,12 @@
-import React, { ComponentProps } from 'react';
-import { IWithReactChildren } from 'shared/interfaces/default-interfaces';
+import React from 'react';
 
-export default function Box({
-   children,
-   className,
-   type,
-   padding,
-   border,
-   ...props
-}: IWithReactChildren &
-   ComponentProps<'div'> & { type?: 'shadow' | 'shadowImage'; padding?: string; border?: string }) {
+interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
+   type?: 'shadow' | 'shadowImage';
+   padding?: string;
+   border?: string;
+}
+
+export default function Box({ children, className, type, padding, border, ...props }: BoxProps) {
    const boxType = {
       shadow: { boxShadow: '1px 1px 3px 0px rgba(0, 0, 0, 0.1)', border: 'none' },
       shadowImage: { padding: '0', boxShadow: '1px 1px 3px 0px rgba(0, 0, 0, 0.1)' },
