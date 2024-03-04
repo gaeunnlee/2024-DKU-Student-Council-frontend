@@ -5,8 +5,27 @@ import React from 'react';
 import Collapse from 'components/ui/collapse';
 import { useFetchPost } from 'hooks/useFetchPost';
 import PostDetailLayout from 'layouts/PostDetailLayout';
+import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
+import { useEffectOnce } from 'hooks/useEffectOnce';
+import { useLayout } from 'hooks/useLayout';
 
 export default function NoticeDetail() {
+   const { setLayout } = useLayout();
+
+   useEffectOnce(() => {
+      setLayout({
+         title: HEADING_TEXT.COUNCIL.HEAD,
+         backButton: true,
+         isMain: false,
+         fullscreen: false,
+         headingText: HEADING_TEXT.COUNCIL.HEAD,
+         subHeadingText: HEADING_TEXT.NOTICE.SUBHEAD,
+         headingStyle: HEADING_STYLE.COUNCIL.HEAD,
+         subHeadingStyle: HEADING_STYLE.COUNCIL.SUBHEAD,
+         rounded: true,
+      });
+   });
+
    const { post, images } = useFetchPost<INotice>({ api: API_PATH.POST.NOTICE.ROOT, isCarousel: true });
    return (
       <PostDetailLayout>

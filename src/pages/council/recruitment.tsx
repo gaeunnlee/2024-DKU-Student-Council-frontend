@@ -3,6 +3,7 @@ import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import Box from 'components/ui/box';
 import SinglePageLayout from 'layouts/SinglePageLayout';
+import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
 import { FileBox } from 'components/ui/box/PostBox';
 
 export default function Recruitment() {
@@ -10,12 +11,14 @@ export default function Recruitment() {
 
    useEffectOnce(() => {
       setLayout({
-         title: '총학생회',
+         title: HEADING_TEXT.COUNCIL.HEAD,
          backButton: true,
          isMain: false,
          fullscreen: false,
-         headingText: '부원모집',
-         subHeadingText: '모집요강',
+         headingText: HEADING_TEXT.RECRUIT.HEAD,
+         subHeadingText: HEADING_TEXT.RECRUIT.SUBHEAD,
+         headingStyle: HEADING_STYLE.COUNCIL.HEAD,
+         subHeadingStyle: HEADING_STYLE.COUNCIL.SUBHEAD,
          rounded: true,
       });
    });

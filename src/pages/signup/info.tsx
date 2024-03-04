@@ -22,7 +22,7 @@ export default function SignupInfo() {
          backButton: true,
          isMain: false,
          fullscreen: true,
-         margin: 'mt-[41px]',
+         margin: '[41px]',
          rounded: true,
       });
    });

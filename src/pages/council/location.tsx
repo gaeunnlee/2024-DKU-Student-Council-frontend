@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import map from '../../assets/images/map.png';
+import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
 import SinglePageLayout from 'layouts/SinglePageLayout';
 
 export default function Location() {
@@ -9,13 +10,14 @@ export default function Location() {
 
    useEffectOnce(() => {
       setLayout({
-         title: '총학생회',
+         title: HEADING_TEXT.COUNCIL.HEAD,
          backButton: true,
          isMain: false,
          fullscreen: false,
-         headingText: '총학생회',
-         subHeadingText: '오시는 길',
-         headingStyle: '',
+         headingText: HEADING_TEXT.COUNCIL.HEAD,
+         subHeadingText: HEADING_TEXT.LOCATION.SUBHEAD,
+         headingStyle: HEADING_STYLE.COUNCIL.HEAD,
+         subHeadingStyle: HEADING_STYLE.COUNCIL.SUBHEAD,
          rounded: true,
       });
    });

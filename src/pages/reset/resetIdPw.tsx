@@ -2,7 +2,7 @@ import Box from 'components/ui/box';
 import Text from 'components/ui/typo/text';
 import Button from 'components/ui/button';
 import Heading from 'components/ui/typo/heading';
-import { HeadingStyle } from 'constants/heading';
+import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import { useNavigate } from 'react-router-dom';
@@ -27,10 +27,10 @@ export default function ResetIdPw() {
          backButton: true,
          isMain: false,
          fullscreen: false,
-         headingText: 'Login',
-         subHeadingText: 'ID찾기 PW 재설정',
-         headingStyle: HeadingStyle.reset.headingStyle,
-         subHeadingStyle: HeadingStyle.reset.subHeadingStyle,
+         headingText: HEADING_TEXT.LOGIN.HEAD,
+         subHeadingText: HEADING_TEXT.RESET_ID_PW.SUBHEAD,
+         headingStyle: HEADING_STYLE.RESET.HEAD,
+         subHeadingStyle: HEADING_STYLE.RESET.SUBHEAD,
          rounded: true,
       });
    });

@@ -3,6 +3,7 @@ import { API_PATH, CONSTANTS } from 'constants/api';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
+import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
 import React from 'react';
 
 export default function NoticeBoard() {
@@ -10,15 +11,14 @@ export default function NoticeBoard() {
 
    useEffectOnce(() => {
       setLayout({
-         title: '총학생회',
+         title: HEADING_TEXT.COUNCIL.HEAD,
          backButton: true,
          isMain: false,
          fullscreen: false,
-         headingText: '총학생회',
-         subHeadingText: '공지',
-         headingStyle: 'text-[25px] font-extrabold mb-[5px] mt-[37px]',
-         subHeadingStyle: 'text-[20px] font-extrabold mb-[24px]',
-         margin: '130px',
+         headingText: HEADING_TEXT.COUNCIL.HEAD,
+         subHeadingText: HEADING_TEXT.NOTICE.SUBHEAD,
+         headingStyle: HEADING_STYLE.COUNCIL.HEAD,
+         subHeadingStyle: HEADING_STYLE.COUNCIL.SUBHEAD,
          rounded: true,
       });
    });

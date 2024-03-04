@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import LoginForm from 'components/login/form';
 import { useLayout } from 'hooks/useLayout';
 import { useEffectOnce } from 'hooks/useEffectOnce';
-import { HeadingStyle } from 'constants/heading';
+import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
 
 export default function Login() {
    const { setLayout } = useLayout();
@@ -13,11 +13,10 @@ export default function Login() {
          backButton: true,
          isMain: false,
          fullscreen: false,
-         headingText: 'Login',
-         subHeadingText: '단국대학교 총학생회 로그인',
-         headingStyle: HeadingStyle.login.headingStyle,
-         subHeadingStyle: HeadingStyle.login.subHeadingStyle,
-         margin: '0px',
+         headingText: HEADING_TEXT.LOGIN.HEAD,
+         subHeadingText: HEADING_TEXT.LOGIN.SUBHEAD,
+         headingStyle: HEADING_STYLE.LOGIN.HEAD,
+         subHeadingStyle: HEADING_STYLE.LOGIN.SUBHEAD,
          rounded: true,
       });
    });

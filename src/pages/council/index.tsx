@@ -3,20 +3,21 @@ import Box from 'components/ui/box';
 import { useLayout } from 'hooks/useLayout';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import SinglePageLayout from 'layouts/SinglePageLayout';
+import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
 
 export default function Greeting() {
    const { setLayout } = useLayout();
 
    useEffectOnce(() => {
       setLayout({
-         title: '총학생회',
+         title: HEADING_TEXT.COUNCIL.HEAD,
          backButton: true,
          isMain: false,
          fullscreen: false,
-         headingText: '총학생회',
-         subHeadingText: '인사말',
-         headingStyle: '',
-         subHeadingStyle: '',
+         headingText: HEADING_TEXT.COUNCIL.HEAD,
+         subHeadingText: HEADING_TEXT.GREETING.SUBHEAD,
+         headingStyle: HEADING_STYLE.COUNCIL.HEAD,
+         subHeadingStyle: HEADING_STYLE.COUNCIL.SUBHEAD,
          rounded: true,
       });
    });

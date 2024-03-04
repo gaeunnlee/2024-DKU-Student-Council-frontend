@@ -13,7 +13,7 @@ export default function SignupTerms() {
          backButton: true,
          isMain: false,
          fullscreen: true,
-         margin: 'mt-[30px]',
+         margin: '[30px]',
          rounded: true,
       });
    });

@@ -13,16 +13,16 @@ export default function ResetId() {
          backButton: true,
          isMain: false,
          fullscreen: false,
-         margin: '[139px]',
+         margin: '[140px]',
          rounded: true,
       });
    });
    return (
       <>
-         <Heading as='h1' size='md' className='mb-4 mt-[69px] ml-10'>
+         <Heading as='h1' size='lg' className='font-extrabold ml-10 mb-[14px] mt-[52px]'>
             Login
          </Heading>
-         <Heading as='h2' size='xs' className='ml-10 mb-[60px]'>
+         <Heading as='h2' size='sm' className='ml-10 font-extrabold mb-[60px]'>
             ID 찾기
          </Heading>
          <IdForm />
