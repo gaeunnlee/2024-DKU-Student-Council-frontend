@@ -5,14 +5,9 @@ import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { BaseSkeleton } from 'components/ui/skeleton';
+import { IBanner } from 'api/main/types/main';
 
 export const BannerSize = 'w-[322px] h-[322px] absolute top-44';
-
-export interface IBanner {
-   id: number;
-   url: string;
-   redirectUrl: string | null;
-}
 
 export default function Banner({ banners }: { banners: IBanner[] }) {
    SwiperCore.use([Autoplay]);

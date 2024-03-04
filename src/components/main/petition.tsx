@@ -1,14 +1,7 @@
 import { BaseSkeleton, TextSkeleton } from 'components/ui/skeleton';
-import type { PetitionType } from 'shared/enum/petition';
+import { IPetition } from 'api/main/types/main';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
-
-export interface IPetition {
-   id: number;
-   title: string;
-   petitionStatus: PetitionType;
-   d_day: number;
-}
 
 export default function Petition({ petitions }: { petitions?: IPetition[] }) {
    const navigate = useNavigate();
