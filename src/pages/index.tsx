@@ -3,7 +3,6 @@ import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
 import { Banner, Notice, Petition, Cafeteria } from 'components/main';
 import { useLayout } from 'hooks/useLayout';
 import { useGetMain } from 'hooks/query/main/query';
-import Service from 'components/main/service';
 import { useFetchMyInfo } from 'hooks/useFetchMyInfo';
 import React from 'react';
 
@@ -34,7 +33,6 @@ export default function Main() {
             <Notice notices={main?.recentNotices} />
             <Petition petitions={main?.popularPetitions} />
             <Cafeteria />
-            <Service />
          </div>
       </main>
    );
