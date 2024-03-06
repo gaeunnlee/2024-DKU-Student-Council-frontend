@@ -13,7 +13,7 @@ export default function SignupVerify() {
          backButton: true,
          isMain: false,
          fullscreen: true,
-         margin: 'mt-[140px]',
+         margin: '[140px]',
          rounded: true,
       });
    });

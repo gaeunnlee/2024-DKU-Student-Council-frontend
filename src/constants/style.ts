@@ -1,11 +1,11 @@
 import { colors } from './colors';
 import { TextStyle } from './textStyle';
-import { HeadingStyle } from './heading';
+import { HEADING_STYLE } from './heading';
 import { bottomNavSize } from './nav';
 
 export const styles = {
    colors,
-   HeadingStyle,
+   HEADING_STYLE,
    TextStyle,
    bottomNavSize,
 };

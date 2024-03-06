@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import { useLayout } from 'hooks/useLayout';
 import { useEffectOnce } from 'hooks/useEffectOnce';
-import { HeadingStyle } from 'constants/heading';
+import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
 
 export const getDaysBetween = (expiresAt: string) => {
    const startDate = new Date();
@@ -30,14 +30,12 @@ export default function PetitionBoard() {
 
    useEffectOnce(() => {
       setLayout({
-         title: '',
+         title: null,
          backButton: true,
          isMain: false,
          fullscreen: false,
-         heading: '청원게시판',
-         headingStyle: `${HeadingStyle.default.header} mb-2`,
-         headingText: HeadingStyle.default.heading,
-         margin: '',
+         headingText: HEADING_TEXT.PETITION.HEAD,
+         headingStyle: `${HEADING_STYLE.COUNCIL.HEAD} mb-[30px]`,
          rounded: true,
       });
    });

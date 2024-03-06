@@ -2,11 +2,10 @@ import React, { Fragment } from 'react';
 import LoginForm from 'components/login/form';
 import { useLayout } from 'hooks/useLayout';
 import { useEffectOnce } from 'hooks/useEffectOnce';
+import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
 
 export default function Login() {
    const { setLayout } = useLayout();
-
-   const headingStyle = 'mt-7 box-content h-[126px] text-center font-extrabold';
 
    useEffectOnce(() => {
       setLayout({
@@ -14,12 +13,10 @@ export default function Login() {
          backButton: true,
          isMain: false,
          fullscreen: false,
-         heading: 'Login',
-         subHeading: '단국대학교 총학생회 로그인',
-         headingStyle: headingStyle,
-         headingText: 'text-2xl mb-[19px]',
-         subHeadingText: 'text-base',
-         margin: '',
+         headingText: HEADING_TEXT.LOGIN.HEAD,
+         subHeadingText: HEADING_TEXT.LOGIN.SUBHEAD,
+         headingStyle: HEADING_STYLE.LOGIN.HEAD,
+         subHeadingStyle: HEADING_STYLE.LOGIN.SUBHEAD,
          rounded: true,
       });
    });

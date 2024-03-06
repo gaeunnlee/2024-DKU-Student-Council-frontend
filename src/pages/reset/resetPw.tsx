@@ -10,8 +10,6 @@ export default function ResetPw() {
    const location = useLocation();
    const navigate = useNavigate();
    const { state } = location;
-   // const data = state?.data ?? null;
-   // const token = data?.token;
    const { setLayout } = useLayout();
 
    useEffectOnce(() => {
@@ -20,7 +18,7 @@ export default function ResetPw() {
          backButton: true,
          isMain: false,
          fullscreen: false,
-         margin: 'mt-[140px]',
+         margin: '[140px]',
          rounded: true,
       });
    });

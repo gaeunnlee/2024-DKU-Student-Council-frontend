@@ -13,8 +13,25 @@ import { useAlert } from 'hooks/useAlert';
 import { useApi } from 'hooks/useApi';
 import FloatingButton from 'components/ui/button/FloatingButton';
 import PostDetailLayout from 'layouts/PostDetailLayout';
+import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
+import { useEffectOnce } from 'hooks/useEffectOnce';
+import { useLayout } from 'hooks/useLayout';
 
 export default function PetitionDetail() {
+   const { setLayout } = useLayout();
+
+   useEffectOnce(() => {
+      setLayout({
+         title: null,
+         backButton: true,
+         isMain: false,
+         fullscreen: false,
+         headingText: HEADING_TEXT.PETITION.HEAD,
+         headingStyle: `${HEADING_STYLE.COUNCIL.HEAD} mb-[30px]`,
+         rounded: true,
+      });
+   });
+
    const [updatePost, setUpdatePost] = useState(false);
    const [chartData, setChartData] = useState({ labels: [''], data: [0] });
    const { post: petition, postId } = useFetchPost<IPetition>({

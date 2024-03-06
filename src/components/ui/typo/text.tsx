@@ -4,8 +4,13 @@ import React from 'react';
 
 interface TextProps extends ChakraTextProps {
    children: string;
+   href?: string;
 }
 
-export default function Text({ children, ...props }: TextProps) {
-   return <ChakraText {...props}>{children}</ChakraText>;
+export default function Text({ children, href, ...props }: TextProps) {
+   return (
+      <ChakraText href={href} target={href ? '_blank' : ''} {...props}>
+         {children}
+      </ChakraText>
+   );
 }

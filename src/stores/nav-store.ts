@@ -14,6 +14,6 @@ export const navStore = create<NavState>((set) => ({
    setFullscreen: (fullscreen) => set({ fullscreen }),
    rounded: false,
    setRounded: (rounded: boolean) => set({ rounded }),
-   margin: '',
+   margin: '0px',
    setMargin: (margin: string) => set({ margin }),
 }));

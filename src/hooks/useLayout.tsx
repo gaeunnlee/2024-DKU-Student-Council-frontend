@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
 import { gnbState } from 'stores/gnb-store';
 import { gnhState } from 'stores/gnh-store';
 import { navStore } from 'stores/nav-store';
 
+interface LayoutProps extends TopHeaderLayoutProps, Partial<HeadingLayoutProps>, NavLayoutProps {}
 interface TopHeaderLayoutProps {
    title: string | null;
    backButton: boolean;
@@ -10,33 +10,22 @@ interface TopHeaderLayoutProps {
 }
 
 interface HeadingLayoutProps {
-   heading?: string | null;
-   subHeading?: string | null;
-   headingStyle?: string;
-   headingText?: string;
-   subHeadingText?: string;
+   headingText: string;
+   subHeadingText: string;
+   headingStyle: string;
+   subHeadingStyle: string;
 }
 
 interface NavLayoutProps {
-   margin: string;
+   margin?: string;
    fullscreen: boolean;
    rounded: boolean;
 }
 
 export const useLayout = () => {
    const { setTitle, setBackButton, setIsMain } = gnbState();
-   const { setHeading, setSubHeading, setHeadingStyle, setHeadingText, setsubHeadingText } = gnhState();
+   const { setHeadingText, setSubHeadingText, setHeadingStyle, setSubHeadingStyle } = gnhState();
    const { setFullscreen, setRounded, setMargin } = navStore();
-
-   useEffect(() => {
-      setHeadingLayout({
-         heading: ' ',
-         subHeading: ' ',
-         headingStyle: ' ',
-         headingText: '',
-         subHeadingText: ' ',
-      });
-   }, []);
 
    const setTopHeader = ({ title, backButton, isMain }: TopHeaderLayoutProps) => {
       setTitle(title);
@@ -45,21 +34,19 @@ export const useLayout = () => {
    };
 
    const setHeadingLayout = ({
-      heading,
-      subHeading,
-      headingStyle,
       headingText,
       subHeadingText,
+      headingStyle,
+      subHeadingStyle,
    }: HeadingLayoutProps) => {
-      heading && setHeading(heading);
-      subHeading && setSubHeading(subHeading);
-      headingStyle && setHeadingStyle(headingStyle);
-      headingText && setHeadingText(headingText);
-      subHeadingText && setsubHeadingText(subHeadingText);
+      setHeadingText(headingText);
+      setSubHeadingText(subHeadingText);
+      setHeadingStyle(headingStyle);
+      setSubHeadingStyle(subHeadingStyle);
    };
 
    const setNavLayout = ({ margin, fullscreen, rounded }: NavLayoutProps) => {
-      setMargin(margin);
+      setMargin(margin ?? '0');
       setFullscreen(fullscreen);
       setRounded(rounded);
    };
@@ -69,16 +56,20 @@ export const useLayout = () => {
       backButton,
       isMain,
       fullscreen,
-      heading,
-      subHeading,
-      headingStyle,
       headingText,
       subHeadingText,
+      headingStyle,
+      subHeadingStyle,
       margin,
       rounded,
-   }: TopHeaderLayoutProps & HeadingLayoutProps & NavLayoutProps) => {
+   }: LayoutProps) => {
       setTopHeader({ title, backButton, isMain });
-      setHeadingLayout({ heading, subHeading, headingStyle, headingText, subHeadingText });
+      setHeadingLayout({
+         headingText: headingText!,
+         subHeadingText: subHeadingText!,
+         headingStyle: headingStyle!,
+         subHeadingStyle: subHeadingStyle!,
+      });
       setNavLayout({ margin, fullscreen, rounded });
    };
 

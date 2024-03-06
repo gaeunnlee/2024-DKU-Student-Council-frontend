@@ -1,6 +1,6 @@
 import Title, { Date } from 'components/ui/text/board';
 import { API_PATH, CONSTANTS } from 'constants/api';
-import { HeadingStyle } from 'constants/heading';
+import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
@@ -11,16 +11,14 @@ export default function ConferenceBoard() {
 
    useEffectOnce(() => {
       setLayout({
-         title: '총학생회',
+         title: HEADING_TEXT.COUNCIL.HEAD,
          backButton: true,
          isMain: false,
          fullscreen: false,
-         heading: '총학생회',
-         subHeading: '회의록',
-         headingStyle: HeadingStyle.default.header,
-         headingText: HeadingStyle.default.heading,
-         subHeadingText: HeadingStyle.default.subHeading,
-         margin: '',
+         headingText: HEADING_TEXT.COUNCIL.HEAD,
+         subHeadingText: HEADING_TEXT.CONFERENCE.SUBHEAD,
+         headingStyle: HEADING_STYLE.COUNCIL.HEAD,
+         subHeadingStyle: HEADING_STYLE.COUNCIL.SUBHEAD,
          rounded: true,
       });
    });

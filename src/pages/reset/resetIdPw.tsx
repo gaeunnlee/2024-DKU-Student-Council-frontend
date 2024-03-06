@@ -2,17 +2,16 @@ import Box from 'components/ui/box';
 import Text from 'components/ui/typo/text';
 import Button from 'components/ui/button';
 import Heading from 'components/ui/typo/heading';
+import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import { useNavigate } from 'react-router-dom';
-import React from 'react';
 import { ROUTES } from 'constants/route';
+import React from 'react';
 
 export default function ResetIdPw() {
    const { setLayout } = useLayout();
    const navigate = useNavigate();
-
-   const headingStyle = 'mt-7 box-content h-[126px] text-center font-extrabold';
 
    const handleFindId = () => {
       navigate(ROUTES.RESET.ID);
@@ -28,12 +27,10 @@ export default function ResetIdPw() {
          backButton: true,
          isMain: false,
          fullscreen: false,
-         heading: 'Login',
-         subHeading: 'ID찾기 PW 재설정',
-         headingStyle: headingStyle,
-         headingText: 'text-2xl mb-[19px]',
-         subHeadingText: 'text-base',
-         margin: '',
+         headingText: HEADING_TEXT.LOGIN.HEAD,
+         subHeadingText: HEADING_TEXT.RESET_ID_PW.SUBHEAD,
+         headingStyle: HEADING_STYLE.RESET.HEAD,
+         subHeadingStyle: HEADING_STYLE.RESET.SUBHEAD,
          rounded: true,
       });
    });
@@ -41,7 +38,7 @@ export default function ResetIdPw() {
    return (
       <div className='flex flex-col gap-5 px-5 mb-[117px] mt-[57px]'>
          <Box className='mb-4'>
-            <Heading as='h3' size='md' marginBottom={'10px'}>
+            <Heading as='h3' size='md' marginBottom='10px'>
                ID 찾기
             </Heading>
             <Text fontSize='13px' className='whitespace-pre-line'>

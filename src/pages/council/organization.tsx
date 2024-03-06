@@ -1,9 +1,9 @@
 import React from 'react';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
-import { HeadingStyle } from 'constants/heading';
 import SinglePageLayout from 'layouts/SinglePageLayout';
 import Box from 'components/ui/box';
+import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
 import Organization01 from '../../assets/images/organization-01.jpg';
 import Organization02 from '../../assets/images/organization-02.jpg';
 
@@ -12,16 +12,14 @@ export default function Organization() {
 
    useEffectOnce(() => {
       setLayout({
-         title: '총학생회',
+         title: HEADING_TEXT.COUNCIL.HEAD,
          backButton: true,
          isMain: false,
          fullscreen: false,
-         heading: '총학생회',
-         subHeading: '조직도',
-         headingStyle: HeadingStyle.default.header,
-         headingText: HeadingStyle.default.heading,
-         subHeadingText: HeadingStyle.default.subHeading,
-         margin: '',
+         headingText: HEADING_TEXT.COUNCIL.HEAD,
+         subHeadingText: HEADING_TEXT.ORGANIZATION.SUBHEAD,
+         headingStyle: HEADING_STYLE.COUNCIL.HEAD,
+         subHeadingStyle: HEADING_STYLE.COUNCIL.SUBHEAD,
          rounded: true,
       });
    });

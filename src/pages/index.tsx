@@ -1,57 +1,27 @@
-import { API_PATH } from 'constants/api';
-import { HeadingStyle } from 'constants/heading';
 import { useEffectOnce } from 'hooks/useEffectOnce';
+import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
 import { Banner, Notice, Petition, Cafeteria } from 'components/main';
-import type { IBanner } from 'components/main/banner';
-import type { INotice } from 'components/main/notice';
-import type { IPetition } from 'components/main/petition';
-import { useApi } from 'hooks/useApi';
 import { useLayout } from 'hooks/useLayout';
-import Service from 'components/main/service';
-import React, { useState } from 'react';
+import { useGetMain } from 'hooks/query/main/query';
 import { useFetchMyInfo } from 'hooks/useFetchMyInfo';
-
-interface IMain {
-   carousels: IBanner[];
-   recentNotices: INotice[];
-   popularPetitions: IPetition[];
-   recentConferences: [
-      {
-         id: number;
-         title: string;
-      },
-   ];
-}
+import React from 'react';
 
 export default function Main() {
-   const [main, setMain] = useState<IMain | null>();
-   const { get } = useApi();
    const { setLayout } = useLayout();
    const { fetchMyInfo } = useFetchMyInfo();
-
-   const fetchMain = async () => {
-      const data = await get<IMain>(API_PATH.MAIN.ROOT, {
-         authenticate: true,
-         log: true,
-         contentType: 'application/json',
-      });
-      setMain(data);
-   };
+   const { data: main } = useGetMain();
 
    useEffectOnce(() => {
-      fetchMain();
       fetchMyInfo();
       setLayout({
          title: null,
          backButton: false,
          isMain: true,
          fullscreen: false,
-         heading: 'DANKOOK UNIVERSITY',
-         subHeading: 'DANKOOK UNIV STUDENT COUNCIL',
-         headingStyle: HeadingStyle.main.size,
-         headingText: HeadingStyle.main.headingStyle,
-         subHeadingText: HeadingStyle.main.subHeadingStyle,
-         margin: '',
+         headingText: HEADING_TEXT.MAIN.HEAD,
+         subHeadingText: HEADING_TEXT.MAIN.SUBHEAD,
+         headingStyle: HEADING_STYLE.MAIN.HEAD,
+         subHeadingStyle: HEADING_STYLE.MAIN.SUBHEAD,
          rounded: false,
       });
    });
@@ -63,7 +33,6 @@ export default function Main() {
             <Notice notices={main?.recentNotices} />
             <Petition petitions={main?.popularPetitions} />
             <Cafeteria />
-            <Service />
          </div>
       </main>
    );
