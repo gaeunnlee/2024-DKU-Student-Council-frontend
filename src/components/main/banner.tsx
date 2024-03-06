@@ -6,11 +6,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { BaseSkeleton } from 'components/ui/skeleton';
 import { IBanner } from 'api/main/types/main';
+import { useNavigate } from 'react-router-dom';
 
 export const BannerSize = 'w-[322px] h-[322px] absolute top-44';
 
 export default function Banner({ banners }: { banners: IBanner[] }) {
    SwiperCore.use([Autoplay]);
+   const navigate = useNavigate();
 
    return (
       <div className='w-full h-[337px] flex justify-center'>
@@ -24,7 +26,16 @@ export default function Banner({ banners }: { banners: IBanner[] }) {
             >
                {banners?.map((item) => (
                   <SwiperSlide key={item.id}>
-                     <img src={item.url} alt='banner' className='w-full h-full object-cover rounded-lg' />
+                     <img
+                        onClick={() => {
+                           item.redirectUrl && navigate(item.redirectUrl);
+                        }}
+                        src={item.url}
+                        alt='banner'
+                        className={`w-full h-full object-cover rounded-lg ${
+                           item.redirectUrl && 'cursor-pointer'
+                        }`}
+                     />
                   </SwiperSlide>
                ))}
             </Swiper>
