@@ -31,6 +31,7 @@ import ResetIdPw from 'pages/reset/resetIdPw';
 import ResetId from 'pages/reset/resetId';
 import VerifyPw from 'pages/reset/verifyPw';
 import ResetPw from 'pages/reset/resetPw';
+import BusinessBoard from 'pages/business';
 
 /**
  * @description 라우터
@@ -99,6 +100,7 @@ export default function Router() {
                <Route path={ROUTES.NOTICE.POST} element={<NoticePost />} />
                <Route path={ROUTES.CONFERENCE.ROOT} element={<ConferenceBoard />} />
                <Route path={ROUTES.RULE.ROOT} element={<RuleBoard />} />
+               <Route path={ROUTES.BUSINESS.ROOT} element={<BusinessBoard />} />
             </Routes>
          </DefaultLayout>
       </BrowserRouter>

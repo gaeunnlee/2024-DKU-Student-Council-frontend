@@ -38,6 +38,10 @@ export const HEADING_TEXT = {
       HEAD: '부원모집',
       SUBHEAD: '모집요강',
    },
+   BUSINESS: {
+      HEAD: '제휴사업',
+      SUBHEAD: '음식',
+   },
 };
 
 export const HEADING_STYLE = {

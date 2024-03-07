@@ -23,9 +23,13 @@ export const useInfiniteScroll = <T>(api: string) => {
 
    const fetchList = useCallback(
       async (boardPage: number) => {
+         const API =
+            api.indexOf('?') !== -1
+               ? `${api}&page=${boardPage}&size=10&sort=id,desc`
+               : `${api}?page=${boardPage}&size=10&sort=id,desc`;
          setFetchSuccess(false);
          try {
-            const { data } = await axios.get(`${api}?page=${boardPage}&size=10&sort=id,desc`);
+            const { data } = await axios.get(API);
             if (data.content.length !== 0) {
                setList((prev) => {
                   return page === 0 ? data.content : prev.concat(data.content);

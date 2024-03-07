@@ -77,4 +77,17 @@ export const ROUTES = {
       /** 루트 */
       ROOT: '/rule',
    },
+   /** 제휴사업 */
+   BUSINESS: {
+      /** 루트 */
+      ROOT: '/business',
+      /** 음식 */
+      FOOD: '/business/food',
+      /** 문화 */
+      CULTURE: '/business/culture',
+      /** 헬스 */
+      HEALTH: '/business/health',
+      /** 기타 */
+      ETC: '/business/etc',
+   },
 };

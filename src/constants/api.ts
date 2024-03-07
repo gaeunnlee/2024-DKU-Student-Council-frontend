@@ -117,6 +117,11 @@ export const API_PATH = {
          /** 회칙 목록 */
          ROOT: '/post/rule',
       },
+      /** 제휴사업 */
+      COALITION: {
+         /** 제휴사업 목록 */
+         ROOT: '/post/coalition',
+      },
    },
 };
 
