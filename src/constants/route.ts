@@ -81,6 +81,8 @@ export const ROUTES = {
    BUSINESS: {
       /** 루트 */
       ROOT: '/business',
+      /** 상세보기 */
+      ID: '/business/:id',
       /** 음식 */
       FOOD: '/business/food',
       /** 문화 */
