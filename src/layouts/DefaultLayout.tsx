@@ -61,12 +61,12 @@ export default function DefaultLayout({ children, ...props }: DefaultLayoutProps
                )}
                <div
                   className='w-[390px] mx-auto overflow-y-auto overflow-x-hidden'
-                  style={{ marginBottom: bottomNavSize }}
+                  style={{ marginBottom: bottomNavSize, marginTop: margin }}
                   {...props}
                >
                   <div
                      className={`${rounded && 'rounded-t-3xl pt-4'} 
-                  mt-${margin} flex flex-col bg-white`}
+                   flex flex-col bg-white`}
                   >
                      {children}
                   </div>
