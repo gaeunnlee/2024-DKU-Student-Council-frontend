@@ -7,7 +7,7 @@ export default function Cafeteria() {
 
    const { data: cafeteria } = useGetCafeteria();
    const handleMealData = () => {
-      return cafeteria ? <p>{cafeteria[selectedMeal]}</p> : null;
+      return cafeteria ? <p className='whitespace-pre-line'>{cafeteria[selectedMeal]}</p> : null;
    };
    const mealButton =
       'flex items-center gap-[2px] w-[70px] h-6 text-center text-sm px-3 rounded-xl shadow-md bg-no-repeat';
@@ -42,7 +42,7 @@ export default function Cafeteria() {
                   </li>
                ))}
             </ul>
-            <div className='w-[250px] px-4 py-5 text-sm'>{handleMealData()}</div>
+            <div className='w-[250px] px-4 text-sm'>{handleMealData()}</div>
          </div>
       </section>
    );
