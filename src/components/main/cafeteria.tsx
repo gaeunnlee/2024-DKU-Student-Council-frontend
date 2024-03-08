@@ -8,8 +8,10 @@ export default function Cafeteria() {
    const emptyCafeteria = '학식 데이터가 존재하지 않습니다.';
 
    const { data: cafeteria } = useGetCafeteria();
+   const cafeteriaInfo = cafeteria ? cafeteria[selectedMeal] : emptyCafeteria;
+
    const handleMealData = () => {
-      return <p className='whitespace-pre-line'>{cafeteria[selectedMeal] ?? emptyCafeteria}</p>;
+      return <p className='whitespace-pre-line'>{cafeteriaInfo}</p>;
    };
 
    const mealButton =
