@@ -2,9 +2,11 @@ import React from 'react';
 import { AxiosError, isAxiosError } from 'axios';
 import { useModal } from './useModal';
 import { ModalProps } from 'components/ui/modal';
+import { useNavigate } from 'react-router-dom';
 
 export const useAlert = () => {
    const { open } = useModal();
+   const navigate = useNavigate();
 
    const alertModal = (content: string | undefined) =>
       (
@@ -34,7 +36,12 @@ export const useAlert = () => {
          open(alertModal(error), alertOption);
       } else if (error instanceof AxiosError && error.response?.data.message) {
          console.log(2);
-         open(alertModal(error.response?.data.message), alertOption);
+         if (error.response?.data.code === 'NotGrantedException') {
+            open(alertModal('로그인이 필요한 서비스입니다.'), alertOption);
+            navigate('/login');
+         } else {
+            open(alertModal(error.response?.data.message), alertOption);
+         }
       } else if (isAxiosError(error)) {
          console.log(3);
          open(alertModal(error.message), alertOption);
