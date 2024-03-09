@@ -18,7 +18,7 @@ export default function ResetPw() {
          backButton: true,
          isMain: false,
          fullscreen: false,
-         margin: '[140px]',
+         margin: '140px',
          rounded: true,
       });
    });

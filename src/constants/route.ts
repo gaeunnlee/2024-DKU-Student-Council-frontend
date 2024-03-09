@@ -1,4 +1,73 @@
-export const ROUTES = {
+type TMypageRoutes = {
+   INDEX: string;
+   PASSWORD: string;
+   EDIT: string;
+   UPDATE: string;
+};
+
+type TSignupRoutes = {
+   ROOT: string;
+   TERMS: string;
+   VERIFY: string;
+   INFO: string;
+   SUCCESS: string;
+};
+
+type TResetRoutes = {
+   INDEX: string;
+   ID: string;
+   PW_VERIFY: string;
+   PW: string;
+};
+
+type TCouncilRoutes = {
+   GREETING: string;
+   ORGANIZATION: string;
+   LOCATION: string;
+   RECRUITMENT: string;
+};
+
+type TRentalRoutes = {
+   ROOT: string;
+   ITEM: string;
+};
+
+type TPetitionRoutes = {
+   ROOT: string;
+   ID: string;
+   POST: string;
+};
+
+type TNoticeRoutes = {
+   ROOT: string;
+   POST: string;
+   ID: string;
+};
+
+type TConferenceRoutes = {
+   ROOT: string;
+};
+
+type TRuleRoutes = {
+   ROOT: string;
+};
+
+export type TMainRoutes = {
+   MAIN: string;
+   LOGIN: string;
+   MYPAGE: TMypageRoutes;
+   NOT_FOUND: string;
+   SIGNUP: TSignupRoutes;
+   RESET: TResetRoutes;
+   COUNCIL: TCouncilRoutes;
+   RENTAL: TRentalRoutes;
+   PETITION: TPetitionRoutes;
+   NOTICE: TNoticeRoutes;
+   CONFERENCE: TConferenceRoutes;
+   RULE: TRuleRoutes;
+};
+
+export const ROUTES: TMainRoutes = {
    /** 메인 화면 */
    MAIN: '/',
    /** 로그인 화면 */

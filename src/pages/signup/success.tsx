@@ -20,7 +20,7 @@ export default function SignupSuccess() {
          backButton: true,
          isMain: false,
          fullscreen: true,
-         margin: '[140px]',
+         margin: '140px',
          rounded: true,
       });
    });
