@@ -52,6 +52,15 @@ type TRuleRoutes = {
    ROOT: string;
 };
 
+type TBusinessRoutes = {
+   ROOT: string;
+   ID: string;
+   FOOD: string;
+   CULTURE: string;
+   HEALTH: string;
+   ETC: string;
+};
+
 export type TMainRoutes = {
    MAIN: string;
    LOGIN: string;
@@ -65,6 +74,7 @@ export type TMainRoutes = {
    NOTICE: TNoticeRoutes;
    CONFERENCE: TConferenceRoutes;
    RULE: TRuleRoutes;
+   BUSINESS: TBusinessRoutes;
 };
 
 export const ROUTES: TMainRoutes = {
