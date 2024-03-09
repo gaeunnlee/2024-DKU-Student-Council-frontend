@@ -13,7 +13,7 @@ export default function ResetId() {
          backButton: true,
          isMain: false,
          fullscreen: false,
-         margin: '[140px]',
+         margin: '140px',
          rounded: true,
       });
    });

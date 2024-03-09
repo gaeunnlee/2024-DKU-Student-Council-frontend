@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import SvgIcon from '../icon/SvgIcon';
 import logo from '../../../assets/images/logo.png';
 import { ROUTES } from 'constants/route';
+import IconButton from 'components/ui/button/IconButton';
 
 interface Props extends React.ComponentProps<'header'> {
    left?: JSX.Element | null;
@@ -35,11 +35,7 @@ Gnb.Logo = function Logo() {
 
 Gnb.GoBack = function GoBack() {
    const navigate = useNavigate();
-   return (
-      <button onClick={() => navigate(-1)}>
-         <SvgIcon id='arrow_back' width={18} height={22} color='white' />
-      </button>
-   );
+   return <IconButton id='arrow_back' width={18} height={22} color='white' onClick={() => navigate(-1)} />;
 };
 
 Gnb.Title = function Title({ children }: { children: string }) {
