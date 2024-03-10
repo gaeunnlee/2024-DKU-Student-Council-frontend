@@ -47,18 +47,16 @@ export function FileBox({
          {...props}
       >
          {files.map((file) => (
-            <>
-               <a
-                  className='flex items-center gap-2'
-                  href={file.url}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  key={file.id}
-               >
-                  <PiPaperclipFill style={{ fontSize: '20px' }} />
-                  <span className='overflow-hidden text-ellipsis truncate'>{file.originalName}</span>
-               </a>
-            </>
+            <a
+               className='flex items-center gap-2'
+               href={file.url}
+               target='_blank'
+               rel='noopener noreferrer'
+               key={file.id}
+            >
+               <PiPaperclipFill style={{ fontSize: '20px' }} />
+               <span className='overflow-hidden text-ellipsis truncate'>{file.originalName}</span>
+            </a>
          ))}
          {children}
       </div>

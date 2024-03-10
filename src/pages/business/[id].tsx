@@ -17,7 +17,6 @@ export default function BusinessDetail() {
 
    useEffect(() => {
       const categoryName = pathname.split('/')[2].toUpperCase();
-      console.log(pathname);
       setCategory(categoryName);
    }, [pathname]);
 
