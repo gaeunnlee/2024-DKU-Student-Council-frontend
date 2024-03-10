@@ -1,7 +1,7 @@
 import Board from 'components/common/board';
 import { useInfiniteScroll } from 'hooks/useInfiniteScroll';
 import React, { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export interface IBoardList {
    id: string;
@@ -28,18 +28,13 @@ export default function BoardLayout({
    setCell: (data: IBoardList) => JSX.Element;
    isFileLink?: boolean;
 }) {
-   const { list, setList, isLoading, bottom } = useInfiniteScroll<IBoardList>(api);
+   const { list, isLoading, bottom } = useInfiniteScroll<IBoardList>(api);
    const [isEmpty, setIsEmpty] = React.useState(false);
    const navigate = useNavigate();
-   const { pathname } = useLocation();
 
    useEffect(() => {
       !list && setIsEmpty(true);
    }, [list]);
-
-   useEffect(() => {
-      setList(list);
-   }, [pathname]);
 
    if (isEmpty) {
       return (

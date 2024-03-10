@@ -17,6 +17,7 @@ export const useInfiniteScroll = <T>(api: string) => {
 
    useEffect(() => {
       setPage(0);
+      setList([]);
    }, [pathname]);
 
    useEffect(() => {
