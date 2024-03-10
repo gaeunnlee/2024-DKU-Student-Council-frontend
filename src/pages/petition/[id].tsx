@@ -29,6 +29,7 @@ export default function PetitionDetail() {
          headingText: HEADING_TEXT.PETITION.HEAD,
          headingStyle: `${HEADING_STYLE.COUNCIL.HEAD} mb-[30px]`,
          rounded: true,
+         dropDown: HEADING_STYLE.COUNCIL.DROPDOWN,
       });
    });
 

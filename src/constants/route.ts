@@ -54,11 +54,8 @@ type TRuleRoutes = {
 
 type TBusinessRoutes = {
    ROOT: string;
-   ID: string;
-   FOOD: string;
-   CULTURE: string;
-   HEALTH: string;
-   ETC: string;
+   DETAIL: string;
+   CATEGORY: string;
 };
 
 export type TMainRoutes = {
@@ -161,14 +158,8 @@ export const ROUTES: TMainRoutes = {
       /** 루트 */
       ROOT: '/business',
       /** 상세보기 */
-      ID: '/business/:id',
+      DETAIL: '/business/:category/:id',
       /** 음식 */
-      FOOD: '/business/food',
-      /** 문화 */
-      CULTURE: '/business/culture',
-      /** 헬스 */
-      HEALTH: '/business/health',
-      /** 기타 */
-      ETC: '/business/etc',
+      CATEGORY: '/business/:category',
    },
 };

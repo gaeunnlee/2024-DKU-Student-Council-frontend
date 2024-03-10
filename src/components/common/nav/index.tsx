@@ -27,7 +27,7 @@ const navItems: NavItem[] = [
    {
       id: 3,
       name: '제휴사업',
-      path: '/business',
+      path: '/business/food',
       icon: <SvgIcon id='partnership' width={17.54} height={19.6} />,
    },
    {

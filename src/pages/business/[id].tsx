@@ -1,31 +1,41 @@
 import Carousel from 'components/common/carousel';
 import PostBox, { FileBox } from 'components/ui/box/PostBox';
 import { API_PATH } from 'constants/api';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Collapse from 'components/ui/collapse';
 import { useFetchPost } from 'hooks/useFetchPost';
 import PostDetailLayout from 'layouts/PostDetailLayout';
 import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
-import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import { IPost } from 'interfaces/post';
+import { useLocation } from 'react-router-dom';
 
 export default function BusinessDetail() {
    const { setLayout } = useLayout();
+   const { pathname } = useLocation();
+   const [category, setCategory] = useState('');
 
-   useEffectOnce(() => {
+   useEffect(() => {
+      const categoryName = pathname.split('/')[2].toUpperCase();
+      console.log(pathname);
+      setCategory(categoryName);
+   }, [pathname]);
+
+   useEffect(() => {
       setLayout({
          title: HEADING_TEXT.COUNCIL.HEAD,
          backButton: true,
          isMain: false,
          fullscreen: false,
          headingText: HEADING_TEXT.BUSINESS.HEAD,
-         subHeadingText: HEADING_TEXT.BUSINESS.SUBHEAD,
+         subHeadingText:
+            Object.getOwnPropertyDescriptor(HEADING_TEXT.BUSINESS.SUBHEAD, category)?.value ?? '',
          headingStyle: HEADING_STYLE.COUNCIL.HEAD,
          subHeadingStyle: HEADING_STYLE.COUNCIL.SUBHEAD,
          rounded: true,
+         dropDown: HEADING_STYLE.BUSINESS.DROPDOWN,
       });
-   });
+   }, [category]);
 
    const { post, images } = useFetchPost<IPost>({ api: API_PATH.POST.NOTICE.ROOT, isCarousel: true });
    return (

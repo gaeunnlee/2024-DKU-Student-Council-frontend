@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export const useInfiniteScroll = <T>(api: string) => {
    const [list, setList] = useState<T[]>([]);
@@ -12,6 +13,11 @@ export const useInfiniteScroll = <T>(api: string) => {
          setPage((prevPage) => prevPage + 1);
       }
    };
+   const { pathname } = useLocation();
+
+   useEffect(() => {
+      setPage(0);
+   }, [pathname]);
 
    useEffect(() => {
       const observer = new IntersectionObserver(callback);
@@ -23,21 +29,23 @@ export const useInfiniteScroll = <T>(api: string) => {
 
    const fetchList = useCallback(
       async (boardPage: number) => {
-         const API =
-            api.indexOf('?') !== -1
-               ? `${api}&page=${boardPage}&size=10&sort=id,desc`
-               : `${api}?page=${boardPage}&size=10&sort=id,desc`;
-         setFetchSuccess(false);
-         try {
-            const { data } = await axios.get(API);
-            if (data.content.length !== 0) {
-               setList((prev) => {
-                  return page === 0 ? data.content : prev.concat(data.content);
-               });
-               setFetchSuccess(true);
+         if (api.length > 0) {
+            const API =
+               api.indexOf('?') !== -1
+                  ? `${api}&page=${boardPage}&size=10&sort=id,desc`
+                  : `${api}?page=${boardPage}&size=10&sort=id,desc`;
+            setFetchSuccess(false);
+            try {
+               const { data } = await axios.get(API);
+               if (data.content.length !== 0) {
+                  setList((prev) => {
+                     return page === 0 ? data.content : prev.concat(data.content);
+                  });
+                  setFetchSuccess(true);
+               }
+            } catch (error) {
+               alert(error);
             }
-         } catch (error) {
-            alert(error);
          }
       },
       [api, page],
@@ -55,6 +63,7 @@ export const useInfiniteScroll = <T>(api: string) => {
 
    return {
       list,
+      setList,
       isLoading,
       bottom,
    };

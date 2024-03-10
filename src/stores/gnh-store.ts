@@ -1,3 +1,4 @@
+import { TOption } from 'components/ui/selector';
 import { create } from 'zustand';
 
 export interface GnhState {
@@ -9,6 +10,8 @@ export interface GnhState {
    setHeadingStyle: (headingStyle: string) => void;
    subHeadingStyle: string;
    setSubHeadingStyle: (subHeadingStyle: string) => void;
+   dropDown: TOption[] | undefined;
+   setDropDown: (options: TOption[] | undefined) => void;
 }
 
 export const gnhState = create<GnhState>((set) => ({
@@ -20,4 +23,6 @@ export const gnhState = create<GnhState>((set) => ({
    setHeadingStyle: (headingStyle: string) => set({ headingStyle }),
    subHeadingStyle: '',
    setSubHeadingStyle: (subHeadingStyle: string) => set({ subHeadingStyle }),
+   dropDown: undefined,
+   setDropDown: (dropDown: TOption[] | undefined) => set({ dropDown }),
 }));

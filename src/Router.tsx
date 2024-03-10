@@ -101,8 +101,8 @@ export default function Router() {
                <Route path={ROUTES.NOTICE.POST} element={<NoticePost />} />
                <Route path={ROUTES.CONFERENCE.ROOT} element={<ConferenceBoard />} />
                <Route path={ROUTES.RULE.ROOT} element={<RuleBoard />} />
-               <Route path={ROUTES.BUSINESS.ROOT} element={<BusinessBoard />} />
-               <Route path={ROUTES.BUSINESS.ID} element={<BusinessDetail />} />
+               <Route path={ROUTES.BUSINESS.CATEGORY} element={<BusinessBoard />} />
+               <Route path={ROUTES.BUSINESS.DETAIL} element={<BusinessDetail />} />
             </Routes>
          </DefaultLayout>
       </BrowserRouter>
