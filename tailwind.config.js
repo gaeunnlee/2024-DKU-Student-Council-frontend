@@ -16,7 +16,7 @@ module.exports = {
             dinner: "url('./assets/icons/dinner.svg')",
          },
          // that is actual animation
-         keyframes: (theme) => ({
+         keyframes: () => ({
             fadeIn: {
                '0%': { opacity: '0' },
                '100%': { opacity: '1' },
