@@ -25,8 +25,26 @@ module.exports = {
       ecmaVersion: 'latest',
       sourceType: 'module',
    },
-   plugins: ['@typescript-eslint', 'react', 'cypress'],
+   plugins: ['@typescript-eslint', 'react', 'cypress', 'import'],
    rules: {
+      'import/order': [
+         'error',
+         {
+            groups: ['builtin', 'external', ['parent', 'sibling'], 'index'],
+            pathGroups: [
+               {
+                  pattern: 'angular',
+                  group: 'external',
+                  position: 'before',
+               },
+            ],
+            alphabetize: {
+               order: 'asc',
+               caseInsensitive: true,
+            },
+            'newlines-between': 'always',
+         },
+      ],
       indent: ['error', 3, { SwitchCase: 1 }],
       quotes: ['error', 'single'],
       semi: ['error', 'always'],
