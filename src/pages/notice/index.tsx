@@ -1,9 +1,9 @@
-import Title, { Date } from 'components/ui/text/board';
-import { API_PATH, CONSTANTS } from 'constants/api';
-import { useEffectOnce } from 'hooks/useEffectOnce';
-import { useLayout } from 'hooks/useLayout';
-import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
-import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
+import Title, { Date } from '@components/ui/text/board';
+import { API_PATH, CONSTANTS } from '@constants/api';
+import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
+import { useEffectOnce } from '@hooks/useEffectOnce';
+import { useLayout } from '@hooks/useLayout';
+import BoardLayout, { IBoardList } from '@layouts/BoardLayout';
 import React from 'react';
 
 export default function NoticeBoard() {

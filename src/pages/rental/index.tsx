@@ -1,14 +1,14 @@
-import React from 'react';
-import Board from 'components/common/board';
-import { API_PATH, PAGE_SIZE, QUERY_STRING } from 'constants/api';
-import { ROUTES } from 'constants/route';
-import { useEffectOnce } from 'hooks/useEffectOnce';
+import { IPaging } from '@api/axios-interface';
+import Board from '@components/common/board';
+import SpeedDial from '@components/ui/speed-dial';
+import { API_PATH, PAGE_SIZE, QUERY_STRING } from '@constants/api';
+import { ROUTES } from '@constants/route';
+import { useApi } from '@hooks/useApi';
+import { useEffectOnce } from '@hooks/useEffectOnce';
+import { useLayout } from '@hooks/useLayout';
 import { ReactComponent as ChevronRight } from 'assets/images/chevron_right.svg';
-import SpeedDial from 'components/ui/speed-dial';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useLayout } from 'hooks/useLayout';
-import { IPaging } from 'api/axios-interface';
-import { useApi } from 'hooks/useApi';
 
 interface Content {
    id: number;

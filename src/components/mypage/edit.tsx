@@ -1,9 +1,10 @@
-import { shadowStyle } from 'constants/shadow';
-import { IEvent, IFormInfo, IInputValue } from 'interfaces/mypage/edit';
+import { shadowStyle } from '@constants/shadow';
+import { checkInputRegex } from '@utils/checkInputRegex';
 import React from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { FaCircleExclamation } from 'react-icons/fa6';
-import { checkInputRegex } from 'utils/checkInputRegex';
+
+import { IEvent, IFormInfo, IInputValue } from '../../interfaces/mypage/edit';
 
 export const Box = ({ children, key }: { children: React.ReactNode; key: number }) => (
    <div key={key} className='w-full rounded-lg bg-[#f4f4f4] p-4 flex flex-col gap-5'>

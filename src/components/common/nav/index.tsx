@@ -1,9 +1,9 @@
+import SvgIcon from '@components/common/icon/SvgIcon';
+import { bottomNavSize } from '@constants/nav';
+import { menuStore } from '@stores/menu-store';
+import { motion } from 'framer-motion';
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import SvgIcon from '../icon/SvgIcon';
-import { bottomNavSize } from 'constants/nav';
-import { menuStore } from 'stores/menu-store';
 
 interface NavItem {
    id: number;

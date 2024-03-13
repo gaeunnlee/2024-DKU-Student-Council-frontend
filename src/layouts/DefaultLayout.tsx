@@ -1,19 +1,19 @@
-import Gnb from 'components/common/gnb';
-import Gnh from 'components/common/gnh';
-import Menu from 'components/main/menu';
-import Nav from 'components/common/nav';
-import { bottomNavSize } from 'constants/nav';
-import { IWithReactChildren } from 'shared/interfaces/default-interfaces';
-import { gnbState } from 'stores/gnb-store';
-import { gnhState } from 'stores/gnh-store';
-import { navStore } from 'stores/nav-store';
+import Gnb from '@components/common/gnb';
+import Gnh from '@components/common/gnh';
+import Nav from '@components/common/nav';
+import Menu from '@components/main/menu';
+import { bottomNavSize } from '@constants/nav';
+import { useAuth } from '@hooks/useAuth';
+import { useDefaultModal } from '@hooks/useDefaultModal';
+import { IWithReactChildren } from '@shared/interfaces/default-interfaces';
+import { useEnrollmentStore } from '@stores/enrollment-store';
+import { gnbState } from '@stores/gnb-store';
+import { gnhState } from '@stores/gnh-store';
+import { menuStore } from '@stores/menu-store';
+import { navStore } from '@stores/nav-store';
 import { AnimatePresence } from 'framer-motion';
 import React, { useEffect } from 'react';
-import { useEnrollmentStore } from 'stores/enrollment-store';
-import { useAuth } from 'hooks/useAuth';
 import { useLocation } from 'react-router-dom';
-import { useDefaultModal } from 'hooks/useDefaultModal';
-import { menuStore } from 'stores/menu-store';
 
 type DefaultLayoutProps = IWithReactChildren & React.HTMLAttributes<HTMLDivElement>;
 

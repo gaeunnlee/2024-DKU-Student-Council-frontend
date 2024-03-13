@@ -1,10 +1,10 @@
+import SvgIcon from '@components/common/icon/SvgIcon';
+import { Button } from '@components/ui/button';
+import { ROUTES } from '@constants/route';
+import { useEffectOnce } from '@hooks/useEffectOnce';
+import { useLayout } from '@hooks/useLayout';
 import React from 'react';
-import SvgIcon from 'components/common/icon/SvgIcon';
-import { useEffectOnce } from 'hooks/useEffectOnce';
-import { useLayout } from 'hooks/useLayout';
-import Button from 'components/ui/button';
 import { useNavigate } from 'react-router-dom';
-import { ROUTES } from 'constants/route';
 
 export default function SignupSuccess() {
    const { setLayout } = useLayout();
@@ -30,7 +30,13 @@ export default function SignupSuccess() {
             <SvgIcon id='success' width={38} height={38} />
             <h2 className='font-bold text-xl'>회원가입 완료</h2>
             <p className='text-xl mb-4'>회원가입이 완료되었습니다.</p>
-            <Button variant='default' size='md' borderRadius='20px' onClick={handleGoLogin}>
+            <Button
+               variant='default'
+               asChild={true}
+               size='md'
+               className='rounded-[20px]'
+               onClick={handleGoLogin}
+            >
                로그인하러 가기
             </Button>
          </div>

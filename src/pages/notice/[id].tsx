@@ -1,13 +1,13 @@
-import Carousel from 'components/common/carousel';
-import PostBox, { FileBox } from 'components/ui/box/PostBox';
-import { API_PATH } from 'constants/api';
+import Carousel from '@components/common/carousel';
+import PostBox, { FileBox } from '@components/ui/box/PostBox';
+import Collapse from '@components/ui/collapse';
+import { API_PATH } from '@constants/api';
+import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
+import { useEffectOnce } from '@hooks/useEffectOnce';
+import { useFetchPost } from '@hooks/useFetchPost';
+import { useLayout } from '@hooks/useLayout';
+import PostDetailLayout from '@layouts/PostDetailLayout';
 import React from 'react';
-import Collapse from 'components/ui/collapse';
-import { useFetchPost } from 'hooks/useFetchPost';
-import PostDetailLayout from 'layouts/PostDetailLayout';
-import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
-import { useEffectOnce } from 'hooks/useEffectOnce';
-import { useLayout } from 'hooks/useLayout';
 
 export default function NoticeDetail() {
    const { setLayout } = useLayout();

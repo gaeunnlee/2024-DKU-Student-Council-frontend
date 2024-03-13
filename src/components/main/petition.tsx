@@ -1,7 +1,7 @@
-import { BaseSkeleton, TextSkeleton } from 'components/ui/skeleton';
-import { IPetition } from 'api/main/types/main';
-import { useNavigate } from 'react-router-dom';
+import { IPetition } from '@api/main/types/main';
+import { BaseSkeleton, TextSkeleton } from '@components/ui/skeleton';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Petition({ petitions }: { petitions?: IPetition[] }) {
    const navigate = useNavigate();

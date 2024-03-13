@@ -1,4 +1,4 @@
-import IconSprite from 'assets/icons/IconSprite.svg';
+import IconSprite from '@assets/icons/IconSprite.svg';
 import React from 'react';
 
 export interface IconProps {

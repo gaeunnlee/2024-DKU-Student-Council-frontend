@@ -1,6 +1,6 @@
-import { API_PATH } from 'constants/api';
-import { IMain } from './types/main';
-import { client } from 'api';
+import { client } from '@api/index';
+import { IMain } from '@api/main/types/main';
+import { API_PATH } from '@constants/api';
 
 export const main = async () => {
    try {

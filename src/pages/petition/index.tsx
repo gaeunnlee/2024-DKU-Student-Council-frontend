@@ -1,14 +1,14 @@
-import FloatingButton from 'components/ui/button/FloatingButton';
-import Text from 'components/ui/text';
-import Title from 'components/ui/text/board';
-import { API_PATH, CONSTANTS } from 'constants/api';
-import { ROUTES } from 'constants/route';
-import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
-import { useNavigate } from 'react-router-dom';
+import FloatingButton from '@components/ui/button/FloatingButton';
+import Text from '@components/ui/text';
+import Title from '@components/ui/text/board';
+import { API_PATH, CONSTANTS } from '@constants/api';
+import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
+import { ROUTES } from '@constants/route';
+import { useEffectOnce } from '@hooks/useEffectOnce';
+import { useLayout } from '@hooks/useLayout';
+import BoardLayout, { IBoardList } from '@layouts/BoardLayout';
 import React from 'react';
-import { useLayout } from 'hooks/useLayout';
-import { useEffectOnce } from 'hooks/useEffectOnce';
-import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
+import { useNavigate } from 'react-router-dom';
 
 export const getDaysBetween = (expiresAt: string) => {
    const startDate = new Date();

@@ -1,9 +1,9 @@
+import Box from '@components/ui/box';
+import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
+import { useEffectOnce } from '@hooks/useEffectOnce';
+import { useLayout } from '@hooks/useLayout';
+import SinglePageLayout from '@layouts/SinglePageLayout';
 import React from 'react';
-import Box from 'components/ui/box';
-import { useLayout } from 'hooks/useLayout';
-import { useEffectOnce } from 'hooks/useEffectOnce';
-import SinglePageLayout from 'layouts/SinglePageLayout';
-import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
 
 export default function Greeting() {
    const { setLayout } = useLayout();

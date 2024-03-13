@@ -1,10 +1,10 @@
-import Input from 'components/ui/input';
-import Button from 'components/ui/button';
-import Message from 'components/ui/typo/message';
+import { IUserRegistration } from '@api/signup/types/signup';
+import { Button } from '@components/ui/button';
+import { Input } from '@components/ui/input';
+import Message from '@components/ui/typo/message';
+import { usePostPhoneVerify, usePostPhoneConfirmCode, usePostSignup } from '@hooks/query/signup/mutation';
+import { useGetNicknameVerify } from '@hooks/query/signup/query';
 import React, { ChangeEvent, useEffect } from 'react';
-import { IUserRegistration } from 'api/signup/types/signup';
-import { usePostPhoneVerify, usePostPhoneConfirmCode, usePostSignup } from 'hooks/query/signup/mutation';
-import { useGetNicknameVerify } from 'hooks/query/signup/query';
 
 export default function InfoForm({ signupToken }: { signupToken: string }) {
    const [signupInfo, setSignupInfo] = React.useState<IUserRegistration>({
@@ -87,7 +87,7 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
                value={signupInfo.password}
                onChange={handleInputChange}
                size='md'
-               borderRadius='10px'
+               className='rounded-[10px]'
             />
             <Input
                type='password'
@@ -96,7 +96,7 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
                value={passwordConfirm}
                onChange={handleInputChange}
                size='md'
-               borderRadius='10px'
+               className='rounded-[10px]'
             />
             <Message>{passwordMismatch ? '비밀번호가 일치하지 않습니다.' : null}</Message>
          </section>
@@ -110,7 +110,7 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
                   value={signupInfo.nickname}
                   onChange={handleInputChange}
                   size='md'
-                  borderRadius='10px'
+                  className='rounded-[10px]'
                />
                <button
                   type='button'
@@ -132,7 +132,7 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
                   value={phoneNumber}
                   onChange={handleInputChange}
                   size='md'
-                  borderRadius='10px'
+                  className='rounded-[10px]'
                />
                <button
                   type='button'
@@ -150,7 +150,7 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
                   name='code'
                   onChange={handleInputChange}
                   size='md'
-                  borderRadius='10px'
+                  className='rounded-[10px]'
                />
                <button
                   type='button'
@@ -165,11 +165,10 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
          <Button
             size='md'
             type='submit'
-            className='mt-4'
+            className='mt-4 rounded-[20px]'
             disabled={!isFormValid}
             onClick={handleSignup}
             variant='default'
-            borderRadius='20px'
          >
             확인
          </Button>

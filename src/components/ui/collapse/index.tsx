@@ -1,6 +1,6 @@
+import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { IoMdArrowDropdownCircle, IoMdArrowDropupCircle } from 'react-icons/io';
-import { motion } from 'framer-motion';
 
 export default function Collapse({
    children,

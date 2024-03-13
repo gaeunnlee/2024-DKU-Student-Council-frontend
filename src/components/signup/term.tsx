@@ -1,15 +1,14 @@
-import Box from 'components/ui/box';
-import Checkbox from 'components/ui/checkbox';
-import Button from 'components/ui/button';
-import Text from 'components/ui/typo/text';
-import { ROUTES } from 'constants/route';
+import Box from '@components/ui/box';
+import { Button } from '@components/ui/button';
+import Checkbox from '@components/ui/checkbox';
+import { ROUTES } from '@constants/route';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import React, { Fragment, useState } from 'react';
 
 export default function Term() {
    const allDisagree = Array(3).fill(false);
    const allAgree = Array(3).fill(true);
-   const [agreeCheck, setAgreeCheck] = useState(allDisagree);
+   const [agreeCheck, setAgreeCheck] = React.useState(allDisagree);
    const allChecked = agreeCheck.every(Boolean);
 
    const navigate = useNavigate();
@@ -33,49 +32,50 @@ export default function Term() {
    };
 
    return (
-      <Fragment>
+      <React.Fragment>
          <div className='flex flex-col gap-6'>
             <div className='ml-auto'>
-               <Checkbox name='AllAgree' isChecked={allChecked} onChange={onAllCheckboxChange}>
-                  <Text fontSize='10px' fontWeight={600}>
-                     전체동의하기
-                  </Text>
-               </Checkbox>
+               <Checkbox
+                  label='allAgree'
+                  checked={allChecked}
+                  onCheckedChange={onAllCheckboxChange}
+                  text='전체동의하기'
+               />
             </div>
             <Box className='h-[156px]'>
-               <Checkbox isChecked={agreeCheck[0]} onChange={() => onCheckboxChange(0)}>
-                  <Text as='span' className='text-[11px]'>
-                     [필수]
-                  </Text>
-                  <Text as='span' color='gray02' className='text-[11px]'>
-                     개인 정보 수집, 이용 동의
-                  </Text>
-               </Checkbox>
+               <Checkbox
+                  label='agreeCheck_1'
+                  checked={agreeCheck[0]}
+                  onCheckedChange={() => onCheckboxChange(0)}
+                  text='[필수] 개인 정보 수집, 이용 동의'
+               />
             </Box>
             <Box className='h-[156px]'>
-               <Checkbox isChecked={agreeCheck[1]} onChange={() => onCheckboxChange(1)}>
-                  <Text as='span' fontSize='11px'>
-                     [필수]
-                  </Text>
-                  <Text as='span' color='gray02' fontSize='11px'>
-                     개인 정보 수집, 이용 동의
-                  </Text>
-               </Checkbox>
+               <Checkbox
+                  label='agreeCheck_1'
+                  checked={agreeCheck[1]}
+                  onCheckedChange={() => onCheckboxChange(1)}
+                  text='[필수] 개인 정보 수집, 이용 동의'
+               />
             </Box>
             <Box className='h-[156px] mb-8'>
-               <Checkbox isChecked={agreeCheck[2]} onChange={() => onCheckboxChange(2)}>
-                  <Text as='span' fontSize='11px'>
-                     [필수]
-                  </Text>
-                  <Text as='span' color='gray02' fontSize='11px'>
-                     개인 정보 수집, 이용 동의
-                  </Text>
-               </Checkbox>
+               <Checkbox
+                  label='agreeCheck_1'
+                  checked={agreeCheck[2]}
+                  onCheckedChange={() => onCheckboxChange(2)}
+                  text='[필수] 개인 정보 수집, 이용 동의'
+               />
             </Box>
          </div>
-         <Button size='md' variant='default' rounded='20px' onClick={handleAgreeAll} isDisabled={!allChecked}>
+         <Button
+            size='md'
+            variant='default'
+            className='rounded-[20px]'
+            onClick={handleAgreeAll}
+            disabled={!allChecked}
+         >
             동의 완료
          </Button>
-      </Fragment>
+      </React.Fragment>
    );
 }

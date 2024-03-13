@@ -1,9 +1,9 @@
-import Button from 'components/ui/button';
-import Input from 'components/ui/input';
-import Message from 'components/ui/typo/message';
-import { usePostPhoneVerify } from 'hooks/query/reset/mutation';
-import { usePostPhoneConfirmCode } from 'hooks/query/reset/mutation';
-import { useAlert } from 'hooks/useAlert';
+import { Button } from '@components/ui/button';
+import { Input } from '@components/ui/input';
+import Message from '@components/ui/typo/message';
+import { usePostPhoneVerify } from '@hooks/query/reset/mutation';
+import { usePostPhoneConfirmCode } from '@hooks/query/reset/mutation';
+import { useAlert } from '@hooks/useAlert';
 import React from 'react';
 
 export default function PwVerifyForm() {
@@ -71,7 +71,7 @@ export default function PwVerifyForm() {
             onChange={handleChange}
             className='mb-4'
          />
-         <Button borderRadius='30px' onClick={handleConfirmCode} size='md' variant='default'>
+         <Button className='rounded-[30px]' onClick={handleConfirmCode} size='md' variant='default'>
             확인
          </Button>
       </form>

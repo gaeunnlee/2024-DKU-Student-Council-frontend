@@ -1,5 +1,5 @@
+import { IWithReactChildren } from '@shared/interfaces/default-interfaces';
 import React, { ComponentProps } from 'react';
-import { IWithReactChildren } from 'shared/interfaces/default-interfaces';
 
 export default function SinglePageLayout({ children, ...props }: IWithReactChildren & ComponentProps<'div'>) {
    return (

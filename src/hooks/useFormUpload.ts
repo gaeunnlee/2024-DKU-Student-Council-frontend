@@ -1,6 +1,7 @@
+import { IFormInfo } from '@api/upload/types/upload';
+import { usePostFormUpload } from '@hooks/query/upload/mutation';
 import React from 'react';
-import { IFormInfo } from 'api/upload/types/upload';
-import { usePostFormUpload } from './query/upload/mutation';
+
 import { useAlert } from './useAlert';
 
 export const useFormUpload = ({

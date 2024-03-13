@@ -1,4 +1,4 @@
-import { IFormInfo } from 'api/upload/types/upload';
+import { IFormInfo } from '@api/upload/types/upload';
 import React, { useEffect } from 'react';
 
 export interface ImageProps {

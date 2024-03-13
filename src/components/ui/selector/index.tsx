@@ -1,7 +1,7 @@
-import { ROUTES } from 'constants/route';
-import React, { Fragment, useState } from 'react';
+import IconButton from '@components/ui/button/IconButton';
+import { ROUTES } from '@constants/route';
+import React, { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
-import IconButton from '../button/IconButton';
 
 type TCouncil = {
    text: string;
@@ -14,8 +14,8 @@ type SubHeadingProps = {
 };
 
 export default function Selector({ subHeadingText }: { subHeadingText: string }) {
-   const [open, setOpen] = useState<boolean>(false);
-   const [selected, setSelected] = useState<string>(subHeadingText);
+   const [open, setOpen] = React.useState<boolean>(false);
+   const [selected, setSelected] = React.useState<string>(subHeadingText);
 
    const navigate = useNavigate();
    const handleOption = () => {

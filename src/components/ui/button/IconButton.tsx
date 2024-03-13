@@ -1,5 +1,5 @@
-import SvgIcon from 'components/common/icon/SvgIcon';
-import { IconProps } from 'components/common/icon/SvgIcon';
+import SvgIcon from '@components/common/icon/SvgIcon';
+import { IconProps } from '@components/common/icon/SvgIcon';
 import React from 'react';
 
 interface IconButtonProps extends IconProps {

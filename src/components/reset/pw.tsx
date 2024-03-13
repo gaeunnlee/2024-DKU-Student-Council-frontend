@@ -1,16 +1,15 @@
-import Button from 'components/ui/button';
-import Input from 'components/ui/input';
-import Message from 'components/ui/typo/message';
-import Text from 'components/ui/typo/text';
-import { usePostResetPw } from 'hooks/query/reset/mutation';
-import { useAlert } from 'hooks/useAlert';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import { Button } from '@components/ui/button';
+import { Input } from '@components/ui/input';
+import Message from '@components/ui/typo/message';
+import { usePostResetPw } from '@hooks/query/reset/mutation';
+import { useAlert } from '@hooks/useAlert';
+import React, { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function ResetPwForm({ token }: { token: string }) {
-   const [password, setPassword] = useState<string>('');
-   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
-   const [passwordMismatch, setPasswordMismatch] = useState<boolean>(false);
+   const [password, setPassword] = React.useState<string>('');
+   const [passwordConfirm, setPasswordConfirm] = React.useState<string>('');
+   const [passwordMismatch, setPasswordMismatch] = React.useState<boolean>(false);
    const navigate = useNavigate();
    const { alert } = useAlert();
 
@@ -40,7 +39,7 @@ export default function ResetPwForm({ token }: { token: string }) {
       }
    };
 
-   useEffect(() => {
+   React.useEffect(() => {
       if (resetSuccess) {
          alert('비밀번호가 변경되었습니다.');
          navigate('/login');
@@ -57,7 +56,7 @@ export default function ResetPwForm({ token }: { token: string }) {
                value={password}
                onChange={handleInputChange}
                size='md'
-               borderRadius='10px'
+               className='rounded-[10px]'
             />
             <Input
                type='password'
@@ -66,14 +65,14 @@ export default function ResetPwForm({ token }: { token: string }) {
                value={passwordConfirm}
                onChange={handleInputChange}
                size='md'
-               borderRadius='10px'
+               className='rounded-[10px]'
             />
          </div>
          {passwordMismatch && <Message>비밀번호가 일치하지 않습니다.</Message>}
-         <Text fontSize='13px' className="mb-8 whitespace-pre-wrap before:content-['●'] before:mr-1">
+         <p className="text-[13px] mb-8 whitespace-pre-wrap before:content-['●'] before:mr-1">
             {'비밀번호는 영문과 숫자 1자이상을 포함하는 \n8~16자리여야합니다.'}
-         </Text>
-         <Button borderRadius='30px' onClick={handleResetPw} size='md' variant='default'>
+         </p>
+         <Button className='rounded-[30px]' onClick={handleResetPw} size='md' variant='default'>
             변경
          </Button>
       </form>

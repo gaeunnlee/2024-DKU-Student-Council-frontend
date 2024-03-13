@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import ArrowButton from '@components/common/carousel/ArrowButton';
+import React from 'react';
 import { GoDotFill } from 'react-icons/go';
-import ArrowButton from './ArrowButton';
 
 export default function Carousel({ data }: { data: string[] }) {
-   const [index, setIndex] = useState(0);
+   const [index, setIndex] = React.useState(0);
 
    return (
       <div className='relative flex justify-center aspect-square overflow-hidden bg-gray-200 rounded-lg mt-2'>

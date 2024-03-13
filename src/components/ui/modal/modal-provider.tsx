@@ -1,7 +1,7 @@
+import Modal, { ModalProps } from '@components/ui/modal/index';
+import { IWithReactChildren } from '@shared/interfaces/default-interfaces';
 import React from 'react';
 import ReactDom from 'react-dom';
-import Modal, { ModalProps } from '.';
-import { IWithReactChildren } from 'shared/interfaces/default-interfaces';
 
 export const ModalContext = React.createContext({
    setModalContent: (content: React.ReactNode) => {

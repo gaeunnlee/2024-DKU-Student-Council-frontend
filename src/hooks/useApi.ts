@@ -1,6 +1,6 @@
+import { CONSTANTS } from '@constants/api';
+import { useAlert } from '@hooks/useAlert';
 import axios from 'axios';
-import { CONSTANTS } from 'constants/api';
-import { useAlert } from './useAlert';
 
 type ContentType = 'multipart/form-data' | 'application/json' | 'application/x-www-form-urlencoded';
 interface Options {

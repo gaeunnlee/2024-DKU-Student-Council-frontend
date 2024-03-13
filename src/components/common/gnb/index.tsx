@@ -1,8 +1,8 @@
+import logo from '@assets/images/logo.png';
+import IconButton from '@components/ui/button/IconButton';
+import { ROUTES } from '@constants/route';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import logo from '../../../assets/images/logo.png';
-import { ROUTES } from 'constants/route';
-import IconButton from 'components/ui/button/IconButton';
 
 interface Props extends React.ComponentProps<'header'> {
    left?: JSX.Element | null;

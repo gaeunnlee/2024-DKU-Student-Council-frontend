@@ -1,12 +1,11 @@
-import Input from 'components/ui/input';
-import Button from 'components/ui/button';
-import { useAuth } from 'hooks/useAuth';
+import { Button } from '@components/ui/button';
+import Checkbox from '@components/ui/checkbox';
+import { Input } from '@components/ui/input/index';
+import { ROUTES } from '@constants/route';
+import { useAuth } from '@hooks/useAuth';
+import { IIdPassword } from '@shared/interfaces/default-interfaces';
 import React from 'react';
-import { IIdPassword } from 'shared/interfaces/default-interfaces';
-import Checkbox from 'components/ui/checkbox';
 import { Link } from 'react-router-dom';
-import { ROUTES } from 'constants/route';
-import Text from 'components/ui/typo/text';
 
 export default function LoginForm() {
    const initLoginInfo: IIdPassword = {
@@ -39,9 +38,8 @@ export default function LoginForm() {
             }}
             type='number'
             placeholder='Student ID              @dankook.ac.kr'
-            className='placeholder:text-[14px]'
+            className='placeholder:text-[14px] text-[14px]'
             size='lg'
-            fontSize='14px'
          />
          <Input
             value={loginInfo.password}
@@ -56,16 +54,14 @@ export default function LoginForm() {
             size='lg'
          />
          <div className='flex justify-between mb-1'>
-            <Checkbox>
-               <Text fontSize='12px'>Save ID</Text>
-            </Checkbox>
+            <Checkbox label='saveId' text='Save ID' fontStyle='text-[13px]' />
             <div className='flex text-[12px] gap-2'>
                <Link to={ROUTES.SIGNUP.VERIFY}>회원가입</Link>
                <span> | </span>
                <Link to={ROUTES.RESET.INDEX}>Forgot ID/PW?</Link>
             </div>
          </div>
-         <Button variant='default' type='submit' rounded='15px' size='full'>
+         <Button variant='default' type='submit' className='rounded-[15px]' size='default'>
             로그인
          </Button>
       </form>

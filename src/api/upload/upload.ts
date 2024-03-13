@@ -1,6 +1,6 @@
-import { client } from 'api';
-import { IFormInfo } from './types/upload';
-import { CONSTANTS } from 'constants/api';
+import { client } from '@api/index';
+import { IFormInfo } from '@api/upload/types/upload';
+import { CONSTANTS } from '@constants/api';
 
 export const uploadForm = async ({ formInfo, API_PATH }: { formInfo: IFormInfo; API_PATH: string }) => {
    const token = localStorage.getItem(CONSTANTS.atk_key);

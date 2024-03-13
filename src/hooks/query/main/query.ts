@@ -1,4 +1,4 @@
-import { main, cafeteria } from 'api/main/main';
+import { main, cafeteria } from '@api/main/main';
 import { useQuery } from 'react-query';
 
 export const useGetMain = () => {

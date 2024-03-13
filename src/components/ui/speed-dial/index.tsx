@@ -1,5 +1,5 @@
-import React from 'react';
 import { MotionProps, motion } from 'framer-motion';
+import React from 'react';
 
 interface SpeedDialProps extends MotionProps {
    className?: string;

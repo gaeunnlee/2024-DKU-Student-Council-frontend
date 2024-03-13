@@ -1,8 +1,8 @@
+import LoginForm from '@components/login/form';
+import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
+import { useEffectOnce } from '@hooks/useEffectOnce';
+import { useLayout } from '@hooks/useLayout';
 import React, { Fragment } from 'react';
-import LoginForm from 'components/login/form';
-import { useLayout } from 'hooks/useLayout';
-import { useEffectOnce } from 'hooks/useEffectOnce';
-import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
 
 export default function Login() {
    const { setLayout } = useLayout();

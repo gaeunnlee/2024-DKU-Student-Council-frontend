@@ -1,5 +1,5 @@
+import TextSkeleton from '@components/ui/skeleton/text';
 import React from 'react';
-import { TextSkeleton } from '../skeleton';
 
 interface Props extends React.ComponentProps<'div'> {
    length: number;

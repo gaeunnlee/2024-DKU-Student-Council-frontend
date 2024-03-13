@@ -1,7 +1,7 @@
-import React from 'react';
+import { ModalProps } from '@components/ui/modal';
+import { useModal } from '@hooks/useModal';
 import { AxiosError, isAxiosError } from 'axios';
-import { useModal } from './useModal';
-import { ModalProps } from 'components/ui/modal';
+import React from 'react';
 
 export const useAlert = () => {
    const { open } = useModal();

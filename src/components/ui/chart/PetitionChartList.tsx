@@ -1,4 +1,4 @@
-import { IPetitionStatistic } from 'pages/petition/[id]';
+import { IPetitionStatistic } from '@pages/petition/[id]';
 import React from 'react';
 
 export default function PetitionChartList({

@@ -11,4 +11,4 @@ export const TextStyle = {
       fontSize: '14px',
       fontWeight: 600,
    },
-} as const;
+};

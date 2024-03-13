@@ -1,5 +1,5 @@
-import { ModalProps } from 'components/ui/modal';
-import { ModalContext } from 'components/ui/modal/modal-provider';
+import { ModalProps } from '@components/ui/modal';
+import { ModalContext } from '@components/ui/modal/modal-provider';
 import React from 'react';
 
 /**

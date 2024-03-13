@@ -1,6 +1,6 @@
-import { gnbState } from 'stores/gnb-store';
-import { gnhState } from 'stores/gnh-store';
-import { navStore } from 'stores/nav-store';
+import { gnbState } from '@stores/gnb-store';
+import { gnhState } from '@stores/gnh-store';
+import { navStore } from '@stores/nav-store';
 
 interface LayoutProps extends TopHeaderLayoutProps, Partial<HeadingLayoutProps>, NavLayoutProps {}
 interface TopHeaderLayoutProps {

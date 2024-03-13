@@ -1,10 +1,9 @@
-import Input from 'components/ui/input';
-import Text from 'components/ui/typo/text';
-import Button from 'components/ui/button';
+import { IVerifyInfo } from '@api/signup/types/signup';
+import { Button } from '@components/ui/button';
+import { Input } from '@components/ui/input';
+import { usePostStudentVerify } from '@hooks/query/signup/mutation';
+import { Regex } from '@utils/regex';
 import React, { useEffect } from 'react';
-import { Regex } from 'utils/regex';
-import { usePostStudentVerify } from 'hooks/query/signup/mutation';
-import { IVerifyInfo } from 'api/signup/types/signup';
 
 export default function VerifyForm() {
    const [verifyInfo, setVerifyInfo] = React.useState<IVerifyInfo>({
@@ -51,20 +50,16 @@ export default function VerifyForm() {
                size='md'
                className='placeholder:text-[14px]'
             />
-            <Text
-               textColor='gray02'
-               fontSize='10.5px'
-               className="mb-8 whitespace-pre-wrap mt-2 before:content-['●'] before:mr-1"
-            >
+            <p className="text-[10.5px] text-gray02 mb-8 whitespace-pre-wrap mt-2 before:content-['●'] before:mr-1">
                {
                   '단국대학교 웹정보 로그인 시 사용 되는 ID, PW를 통해\n 학생인증이 진행됩니다. (입력한 정보는 인증 후 즉시 폐기됩니다)'
                }
-            </Text>
+            </p>
             <Button
                size='md'
                variant='default'
-               rounded='20px'
-               isDisabled={!isFormValid}
+               className='rounded-[20px]'
+               disabled={!isFormValid}
                onClick={() => mutate(verifyInfo)}
             >
                인증

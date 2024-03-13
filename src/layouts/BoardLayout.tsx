@@ -1,5 +1,5 @@
-import Board from 'components/common/board';
-import { useInfiniteScroll } from 'hooks/useInfiniteScroll';
+import Board from '@components/common/board';
+import { useInfiniteScroll } from '@hooks/useInfiniteScroll';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 

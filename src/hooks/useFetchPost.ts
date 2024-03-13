@@ -1,6 +1,6 @@
+import { useAlert } from '@hooks/useAlert';
+import { useParam } from '@hooks/useParam';
 import { useEffect, useState } from 'react';
-import { useParam } from './useParam';
-import { useAlert } from './useAlert';
 
 type TPost = {
    images: [

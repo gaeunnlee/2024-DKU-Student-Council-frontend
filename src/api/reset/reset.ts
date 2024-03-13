@@ -1,7 +1,7 @@
-import { client } from 'api';
-import { API_PATH } from 'constants/api';
-import { formatphoneNumber } from 'utils/tell';
-import { ResetPwParams, VerifyCodeParams } from './types/reset';
+import { client } from '@api/index';
+import { ResetPwParams, VerifyCodeParams } from '@api/reset/types/reset';
+import { API_PATH } from '@constants/api';
+import { formatphoneNumber } from '@utils/tell';
 import { isAxiosError } from 'axios';
 
 export const findId = async (phoneNumber: string) => {

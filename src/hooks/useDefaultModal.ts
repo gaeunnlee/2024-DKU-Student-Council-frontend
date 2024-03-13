@@ -1,4 +1,4 @@
-import { useModal } from 'hooks/useModal';
+import { useModal } from '@hooks/useModal';
 import { useNavigate } from 'react-router-dom';
 
 export const useDefaultModal = () => {

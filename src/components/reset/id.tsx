@@ -1,7 +1,7 @@
-import Button from 'components/ui/button';
-import Input from 'components/ui/input';
-import { usePostFindId } from 'hooks/query/reset/mutation';
-import { useAlert } from 'hooks/useAlert';
+import { Button } from '@components/ui/button/index';
+import { Input } from '@components/ui/input';
+import { usePostFindId } from '@hooks/query/reset/mutation';
+import { useAlert } from '@hooks/useAlert';
 import React, { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -35,14 +35,15 @@ export default function IdForm() {
                placeholder='가입시 입력한 휴대전화번호 입력'
                onChange={handlePhoneChange}
             />
-            <button className='ml-[-40px] z-10 text-[13px]'>요청</button>
+            <Button variant='ghost' className='ml-[-40px] z-10 text-[13px]'>
+               요청
+            </Button>
          </div>
          <Button
             onClick={() => navigate('/login')}
             size='md'
             variant='default'
-            borderRadius='30px'
-            className='!w-[311px]'
+            className='!w-[311px] rounded-[30px]'
          >
             확인
          </Button>

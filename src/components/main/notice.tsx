@@ -1,6 +1,6 @@
-import { useNavigate } from 'react-router-dom';
+import { BaseSkeleton, TextSkeleton } from '@components/ui/skeleton';
 import React from 'react';
-import { BaseSkeleton, TextSkeleton } from 'components/ui/skeleton';
+import { useNavigate } from 'react-router-dom';
 
 export interface INotice {
    id: number;
