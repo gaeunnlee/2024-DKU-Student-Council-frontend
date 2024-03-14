@@ -19,7 +19,7 @@ const buttonVariants = cva(
          size: {
             default: '100%',
             // TODO) padding이랑 height 주는걸로 변경
-            md: 'w-[316px] text-xs',
+            md: 'w-[311px] text-base',
             lg: 'w-[336px]',
             xl: 'w-[349px]',
          },
