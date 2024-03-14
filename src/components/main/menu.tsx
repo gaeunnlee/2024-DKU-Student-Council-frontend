@@ -1,14 +1,15 @@
 import logo from '@assets/images/logo.png';
+import { ROUTES } from '@constants/route';
+import { menuStore } from '@stores/menu-store';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import {
    Accordion,
    AccordionItem,
    AccordionTrigger,
    AccordionContent,
-} from '@components/common/shadcn-ui/accordion';
-import { ROUTES } from '@constants/route';
-import { menuStore } from '@stores/menu-store';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+} from '@/components/ui/shadcn-ui/accordion';
 
 export default function Menu() {
    const { setMenuOpen } = menuStore();

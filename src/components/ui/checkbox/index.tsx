@@ -1,6 +1,7 @@
-import { Checkbox as ShadcnCheckbox } from '@components/common/shadcn-ui/checkbox';
-import { CheckboxShadcnProps } from '@components/common/shadcn-ui/checkbox';
 import React from 'react';
+
+import { Checkbox as ShadcnCheckbox } from '@/components/ui/shadcn-ui/checkbox';
+import { CheckboxShadcnProps } from '@/components/ui/shadcn-ui/checkbox';
 
 interface CheckboxProps extends CheckboxShadcnProps {
    direction?: 'left' | 'right';
