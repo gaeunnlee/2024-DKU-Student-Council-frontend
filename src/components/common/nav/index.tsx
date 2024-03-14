@@ -2,7 +2,7 @@ import SvgIcon from '@components/common/icon/SvgIcon';
 import { bottomNavSize } from '@constants/nav';
 import { menuStore } from '@stores/menu-store';
 import { motion } from 'framer-motion';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 interface NavItem {
@@ -44,7 +44,7 @@ export default function Nav() {
       setMenuOpen(true);
    };
    return (
-      <Fragment>
+      <React.Fragment>
          <motion.nav
             className='w-[390px] bg-black left-[50%] translate-x-[-50%] fixed flex justify-between p-6 items-center max-w-3xl'
             style={{ height: bottomNavSize }}
@@ -75,6 +75,6 @@ export default function Nav() {
                ),
             )}
          </motion.nav>
-      </Fragment>
+      </React.Fragment>
    );
 }
