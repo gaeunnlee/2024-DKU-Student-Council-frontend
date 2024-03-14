@@ -19,8 +19,8 @@ export default function VerifyPw() {
 
    return (
       <React.Fragment>
-         <h1 className='font-extrabold ml-10 mb-[14px] mt-[52px]'>Login</h1>
-         <h2 className='ml-10 font-extrabold mb-6'>PW 재설정</h2>
+         <h1 className='text-2xl font-extrabold ml-10 mb-[14px] mt-[52px]'>Login</h1>
+         <h2 className='text-base ml-10 font-extrabold mb-6'>PW 재설정</h2>
          <PwVerifyForm />
       </React.Fragment>
    );
