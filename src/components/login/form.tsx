@@ -38,7 +38,6 @@ export default function LoginForm() {
             }}
             type='number'
             placeholder='Student ID              @dankook.ac.kr'
-            className='placeholder:text-[14px] text-[14px]'
             size='lg'
          />
          <Input
@@ -50,11 +49,14 @@ export default function LoginForm() {
             }}
             type='password'
             placeholder='Password'
-            className='placeholder:text-[14px]'
             size='lg'
          />
          <div className='flex justify-between mb-1'>
-            <Checkbox label='saveId' text='Save ID' fontStyle='text-[13px]' />
+            <Checkbox>
+               <label htmlFor='saveId' className='text-[12px]'>
+                  Save ID
+               </label>
+            </Checkbox>
             <div className='flex text-[12px] gap-2'>
                <Link to={ROUTES.SIGNUP.VERIFY}>회원가입</Link>
                <span> | </span>
