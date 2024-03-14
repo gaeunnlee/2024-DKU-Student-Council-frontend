@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function IdForm() {
    const [phoneNumber, setPhoneNumber] = React.useState<string>('');
+   //TODO) 인증번호 전송 여부 Toast 추가
    const navigate = useNavigate();
    const { alert } = useAlert();
 
@@ -39,12 +40,7 @@ export default function IdForm() {
                요청
             </Button>
          </div>
-         <Button
-            onClick={() => navigate('/login')}
-            size='md'
-            variant='default'
-            className='!w-[311px] rounded-[30px]'
-         >
+         <Button onClick={() => navigate('/login')} size='md' variant='default' className='rounded-[30px]'>
             확인
          </Button>
       </form>
