@@ -44,7 +44,7 @@ export default function PwVerifyForm() {
 
    return (
       <form className='flex flex-col mx-auto w-[311px]'>
-         <div className='flex mb-4'>
+         <div className='flex items-center mb-4'>
             <Input
                size='md'
                type='number'
@@ -53,13 +53,14 @@ export default function PwVerifyForm() {
                value={pwVerifyInfo.phoneNumber}
                onChange={handleChange}
             />
-            <button
+            <Button
+               variant='ghost'
                type='button'
-               className='self-end ml-[-70px] h-10 z-10 text-[13px]'
+               className='ml-[-70px] text-[13px]'
                onClick={handlePhoneVerify}
             >
                인증요청
-            </button>
+            </Button>
          </div>
          <Message>{verifySuccess ? '인증번호가 발송되었습니다.' : null}</Message>
          <Input
