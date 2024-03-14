@@ -1,6 +1,7 @@
 import Box from '@components/ui/box';
 import { Button } from '@components/ui/button';
 import Checkbox from '@components/ui/checkbox';
+import { Label } from '@components/ui/label';
 import { ROUTES } from '@constants/route';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -38,12 +39,12 @@ export default function Term() {
          subText: '개인 정보 수집, 이용 동의',
       },
       {
-         id: 'agreeCheck01',
+         id: 'agreeCheck02',
          mainText: '[필수]',
          subText: '개인 정보 수집, 이용 동의',
       },
       {
-         id: 'agreeCheck01',
+         id: 'agreeCheck03',
          mainText: '[필수]',
          subText: '개인 정보 수집, 이용 동의',
       },
@@ -53,21 +54,30 @@ export default function Term() {
       <React.Fragment>
          <div className='flex flex-col gap-6'>
             <div className='ml-auto'>
-               <Checkbox direction='right' checked={allChecked} onCheckedChange={handleAllCheckboxChange}>
-                  <label htmlFor='allAgree' className='text-xs font-semibold'>
+               <Checkbox
+                  id='allAgree'
+                  direction='right'
+                  checked={allChecked}
+                  onCheckedChange={handleAllCheckboxChange}
+               >
+                  <Label htmlFor='allAgree' className='text-xs font-semibold'>
                      전체동의하기
-                  </label>
+                  </Label>
                </Checkbox>
             </div>
             {CHECKBOX.map((checkbox, index) => (
                <Box key={checkbox.id} className='h-[156px]'>
-                  <Checkbox checked={agreeCheck[index]} onCheckedChange={() => handleCheckboxChange(0)}>
-                     <label htmlFor='agreeCheck_1' className='text-xs'>
+                  <Checkbox
+                     id={checkbox.id}
+                     checked={agreeCheck[index]}
+                     onCheckedChange={() => handleCheckboxChange(index)}
+                  >
+                     <Label htmlFor={checkbox.id} className='text-xs'>
                         [필수]
-                     </label>
-                     <label htmlFor='agreeCheck_1' className='text-xs -ml-1 text-gray02'>
+                     </Label>
+                     <Label htmlFor={checkbox.id} className='text-xs -ml-1 text-gray02'>
                         개인 정보 수집, 이용 동의
-                     </label>
+                     </Label>
                   </Checkbox>
                </Box>
             ))}

@@ -1,6 +1,7 @@
 import { Button } from '@components/ui/button';
 import Checkbox from '@components/ui/checkbox';
 import { Input } from '@components/ui/input/index';
+import { Label } from '@components/ui/label';
 import { ROUTES } from '@constants/route';
 import { useAuth } from '@hooks/useAuth';
 import { IIdPassword } from '@shared/interfaces/default-interfaces';
@@ -52,13 +53,13 @@ export default function LoginForm() {
             size='lg'
          />
          <div className='flex justify-between mb-1'>
-            <Checkbox>
-               <label htmlFor='saveId' className='text-[12px]'>
+            <Checkbox id='saveId'>
+               <Label htmlFor='saveId' className='text-[12px]'>
                   Save ID
-               </label>
+               </Label>
             </Checkbox>
             <div className='flex text-[12px] gap-2'>
-               <Link to={ROUTES.SIGNUP.VERIFY}>회원가입</Link>
+               <Link to={ROUTES.SIGNUP.TERMS}>회원가입</Link>
                <span> | </span>
                <Link to={ROUTES.RESET.INDEX}>Forgot ID/PW?</Link>
             </div>
