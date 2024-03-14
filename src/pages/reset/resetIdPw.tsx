@@ -34,7 +34,7 @@ export default function ResetIdPw() {
    });
 
    return (
-      <div className='flex flex-col px-5 mb-[117px] mt-10'>
+      <div className='flex flex-col px-5 mt-10'>
          <section className='mb-5'>
             <Box className='mb-4' type='shadow'>
                <h3 className='text-xl font-extrabold mb-[10px]'>ID 찾기</h3>
