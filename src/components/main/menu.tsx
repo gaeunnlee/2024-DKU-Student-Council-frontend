@@ -1,13 +1,25 @@
-import React, { Fragment } from 'react';
-import { Accordion, AccordionItem, AccordionButton, AccordionPanel, Box } from '@chakra-ui/react';
-import { ROUTES } from 'constants/route';
+import logo from '@assets/images/logo.png';
+import {
+   Accordion,
+   AccordionItem,
+   AccordionTrigger,
+   AccordionContent,
+} from '@components/common/shadcn-ui/accordion';
+import { ROUTES } from '@constants/route';
+import { menuStore } from '@stores/menu-store';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import SvgIcon from 'components/common/icon/SvgIcon';
-import logo from 'assets/images/logo.png';
-import { menuStore } from 'stores/menu-store';
 
 export default function Menu() {
-   const menuItems = [
+   const { setMenuOpen } = menuStore();
+
+   const navigate = useNavigate();
+   const handleNavigate = (path: string) => {
+      navigate(path);
+      setMenuOpen(false);
+   };
+
+   const MENUITEM = [
       {
          title: '총학생회',
          subItems: [
@@ -25,16 +37,8 @@ export default function Menu() {
          subItems: [{ title: '모집요강', path: ROUTES.COUNCIL.RECRUITMENT }],
       },
    ];
-   const navigate = useNavigate();
-   const { setMenuOpen } = menuStore();
-
-   const handleNavigate = (path: string) => {
-      navigate(path);
-      setMenuOpen(false);
-   };
-
    return (
-      <Fragment>
+      <React.Fragment>
          <header className='px-[22px] py-1.5 h-[50px] flex items-center mx-auto'>
             <img
                className='cursor-pointer'
@@ -45,31 +49,20 @@ export default function Menu() {
                alt='단국대학교 로고'
             />
          </header>
-         <Accordion defaultIndex={[0]} allowMultiple>
-            {menuItems.map((item, index) => (
-               <AccordionItem key={index}>
-                  <h2>
-                     <AccordionButton className='bg-black text-white py-[15px] pl-[17px] pr-[27px]'>
-                        <Box as='span' flex='1' textAlign='left'>
-                           {item.title}
-                        </Box>
-                        <SvgIcon id='arrow_down' width={19} height={9} />
-                     </AccordionButton>
-                  </h2>
-                  {item.subItems.map((subItem, index) => (
-                     <AccordionPanel
-                        pb={4}
-                        key={index}
-                        onClick={() => handleNavigate(subItem.path)}
-                        className='bg-[#353535] flex items-center justify-between pl-[40px] py-[15px] pr-8 text-white cursor-pointer'
-                     >
-                        {subItem.title}
-                        <SvgIcon id='arrow_right' width={15} height={12} />
-                     </AccordionPanel>
-                  ))}
-               </AccordionItem>
+         <Accordion type='single' collapsible className='w-full'>
+            {MENUITEM.map((menu, index) => (
+               <React.Fragment key={index}>
+                  <AccordionItem value={`menu-${index + 1}`}>
+                     <AccordionTrigger>{menu.title}</AccordionTrigger>
+                     {menu.subItems.map((subItem, subIndex) => (
+                        <AccordionContent onClick={() => handleNavigate(subItem.path)} key={subIndex}>
+                           {subItem.title}
+                        </AccordionContent>
+                     ))}
+                  </AccordionItem>
+               </React.Fragment>
             ))}
          </Accordion>
-      </Fragment>
+      </React.Fragment>
    );
 }
