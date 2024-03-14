@@ -17,11 +17,10 @@ export const useFormUpload = ({
    const { mutate } = usePostFormUpload(NAVIGATE_PATH);
    const { alert } = useAlert();
 
-   const handleUpdate = (value: string) => {
-      const cleanedValue = value.replaceAll(/<\/?p[^>]*>/g, '').replace(/<br>/g, '');
+   const handleUpdate = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       setFormInfo({
          ...formInfo,
-         body: cleanedValue,
+         body: e.target.value,
       });
    };
 
