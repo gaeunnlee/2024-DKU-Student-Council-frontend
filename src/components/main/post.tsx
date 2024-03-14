@@ -1,16 +1,19 @@
 import { IFormInfo } from '@api/upload/types/upload';
-import TextEditor from '@components/common/editor/index';
 import PostBox from '@components/ui/box/PostBox';
 import FloatingButton from '@components/ui/button/FloatingButton';
 import Title from '@components/ui/text/board';
+import { Textarea } from '@components/ui/textarea';
+import { HEADING_STYLE, HEADING_TEXT } from '@constants/heading';
+import { useEffectOnce } from '@hooks/useEffectOnce';
 import { ImageProps } from '@hooks/useImageUpload';
+import { useLayout } from '@hooks/useLayout';
 import React, { ReactNode } from 'react';
 import { FaCamera } from 'react-icons/fa';
 
 interface PostProps {
    formInfo: IFormInfo;
    setFormInfo: React.Dispatch<React.SetStateAction<IFormInfo>>;
-   handleUpdate: (value: string) => void;
+   handleUpdate: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
    imageList: { imageUrl: string; imageName: string }[];
    addImage: (params: ImageProps['add']) => void;
@@ -29,6 +32,21 @@ export default function Post({
    deleteImage,
    pageTitle,
 }: PostProps) {
+   const { setLayout } = useLayout();
+
+   useEffectOnce(() => {
+      setLayout({
+         title: null,
+         backButton: true,
+         isMain: false,
+         fullscreen: false,
+         headingText: HEADING_TEXT.PETITION.HEAD,
+         headingStyle: `${HEADING_STYLE.COUNCIL.HEAD} mb-[30px]`,
+         rounded: true,
+      });
+   });
+   //TODO) 이미지 리스트 컴포넌트로 분리
+
    return (
       <form onSubmit={handleSubmit} encType='multipart/form-data' className='flex-col'>
          <Box>
@@ -49,7 +67,11 @@ export default function Post({
          </Box>
          <Box>
             <Title content={`${pageTitle} 내용`} />
-            <TextEditor value={!formInfo.body ? '<br>' : `<p>${formInfo.body}</p>`} onChange={handleUpdate} />
+            <Textarea
+               value={formInfo.body && formInfo.body}
+               placeholder='청원 내용을 입력해 주세요.'
+               onChange={handleUpdate}
+            />
          </Box>
          <Box>
             <label htmlFor='input-file' className='flex items-center gap-3'>
