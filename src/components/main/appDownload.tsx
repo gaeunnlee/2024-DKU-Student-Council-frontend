@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { IoLogoGooglePlaystore } from 'react-icons/io5';
 import { FaApple } from 'react-icons/fa';
 
+type TButton = {
+   name: string;
+   link: string;
+   icon: ReactNode;
+};
+
 export default function AppDownload() {
-   const buttonInfo = [
+   const buttonInfo: TButton[] = [
       {
          name: 'App Store',
          link: '',
