@@ -93,9 +93,23 @@ export default function Router() {
                <Route path={ROUTES.PETITION.ID} element={<PetitionDetail />} />
                <Route path={ROUTES.NOTICE.ROOT} element={<NoticeBoard />} />
                <Route path={ROUTES.NOTICE.ID} element={<NoticeDetail />} />
-               <Route path={ROUTES.PETITION.POST} element={<PetitionForm />} />
+               <Route
+                  path={ROUTES.PETITION.POST}
+                  element={
+                     <PrivateRoute>
+                        <PetitionForm />
+                     </PrivateRoute>
+                  }
+               />
                <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
-               <Route path={ROUTES.NOTICE.POST} element={<NoticePost />} />
+               <Route
+                  path={ROUTES.NOTICE.POST}
+                  element={
+                     <PrivateRoute>
+                        <NoticePost />
+                     </PrivateRoute>
+                  }
+               />
                <Route path={ROUTES.CONFERENCE.ROOT} element={<ConferenceBoard />} />
                <Route path={ROUTES.RULE.ROOT} element={<RuleBoard />} />
                <Route path={ROUTES.BUSINESS.CATEGORY} element={<BusinessBoard />} />

@@ -9,6 +9,7 @@ import React from 'react';
 import { useLayout } from 'hooks/useLayout';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
+import { useAuth } from 'hooks/useAuth';
 
 export const getDaysBetween = (expiresAt: string) => {
    const startDate = new Date();
@@ -27,6 +28,7 @@ export const getPetitionStatus = (status: string) => {
 export default function PetitionBoard() {
    const navigate = useNavigate();
    const { setLayout } = useLayout();
+   const { isLoggedIn } = useAuth();
 
    useEffectOnce(() => {
       setLayout({
@@ -57,13 +59,15 @@ export default function PetitionBoard() {
             api={API_PATH.POST.PETITION.ROOT}
             setCell={(data: IBoardList) => <Cell data={data} />}
          />
-         <FloatingButton
-            event={() => {
-               navigate(ROUTES.PETITION.POST);
-            }}
-         >
-            <p className='text-white'>Upload</p>
-         </FloatingButton>
+         {isLoggedIn && (
+            <FloatingButton
+               event={() => {
+                  navigate(ROUTES.PETITION.POST);
+               }}
+            >
+               <p className='text-white'>Upload</p>
+            </FloatingButton>
+         )}
       </>
    );
 }
