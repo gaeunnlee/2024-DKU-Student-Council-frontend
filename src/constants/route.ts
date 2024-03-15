@@ -8,7 +8,6 @@ type TMypageRoutes = {
 type TSignupRoutes = {
    ROOT: string;
    TERMS: string;
-   VERIFY: string;
    INFO: string;
    SUCCESS: string;
 };
@@ -94,8 +93,6 @@ export const ROUTES: TMainRoutes = {
       ROOT: '/signup',
       /** 동의 */
       TERMS: '/signup/terms',
-      /** 학생 인증 */
-      VERIFY: '/signup/verify',
       /** 회원 정보 입력 */
       INFO: '/signup/info',
       /** 회원가입 성공 */

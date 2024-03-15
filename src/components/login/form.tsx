@@ -60,7 +60,7 @@ export default function LoginForm() {
                <Text fontSize='12px'>Save ID</Text>
             </Checkbox>
             <div className='flex text-[12px] gap-2'>
-               <Link to={ROUTES.SIGNUP.VERIFY}>회원가입</Link>
+               <Link to={ROUTES.SIGNUP.ROOT}>회원가입</Link>
                <span> | </span>
                <Link to={ROUTES.RESET.INDEX}>Forgot ID/PW?</Link>
             </div>

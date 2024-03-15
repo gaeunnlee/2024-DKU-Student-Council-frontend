@@ -8,9 +8,8 @@ import PetitionForm from 'pages/petition/post';
 import Main from 'pages';
 import NotFound from 'pages/404';
 import Login from 'pages/login';
-import Signup from 'pages/signup';
 import SignupTerms from 'pages/signup/terms';
-import SignupVerify from 'pages/signup/verify';
+import SignupVerify from 'pages/signup';
 import SignupSuccess from 'pages/signup/success';
 import SignupInfo from 'pages/signup/info';
 import Greeting from 'pages/council';
@@ -82,12 +81,10 @@ export default function Router() {
                      </PrivateRoute>
                   }
                />
-               <Route path={ROUTES.SIGNUP.ROOT} element={<Signup />}>
-                  <Route index path={ROUTES.SIGNUP.VERIFY} element={<SignupVerify />} />
-                  <Route path={ROUTES.SIGNUP.TERMS} element={<SignupTerms />} />
-                  <Route path={ROUTES.SIGNUP.INFO} element={<SignupInfo />} />
-                  <Route path={ROUTES.SIGNUP.SUCCESS} element={<SignupSuccess />} />
-               </Route>
+               <Route index path={ROUTES.SIGNUP.ROOT} element={<SignupVerify />} />
+               <Route path={ROUTES.SIGNUP.TERMS} element={<SignupTerms />} />
+               <Route path={ROUTES.SIGNUP.INFO} element={<SignupInfo />} />
+               <Route path={ROUTES.SIGNUP.SUCCESS} element={<SignupSuccess />} />
                <Route path={ROUTES.COUNCIL.GREETING} element={<Greeting />} />
                <Route path={ROUTES.COUNCIL.ORGANIZATION} element={<Organization />} />
                <Route path={ROUTES.COUNCIL.LOCATION} element={<Location />} />

@@ -30,7 +30,7 @@ export default function SignupInfo() {
    const handleVerify = useCallback(() => {
       if (!data) {
          alert('학생 인증을 완료해주세요');
-         navigate(ROUTES.SIGNUP.VERIFY);
+         navigate(ROUTES.SIGNUP.ROOT);
       }
    }, [data, alert, navigate]);
 
