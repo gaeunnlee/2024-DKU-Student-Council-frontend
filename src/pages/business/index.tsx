@@ -1,5 +1,5 @@
 import Title, { Date } from 'components/ui/text/board';
-import { API_PATH, CONSTANTS } from 'constants/api';
+import { API_PATH } from 'constants/api';
 import { useLayout } from 'hooks/useLayout';
 import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
 import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
@@ -52,11 +52,7 @@ export default function BusinessBoard() {
 
    return (
       <BoardLayout
-         api={
-            category.length > 0
-               ? CONSTANTS.SERVER_URL + API_PATH.POST.COALITION.ROOT + '?coalitionType=' + category
-               : ''
-         }
+         api={category.length > 0 ? API_PATH.POST.COALITION.ROOT + '?coalitionType=' + category : ''}
          setCell={(data: IBoardList) => <Cell data={data} />}
       />
    );

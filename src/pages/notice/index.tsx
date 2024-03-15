@@ -1,5 +1,5 @@
 import Title, { Date } from 'components/ui/text/board';
-import { API_PATH, CONSTANTS } from 'constants/api';
+import { API_PATH } from 'constants/api';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
 import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
@@ -43,9 +43,6 @@ export default function NoticeBoard() {
    );
 
    return (
-      <BoardLayout
-         api={CONSTANTS.SERVER_URL + API_PATH.POST.NOTICE.ROOT}
-         setCell={(data: IBoardList) => <Cell data={data} />}
-      />
+      <BoardLayout api={API_PATH.POST.NOTICE.ROOT} setCell={(data: IBoardList) => <Cell data={data} />} />
    );
 }

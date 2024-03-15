@@ -1,7 +1,7 @@
 import FloatingButton from 'components/ui/button/FloatingButton';
 import Text from 'components/ui/text';
 import Title from 'components/ui/text/board';
-import { API_PATH, CONSTANTS } from 'constants/api';
+import { API_PATH } from 'constants/api';
 import { ROUTES } from 'constants/route';
 import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
 import { useNavigate } from 'react-router-dom';
@@ -54,7 +54,7 @@ export default function PetitionBoard() {
    return (
       <>
          <BoardLayout
-            api={CONSTANTS.SERVER_URL + API_PATH.POST.PETITION.ROOT}
+            api={API_PATH.POST.PETITION.ROOT}
             setCell={(data: IBoardList) => <Cell data={data} />}
          />
          <FloatingButton

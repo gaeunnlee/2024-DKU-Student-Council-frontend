@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { CONSTANTS } from 'constants/api';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -33,8 +34,8 @@ export const useInfiniteScroll = <T>(api: string) => {
          if (api.length > 0) {
             const API =
                api.indexOf('?') !== -1
-                  ? `${api}&page=${boardPage}&size=10&sort=id,desc`
-                  : `${api}?page=${boardPage}&size=10&sort=id,desc`;
+                  ? `${CONSTANTS.SERVER_URL}/${api}&page=${boardPage}&size=10&sort=id,desc`
+                  : `${CONSTANTS.SERVER_URL}/${api}?page=${boardPage}&size=10&sort=id,desc`;
             setFetchSuccess(false);
             try {
                const { data } = await axios.get(API);

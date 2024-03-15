@@ -1,5 +1,5 @@
 import Title, { Date } from 'components/ui/text/board';
-import { API_PATH, CONSTANTS } from 'constants/api';
+import { API_PATH } from 'constants/api';
 import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { useLayout } from 'hooks/useLayout';
@@ -32,7 +32,7 @@ export default function RuleBoard() {
    );
    return (
       <BoardLayout
-         api={CONSTANTS.SERVER_URL + API_PATH.POST.RULE.ROOT}
+         api={API_PATH.POST.RULE.ROOT}
          setCell={(data: IBoardList) => <Cell data={data} />}
          isFileLink={true}
       />
