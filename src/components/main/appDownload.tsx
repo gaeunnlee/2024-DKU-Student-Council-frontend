@@ -1,11 +1,10 @@
-import React, { ReactNode } from 'react';
-import { IoLogoGooglePlaystore } from 'react-icons/io5';
-import { FaApple } from 'react-icons/fa';
+import React from 'react';
+import SvgIcon from 'components/common/icon/SvgIcon';
 
 type TButton = {
    name: string;
    link: string;
-   icon: ReactNode;
+   icon: string;
 };
 
 export default function AppDownload() {
@@ -13,12 +12,12 @@ export default function AppDownload() {
       {
          name: 'App Store',
          link: '',
-         icon: <FaApple />,
+         icon: 'logo_apple',
       },
       {
          name: 'Google Play',
          link: '',
-         icon: <IoLogoGooglePlaystore />,
+         icon: 'logo_google_playstore',
       },
    ];
    return (
@@ -36,7 +35,7 @@ export default function AppDownload() {
                      window.open(link);
                   }}
                >
-                  {icon}
+                  <SvgIcon id={icon} width={18} height={18} color='white' />
                   <p>{name}</p>
                </button>
             ))}
