@@ -8,7 +8,6 @@ type TMypageRoutes = {
 type TSignupRoutes = {
    ROOT: string;
    TERMS: string;
-   VERIFY: string;
    INFO: string;
    SUCCESS: string;
 };
@@ -52,6 +51,12 @@ type TRuleRoutes = {
    ROOT: string;
 };
 
+type TBusinessRoutes = {
+   ROOT: string;
+   DETAIL: string;
+   CATEGORY: string;
+};
+
 export type TMainRoutes = {
    MAIN: string;
    LOGIN: string;
@@ -65,6 +70,7 @@ export type TMainRoutes = {
    NOTICE: TNoticeRoutes;
    CONFERENCE: TConferenceRoutes;
    RULE: TRuleRoutes;
+   BUSINESS: TBusinessRoutes;
 };
 
 export const ROUTES: TMainRoutes = {
@@ -87,8 +93,6 @@ export const ROUTES: TMainRoutes = {
       ROOT: '/signup',
       /** 동의 */
       TERMS: '/signup/terms',
-      /** 학생 인증 */
-      VERIFY: '/signup/verify',
       /** 회원 정보 입력 */
       INFO: '/signup/info',
       /** 회원가입 성공 */
@@ -145,5 +149,14 @@ export const ROUTES: TMainRoutes = {
    RULE: {
       /** 루트 */
       ROOT: '/rule',
+   },
+   /** 제휴사업 */
+   BUSINESS: {
+      /** 루트 */
+      ROOT: '/business',
+      /** 상세보기 */
+      DETAIL: '/business/:category/:id',
+      /** 음식 */
+      CATEGORY: '/business/:category',
    },
 };

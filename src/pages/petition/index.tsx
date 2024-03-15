@@ -1,7 +1,7 @@
 import FloatingButton from 'components/ui/button/FloatingButton';
 import Text from 'components/ui/text';
 import Title from 'components/ui/text/board';
-import { API_PATH, CONSTANTS } from 'constants/api';
+import { API_PATH } from 'constants/api';
 import { ROUTES } from 'constants/route';
 import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +9,7 @@ import React from 'react';
 import { useLayout } from 'hooks/useLayout';
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
+import { useAuth } from 'hooks/useAuth';
 
 export const getDaysBetween = (expiresAt: string) => {
    const startDate = new Date();
@@ -27,6 +28,7 @@ export const getPetitionStatus = (status: string) => {
 export default function PetitionBoard() {
    const navigate = useNavigate();
    const { setLayout } = useLayout();
+   const { isLoggedIn } = useAuth();
 
    useEffectOnce(() => {
       setLayout({
@@ -37,6 +39,7 @@ export default function PetitionBoard() {
          headingText: HEADING_TEXT.PETITION.HEAD,
          headingStyle: `${HEADING_STYLE.COUNCIL.HEAD} mb-[30px]`,
          rounded: true,
+         dropDown: HEADING_STYLE.COUNCIL.DROPDOWN,
       });
    });
 
@@ -53,16 +56,18 @@ export default function PetitionBoard() {
    return (
       <>
          <BoardLayout
-            api={CONSTANTS.SERVER_URL + API_PATH.POST.PETITION.ROOT}
+            api={API_PATH.POST.PETITION.ROOT}
             setCell={(data: IBoardList) => <Cell data={data} />}
          />
-         <FloatingButton
-            event={() => {
-               navigate(ROUTES.PETITION.POST);
-            }}
-         >
-            <p className='text-white'>Upload</p>
-         </FloatingButton>
+         {isLoggedIn && (
+            <FloatingButton
+               event={() => {
+                  navigate(ROUTES.PETITION.POST);
+               }}
+            >
+               <p className='text-white'>Upload</p>
+            </FloatingButton>
+         )}
       </>
    );
 }

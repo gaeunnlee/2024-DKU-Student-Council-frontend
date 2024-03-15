@@ -26,7 +26,7 @@ export default function Term() {
 
    const handleAgreeAll = () => {
       if (allChecked) {
-         navigate(ROUTES.SIGNUP.VERIFY);
+         navigate(ROUTES.SIGNUP.ROOT);
       } else {
          alert('약관에 동의해야 회원가입이 가능합니다.');
       }

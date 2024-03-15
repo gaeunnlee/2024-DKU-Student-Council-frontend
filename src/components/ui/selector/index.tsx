@@ -1,9 +1,8 @@
-import { ROUTES } from 'constants/route';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import IconButton from '../button/IconButton';
 
-type TCouncil = {
+export type TOption = {
    text: string;
    path: string;
 };
@@ -13,28 +12,23 @@ type SubHeadingProps = {
    id: string;
 };
 
-export default function Selector({ subHeadingText }: { subHeadingText: string }) {
+export default function Selector({ list, subHeadingText }: { list: TOption[]; subHeadingText: string }) {
    const [open, setOpen] = useState<boolean>(false);
    const [selected, setSelected] = useState<string>(subHeadingText);
+
+   useEffect(() => {
+      setSelected(subHeadingText);
+   }, [subHeadingText]);
 
    const navigate = useNavigate();
    const handleOption = () => {
       setOpen((prevOpen) => !prevOpen);
    };
 
-   const COUNCIL_LIST: TCouncil[] = [
-      { text: '공지', path: ROUTES.NOTICE.ROOT },
-      { text: '회의록', path: ROUTES.CONFERENCE.ROOT },
-      { text: '회칙', path: ROUTES.RULE.ROOT },
-      { text: '인사말', path: ROUTES.COUNCIL.GREETING },
-      { text: '조직도', path: ROUTES.COUNCIL.ORGANIZATION },
-      { text: '오시는 길', path: ROUTES.COUNCIL.LOCATION },
-   ];
-
-   const handleSelect = (council: TCouncil) => {
-      setSelected(council.text);
+   const handleSelect = (option: TOption) => {
+      setSelected(option.text);
       setOpen(false);
-      navigate(council.path);
+      navigate(option.path);
    };
 
    const SubHeadingText = ({ className, id }: SubHeadingProps) => {
@@ -54,11 +48,13 @@ export default function Selector({ subHeadingText }: { subHeadingText: string })
             <Fragment>
                <SubHeadingText className='mb-3' id='drop_up_circle' />
                <ul className='ml-[29px] w-20 mb-[30px]'>
-                  {COUNCIL_LIST.filter((council) => council.text !== subHeadingText).map((council, index) => (
-                     <li key={index} onClick={() => handleSelect(council)} className='cursor-pointer mb-2'>
-                        <h2 className='text-white font-extrabold'>{council.text}</h2>
-                     </li>
-                  ))}
+                  {list
+                     .filter((option) => option.text !== subHeadingText)
+                     .map((option, index) => (
+                        <li key={index} onClick={() => handleSelect(option)} className='cursor-pointer mb-2'>
+                           <h2 className='text-white font-extrabold'>{option.text}</h2>
+                        </li>
+                     ))}
                </ul>
             </Fragment>
          )}

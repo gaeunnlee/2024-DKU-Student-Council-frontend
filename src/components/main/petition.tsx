@@ -30,7 +30,7 @@ export default function Petition({ petitions }: { petitions?: IPetition[] }) {
                   onClick={() => handlePetitionItem(item.id)}
                >
                   <span className='text-sm cursor-pointer'>{item.title}</span>
-                  <span className='text-xs text-gray-500'>D-{item.d_day}</span>
+                  <span className='text-xs text-gray-500'>{item.d_day < 0 ? `D${item.d_day}` : '만료'}</span>
                </li>
             ))}
          </ul>

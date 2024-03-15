@@ -1,3 +1,4 @@
+import { TOption } from 'components/ui/selector';
 import { gnbState } from 'stores/gnb-store';
 import { gnhState } from 'stores/gnh-store';
 import { navStore } from 'stores/nav-store';
@@ -14,6 +15,7 @@ interface HeadingLayoutProps {
    subHeadingText: string;
    headingStyle: string;
    subHeadingStyle: string;
+   dropDown?: TOption[];
 }
 
 interface NavLayoutProps {
@@ -24,7 +26,7 @@ interface NavLayoutProps {
 
 export const useLayout = () => {
    const { setTitle, setBackButton, setIsMain } = gnbState();
-   const { setHeadingText, setSubHeadingText, setHeadingStyle, setSubHeadingStyle } = gnhState();
+   const { setHeadingText, setSubHeadingText, setHeadingStyle, setSubHeadingStyle, setDropDown } = gnhState();
    const { setFullscreen, setRounded, setMargin } = navStore();
 
    const setTopHeader = ({ title, backButton, isMain }: TopHeaderLayoutProps) => {
@@ -38,11 +40,13 @@ export const useLayout = () => {
       subHeadingText,
       headingStyle,
       subHeadingStyle,
+      dropDown,
    }: HeadingLayoutProps) => {
       setHeadingText(headingText);
       setSubHeadingText(subHeadingText);
       setHeadingStyle(headingStyle);
       setSubHeadingStyle(subHeadingStyle);
+      setDropDown(dropDown);
    };
 
    const setNavLayout = ({ margin, fullscreen, rounded }: NavLayoutProps) => {
@@ -62,6 +66,7 @@ export const useLayout = () => {
       subHeadingStyle,
       margin,
       rounded,
+      dropDown,
    }: LayoutProps) => {
       setTopHeader({ title, backButton, isMain });
       setHeadingLayout({
@@ -69,6 +74,7 @@ export const useLayout = () => {
          subHeadingText: subHeadingText!,
          headingStyle: headingStyle!,
          subHeadingStyle: subHeadingStyle!,
+         dropDown: dropDown ?? [],
       });
       setNavLayout({ margin, fullscreen, rounded });
    };

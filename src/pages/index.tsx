@@ -1,6 +1,6 @@
 import { useEffectOnce } from 'hooks/useEffectOnce';
 import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
-import { Banner, Notice, Petition, Cafeteria } from 'components/main';
+import { Banner, Notice, Petition, Cafeteria, AppDownload } from 'components/main';
 import { useLayout } from 'hooks/useLayout';
 import { useGetMain } from 'hooks/query/main/query';
 import { useFetchMyInfo } from 'hooks/useFetchMyInfo';
@@ -33,6 +33,7 @@ export default function Main() {
             <Notice notices={main?.recentNotices} />
             <Petition petitions={main?.popularPetitions} />
             <Cafeteria />
+            <AppDownload />
          </div>
       </main>
    );

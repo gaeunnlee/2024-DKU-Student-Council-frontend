@@ -19,6 +19,7 @@ export default function Greeting() {
          headingStyle: HEADING_STYLE.COUNCIL.HEAD,
          subHeadingStyle: HEADING_STYLE.COUNCIL.SUBHEAD,
          rounded: true,
+         dropDown: HEADING_STYLE.COUNCIL.DROPDOWN,
       });
    });
 

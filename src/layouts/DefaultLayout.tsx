@@ -19,7 +19,7 @@ type DefaultLayoutProps = IWithReactChildren & React.HTMLAttributes<HTMLDivEleme
 
 export default function DefaultLayout({ children, ...props }: DefaultLayoutProps) {
    const { title, backButton, isMain } = gnbState();
-   const { headingText, subHeadingText, headingStyle, subHeadingStyle } = gnhState();
+   const { headingText, subHeadingText, headingStyle, subHeadingStyle, dropDown } = gnhState();
    const { fullscreen, rounded, margin } = navStore();
    const { menuOpen } = menuStore();
    const defaultStyle = 'w-[390px] mx-auto bg-black';
@@ -57,6 +57,7 @@ export default function DefaultLayout({ children, ...props }: DefaultLayoutProps
                      subHeadingText={subHeadingText}
                      headingStyle={headingStyle}
                      subHeadingStyle={subHeadingStyle}
+                     dropDown={dropDown}
                   />
                )}
                <div
