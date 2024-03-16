@@ -1,5 +1,4 @@
-import { CONSTANTS } from 'constants/api';
-
+import { CONSTANTS } from '@constants/api';
 import axios from 'axios';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';

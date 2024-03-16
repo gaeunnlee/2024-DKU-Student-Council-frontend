@@ -1,5 +1,5 @@
+import { useDebounce } from '@hooks/useDebounce';
 import { renderHook, act } from '@testing-library/react-hooks';
-import { useDebounce } from './useDebounce';
 
 describe('useDebounce', () => {
    it('초기값을 반환한다.', () => {

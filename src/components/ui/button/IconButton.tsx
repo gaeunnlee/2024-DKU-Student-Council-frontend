@@ -4,11 +4,12 @@ import React from 'react';
 
 interface IconButtonProps extends IconProps {
    onClick: () => void;
+   buttonStyle?: string;
 }
 
-export default function IconButton({ onClick, ...props }: IconButtonProps) {
+export default function IconButton({ onClick, buttonStyle, ...props }: IconButtonProps) {
    return (
-      <button onClick={onClick}>
+      <button onClick={onClick} className={`${buttonStyle ?? ''}`}>
          <SvgIcon {...props} />
       </button>
    );
