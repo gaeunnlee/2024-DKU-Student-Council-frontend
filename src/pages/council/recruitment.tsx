@@ -20,6 +20,7 @@ export default function Recruitment() {
          headingStyle: HEADING_STYLE.COUNCIL.HEAD,
          subHeadingStyle: HEADING_STYLE.COUNCIL.SUBHEAD,
          rounded: true,
+         dropDown: HEADING_STYLE.COUNCIL.DROPDOWN,
       });
    });
 

@@ -59,7 +59,7 @@ export default function LoginForm() {
                </Label>
             </Checkbox>
             <div className='flex text-[12px] gap-2'>
-               <Link to={ROUTES.SIGNUP.TERMS}>회원가입</Link>
+               <Link to={ROUTES.SIGNUP.ROOT}>회원가입</Link>
                <span> | </span>
                <Link to={ROUTES.RESET.INDEX}>Forgot ID/PW?</Link>
             </div>

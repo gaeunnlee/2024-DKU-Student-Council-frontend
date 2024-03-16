@@ -1,4 +1,4 @@
-import { Banner, Notice, Petition, Cafeteria } from '@components/main';
+import { Banner, Notice, Petition, Cafeteria, AppDownload } from '@components/main';
 import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
 import { useGetMain } from '@hooks/query/main/query';
 import { useEffectOnce } from '@hooks/useEffectOnce';
@@ -33,6 +33,7 @@ export default function Main() {
             <Notice notices={main?.recentNotices} />
             <Petition petitions={main?.popularPetitions} />
             <Cafeteria />
+            <AppDownload />
          </div>
       </React.Fragment>
    );

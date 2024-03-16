@@ -1,28 +1,36 @@
 import Title, { Date } from '@components/ui/text/board';
 import { API_PATH } from '@constants/api';
 import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
-import { useEffectOnce } from '@hooks/useEffectOnce';
 import { useLayout } from '@hooks/useLayout';
 import BoardLayout, { IBoardList } from '@layouts/BoardLayout';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
-export default function NoticeBoard() {
+export default function BusinessBoard() {
    const { setLayout } = useLayout();
+   const { pathname } = useLocation();
+   const [category, setCategory] = useState('');
 
-   useEffectOnce(() => {
+   useEffect(() => {
+      const categoryName = pathname.split('/business/')[1].toUpperCase();
+      setCategory(categoryName);
+   }, [pathname]);
+
+   useEffect(() => {
       setLayout({
          title: HEADING_TEXT.COUNCIL.HEAD,
          backButton: true,
          isMain: false,
          fullscreen: false,
-         headingText: HEADING_TEXT.COUNCIL.HEAD,
-         subHeadingText: HEADING_TEXT.NOTICE.SUBHEAD,
+         headingText: HEADING_TEXT.BUSINESS.HEAD,
+         subHeadingText:
+            Object.getOwnPropertyDescriptor(HEADING_TEXT.BUSINESS.SUBHEAD, category)?.value ?? '',
          headingStyle: HEADING_STYLE.COUNCIL.HEAD,
          subHeadingStyle: HEADING_STYLE.COUNCIL.SUBHEAD,
          rounded: true,
-         dropDown: HEADING_STYLE.COUNCIL.DROPDOWN,
+         dropDown: HEADING_STYLE.BUSINESS.DROPDOWN,
       });
-   });
+   }, [category]);
 
    const Cell = ({ data }: { data: IBoardList }) => (
       <div className='flex gap-4 overflow-hidden '>
@@ -43,6 +51,9 @@ export default function NoticeBoard() {
    );
 
    return (
-      <BoardLayout api={API_PATH.POST.NOTICE.ROOT} setCell={(data: IBoardList) => <Cell data={data} />} />
+      <BoardLayout
+         api={category.length > 0 ? API_PATH.POST.COALITION.ROOT + '?coalitionType=' + category : ''}
+         setCell={(data: IBoardList) => <Cell data={data} />}
+      />
    );
 }
