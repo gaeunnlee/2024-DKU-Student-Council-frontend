@@ -1,8 +1,8 @@
+import { confirmCode, phoneVerification, verify, signup } from '@api/signup/signup';
+import { ROUTES } from '@constants/route';
 import { useState } from 'react';
 import { useMutation } from 'react-query';
-import { confirmCode, phoneVerification, verify, signup } from 'api/signup/signup';
 import { useNavigate } from 'react-router-dom';
-import { ROUTES } from 'constants/route';
 
 export const usePostStudentVerify = () => {
    const navigate = useNavigate();

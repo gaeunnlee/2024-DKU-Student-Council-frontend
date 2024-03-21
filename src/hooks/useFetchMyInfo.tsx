@@ -1,10 +1,11 @@
-import { IMyInfo } from 'interfaces/mypage/edit';
-import { useApi } from './useApi';
-import { API_PATH } from 'constants/api';
+import { API_PATH } from '@constants/api';
+import { useAlert } from '@hooks/useAlert';
+import { useApi } from '@hooks/useApi';
+import { useAuth } from '@hooks/useAuth';
+import { useEnrollmentStore } from '@stores/enrollment-store';
 import { useState } from 'react';
-import { useAlert } from './useAlert';
-import { useEnrollmentStore } from 'stores/enrollment-store';
-import { useAuth } from './useAuth';
+
+import { IMyInfo } from '../interfaces/mypage/edit';
 
 export const useFetchMyInfo = () => {
    const { get } = useApi();

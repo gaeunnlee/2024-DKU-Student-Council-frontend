@@ -1,8 +1,8 @@
-import Title, { Date } from 'components/ui/text/board';
-import { API_PATH } from 'constants/api';
-import { useLayout } from 'hooks/useLayout';
-import BoardLayout, { IBoardList } from 'layouts/BoardLayout';
-import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
+import Title, { Date } from '@components/ui/text/board';
+import { API_PATH } from '@constants/api';
+import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
+import { useLayout } from '@hooks/useLayout';
+import BoardLayout, { IBoardList } from '@layouts/BoardLayout';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 

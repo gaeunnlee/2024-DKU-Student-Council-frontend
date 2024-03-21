@@ -1,9 +1,10 @@
+import { API_PATH } from '@constants/api';
+import { useApi } from '@hooks/useApi';
+import { useEffectOnce } from '@hooks/useEffectOnce';
+import { useLayout } from '@hooks/useLayout';
 import React from 'react';
-import { API_PATH } from 'constants/api';
-import { useEffectOnce } from 'hooks/useEffectOnce';
-import { useLayout } from 'hooks/useLayout';
-import { useApi } from 'hooks/useApi';
-import { IMyInfo } from 'interfaces/mypage/edit';
+
+import { IMyInfo } from '../interfaces/mypage/edit';
 
 export default function MyPageLayout({
    children,

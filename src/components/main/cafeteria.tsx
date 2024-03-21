@@ -1,6 +1,6 @@
+import SvgIcon from '@components/common/icon/SvgIcon';
+import { useGetCafeteria } from '@hooks/query/main/query';
 import React, { useState } from 'react';
-import { useGetCafeteria } from 'hooks/query/main/query';
-import SvgIcon from 'components/common/icon/SvgIcon';
 
 export default function Cafeteria() {
    const [selectedMeal, setSelectedMeal] = useState('breakfast');

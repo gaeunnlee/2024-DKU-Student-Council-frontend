@@ -1,7 +1,7 @@
-import { TOption } from 'components/ui/selector';
-import { gnbState } from 'stores/gnb-store';
-import { gnhState } from 'stores/gnh-store';
-import { navStore } from 'stores/nav-store';
+import { TOption } from '@components/ui/selector';
+import { gnbState } from '@stores/gnb-store';
+import { gnhState } from '@stores/gnh-store';
+import { navStore } from '@stores/nav-store';
 
 interface LayoutProps extends TopHeaderLayoutProps, Partial<HeadingLayoutProps>, NavLayoutProps {}
 interface TopHeaderLayoutProps {

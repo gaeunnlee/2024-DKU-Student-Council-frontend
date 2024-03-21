@@ -1,16 +1,16 @@
-import Button from 'components/ui/button';
-import Input from 'components/ui/input';
-import Text, { Title } from 'components/ui/text';
-import { API_PATH, CONSTANTS } from 'constants/api';
-import { useAlert } from 'hooks/useAlert';
-import { useApi } from 'hooks/useApi';
-import { useEffectOnce } from 'hooks/useEffectOnce';
-import { useLayout } from 'hooks/useLayout';
+import { Button } from '@components/ui/button';
+import { Input } from '@components/ui/input';
+import Text, { Title } from '@components/ui/text';
+import { API_PATH, CONSTANTS } from '@constants/api';
+import { useAlert } from '@hooks/useAlert';
+import { useApi } from '@hooks/useApi';
+import { useEffectOnce } from '@hooks/useEffectOnce';
+import { useLayout } from '@hooks/useLayout';
+import { useEnrollmentStore } from '@stores/enrollment-store';
+import { checkInputRegex } from '@utils/checkInputRegex';
 import React, { useState } from 'react';
 import { GoDotFill } from 'react-icons/go';
 import { useNavigate } from 'react-router-dom';
-import { useEnrollmentStore } from 'stores/enrollment-store';
-import { checkInputRegex } from 'utils/checkInputRegex';
 
 export default function MyPageUpdate() {
    const { setLayout } = useLayout();

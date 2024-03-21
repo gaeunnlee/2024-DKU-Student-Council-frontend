@@ -1,8 +1,8 @@
-import React from 'react';
-import Box from 'components/ui/box';
-import { BaseSkeleton, TextSkeleton } from 'components/ui/skeleton';
+import Box from '@components/ui/box';
+import { BaseSkeleton, TextSkeleton } from '@components/ui/skeleton';
+import Delay from '@layouts/Delay';
 import { ComponentProps } from 'react';
-import Delay from 'layouts/Delay';
+import React from 'react';
 
 type BoardProps = ComponentProps<'ol'>;
 type CellProps = ComponentProps<'li'>;

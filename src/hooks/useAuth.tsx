@@ -1,12 +1,12 @@
+import type { ILoginResponse } from '@api/axios-interface';
+import { API_PATH, CONSTANTS } from '@constants/api';
+import { ROUTES } from '@constants/route';
+import { useAlert } from '@hooks/useAlert';
+import type { IIdPassword } from '@shared/interfaces/default-interfaces';
+import { useEnrollmentStore } from '@stores/enrollment-store';
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router';
-import { useAlert } from 'hooks/useAlert';
-import { API_PATH, CONSTANTS } from 'constants/api';
-import { ROUTES } from 'constants/route';
-import type { IIdPassword } from 'shared/interfaces/default-interfaces';
-import type { ILoginResponse } from 'api/axios-interface';
 import { useState } from 'react';
-import { useEnrollmentStore } from 'stores/enrollment-store';
+import { useNavigate, useLocation } from 'react-router';
 
 export const useAuth = () => {
    const navigate = useNavigate();

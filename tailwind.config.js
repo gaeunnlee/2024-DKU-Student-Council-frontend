@@ -1,5 +1,4 @@
 import { Palette } from './src/constants/colors';
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
    content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
@@ -10,22 +9,25 @@ module.exports = {
          animation: {
             fadeIn: 'fadeIn 0.3s ease-in-out',
             fadeOut: 'fadeOut 0.3s ease-in-out',
+            // 기존 애니메이션 확장
+            'accordion-down': 'accordion-down 0.2s ease-out',
+            'accordion-up': 'accordion-up 0.2s ease-out',
          },
          backgroundImage: {
             breakfast: "url('./assets/icons/breakfast.svg')",
             dinner: "url('./assets/icons/dinner.svg')",
          },
-         // that is actual animation
-         keyframes: (theme) => ({
-            fadeIn: {
-               '0%': { opacity: '0' },
-               '100%': { opacity: '1' },
+         keyframes: {
+            // 기존 키프레임 확장
+            'accordion-down': {
+               from: { height: '0' },
+               to: { height: 'var(--radix-accordion-content-height)' },
             },
-            fadeOut: {
-               '0%': { opacity: '1' },
-               '100%': { opacity: '0' },
+            'accordion-up': {
+               from: { height: 'var(--radix-accordion-content-height)' },
+               to: { height: '0' },
             },
-         }),
+         },
          boxShadow: {
             custom: '0 4px 3px rgba(0, 0, 0, 0.25)',
          },

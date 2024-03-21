@@ -1,9 +1,9 @@
-import React from 'react';
+import { CONSTANTS } from '@constants/api';
+import Login from '@pages/login';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Login from '../pages/login';
+import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { CONSTANTS } from 'constants/api';
 
 describe('로그인', () => {
    it('로그인 버튼이 있어야 한다.', () => {

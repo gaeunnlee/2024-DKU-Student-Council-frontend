@@ -1,5 +1,5 @@
+import { useApi } from '@hooks/useApi';
 import { useLocation } from 'react-router';
-import { useApi } from './useApi';
 
 export const useParam = () => {
    const location = useLocation();

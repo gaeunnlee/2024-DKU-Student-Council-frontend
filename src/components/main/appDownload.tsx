@@ -1,5 +1,5 @@
+import SvgIcon from '@components/common/icon/SvgIcon';
 import React from 'react';
-import SvgIcon from 'components/common/icon/SvgIcon';
 
 type TButton = {
    name: string;

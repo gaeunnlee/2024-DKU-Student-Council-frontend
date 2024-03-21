@@ -1,9 +1,19 @@
-import { Checkbox as ChakraCheckbox } from '@chakra-ui/react';
-import { CheckboxProps as ChakraCheckboxProps } from '@chakra-ui/react';
 import React from 'react';
 
-interface CheckboxProps extends ChakraCheckboxProps {}
+import { Checkbox as ShadcnCheckbox } from '@/components/ui/shadcn-ui/checkbox';
+import { CheckboxShadcnProps } from '@/components/ui/shadcn-ui/checkbox';
 
-export default function Checkbox({ ...props }: CheckboxProps) {
-   return <ChakraCheckbox size='md' {...props} className='!flex items-center' />;
+interface CheckboxProps extends CheckboxShadcnProps {
+   direction?: 'left' | 'right';
+   children: React.ReactNode;
+}
+
+export default function Checkbox({ direction = 'left', children, ...props }: CheckboxProps) {
+   const checkboxPosition = direction === 'right' ? 'flex-row-reverse' : '';
+   return (
+      <div className={`flex items-center ${checkboxPosition} gap-2`}>
+         <ShadcnCheckbox {...props} />
+         {children}
+      </div>
+   );
 }

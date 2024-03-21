@@ -1,11 +1,3 @@
-import React, { useEffect, useState } from 'react';
-import { API_PATH, CONSTANTS } from 'constants/api';
-import { useEffectOnce } from 'hooks/useEffectOnce';
-import { useLayout } from 'hooks/useLayout';
-import { useApi } from 'hooks/useApi';
-import { ProfileImage } from 'layouts/MyPageLayout';
-import { IEvent, IFormInfo, IInputValue, IValidationInfo } from 'interfaces/mypage/edit';
-import { defaultFormInfo } from 'data/mypage/edit/defaultFormInfo';
 import {
    Box,
    InputBox,
@@ -14,10 +6,19 @@ import {
    Label,
    Message,
    ValidationIcon,
-} from 'components/mypage/edit';
-import { useAlert } from 'hooks/useAlert';
+} from '@components/mypage/edit';
+import { API_PATH, CONSTANTS } from '@constants/api';
+import { useAlert } from '@hooks/useAlert';
+import { useApi } from '@hooks/useApi';
+import { useEffectOnce } from '@hooks/useEffectOnce';
+import { useFetchMyInfo } from '@hooks/useFetchMyInfo';
+import { useLayout } from '@hooks/useLayout';
+import { ProfileImage } from '@layouts/MyPageLayout';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useFetchMyInfo } from 'hooks/useFetchMyInfo';
+
+import { defaultFormInfo } from '../../data/mypage/edit/defaultFormInfo';
+import { IEvent, IFormInfo, IInputValue, IValidationInfo } from '../../interfaces/mypage/edit';
 
 export default function MyPageEdit() {
    const { setLayout } = useLayout();

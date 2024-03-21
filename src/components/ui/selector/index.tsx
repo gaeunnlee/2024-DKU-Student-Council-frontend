@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import IconButton from '@components/ui/button/IconButton';
+import React, { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
-import IconButton from '../button/IconButton';
 
 export type TOption = {
    text: string;
@@ -13,10 +13,10 @@ type SubHeadingProps = {
 };
 
 export default function Selector({ list, subHeadingText }: { list: TOption[]; subHeadingText: string }) {
-   const [open, setOpen] = useState<boolean>(false);
-   const [selected, setSelected] = useState<string>(subHeadingText);
+   const [open, setOpen] = React.useState<boolean>(false);
+   const [selected, setSelected] = React.useState<string>(subHeadingText);
 
-   useEffect(() => {
+   React.useEffect(() => {
       setSelected(subHeadingText);
    }, [subHeadingText]);
 

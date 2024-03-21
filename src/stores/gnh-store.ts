@@ -1,4 +1,4 @@
-import { TOption } from 'components/ui/selector';
+import { TOption } from '@components/ui/selector';
 import { create } from 'zustand';
 
 export interface GnhState {

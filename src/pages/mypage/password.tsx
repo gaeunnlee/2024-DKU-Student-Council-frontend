@@ -1,9 +1,9 @@
+import { Button } from '@components/ui/button';
+import { Input } from '@components/ui/input';
+import Text from '@components/ui/text';
+import { useAuth } from '@hooks/useAuth';
+import MyPageLayout from '@layouts/MyPageLayout';
 import React, { FormEvent, useEffect, useState } from 'react';
-import MyPageLayout from 'layouts/MyPageLayout';
-import Text from 'components/ui/text';
-import Input from 'components/ui/input';
-import Button from 'components/ui/button';
-import { useAuth } from 'hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 
 export default function MyPagePassword() {
@@ -37,7 +37,7 @@ export default function MyPagePassword() {
                   setLoginInfo((prev) => ({ ...prev, password: e.target.value }));
                }}
             />
-            <Button size='full' className='rounded-lg'>
+            <Button size='default' className='rounded-lg'>
                확인
             </Button>
          </form>

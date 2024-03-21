@@ -1,10 +1,10 @@
-import { colors } from './colors';
-import { TextStyle } from './textStyle';
-import { HEADING_STYLE } from './heading';
-import { bottomNavSize } from './nav';
+import { Palette } from '@constants/colors';
+import { HEADING_STYLE } from '@constants/heading';
+import { bottomNavSize } from '@constants/nav';
+import { TextStyle } from '@constants/textStyle';
 
 export const styles = {
-   colors,
+   Palette,
    HEADING_STYLE,
    TextStyle,
    bottomNavSize,

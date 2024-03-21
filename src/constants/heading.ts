@@ -1,5 +1,5 @@
-import { TOption } from 'components/ui/selector';
-import { ROUTES } from 'constants/route';
+import { TOption } from '@components/ui/selector';
+import { ROUTES } from '@constants/route';
 
 export const HEADING_TEXT = {
    MAIN: {

@@ -1,25 +1,25 @@
-import Box from 'components/ui/box';
-import Checkbox from 'components/ui/checkbox';
-import Button from 'components/ui/button';
-import Text from 'components/ui/typo/text';
-import { ROUTES } from 'constants/route';
+import Box from '@components/ui/box';
+import { Button } from '@components/ui/button';
+import Checkbox from '@components/ui/checkbox';
+import { Label } from '@components/ui/label';
+import { ROUTES } from '@constants/route';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import React, { Fragment, useState } from 'react';
 
 export default function Term() {
    const allDisagree = Array(3).fill(false);
    const allAgree = Array(3).fill(true);
-   const [agreeCheck, setAgreeCheck] = useState(allDisagree);
+   const [agreeCheck, setAgreeCheck] = React.useState(allDisagree);
    const allChecked = agreeCheck.every(Boolean);
 
    const navigate = useNavigate();
 
-   const onCheckboxChange = (index: number) => {
+   const handleCheckboxChange = (index: number) => {
       const newAgreeCheck = [...agreeCheck];
       newAgreeCheck[index] = !newAgreeCheck[index];
       setAgreeCheck(newAgreeCheck);
    };
-   const onAllCheckboxChange = () => {
+   const handleAllCheckboxChange = () => {
       const newAgreeCheck = allChecked ? allDisagree : allAgree;
       setAgreeCheck(newAgreeCheck);
    };
@@ -32,50 +32,65 @@ export default function Term() {
       }
    };
 
+   const CHECKBOX = [
+      {
+         id: 'agreeCheck01',
+         mainText: '[필수]',
+         subText: '개인 정보 수집, 이용 동의',
+      },
+      {
+         id: 'agreeCheck02',
+         mainText: '[필수]',
+         subText: '개인 정보 수집, 이용 동의',
+      },
+      {
+         id: 'agreeCheck03',
+         mainText: '[필수]',
+         subText: '개인 정보 수집, 이용 동의',
+      },
+   ];
+
    return (
-      <Fragment>
+      <React.Fragment>
          <div className='flex flex-col gap-6'>
             <div className='ml-auto'>
-               <Checkbox name='AllAgree' isChecked={allChecked} onChange={onAllCheckboxChange}>
-                  <Text fontSize='10px' fontWeight={600}>
+               <Checkbox
+                  id='allAgree'
+                  direction='right'
+                  checked={allChecked}
+                  onCheckedChange={handleAllCheckboxChange}
+               >
+                  <Label htmlFor='allAgree' className='text-xs font-semibold'>
                      전체동의하기
-                  </Text>
+                  </Label>
                </Checkbox>
             </div>
-            <Box className='h-[156px]'>
-               <Checkbox isChecked={agreeCheck[0]} onChange={() => onCheckboxChange(0)}>
-                  <Text as='span' className='text-[11px]'>
-                     [필수]
-                  </Text>
-                  <Text as='span' color='gray02' className='text-[11px]'>
-                     개인 정보 수집, 이용 동의
-                  </Text>
-               </Checkbox>
-            </Box>
-            <Box className='h-[156px]'>
-               <Checkbox isChecked={agreeCheck[1]} onChange={() => onCheckboxChange(1)}>
-                  <Text as='span' fontSize='11px'>
-                     [필수]
-                  </Text>
-                  <Text as='span' color='gray02' fontSize='11px'>
-                     개인 정보 수집, 이용 동의
-                  </Text>
-               </Checkbox>
-            </Box>
-            <Box className='h-[156px] mb-8'>
-               <Checkbox isChecked={agreeCheck[2]} onChange={() => onCheckboxChange(2)}>
-                  <Text as='span' fontSize='11px'>
-                     [필수]
-                  </Text>
-                  <Text as='span' color='gray02' fontSize='11px'>
-                     개인 정보 수집, 이용 동의
-                  </Text>
-               </Checkbox>
-            </Box>
+            {CHECKBOX.map((checkbox, index) => (
+               <Box key={checkbox.id} className='h-[156px]'>
+                  <Checkbox
+                     id={checkbox.id}
+                     checked={agreeCheck[index]}
+                     onCheckedChange={() => handleCheckboxChange(index)}
+                  >
+                     <Label htmlFor={checkbox.id} className='text-xs'>
+                        [필수]
+                     </Label>
+                     <Label htmlFor={checkbox.id} className='text-xs -ml-1 text-gray02'>
+                        개인 정보 수집, 이용 동의
+                     </Label>
+                  </Checkbox>
+               </Box>
+            ))}
+            <Button
+               size='md'
+               variant='default'
+               className='rounded-[20px]'
+               onClick={handleAgreeAll}
+               disabled={!allChecked}
+            >
+               동의 완료
+            </Button>
          </div>
-         <Button size='md' variant='default' rounded='20px' onClick={handleAgreeAll} isDisabled={!allChecked}>
-            동의 완료
-         </Button>
-      </Fragment>
+      </React.Fragment>
    );
 }

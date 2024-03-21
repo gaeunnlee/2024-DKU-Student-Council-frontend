@@ -1,10 +1,10 @@
+import Box from '@components/ui/box';
+import { FileBox } from '@components/ui/box/PostBox';
+import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
+import { useEffectOnce } from '@hooks/useEffectOnce';
+import { useLayout } from '@hooks/useLayout';
+import SinglePageLayout from '@layouts/SinglePageLayout';
 import React from 'react';
-import { useEffectOnce } from 'hooks/useEffectOnce';
-import { useLayout } from 'hooks/useLayout';
-import Box from 'components/ui/box';
-import SinglePageLayout from 'layouts/SinglePageLayout';
-import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
-import { FileBox } from 'components/ui/box/PostBox';
 
 export default function Recruitment() {
    const { setLayout } = useLayout();

@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import Selector, { TOption } from 'components/ui/selector';
+import Selector, { TOption } from '@components/ui/selector';
+import React from 'react';
 
 interface GnhProps {
    headingText: string;
@@ -10,13 +10,13 @@ interface GnhProps {
 }
 
 const Gnh = ({ headingText, subHeadingText, headingStyle, subHeadingStyle, dropDown }: GnhProps) => (
-   <Fragment>
+   <React.Fragment>
       {headingText && <h1 className={`${headingStyle} text-2xl font-extrabold text-white`}>{headingText}</h1>}
       {dropDown !== undefined && dropDown.length > 0 && subHeadingText ? (
          <Selector list={dropDown} subHeadingText={subHeadingText} />
       ) : (
          <h2 className={`${subHeadingStyle} text-white`}>{subHeadingText}</h2>
       )}
-   </Fragment>
+   </React.Fragment>
 );
 export default Gnh;

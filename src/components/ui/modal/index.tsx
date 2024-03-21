@@ -1,8 +1,8 @@
-import React from 'react';
-import { useModal } from 'hooks/useModal';
-import { IWithReactChildren } from 'shared/interfaces/default-interfaces';
-import Button from 'components/ui/button';
+import { Button } from '@components/ui/button';
+import { useModal } from '@hooks/useModal';
+import { IWithReactChildren } from '@shared/interfaces/default-interfaces';
 import { motion } from 'framer-motion';
+import React from 'react';
 
 export interface ModalProps {
    title?: string;

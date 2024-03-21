@@ -1,13 +1,13 @@
-import { client } from 'api';
+import { client } from '@api/index';
 import {
    IVerifyInfo,
    PhoneVerifyParams,
    SignupParams,
    StudentVerifyResponse,
    confirmCodeParams,
-} from './types/signup';
-import { API_PATH } from 'constants/api';
-import { formatphoneNumber } from 'utils/tell';
+} from '@api/signup/types/signup';
+import { API_PATH } from '@constants/api';
+import { formatphoneNumber } from '@utils/tell';
 
 export const verify = async (verifyInfo: IVerifyInfo) => {
    try {

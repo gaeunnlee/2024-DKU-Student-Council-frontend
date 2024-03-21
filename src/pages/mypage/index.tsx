@@ -1,15 +1,15 @@
+import { Button } from '@components/ui/button';
+import { API_PATH, CONSTANTS } from '@constants/api';
+import { shadowStyle } from '@constants/shadow';
+import { useAlert } from '@hooks/useAlert';
+import { useApi } from '@hooks/useApi';
+import { useAuth } from '@hooks/useAuth';
+import MyPageLayout from '@layouts/MyPageLayout';
 import React from 'react';
-import Button from 'components/ui/button';
-import { useAuth } from 'hooks/useAuth';
+import { BiSolidCalendarStar } from 'react-icons/bi';
 import { FaUser } from 'react-icons/fa6';
 import { IoIosListBox } from 'react-icons/io';
-import { BiSolidCalendarStar } from 'react-icons/bi';
-import { shadowStyle } from 'constants/shadow';
 import { useNavigate } from 'react-router-dom';
-import MyPageLayout from 'layouts/MyPageLayout';
-import { API_PATH, CONSTANTS } from 'constants/api';
-import { useAlert } from 'hooks/useAlert';
-import { useApi } from 'hooks/useApi';
 
 export default function MyPage() {
    const { logout } = useAuth();
@@ -47,10 +47,10 @@ export default function MyPage() {
             </ul>
          </nav>
          <div className='p-4 flex flex-col gap-3'>
-            <Button size='full' variant='default' onClick={() => logout()}>
+            <Button size='default' variant='default' onClick={() => logout()}>
                로그아웃
             </Button>
-            <Button size='full' onClick={() => deleteAccount()}>
+            <Button size='default' onClick={() => deleteAccount()}>
                탈퇴하기
             </Button>
          </div>

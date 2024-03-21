@@ -1,6 +1,6 @@
+import { IWithReactChildren } from '@shared/interfaces/default-interfaces';
 import React, { ComponentProps } from 'react';
 import { PiPaperclipFill } from 'react-icons/pi';
-import { IWithReactChildren } from 'shared/interfaces/default-interfaces';
 interface IPostBox {
    shadow?: boolean;
 }

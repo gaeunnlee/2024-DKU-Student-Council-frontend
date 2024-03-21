@@ -1,6 +1,6 @@
+import { uploadForm } from '@api/upload/upload';
+import { useAlert } from '@hooks/useAlert';
 import { useMutation } from 'react-query';
-import { useAlert } from 'hooks/useAlert';
-import { uploadForm } from 'api/upload/upload';
 import { useNavigate } from 'react-router-dom';
 
 export const usePostFormUpload = (NAVIGATE_PATH: string) => {

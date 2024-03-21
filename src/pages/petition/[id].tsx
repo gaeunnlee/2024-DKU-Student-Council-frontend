@@ -1,21 +1,22 @@
-import PostBox, { FileBox } from 'components/ui/box/PostBox';
-import { API_PATH } from 'constants/api';
+import PostBox, { FileBox } from '@components/ui/box/PostBox';
+import FloatingButton from '@components/ui/button/FloatingButton';
+import DoughnutChart from '@components/ui/chart/DoughnutChart';
+import PetitonChartList from '@components/ui/chart/PetitionChartList';
+import Collapse from '@components/ui/collapse';
+import Text from '@components/ui/text';
+import { API_PATH } from '@constants/api';
+import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
+import { useAlert } from '@hooks/useAlert';
+import { useApi } from '@hooks/useApi';
+import { useEffectOnce } from '@hooks/useEffectOnce';
+import { useFetchPost } from '@hooks/useFetchPost';
+import { useLayout } from '@hooks/useLayout';
+import PostDetailLayout from '@layouts/PostDetailLayout';
+import { IWithReactChildren } from '@shared/interfaces/default-interfaces';
 import React, { ComponentProps, ReactNode, useEffect, useState } from 'react';
-import Collapse from 'components/ui/collapse';
-import { useFetchPost } from 'hooks/useFetchPost';
-import { getDaysBetween, getPetitionStatus } from '.';
-import { IWithReactChildren } from 'shared/interfaces/default-interfaces';
-import DoughnutChart from 'components/ui/chart/DoughnutChart';
-import Text from 'components/ui/text';
-import PetitonChartList from 'components/ui/chart/PetitionChartList';
 import { TbThumbUp, TbThumbUpFilled } from 'react-icons/tb';
-import { useAlert } from 'hooks/useAlert';
-import { useApi } from 'hooks/useApi';
-import FloatingButton from 'components/ui/button/FloatingButton';
-import PostDetailLayout from 'layouts/PostDetailLayout';
-import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
-import { useEffectOnce } from 'hooks/useEffectOnce';
-import { useLayout } from 'hooks/useLayout';
+
+import { getDaysBetween, getPetitionStatus } from '.';
 
 export default function PetitionDetail() {
    const { setLayout } = useLayout();

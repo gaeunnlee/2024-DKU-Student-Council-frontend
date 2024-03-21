@@ -1,4 +1,4 @@
-import { IInputValue, IValidationInfo } from 'interfaces/mypage/edit';
+import { IInputValue, IValidationInfo } from '../../../interfaces/mypage/edit';
 
 export const defaultFormInfo = ({
    originNickname,

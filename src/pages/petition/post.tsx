@@ -1,10 +1,10 @@
+import { IFormInfo } from '@api/upload/types/upload';
+import Post from '@components/main/post';
+import { API_PATH } from '@constants/api';
+import { ROUTES } from '@constants/route';
+import { useFormUpload } from '@hooks/useFormUpload';
+import useImageUpload from '@hooks/useImageUpload';
 import React from 'react';
-import { API_PATH } from 'constants/api';
-import { ROUTES } from 'constants/route';
-import useImageUpload from 'hooks/useImageUpload';
-import { useFormUpload } from 'hooks/useFormUpload';
-import Post from 'components/main/post';
-import { IFormInfo } from 'api/upload/types/upload';
 
 export default function PetitionForm() {
    const initFormInfo: IFormInfo = {

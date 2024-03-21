@@ -1,10 +1,11 @@
-import Input from 'components/ui/input';
-import Button from 'components/ui/button';
-import Message from 'components/ui/typo/message';
+import { IUserRegistration } from '@api/signup/types/signup';
+import { Button } from '@components/ui/button';
+import { Input } from '@components/ui/input';
+import { Label } from '@components/ui/label';
+import Message from '@components/ui/typo/message';
+import { usePostPhoneVerify, usePostPhoneConfirmCode, usePostSignup } from '@hooks/query/signup/mutation';
+import { useGetNicknameVerify } from '@hooks/query/signup/query';
 import React, { ChangeEvent, useEffect } from 'react';
-import { IUserRegistration } from 'api/signup/types/signup';
-import { usePostPhoneVerify, usePostPhoneConfirmCode, usePostSignup } from 'hooks/query/signup/mutation';
-import { useGetNicknameVerify } from 'hooks/query/signup/query';
 
 export default function InfoForm({ signupToken }: { signupToken: string }) {
    const [signupInfo, setSignupInfo] = React.useState<IUserRegistration>({
@@ -18,7 +19,7 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
 
    const { data, isSuccess, refetch } = useGetNicknameVerify(signupInfo.nickname);
 
-   const buttonStyle = 'h-10 z-10 whitespace-nowrap text-[13px]';
+   const labelStyle = 'ml-[14px] font-normal text-gray02';
 
    const [passwordConfirm, setPasswordConfirm] = React.useState<string>('');
    const [passwordMismatch, setPasswordError] = React.useState<boolean>(false);
@@ -79,97 +80,92 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
    return (
       <form onSubmit={handleFormSubmit}>
          <section className='flex flex-col gap-2 mb-6'>
+            <Label htmlFor='password' className={`${labelStyle}`}>
+               비밀번호
+            </Label>
             <Input
-               label='비밀번호'
                type='password'
                placeholder='비밀번호 입력'
+               id='password'
                name='password'
                value={signupInfo.password}
                onChange={handleInputChange}
                size='md'
-               borderRadius='10px'
+               className='rounded-[10px]'
             />
             <Input
                type='password'
                placeholder='비밀번호 확인'
+               id='password'
                name='passwordConfirm'
                value={passwordConfirm}
                onChange={handleInputChange}
                size='md'
-               borderRadius='10px'
+               className='rounded-[10px]'
             />
-            <Message>{passwordMismatch ? '비밀번호가 일치하지 않습니다.' : null}</Message>
+            {passwordMismatch && <Message>비밀번호가 일치하지 않습니다.</Message>}
          </section>
          <section className='mb-6'>
-            <div className='flex'>
+            <Label htmlFor='nickname' className={`${labelStyle}`}>
+               닉네임
+            </Label>
+            <div className='flex items-center'>
                <Input
-                  label='닉네임'
                   type='text'
                   placeholder='닉네임 입력'
+                  id='nickname'
                   name='nickname'
                   value={signupInfo.nickname}
                   onChange={handleInputChange}
                   size='md'
-                  borderRadius='10px'
                />
-               <button
-                  type='button'
-                  className={`self-end ml-[-70px] ${buttonStyle}`}
-                  onClick={handleNicknameVerify}
-               >
+               <Button type='button' variant='ghost' className='ml-[-70px]' onClick={handleNicknameVerify}>
                   중복확인
-               </button>
+               </Button>
             </div>
-            <Message>{isNicknameValid ? '사용가능한 닉네임입니다.' : null}</Message>
+            {isNicknameValid && <Message>사용가능한 닉네임입니다.</Message>}
          </section>
          <section className='flex flex-col gap-2'>
-            <div className='flex'>
+            <Label htmlFor='tel' className={`${labelStyle}`}>
+               휴대폰 인증
+            </Label>
+            <div className='flex items-center'>
                <Input
-                  label='휴대폰 인증'
                   type='number'
                   placeholder='-는 제외하고 입력해주세요.'
+                  id='tel'
                   name='phoneNumber'
                   value={phoneNumber}
                   onChange={handleInputChange}
                   size='md'
-                  borderRadius='10px'
                />
-               <button
-                  type='button'
-                  className={`self-end ml-[-70px] ${buttonStyle}`}
-                  onClick={handlePhoneVerify}
-               >
+               <Button variant='ghost' type='button' className='ml-[-70px]' onClick={handlePhoneVerify}>
                   인증요청
-               </button>
+               </Button>
             </div>
-            <Message>{isPhoneVerified ? '인증번호가 전송되었습니다.' : null}</Message>
-            <div className={'flex'}>
+            {isPhoneVerified && <Message>인증번호가 전송되었습니다.</Message>}
+            <div className='flex items-center mb-6'>
                <Input
                   type='number'
                   placeholder='인증번호 6자리를 입력해주세요.'
                   name='code'
                   onChange={handleInputChange}
                   size='md'
-                  borderRadius='10px'
+                  className='rounded-[10px]'
                />
-               <button
-                  type='button'
-                  className={`self-start ml-[-50px] ${buttonStyle}`}
-                  onClick={handlePhoneConfirm}
-               >
+               <Button variant='ghost' type='button' className='ml-[-50px]' onClick={handlePhoneConfirm}>
                   확인
-               </button>
+               </Button>
             </div>
-            <Message>{isCodeVerified ? '인증번호가 일치합니다' : null}</Message>
+            {isCodeVerified && <Message>인증번호가 일치합니다.</Message>}
          </section>
          <Button
             size='md'
             type='submit'
-            className='mt-4'
+            className='rounded-[20px]'
             disabled={!isFormValid}
             onClick={handleSignup}
             variant='default'
-            borderRadius='20px'
          >
             확인
          </Button>

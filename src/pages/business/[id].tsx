@@ -1,14 +1,15 @@
-import Carousel from 'components/common/carousel';
-import PostBox, { FileBox } from 'components/ui/box/PostBox';
-import { API_PATH } from 'constants/api';
+import Carousel from '@components/common/carousel';
+import PostBox, { FileBox } from '@components/ui/box/PostBox';
+import Collapse from '@components/ui/collapse';
+import { API_PATH } from '@constants/api';
+import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
+import { useFetchPost } from '@hooks/useFetchPost';
+import { useLayout } from '@hooks/useLayout';
+import PostDetailLayout from '@layouts/PostDetailLayout';
 import React, { useEffect, useState } from 'react';
-import Collapse from 'components/ui/collapse';
-import { useFetchPost } from 'hooks/useFetchPost';
-import PostDetailLayout from 'layouts/PostDetailLayout';
-import { HEADING_TEXT, HEADING_STYLE } from 'constants/heading';
-import { useLayout } from 'hooks/useLayout';
-import { IPost } from 'interfaces/post';
 import { useLocation } from 'react-router-dom';
+
+import { IPost } from '../../interfaces/post';
 
 export default function BusinessDetail() {
    const { setLayout } = useLayout();
