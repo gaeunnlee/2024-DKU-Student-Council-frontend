@@ -1,4 +1,4 @@
-import { cn } from '@utils/shadcn';
+import { cn } from '@libs/shadcn';
 import * as React from 'react';
 
 export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
