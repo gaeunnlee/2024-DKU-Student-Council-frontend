@@ -1,7 +1,7 @@
 import { Button } from '@components/ui/button';
 import { Input } from '@components/ui/input';
 import Message from '@components/ui/typo/message';
-import { usePostResetPw } from '@hooks/query/reset/mutation';
+import { usePostResetPw } from '@hooks/api/reset/usePostResetPw';
 import { useAlert } from '@hooks/useAlert';
 import React, { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';

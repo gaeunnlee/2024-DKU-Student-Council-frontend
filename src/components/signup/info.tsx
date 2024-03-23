@@ -1,23 +1,25 @@
-import { IUserRegistration } from '@api/signup/types/signup';
 import { Button } from '@components/ui/button';
 import { Input } from '@components/ui/input';
 import { Label } from '@components/ui/label';
 import Message from '@components/ui/typo/message';
-import { usePostPhoneVerify, usePostPhoneConfirmCode, usePostSignup } from '@hooks/query/signup/mutation';
-import { useGetNicknameVerify } from '@hooks/query/signup/query';
+import { useGetNicknameVerify } from '@hooks/api/signup/useGetNicknameVerify';
+import { usePostPhoneConfirmCode } from '@hooks/api/signup/usePostPhoneConfirmCode';
+import { usePostPhoneVerify } from '@hooks/api/signup/usePostPhoneVerify';
+import { UserRegistrationInfo } from '@hooks/api/signup/usePostSignup';
+import { usePostSignup } from '@hooks/api/signup/usePostSignup';
 import React, { ChangeEvent, useEffect } from 'react';
 
 export default function InfoForm({ signupToken }: { signupToken: string }) {
-   const [signupInfo, setSignupInfo] = React.useState<IUserRegistration>({
+   const [signupInfo, setSignupInfo] = React.useState<UserRegistrationInfo>({
       nickname: '',
       password: '',
    });
 
-   const { phoneVerifyMutation: phoneVerify, isPhoneVerified } = usePostPhoneVerify();
-   const { phoneConfirmMutation: phoneConfirm, isCodeVerified } = usePostPhoneConfirmCode();
-   const { signupMutation: signup } = usePostSignup();
+   const { mutate: phoneVerify, isSuccess: isPhoneVerifySuccess } = usePostPhoneVerify(signupToken);
+   const { mutate: phoneConfirm, isSuccess: isCodeConfirm } = usePostPhoneConfirmCode(signupToken);
+   const { mutate: signup } = usePostSignup(signupToken);
 
-   const { data, isSuccess, refetch } = useGetNicknameVerify(signupInfo.nickname);
+   const { isSuccess: isNicknameVerify, refetch } = useGetNicknameVerify(signupInfo.nickname);
 
    const labelStyle = 'ml-[14px] font-normal text-gray02';
 
@@ -25,26 +27,22 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
    const [passwordMismatch, setPasswordError] = React.useState<boolean>(false);
    const [phoneNumber, setphoneNumber] = React.useState<string>('');
    const [code, setCode] = React.useState<string>('');
-   const [isNicknameValid, setIsNicknameValid] = React.useState<boolean>(false);
    const [isFormValid, setIsFormValid] = React.useState<boolean>(false);
 
    const handlePhoneVerify = () => {
-      phoneVerify({ phoneNumber, signupToken });
+      phoneVerify({ phoneNumber: phoneNumber });
    };
 
    const handlePhoneConfirm = () => {
-      phoneConfirm({ code, signupToken });
+      phoneConfirm({ code: code });
    };
 
    const handleSignup = () => {
-      signup({ signupInfo, signupToken });
+      signup(signupInfo);
    };
 
    const handleNicknameVerify = () => {
       refetch();
-      if (data.message === 'ok') {
-         setIsNicknameValid(isSuccess);
-      }
    };
 
    const handleFormSubmit = (e: React.FormEvent) => {
@@ -53,8 +51,8 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
    };
 
    useEffect(() => {
-      setIsFormValid(isNicknameValid && isPhoneVerified && isCodeVerified && !passwordMismatch);
-   }, [isNicknameValid, isPhoneVerified, isCodeVerified, passwordMismatch]);
+      setIsFormValid(isNicknameVerify && isPhoneVerifySuccess && isCodeConfirm && !passwordMismatch);
+   }, [isNicknameVerify, isPhoneVerifySuccess, isCodeConfirm, passwordMismatch]);
 
    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
@@ -123,9 +121,9 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
                   중복확인
                </Button>
             </div>
-            {isNicknameValid && <Message>사용가능한 닉네임입니다.</Message>}
+            {isNicknameVerify && <Message>사용가능한 닉네임입니다.</Message>}
          </section>
-         <section className='flex flex-col gap-2'>
+         <section className='flex flex-col gap-2 mb-4'>
             <Label htmlFor='tel' className={`${labelStyle}`}>
                휴대폰 인증
             </Label>
@@ -143,8 +141,8 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
                   인증요청
                </Button>
             </div>
-            {isPhoneVerified && <Message>인증번호가 전송되었습니다.</Message>}
-            <div className='flex items-center mb-6'>
+            {isPhoneVerifySuccess && <Message>인증번호가 전송되었습니다.</Message>}
+            <div className='flex items-center'>
                <Input
                   type='number'
                   placeholder='인증번호 6자리를 입력해주세요.'
@@ -157,7 +155,7 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
                   확인
                </Button>
             </div>
-            {isCodeVerified && <Message>인증번호가 일치합니다.</Message>}
+            {isCodeConfirm && <Message>인증번호가 일치합니다.</Message>}
          </section>
          <Button
             size='md'

@@ -1,29 +1,25 @@
 import { Button } from '@components/ui/button';
-import { API_PATH, CONSTANTS } from '@constants/api';
 import { shadowStyle } from '@constants/shadow';
-import { useAlert } from '@hooks/useAlert';
-import { useApi } from '@hooks/useApi';
-import { useAuth } from '@hooks/useAuth';
-import MyPageLayout from '@layouts/MyPageLayout';
+import { useDeleteUser } from '@hooks/api/auth/useDeleteUser';
 import React from 'react';
 import { BiSolidCalendarStar } from 'react-icons/bi';
 import { FaUser } from 'react-icons/fa6';
 import { IoIosListBox } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
 
+import MyPageLayout from '@/components/layouts/MyPageLayout';
+import { removeTokens } from '@/utils/token';
+
 export default function MyPage() {
-   const { logout } = useAuth();
-   const { alert } = useAlert();
-   const { delete: axiosDelte } = useApi();
    const navigate = useNavigate();
-   const deleteAccount = async () => {
-      try {
-         await axiosDelte(CONSTANTS.SERVER_URL + API_PATH.USER.ME, { authenticate: true });
-         alert('탈퇴하였습니다.');
-         logout();
-      } catch (error) {
-         alert(error);
-      }
+   const { mutate } = useDeleteUser();
+
+   const deleteAccount = () => {
+      mutate();
+   };
+
+   const logout = () => {
+      removeTokens();
    };
 
    return (

@@ -1,8 +1,8 @@
 import { Button } from '@components/ui/button';
 import { Input } from '@components/ui/input';
 import Message from '@components/ui/typo/message';
-import { usePostPhoneVerify } from '@hooks/query/reset/mutation';
-import { usePostPhoneConfirmCode } from '@hooks/query/reset/mutation';
+import { usePostPhoneConfirmCode } from '@hooks/api/reset/usePostPhoneConfirmCode';
+import { usePostPhoneVerify } from '@hooks/api/reset/usePostPhoneVerify';
 import { useAlert } from '@hooks/useAlert';
 import React from 'react';
 
@@ -19,12 +19,16 @@ export default function PwVerifyForm() {
       });
    };
 
-   const { mutate: phoneVerify, isSuccess: verifySuccess } = usePostPhoneVerify(setToken);
-   const { mutate: confirmCode } = usePostPhoneConfirmCode(token);
+   const { mutate: phoneVerify, isSuccess: verifySuccess } = usePostPhoneVerify({
+      onSuccess: (res) => {
+         setToken(res.token);
+      },
+   });
+   const { mutate: confirmCode } = usePostPhoneConfirmCode();
 
    const handlePhoneVerify = () => {
       if (pwVerifyInfo.phoneNumber.length === 11) {
-         phoneVerify(pwVerifyInfo.phoneNumber);
+         phoneVerify({ phoneNumber: pwVerifyInfo.phoneNumber });
       } else {
          alert('올바른 휴대폰번호를 입력해주세요.');
       }
@@ -35,7 +39,7 @@ export default function PwVerifyForm() {
          if (pwVerifyInfo.code.length !== 6) {
             alert('올바른 인증번호를 입력해주세요.');
          } else {
-            confirmCode({ token, code: pwVerifyInfo.code });
+            confirmCode({ token: token, code: pwVerifyInfo.code });
          }
       } else {
          alert('인증 후 이용 가능합니다.');

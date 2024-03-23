@@ -1,12 +1,12 @@
-import { IVerifyInfo } from '@api/signup/types/signup';
 import { Button } from '@components/ui/button';
 import { Input } from '@components/ui/input';
-import { usePostStudentVerify } from '@hooks/query/signup/mutation';
+import { UserVerifyInfo } from '@hooks/api/signup/usePostStudentVerify';
+import { usePostStudentVerify } from '@hooks/api/signup/usePostStudentVerify';
 import { Regex } from '@utils/regex';
 import React, { useEffect } from 'react';
 
 export default function VerifyForm() {
-   const [verifyInfo, setVerifyInfo] = React.useState<IVerifyInfo>({
+   const [verifyInfo, setVerifyInfo] = React.useState<UserVerifyInfo>({
       dkuStudentId: '',
       dkuPassword: '',
    });
