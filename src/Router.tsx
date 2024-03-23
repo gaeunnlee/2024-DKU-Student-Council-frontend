@@ -1,5 +1,5 @@
+import DefaultLayout from '@components/layouts/DefaultLayout';
 import { ROUTES } from '@constants/route';
-import DefaultLayout from '@layouts/DefaultLayout';
 import NotFound from '@pages/404';
 import BusinessBoard from '@pages/business';
 import BusinessDetail from '@pages/business/[id]';
