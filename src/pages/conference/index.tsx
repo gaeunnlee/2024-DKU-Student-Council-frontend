@@ -1,9 +1,9 @@
-import Title, { Date } from '@components/ui/text/board';
+import BoardLayout, { IBoardList } from '@components/layouts/BoardLayout';
+import { Date } from '@components/ui/text/board';
 import { API_PATH } from '@constants/api';
 import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
 import { useEffectOnce } from '@hooks/useEffectOnce';
 import { useLayout } from '@hooks/useLayout';
-import BoardLayout, { IBoardList } from '@layouts/BoardLayout';
 import React from 'react';
 
 export default function ConferenceBoard() {
@@ -26,13 +26,13 @@ export default function ConferenceBoard() {
 
    const Cell = ({ data }: { data: IBoardList }) => (
       <div className='flex gap-2 p-3'>
-         <Title content={data.title} className='grow text-center truncate' />
+         <p className='grow text-center truncate'>{data.title}</p>
          <Date content={data.createdAt} className='font-semibold' />
       </div>
    );
    return (
       <BoardLayout
-         api={API_PATH.POST.CONFERENCE.ROOT}
+         api={API_PATH.CONFERENCE.ROOT}
          setCell={(data: IBoardList) => <Cell data={data} />}
          isFileLink={true}
       />

@@ -1,4 +1,4 @@
-import { IFormInfo } from '@api/upload/types/upload';
+import { PostFormInfo } from '@components/main/post';
 import IconButton from '@components/ui/button/IconButton';
 import { ImageProps } from '@hooks/useImageUpload';
 import React from 'react';
@@ -6,7 +6,7 @@ import React from 'react';
 interface ImagePreviewProps {
    imageList: { imageUrl: string; imageName: string }[];
    deleteImage: (params: ImageProps['delete']) => void;
-   setFormInfo: React.Dispatch<React.SetStateAction<IFormInfo>>;
+   setFormInfo: React.Dispatch<React.SetStateAction<PostFormInfo>>;
 }
 
 export default function ImagePreview({ imageList, deleteImage, setFormInfo }: ImagePreviewProps) {

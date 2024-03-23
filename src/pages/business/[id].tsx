@@ -1,15 +1,15 @@
 import Carousel from '@components/common/carousel';
+import PostDetailLayout from '@components/layouts/PostDetailLayout';
 import PostBox, { FileBox } from '@components/ui/box/PostBox';
 import Collapse from '@components/ui/collapse';
 import { API_PATH } from '@constants/api';
 import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
 import { useFetchPost } from '@hooks/useFetchPost';
 import { useLayout } from '@hooks/useLayout';
-import PostDetailLayout from '@layouts/PostDetailLayout';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { IPost } from '../../interfaces/post';
+import { IPost } from '@/types/post';
 
 export default function BusinessDetail() {
    const { setLayout } = useLayout();
@@ -37,7 +37,7 @@ export default function BusinessDetail() {
       });
    }, [category]);
 
-   const { post, images } = useFetchPost<IPost>({ api: API_PATH.POST.NOTICE.ROOT, isCarousel: true });
+   const { post, images } = useFetchPost<IPost>({ api: API_PATH.NOTICE.ROOT, isCarousel: true });
    return (
       <PostDetailLayout>
          {images!.length > 0 && (

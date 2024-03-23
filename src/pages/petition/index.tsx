@@ -1,13 +1,11 @@
+import BoardLayout, { IBoardList } from '@components/layouts/BoardLayout';
 import FloatingButton from '@components/ui/button/FloatingButton';
-import Text from '@components/ui/text';
-import Title from '@components/ui/text/board';
 import { API_PATH } from '@constants/api';
 import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
 import { ROUTES } from '@constants/route';
-import { useAuth } from '@hooks/useAuth';
 import { useEffectOnce } from '@hooks/useEffectOnce';
 import { useLayout } from '@hooks/useLayout';
-import BoardLayout, { IBoardList } from '@layouts/BoardLayout';
+import { isLoggedIn } from '@utils/token';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -28,7 +26,6 @@ export const getPetitionStatus = (status: string) => {
 export default function PetitionBoard() {
    const navigate = useNavigate();
    const { setLayout } = useLayout();
-   const { isLoggedIn } = useAuth();
 
    useEffectOnce(() => {
       setLayout({
@@ -45,20 +42,15 @@ export default function PetitionBoard() {
 
    const Cell = ({ data }: { data: IBoardList }) => (
       <div className=' py-3 flex justify-between leading-9 px-6 gap-3 whitespace-nowrap'>
-         <Text length={4}>{getPetitionStatus(data.status!)}</Text>
-         <Title content={data.title} className='text-ellipsis overflow-hidden' />
-         <Text length={4}>
-            {getDaysBetween(data.expiresAt!) > 0 ? `D-${getDaysBetween(data.expiresAt!)}` : '만료'}
-         </Text>
+         <p>{getPetitionStatus(data.status!)}</p>
+         <p className='text-ellipsis overflow-hidden'>{data.title}</p>
+         <p>{getDaysBetween(data.expiresAt!) > 0 ? `D-${getDaysBetween(data.expiresAt!)}` : '만료'}</p>
       </div>
    );
 
    return (
       <>
-         <BoardLayout
-            api={API_PATH.POST.PETITION.ROOT}
-            setCell={(data: IBoardList) => <Cell data={data} />}
-         />
+         <BoardLayout api={API_PATH.PETITION.ROOT} setCell={(data: IBoardList) => <Cell data={data} />} />
          {isLoggedIn && (
             <FloatingButton
                event={() => {

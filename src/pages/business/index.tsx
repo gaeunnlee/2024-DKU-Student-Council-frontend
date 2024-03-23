@@ -1,8 +1,8 @@
-import Title, { Date } from '@components/ui/text/board';
+import BoardLayout, { IBoardList } from '@components/layouts/BoardLayout';
+import { Date } from '@components/ui/text/board';
 import { API_PATH } from '@constants/api';
 import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
 import { useLayout } from '@hooks/useLayout';
-import BoardLayout, { IBoardList } from '@layouts/BoardLayout';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -44,7 +44,7 @@ export default function BusinessBoard() {
             />
          </div>
          <div className='w-[60%] h-[100px] flex flex-col gap-3 justify-center'>
-            <Title content={data.title} className=' font-bold text-base line-clamp-2' />
+            <p className=' font-bold text-base line-clamp-2'>{data.title}</p>
             <Date content={data.createdAt} className='text-gray-400 text-xs' />
          </div>
       </div>
@@ -52,7 +52,7 @@ export default function BusinessBoard() {
 
    return (
       <BoardLayout
-         api={category.length > 0 ? API_PATH.POST.COALITION.ROOT + '?coalitionType=' + category : ''}
+         api={category.length > 0 ? API_PATH.COALITION.ROOT + '?coalitionType=' + category : ''}
          setCell={(data: IBoardList) => <Cell data={data} />}
       />
    );

@@ -1,8 +1,8 @@
 import map from '@assets/images/map.png';
+import SinglePageLayout from '@components/layouts/SinglePageLayout';
 import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
 import { useEffectOnce } from '@hooks/useEffectOnce';
 import { useLayout } from '@hooks/useLayout';
-import SinglePageLayout from '@layouts/SinglePageLayout';
 import React from 'react';
 
 export default function Location() {
