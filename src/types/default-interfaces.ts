@@ -1,8 +1,8 @@
-export interface IWithReactChildren {
+export interface WithReactChildren {
    children?: React.ReactNode;
 }
 
-export interface IIdPassword {
+export interface IdPassword {
    studentId: string;
    password: string;
 }
