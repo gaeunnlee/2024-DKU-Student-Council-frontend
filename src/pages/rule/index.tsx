@@ -1,13 +1,15 @@
-import Title, { Date } from '@components/ui/text/board';
-import { API_PATH } from '@constants/api';
+import Board from '@components/common/board';
+import { Date } from '@components/ui/text/board';
 import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
+import { useGetRule } from '@hooks/api/rule/useGetRule';
+import { RuleContentResponse } from '@hooks/api/rule/useGetRule';
 import { useEffectOnce } from '@hooks/useEffectOnce';
 import { useLayout } from '@hooks/useLayout';
-import BoardLayout, { IBoardList } from '@layouts/BoardLayout';
 import React from 'react';
 
 export default function RuleBoard() {
    const { setLayout } = useLayout();
+   const { data: rule } = useGetRule();
 
    useEffectOnce(() => {
       setLayout({
@@ -24,17 +26,22 @@ export default function RuleBoard() {
       });
    });
 
-   const Cell = ({ data }: { data: IBoardList }) => (
-      <div className='flex gap-2 p-3'>
-         <Title content={data.title} className='grow text-center truncate' />
-         <Date content={data.createdAt} />
-      </div>
-   );
+   const handleOpenFile = (item: RuleContentResponse) => {
+      window.open(item.files[0].url);
+   };
+
    return (
-      <BoardLayout
-         api={API_PATH.POST.RULE.ROOT}
-         setCell={(data: IBoardList) => <Cell data={data} />}
-         isFileLink={true}
-      />
+      <Board>
+         {rule?.pages.map((page) =>
+            page.content.map((item) => (
+               <Board.Cell key={item.id} onClick={() => handleOpenFile(item)}>
+                  <div className='flex gap-2 p-3'>
+                     <p className='grow text-center truncate'>{item.title}</p>
+                     <Date date={item.createdAt} />
+                  </div>
+               </Board.Cell>
+            )),
+         )}
+      </Board>
    );
 }
