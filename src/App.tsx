@@ -1,6 +1,6 @@
 import ModalProvider from '@components/ui/modal/modal-provider';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
 
 import Router from '@/Router';
 
