@@ -1,4 +1,4 @@
-import { API_PATH } from '@constants/api';
+import { API_PATH, QUERY_STRING } from '@constants/api';
 import { get } from '@libs/api';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
@@ -23,7 +23,7 @@ export const useGetCoalitionList = (coalition: CoalitionType) => {
    return useInfiniteQuery<CoalitionResponse>({
       queryKey: ['getCoalitionList'],
       queryFn: ({ pageParam = 0 }) =>
-         get(API_PATH.COALITION.ROOT + `?coalitionType=${coalition}&page=${pageParam}`),
+         get(API_PATH.COALITION.ROOT + `?coalitionType=${coalition}&${QUERY_STRING.PAGE}=${pageParam}`),
       initialPageParam: 0,
       getNextPageParam: (lastPage, allPages) => {
          const nextPage = allPages.length + 1;
