@@ -2,16 +2,10 @@ import { API_PATH, QUERY_STRING } from '@constants/api';
 import { get } from '@libs/api';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
+import { CoalitionType } from '@/types/coalition';
 import { PageResponse, ContentResponse } from '@/types/page';
 
-enum CoalitionType {
-   HEALTH,
-   FOOD,
-   CULTURE,
-   ETC,
-}
-
-interface CoalitionContentResponse extends ContentResponse {
+export interface CoalitionContentResponse extends ContentResponse {
    coalitionType: CoalitionType;
 }
 
