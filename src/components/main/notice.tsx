@@ -1,4 +1,6 @@
+import MainSectionLayout from '@components/layouts/MainSectionLayout';
 import { Button } from '@components/ui/button';
+import { ROUTES } from '@constants/route';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,11 +16,11 @@ export default function Notice({ notices }: { notices?: INotice[] }) {
    };
 
    const handleNotice = () => {
-      navigate('/notice');
+      navigate(ROUTES.NOTICE.ROOT);
    };
 
    return (
-      <section className='px-4 py-5 m-4 rounded-xl bg-white shadow-md'>
+      <MainSectionLayout>
          <div className='flex items-center justify-between'>
             <h3 className='font-bold text-lg'>총학소식</h3>
             <Button variant='ghost' className='text-[13px]' onClick={handleNotice}>
@@ -32,6 +34,6 @@ export default function Notice({ notices }: { notices?: INotice[] }) {
                </li>
             ))}
          </ul>
-      </section>
+      </MainSectionLayout>
    );
 }

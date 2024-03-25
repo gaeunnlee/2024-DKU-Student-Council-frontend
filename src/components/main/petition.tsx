@@ -1,3 +1,4 @@
+import MainSectionLayout from '@components/layouts/MainSectionLayout';
 import { Button } from '@components/ui/button';
 import { PetitionType } from '@hooks/api/main/useGetMain';
 import React from 'react';
@@ -15,7 +16,7 @@ export default function Petition({ petitions }: { petitions?: PetitionType[] }) 
    };
 
    return (
-      <section className='px-4 py-5 m-4 rounded-xl bg-white shadow-md'>
+      <MainSectionLayout>
          <div className='flex items-center justify-between'>
             <h3 className='font-bold text-lg'>청원게시판</h3>
             <Button variant='ghost' className='text-[13px]' onClick={handlePetition}>
@@ -34,6 +35,6 @@ export default function Petition({ petitions }: { petitions?: PetitionType[] }) 
                </li>
             ))}
          </ul>
-      </section>
+      </MainSectionLayout>
    );
 }
