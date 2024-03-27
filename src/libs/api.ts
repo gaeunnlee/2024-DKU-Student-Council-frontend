@@ -1,4 +1,5 @@
 import { CONSTANTS } from '@constants/api';
+import { handleAPIError } from '@libs/interceptor';
 import axios, { AxiosResponse } from 'axios';
 
 export const client = axios.create({
@@ -30,3 +31,6 @@ export const del = async <T>(...args: Parameters<typeof client.delete>): Promise
    const response = await client.delete<T, AxiosResponse<T>>(...args);
    return response.data;
 };
+
+// client.interceptors.request.use(checkToken, handleAPIError);
+client.interceptors.request.use((response) => response, handleAPIError);
