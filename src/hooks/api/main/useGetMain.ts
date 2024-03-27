@@ -1,6 +1,6 @@
 import { API_PATH } from '@constants/api';
 import { get } from '@libs/api';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 interface Response {
    carousels: CarouselType[];
@@ -17,7 +17,7 @@ interface Response {
 export interface CarouselType {
    id: number;
    url: string;
-   redirectUrl: string | null;
+   redirectUrl?: string | null;
 }
 
 export interface NoticeType {
@@ -32,17 +32,12 @@ export interface PetitionType {
    d_day: number;
 }
 
-export enum PetitionStatusType {
-   WAITING,
-   ACTIVE,
-   ANSWERED,
-   EXPIRED,
-}
-
 const useGetMain = () => {
-   return useQuery<Response>({
+   return useSuspenseQuery<Response>({
       queryKey: ['main'],
       queryFn: () => get(API_PATH.MAIN.ROOT),
+      staleTime: 6,
+      gcTime: 10,
    });
 };
 
