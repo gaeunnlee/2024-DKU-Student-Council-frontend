@@ -3,22 +3,24 @@ import Checkbox from '@components/ui/checkbox';
 import { Input } from '@components/ui/input/index';
 import { Label } from '@components/ui/label';
 import { ROUTES } from '@constants/route';
-import { useAuth } from '@hooks/useAuth';
-import { IIdPassword } from '@shared/interfaces/default-interfaces';
+import { usePostLogin } from '@hooks/api/auth/usePostLogin';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { IdPassword } from '@/types/default-interfaces';
+
 export default function LoginForm() {
-   const initLoginInfo: IIdPassword = {
+   const initLoginInfo: IdPassword = {
       studentId: '',
       password: '',
    };
-   const [loginInfo, setLoginInfo] = React.useState<IIdPassword>(initLoginInfo);
-   const { login } = useAuth();
+   const [loginInfo, setLoginInfo] = React.useState<IdPassword>(initLoginInfo);
+
+   const { mutate } = usePostLogin();
 
    const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      login(loginInfo);
+      mutate(loginInfo);
    };
 
    return (
@@ -59,7 +61,7 @@ export default function LoginForm() {
                </Label>
             </Checkbox>
             <div className='flex text-[12px] gap-2'>
-               <Link to={ROUTES.SIGNUP.ROOT}>회원가입</Link>
+               <Link to={ROUTES.SIGNUP.TERMS}>회원가입</Link>
                <span> | </span>
                <Link to={ROUTES.RESET.INDEX}>Forgot ID/PW?</Link>
             </div>

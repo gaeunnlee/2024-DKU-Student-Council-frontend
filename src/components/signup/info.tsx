@@ -1,7 +1,7 @@
 import { Button } from '@components/ui/button';
 import { Input } from '@components/ui/input';
 import { Label } from '@components/ui/label';
-import Message from '@components/ui/typo/message';
+import Message from '@components/ui/text/message';
 import { useGetNicknameVerify } from '@hooks/api/signup/useGetNicknameVerify';
 import { usePostPhoneConfirmCode } from '@hooks/api/signup/usePostPhoneConfirmCode';
 import { usePostPhoneVerify } from '@hooks/api/signup/usePostPhoneVerify';
@@ -24,7 +24,7 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
    const labelStyle = 'ml-[14px] font-normal text-gray02';
 
    const [passwordConfirm, setPasswordConfirm] = React.useState<string>('');
-   const [passwordMismatch, setPasswordError] = React.useState<boolean>(false);
+   const [passwordMatch, setPasswordMatch] = React.useState<boolean>(false);
    const [phoneNumber, setphoneNumber] = React.useState<string>('');
    const [code, setCode] = React.useState<string>('');
    const [isFormValid, setIsFormValid] = React.useState<boolean>(false);
@@ -51,15 +51,29 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
    };
 
    useEffect(() => {
-      setIsFormValid(isNicknameVerify && isPhoneVerifySuccess && isCodeConfirm && !passwordMismatch);
-   }, [isNicknameVerify, isPhoneVerifySuccess, isCodeConfirm, passwordMismatch]);
+      setIsFormValid(
+         isNicknameVerify &&
+            isPhoneVerifySuccess &&
+            isCodeConfirm &&
+            passwordMatch &&
+            signupInfo.nickname !== '' &&
+            signupInfo.password !== '',
+      );
+   }, [
+      isNicknameVerify,
+      isPhoneVerifySuccess,
+      isCodeConfirm,
+      passwordMatch,
+      signupInfo.nickname,
+      signupInfo.password,
+   ]);
 
    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
       switch (name) {
          case 'passwordConfirm':
             setPasswordConfirm(value);
-            setPasswordError(signupInfo.password !== value);
+            setPasswordMatch(signupInfo.password === value);
             break;
          case 'phoneNumber':
             setphoneNumber(value);
@@ -74,6 +88,8 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
             });
       }
    };
+
+   const passwordMismatch = !passwordMatch && passwordConfirm !== '';
 
    return (
       <form onSubmit={handleFormSubmit}>

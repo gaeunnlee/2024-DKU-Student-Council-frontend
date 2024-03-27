@@ -1,6 +1,6 @@
 import { Button } from '@components/ui/button';
 import { Input } from '@components/ui/input';
-import Message from '@components/ui/typo/message';
+import Message from '@components/ui/text/message';
 import { usePostPhoneConfirmCode } from '@hooks/api/reset/usePostPhoneConfirmCode';
 import { usePostPhoneVerify } from '@hooks/api/reset/usePostPhoneVerify';
 import { useAlert } from '@hooks/useAlert';
