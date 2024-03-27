@@ -1,11 +1,10 @@
 import { ROUTES } from '@constants/route';
-import { useAuth } from '@hooks/useAuth';
-import { IWithReactChildren } from '@shared/interfaces/default-interfaces';
+import { isLoggedIn } from '@utils/token';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-export default function PrivateRoute({ children }: IWithReactChildren) {
-   const { isLoggedIn } = useAuth();
+import { WithReactChildren } from '@/types/default-interfaces';
 
+export default function PrivateRoute({ children }: WithReactChildren) {
    return isLoggedIn ? <>{children}</> : <Navigate to={ROUTES.LOGIN} replace={true} />;
 }
