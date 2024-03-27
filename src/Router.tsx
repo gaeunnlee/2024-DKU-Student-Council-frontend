@@ -1,122 +1,271 @@
-import DefaultLayout from '@components/layouts/DefaultLayout';
 import { ROUTES } from '@constants/route';
-import NotFound from '@pages/404';
-import BusinessBoard from '@pages/business';
-import BusinessDetail from '@pages/business/[id]';
-import ConferenceBoard from '@pages/conference';
-import Greeting from '@pages/council';
-import Location from '@pages/council/location';
-import Organization from '@pages/council/organization';
-import Recruitment from '@pages/council/recruitment';
-import Main from '@pages/index';
-import Login from '@pages/login';
-import MyPageEdit from '@pages/mypage/edit';
-import MyPage from '@pages/mypage/index';
-import MyPagePassword from '@pages/mypage/password';
-import MyPageUpdate from '@pages/mypage/update';
-import NoticeDetail from '@pages/notice/[id]';
-import NoticeBoard from '@pages/notice/index';
-import NoticePost from '@pages/notice/post';
-import PetitionBoard from '@pages/petition';
-import PetitionDetail from '@pages/petition/[id]';
-import PetitionForm from '@pages/petition/post';
-import ResetId from '@pages/reset/resetId';
-import ResetIdPw from '@pages/reset/resetIdPw';
-import ResetPw from '@pages/reset/resetPw';
-import VerifyPw from '@pages/reset/verifyPw';
-import RuleBoard from '@pages/rule';
-import SignupVerify from '@pages/signup';
-import SignupInfo from '@pages/signup/info';
-import SignupSuccess from '@pages/signup/success';
-import SignupTerms from '@pages/signup/terms';
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { lazy } from 'react';
+import { createBrowserRouter } from 'react-router-dom';
 
-import PrivateRoute from '@/PrivateRoute';
+import App from './App';
 
-/**
- * @description 라우터
- * @author 이호연
- */
-export default function Router() {
-   return (
-      <BrowserRouter>
-         {/* TODO: 로딩 컴포넌트 만들어 넣기 */}
-         <DefaultLayout>
-            <Routes>
-               <Route path={ROUTES.MAIN} element={<Main />} />
-               <Route path={ROUTES.LOGIN} element={<Login />} />
-               <Route path={ROUTES.RESET.INDEX} element={<ResetIdPw />} />
-               <Route path={ROUTES.RESET.ID} element={<ResetId />} />
-               <Route path={ROUTES.RESET.PW_VERIFY} element={<VerifyPw />} />
-               <Route path={ROUTES.RESET.PW} element={<ResetPw />} />
-               <Route
-                  path={ROUTES.MYPAGE.INDEX}
-                  element={
-                     <PrivateRoute>
-                        <MyPage />
-                     </PrivateRoute>
-                  }
-               />
-               <Route
-                  path={ROUTES.MYPAGE.PASSWORD}
-                  element={
-                     <PrivateRoute>
-                        <MyPagePassword />
-                     </PrivateRoute>
-                  }
-               />
-               <Route
-                  path={ROUTES.MYPAGE.EDIT}
-                  element={
-                     <PrivateRoute>
-                        <MyPageEdit />
-                     </PrivateRoute>
-                  }
-               />
-               <Route
-                  path={ROUTES.MYPAGE.UPDATE}
-                  element={
-                     <PrivateRoute>
-                        <MyPageUpdate />
-                     </PrivateRoute>
-                  }
-               />
-               <Route index path={ROUTES.SIGNUP.ROOT} element={<SignupVerify />} />
-               <Route path={ROUTES.SIGNUP.TERMS} element={<SignupTerms />} />
-               <Route path={ROUTES.SIGNUP.INFO} element={<SignupInfo />} />
-               <Route path={ROUTES.SIGNUP.SUCCESS} element={<SignupSuccess />} />
-               <Route path={ROUTES.COUNCIL.GREETING} element={<Greeting />} />
-               <Route path={ROUTES.COUNCIL.ORGANIZATION} element={<Organization />} />
-               <Route path={ROUTES.COUNCIL.LOCATION} element={<Location />} />
-               <Route path={ROUTES.COUNCIL.RECRUITMENT} element={<Recruitment />} />
-               <Route path={ROUTES.PETITION.ROOT} element={<PetitionBoard />} />
-               <Route path={ROUTES.PETITION.ID} element={<PetitionDetail />} />
-               <Route path={ROUTES.NOTICE.ROOT} element={<NoticeBoard />} />
-               <Route path={ROUTES.NOTICE.ID} element={<NoticeDetail />} />
-               <Route
-                  path={ROUTES.PETITION.POST}
-                  element={
-                     <PrivateRoute>
-                        <PetitionForm />
-                     </PrivateRoute>
-                  }
-               />
-               <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
-               <Route
-                  path={ROUTES.NOTICE.POST}
-                  element={
-                     <PrivateRoute>
-                        <NoticePost />
-                     </PrivateRoute>
-                  }
-               />
-               <Route path={ROUTES.CONFERENCE.ROOT} element={<ConferenceBoard />} />
-               <Route path={ROUTES.RULE.ROOT} element={<RuleBoard />} />
-               <Route path={ROUTES.BUSINESS.CATEGORY} element={<BusinessBoard />} />
-               <Route path={ROUTES.BUSINESS.DETAIL} element={<BusinessDetail />} />
-            </Routes>
-         </DefaultLayout>
-      </BrowserRouter>
-   );
-}
+const DefaultLayout = lazy(() => import('@components/layouts/DefaultLayout'));
+const NotFound = lazy(() => import('@pages/404'));
+const BusinessBoard = lazy(() => import('@pages/business'));
+const BusinessDetail = lazy(() => import('@pages/business/[id]'));
+const ConferenceBoard = lazy(() => import('@pages/conference'));
+const Greeting = lazy(() => import('@pages/council'));
+const Location = lazy(() => import('@pages/council/location'));
+const Organization = lazy(() => import('@pages/council/organization'));
+const Recruitment = lazy(() => import('@pages/council/recruitment'));
+const Main = lazy(() => import('@pages/index'));
+const Login = lazy(() => import('@pages/login'));
+const MyPageEdit = lazy(() => import('@pages/mypage/edit'));
+const MyPage = lazy(() => import('@pages/mypage/index'));
+const MyPagePassword = lazy(() => import('@pages/mypage/password'));
+const MyPageUpdate = lazy(() => import('@pages/mypage/update'));
+const NoticeDetail = lazy(() => import('@pages/notice/[id]'));
+const NoticeBoard = lazy(() => import('@pages/notice/index'));
+const NoticePost = lazy(() => import('@pages/notice/post'));
+const PetitionBoard = lazy(() => import('@pages/petition'));
+const PetitionDetail = lazy(() => import('@pages/petition/[id]'));
+const PetitionForm = lazy(() => import('@pages/petition/post'));
+const ResetId = lazy(() => import('@pages/reset/resetId'));
+const ResetIdPw = lazy(() => import('@pages/reset/resetIdPw'));
+const ResetPw = lazy(() => import('@pages/reset/resetPw'));
+const VerifyPw = lazy(() => import('@pages/reset/verifyPw'));
+const RuleBoard = lazy(() => import('@pages/rule'));
+const SignupVerify = lazy(() => import('@pages/signup'));
+const SignupInfo = lazy(() => import('@pages/signup/info'));
+const SignupSuccess = lazy(() => import('@pages/signup/success'));
+const SignupTerms = lazy(() => import('@pages/signup/terms'));
+
+const Router = createBrowserRouter([
+   {
+      path: '/',
+      element: <App />,
+      errorElement: <NotFound />,
+      children: [
+         {
+            path: ROUTES.MAIN,
+            element: (
+               <DefaultLayout>
+                  <Main />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.LOGIN,
+            element: (
+               <DefaultLayout>
+                  <Login />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.RESET.INDEX,
+            element: (
+               <DefaultLayout>
+                  <ResetIdPw />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.RESET.ID,
+            element: (
+               <DefaultLayout>
+                  <ResetId />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.RESET.PW_VERIFY,
+            element: (
+               <DefaultLayout>
+                  <VerifyPw />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.RESET.PW,
+            element: (
+               <DefaultLayout>
+                  <ResetPw />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.MYPAGE.INDEX,
+            element: (
+               <DefaultLayout>
+                  <MyPage />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.MYPAGE.PASSWORD,
+            element: (
+               <DefaultLayout>
+                  <MyPagePassword />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.MYPAGE.EDIT,
+            element: (
+               <DefaultLayout>
+                  <MyPageEdit />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.MYPAGE.UPDATE,
+            element: (
+               <DefaultLayout>
+                  <MyPageUpdate />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.SIGNUP.ROOT,
+            element: (
+               <DefaultLayout>
+                  <SignupVerify />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.SIGNUP.TERMS,
+            element: (
+               <DefaultLayout>
+                  <SignupTerms />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.SIGNUP.INFO,
+            element: (
+               <DefaultLayout>
+                  <SignupInfo />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.SIGNUP.SUCCESS,
+            element: (
+               <DefaultLayout>
+                  <SignupSuccess />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.COUNCIL.GREETING,
+            element: (
+               <DefaultLayout>
+                  <Greeting />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.COUNCIL.ORGANIZATION,
+            element: (
+               <DefaultLayout>
+                  <Organization />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.COUNCIL.LOCATION,
+            element: (
+               <DefaultLayout>
+                  <Location />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.COUNCIL.RECRUITMENT,
+            element: (
+               <DefaultLayout>
+                  <Recruitment />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.PETITION.ROOT,
+            element: (
+               <DefaultLayout>
+                  <PetitionBoard />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.PETITION.ID(':id'),
+            element: (
+               <DefaultLayout>
+                  <PetitionDetail />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.PETITION.POST,
+            element: (
+               <DefaultLayout>
+                  <PetitionForm />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.NOTICE.ROOT,
+            element: (
+               <DefaultLayout>
+                  <NoticeBoard />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.NOTICE.ID(':id'),
+            element: (
+               <DefaultLayout>
+                  <NoticeDetail />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.NOTICE.POST,
+            element: (
+               <DefaultLayout>
+                  <NoticePost />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.CONFERENCE.ROOT,
+            element: (
+               <DefaultLayout>
+                  <ConferenceBoard />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.RULE.ROOT,
+            element: (
+               <DefaultLayout>
+                  <RuleBoard />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.BUSINESS.CATEGORY(':category'),
+            element: (
+               <DefaultLayout>
+                  <BusinessBoard />
+               </DefaultLayout>
+            ),
+         },
+         {
+            path: ROUTES.BUSINESS.DETAIL(':category', ':id'),
+            element: (
+               <DefaultLayout>
+                  <BusinessDetail />
+               </DefaultLayout>
+            ),
+         },
+      ],
+   },
+]);
+export default Router;
