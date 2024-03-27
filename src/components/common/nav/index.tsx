@@ -28,13 +28,13 @@ const navItems: NavItem[] = [
    {
       id: 3,
       name: '제휴사업',
-      path: ROUTES.BUSINESS.CATEGORY,
+      path: ROUTES.BUSINESS.CATEGORY(':category'),
       icon: <SvgIcon id='partnership' width={17.54} height={19.6} />,
    },
    {
       id: 4,
       name: 'My page',
-      path: ROUTES.MYPAGE.INDEX,
+      path: ROUTES.LOGIN,
       icon: <SvgIcon id='mypage' width={20.06} height={20.13} />,
    },
 ];
@@ -48,7 +48,7 @@ export default function Nav() {
 
    const handleNavigate = (el: NavItem) => {
       if (el.name === '제휴사업') {
-         navigate(ROUTES.BUSINESS.CATEGORY.replace(':category', 'food'));
+         navigate(ROUTES.BUSINESS.CATEGORY('food'));
       } else {
          navigate(el.path as string);
       }
