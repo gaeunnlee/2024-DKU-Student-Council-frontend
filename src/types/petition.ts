@@ -1,6 +1,6 @@
 export enum PetitionType {
-   WAITING,
-   ACTIVE,
-   ANSWERED,
-   EXPIRED,
+   WAITING = 'WAITING',
+   ACTIVE = 'ACTIVE',
+   ANSWERED = 'ANSWERED',
+   EXPIRED = 'EXPIRED',
 }
