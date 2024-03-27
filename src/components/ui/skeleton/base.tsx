@@ -1,5 +1,8 @@
+import { cn } from '@libs/shadcn';
 import React from 'react';
 
-export default function BaseSkeleton({ className, ...props }: React.ComponentProps<'div'>) {
-   return <div className={`animate-pulse bg-gray-200 ${className}`} {...props} />;
+function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+   return <div className={cn('animate-pulse rounded-md bg-slate-200', className)} {...props} />;
 }
+
+export { Skeleton };
