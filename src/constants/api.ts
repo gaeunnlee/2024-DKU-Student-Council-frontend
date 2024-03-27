@@ -81,47 +81,45 @@ export const API_PATH = {
       /** 학식 정보 */
       CAFETERIA: '/cafeteria/meal/today',
    },
-   POST: {
-      /* 공지 */
-      NOTICE: {
-         /** 공지 목록 */
-         ROOT: '/post/notice',
-         /** 공지 단건조회 */
-         ID: (id: string) => `/post/notice/${id}`,
+   /* 공지 */
+   NOTICE: {
+      /** 공지 목록 */
+      ROOT: '/post/notice',
+      /** 공지 단건조회 */
+      ID: (id: string) => `/post/notice/${id}`,
+   },
+   /* 청원게시판 */
+   PETITION: {
+      /** 청원게시판 목록 */
+      ROOT: '/post/petition',
+      /** 청원게시판 단건조회 */
+      ID: (id: string) => `/post/petition/${id}`,
+      /** 청원글 동의 */
+      AGREE: {
+         ID: (id: string) => `/post/petition/agree/${id}`,
       },
-      /* 청원게시판 */
-      PETITION: {
-         /** 청원게시판 목록 */
-         ROOT: '/post/petition',
-         /** 청원게시판 단건조회 */
-         ID: (id: string) => `/post/petition/${id}`,
-         /** 청원글 동의 */
-         AGREE: {
-            ID: (id: string) => `/post/petition/agree/${id}`,
-         },
-      },
-      /* 대여물품 */
-      RENTAL: {
-         /** 대여물품 목록 */
-         ITEM: '/rental/item',
-         /** 대여물품 단건조회 */
-         ITEM_DETAIL: (id: string) => `/rental/${id}`,
-      },
-      /** 회의록 */
-      CONFERENCE: {
-         /** 회의록 목록 */
-         ROOT: '/post/conference',
-      },
-      /** 회칙 */
-      RULE: {
-         /** 회칙 목록 */
-         ROOT: '/post/rule',
-      },
-      /** 제휴사업 */
-      COALITION: {
-         /** 제휴사업 목록 */
-         ROOT: '/post/coalition',
-      },
+   },
+   /* 대여물품 */
+   RENTAL: {
+      /** 대여물품 목록 */
+      ITEM: '/rental/item',
+      /** 대여물품 단건조회 */
+      ITEM_DETAIL: (id: string) => `/rental/${id}`,
+   },
+   /** 회의록 */
+   CONFERENCE: {
+      /** 회의록 목록 */
+      ROOT: '/post/conference',
+   },
+   /** 회칙 */
+   RULE: {
+      /** 회칙 목록 */
+      ROOT: '/post/rule',
+   },
+   /** 제휴사업 */
+   COALITION: {
+      /** 제휴사업 목록 */
+      ROOT: '/post/coalition',
    },
 };
 
