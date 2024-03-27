@@ -12,13 +12,13 @@ export interface ContentResponse {
    id: number;
    title: string;
    author: string;
-   body: string;
+   body?: string;
    createdAt: string;
    images: ContentImageResponse[];
    files: ContentFileResponse[];
    likes: number;
    views: number;
-   commentCount: number;
+   commentCount?: number;
    tag: ContentTagResponse[];
    blinded: boolean;
 }
@@ -39,6 +39,6 @@ export interface ContentFileResponse {
 }
 
 export interface ContentTagResponse {
-   id?: number;
-   name?: string;
+   id: number | null;
+   name: string | null;
 }

@@ -1,11 +1,11 @@
-import { IPetitionStatistic } from '@pages/petition/[id]';
+import { StatistResponse } from '@hooks/api/petition/useGetPetitionItem';
 import React from 'react';
 
 export default function PetitionChartList({
    statisticList,
    sum,
 }: {
-   statisticList: IPetitionStatistic[];
+   statisticList: StatistResponse[];
    sum: number;
 }) {
    return (
