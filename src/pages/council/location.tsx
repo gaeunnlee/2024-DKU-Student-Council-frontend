@@ -25,7 +25,7 @@ export default function Location() {
 
    return (
       <SinglePageLayout>
-         <img className='w-[366px] h-[240px] mx-auto' src={map} />
+         <img className='w-[366px] h-[240px] mx-auto' src={map} alt='단국대학교 총학생회 지도' />
          <ul className='flex flex-col gap-4'>
             <li>
                <h2 className='font-semibold'>위치</h2>
