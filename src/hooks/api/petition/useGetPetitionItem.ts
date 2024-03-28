@@ -1,6 +1,6 @@
 import { API_PATH } from '@constants/api';
 import { get } from '@libs/api';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { ContentResponse } from '@/types/page';
 import { PetitionType } from '@/types/petition';
@@ -22,7 +22,7 @@ export interface StatistResponse {
 }
 
 export const useGetPetitionItem = (id: string) => {
-   return useQuery<PetitionContentResponse>({
+   return useSuspenseQuery<PetitionContentResponse>({
       queryKey: ['getPetitionItem'],
       queryFn: () => get(API_PATH.PETITION.ID(id)),
    });
