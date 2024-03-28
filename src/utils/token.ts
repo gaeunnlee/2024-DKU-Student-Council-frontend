@@ -1,22 +1,24 @@
-export const getAccessToken = (): string | null => {
-   return localStorage.getItem('accessToken');
+export type TokenType = {
+   accessToken: string;
+   refreshToken: string;
 };
 
-export const getRefreshToken = (): string | null => {
-   return localStorage.getItem('refreshToken');
+export const getAccessToken = () => {
+   return localStorage.getItem('damda-atk');
 };
 
-export const setAccessToken = (accessToken: string) => {
-   localStorage.setItem('accessToken', accessToken);
+export const getRefreshToken = () => {
+   return localStorage.getItem('damda-rtk');
 };
 
-export const setRefreshToken = (refreshToken: string) => {
-   localStorage.setItem('refreshToken', refreshToken);
+export const setToken = ({ accessToken, refreshToken }: TokenType) => {
+   localStorage.setItem('damda-atk', accessToken);
+   localStorage.setItem('damda-rtk', refreshToken);
 };
 
-export const removeTokens = () => {
-   localStorage.removeItem('accessToken');
-   localStorage.removeItem('refreshToken');
+export const removeToken = () => {
+   localStorage.removeItem('damda-atk');
+   localStorage.removeItem('damda-rtk');
 };
 
-export const isLoggedIn = getAccessToken() !== null;
+export const isLoggedIn = getAccessToken() ? true : false;

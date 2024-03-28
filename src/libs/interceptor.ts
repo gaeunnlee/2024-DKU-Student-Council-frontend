@@ -1,34 +1,32 @@
+import { client } from '@libs/api';
+import { TokenType, getAccessToken, getRefreshToken, setToken } from '@utils/token';
 import { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
-import { HTTP_STATUS_CODE } from '@/constants/error';
-
-interface ErrorResponse {
-   statusCode?: number;
-   status: string;
-   message: string;
-}
-
-export const checkToken = (config: InternalAxiosRequestConfig) => {
-   if (!config.headers || config.headers.Authorization) return config;
-
-   const accessToken = localStorage.getItem('accessToken');
-
-   if (!accessToken) {
-      // window.location.href = '/';
-      throw new Error('토큰이 유효하지 않습니다');
+export const authorization = (config: InternalAxiosRequestConfig) => {
+   const accessToken = getAccessToken();
+   if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
    }
-
-   config.headers.Authorization = `Bearer ${accessToken}`;
    return config;
 };
 
-export const handleAPIError = (error: AxiosError<ErrorResponse>) => {
-   if (!error.response) throw error;
-
-   const { status } = error.response;
-   if (status >= HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR) {
-      throw new Error();
+export const checkToken = async (error: AxiosError) => {
+   const originalRequest = error.config;
+   if (!originalRequest?.headers || originalRequest.headers.Authorization) return Promise.reject(error);
+   const refreshToken = getRefreshToken();
+   if (error.response?.status === 401) {
+      try {
+         const res = await client.post<TokenType>('/user/reissue', { refreshToken });
+         const newAccessToken = res.data.accessToken;
+         const newRefreshToken = res.data.refreshToken;
+         setToken({ accessToken: newAccessToken, refreshToken: newRefreshToken });
+         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+         return client(originalRequest);
+      } catch (error) {
+         alert('세션이 만료되었습니다. 다시 로그인을 시도해주세요');
+         window.location.href = '/login';
+         return Promise.reject(error);
+      }
    }
-
-   throw new Error();
+   return Promise.reject(error);
 };
