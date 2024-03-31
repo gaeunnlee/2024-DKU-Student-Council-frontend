@@ -6,6 +6,8 @@ import React from 'react';
 
 import { IMyInfo } from '../interfaces/mypage/edit';
 
+import SvgIcon from '@/components/common/icon/SvgIcon';
+
 export default function MyPageLayout({
    children,
    getStudentId,
@@ -47,18 +49,18 @@ export default function MyPageLayout({
                   {myInfo?.department} {myInfo?.major}
                </p>
             </div>
-            <ProfileImage src={myInfo?.profileImage} />
+            <ProfileImage gender={myInfo?.gender ?? '남자'} />
          </div>
          {children}
       </div>
    );
 }
 
-export const ProfileImage = ({ src }: { src?: string }) => (
-   <div
-      style={{
-         backgroundImage: `url('${src}')`,
-      }}
-      className='rounded-full bg-slate-300 w-[7rem] h-[7rem] bg-cover'
-   ></div>
+export const ProfileImage = ({ gender }: { gender: '남자' | '여자' }) => (
+   <div className='bg-[#D9D9D9] rounded-full'>{profileData[gender]}</div>
 );
+
+const profileData = {
+   남자: <SvgIcon id='male_icon' width={100} height={100} />,
+   여자: <SvgIcon id='female_icon' width={100} height={100} />,
+};
