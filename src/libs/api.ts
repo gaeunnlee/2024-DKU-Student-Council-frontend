@@ -1,5 +1,6 @@
 import { CONSTANTS } from '@constants/api';
-import { handleAPIError } from '@libs/interceptor';
+import { checkToken } from '@libs/interceptor';
+import { authorization } from '@libs/interceptor';
 import axios, { AxiosResponse } from 'axios';
 
 export const client = axios.create({
@@ -32,5 +33,13 @@ export const del = async <T>(...args: Parameters<typeof client.delete>): Promise
    return response.data;
 };
 
-// client.interceptors.request.use(checkToken, handleAPIError);
-client.interceptors.request.use((response) => response, handleAPIError);
+client.interceptors.request.use(async (config) => authorization(config));
+
+client.interceptors.response.use(
+   (response: AxiosResponse) => {
+      return response;
+   },
+   async (error) => {
+      checkToken(error);
+   },
+);
