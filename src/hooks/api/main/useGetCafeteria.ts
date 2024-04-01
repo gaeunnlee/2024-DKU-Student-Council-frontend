@@ -2,7 +2,7 @@ import { API_PATH } from '@constants/api';
 import { get } from '@libs/api';
 import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
 
-interface Response extends MealResponse {
+interface CafeteriaResponse extends MealResponse {
    mealDate: string;
    other: string;
 }
@@ -15,10 +15,10 @@ export interface MealResponse {
 
 export type MealType = keyof MealResponse;
 
-export const useGetCafeteria = (options?: UseQueryOptions<Response>) => {
-   return useQuery<Response>({
+export const useGetCafeteria = (options?: UseQueryOptions<CafeteriaResponse>) => {
+   return useQuery<CafeteriaResponse>({
       queryKey: ['cafeteria'],
-      queryFn: () => get<Response>(API_PATH.MAIN.CAFETERIA),
+      queryFn: () => get(API_PATH.MAIN.CAFETERIA),
       ...options,
    });
 };
