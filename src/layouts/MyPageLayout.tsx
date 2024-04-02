@@ -57,10 +57,7 @@ export default function MyPageLayout({
 }
 
 export const ProfileImage = ({ gender }: { gender: '남자' | '여자' }) => (
-   <div className='bg-[#D9D9D9] rounded-full'>{profileData[gender]}</div>
+   <div className='bg-[#D9D9D9] rounded-full'>
+      <SvgIcon id={`${gender === '여자' ? 'female' : 'male'}_icon`} width={100} height={100} />
+   </div>
 );
-
-const profileData = {
-   남자: <SvgIcon id='male_icon' width={100} height={100} />,
-   여자: <SvgIcon id='female_icon' width={100} height={100} />,
-};
