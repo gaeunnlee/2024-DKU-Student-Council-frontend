@@ -1,11 +1,12 @@
 import { CONSTANTS } from '@constants/api';
 import { checkToken } from '@libs/interceptor';
 import { authorization } from '@libs/interceptor';
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
+
 
 export const client = axios.create({
    baseURL: CONSTANTS.SERVER_URL,
-   timeout: 15000,
+   timeout: 18000,
 });
 
 export const get = async <T>(...args: Parameters<typeof client.get>): Promise<T> => {
@@ -34,7 +35,7 @@ client.interceptors.response.use(
    (response: AxiosResponse) => {
       return response.data;
    },
-   async (error) => {
-      checkToken(error);
+   async (error: AxiosError) => {
+      await checkToken(error);
    },
 );
