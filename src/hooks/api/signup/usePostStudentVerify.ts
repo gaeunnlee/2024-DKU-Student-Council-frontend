@@ -3,7 +3,11 @@ import { API_PATH } from '@constants/api';
 import { ROUTES } from '@constants/route';
 import { post } from '@libs/api';
 import { useMutation, type UseMutationOptions } from '@tanstack/react-query';
+import { AxiosResponse, AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
+
+import HTTPError from '@/types/statusError';
+
 
 export interface UserVerifyInfo {
    dkuStudentId: string;
@@ -23,15 +27,17 @@ interface StudentInfo {
    major: string;
 }
 
+
 export const usePostStudentVerify = (
-   options?: UseMutationOptions<UserVerifyResponse, unknown, UserVerifyInfo>,
+   options?: UseMutationOptions<AxiosResponse<UserVerifyResponse>, AxiosError, UserVerifyInfo>,
 ) => {
    const navigate = useNavigate();
    const { toast } = useToast();
-   return useMutation<UserVerifyResponse, unknown, UserVerifyInfo>({
+   return useMutation<AxiosResponse<UserVerifyResponse>, AxiosError, UserVerifyInfo>({
       mutationFn: (verifyInfo: UserVerifyInfo) => post(API_PATH.USER.SIGNUP.VERIFY, verifyInfo),
       ...options,
       onSuccess: (data) => {
+         console.log(data);
          toast({
             title: '인증되었습니다',
          });
@@ -41,5 +47,12 @@ export const usePostStudentVerify = (
             },
          });
       },
+      onError: (error) => {
+         const errorResponse = error?.response?.data as HTTPError;
+         const errorMsg = errorResponse.message[0];
+         toast({
+            title: errorMsg,
+         });
+      }
    });
 };
