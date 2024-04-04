@@ -11,6 +11,8 @@ import React, { ChangeEvent, useEffect } from 'react';
 
 import HTTPError from '@/types/statusError';
 
+
+
 export default function InfoForm({ signupToken }: { signupToken: string }) {
    const [signupInfo, setSignupInfo] = React.useState<UserRegistrationInfo>({
       nickname: '',
@@ -24,6 +26,7 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
       isError: isCodeError,
       error: codeError,
    } = usePostPhoneConfirmCode(signupToken);
+
    const { mutate: signup } = usePostSignup(signupToken);
    const codeErrorResponse = codeError?.response?.data as HTTPError;
    const { isSuccess: isNicknameVerify, refetch } = useGetNicknameVerify(signupInfo.nickname);
@@ -104,8 +107,7 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
    };
 
    const passwordMismatch = !passwordMatch && passwordConfirm !== '';
-
-   const codeErrorMsg = codeErrorResponse?.message?.[0] ?? '';
+   const codeErrorMsg = codeErrorResponse?.message[0];
 
    return (
       <form onSubmit={handleFormSubmit}>
