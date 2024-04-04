@@ -1,6 +1,7 @@
 import { API_PATH } from '@constants/api';
 import { get } from '@libs/api';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseQuery, UseSuspenseQueryOptions } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 
 interface Response {
    carousels: CarouselType[];
@@ -32,13 +33,13 @@ export interface PetitionType {
    d_day: number;
 }
 
-const useGetMain = () => {
-   return useSuspenseQuery<Response>({
+const useGetMain = (options?: UseSuspenseQueryOptions<Response, AxiosError>) => {
+   return useSuspenseQuery<Response, AxiosError>({
       queryKey: ['main'],
       queryFn: () => get(API_PATH.MAIN.ROOT),
-      staleTime: 6,
-      gcTime: 10,
+      ...options,
    });
 };
+
 
 export default useGetMain;
