@@ -26,9 +26,7 @@ export default function LoginForm() {
    return (
       <form
          className='w-[336px] flex flex-col mx-auto gap-3 mt-[76px]'
-         onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
-            handleLogin(e);
-         }}
+         onSubmit={handleLogin}
       >
          <Input
             value={loginInfo.studentId}
