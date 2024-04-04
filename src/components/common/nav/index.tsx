@@ -13,7 +13,7 @@ interface NavItem {
    icon: React.ReactElement;
 }
 
-const navItems: NavItem[] = [
+const NAV_ITEMS: NavItem[] = [
    {
       id: 1,
       name: 'Menu',
@@ -34,7 +34,7 @@ const navItems: NavItem[] = [
    {
       id: 4,
       name: 'My page',
-      path: ROUTES.LOGIN,
+      path: ROUTES.MYPAGE.INDEX,
       icon: <SvgIcon id='mypage' width={20.06} height={20.13} />,
    },
 ];
@@ -64,7 +64,7 @@ export default function Nav() {
             exit={{ bottom: '-60px' }}
             transition={{ duration: 0.3 }}
          >
-            {navItems.map((el) =>
+            {NAV_ITEMS.map((el) =>
                el.path ? (
                   <div
                      key={el.id}
