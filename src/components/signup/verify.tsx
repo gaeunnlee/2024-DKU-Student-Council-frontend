@@ -31,7 +31,8 @@ export default function VerifyForm() {
       const isStudentIdValid = Regex.studentId.test(verifyInfo.dkuStudentId);
       const isPasswordValid = verifyInfo.dkuPassword !== '';
       setIsFormValid(isStudentIdValid && isPasswordValid);
-   }, [verifyInfo]);
+   }, [verifyInfo]); 
+
 
    return (
       <React.Fragment>
