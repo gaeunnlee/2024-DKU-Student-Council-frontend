@@ -9,35 +9,30 @@ export const client = axios.create({
 });
 
 export const get = async <T>(...args: Parameters<typeof client.get>): Promise<T> => {
-   const response = await client.get<T, AxiosResponse<T>>(...args);
-   return response.data;
+   return await client.get<T, T>(...args);
 };
 
 export const post = async <T>(...args: Parameters<typeof client.post>): Promise<T> => {
-   const response = await client.post<T, AxiosResponse<T>>(...args);
-   return response.data;
+   return await client.post<T, T>(...args);
 };
 
 export const put = async <T>(...args: Parameters<typeof client.put>): Promise<T> => {
-   const response = await client.put<T, AxiosResponse<T>>(...args);
-   return response.data;
+   return await client.put<T, T>(...args);
 };
 
 export const patch = async <T>(...args: Parameters<typeof client.patch>): Promise<T> => {
-   const response = await client.patch<T, AxiosResponse<T>>(...args);
-   return response.data;
+   return await client.patch<T, T>(...args);
 };
 
 export const del = async <T>(...args: Parameters<typeof client.delete>): Promise<T> => {
-   const response = await client.delete<T, AxiosResponse<T>>(...args);
-   return response.data;
+   return await client.delete<T, T>(...args);
 };
 
 client.interceptors.request.use(async (config) => authorization(config));
 
 client.interceptors.response.use(
    (response: AxiosResponse) => {
-      return response;
+      return response.data;
    },
    async (error) => {
       checkToken(error);
