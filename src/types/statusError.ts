@@ -1,18 +1,19 @@
 interface HTTPErrorProps {
    statusCode: number;
-   message?: string;
+   code: string;
+   message: string[];
    errorResponse?: Response;
 }
 
 class HTTPError extends Error {
    statusCode?: number;
-   errorResponse: Response | undefined;
+   code?: string;
 
    constructor(props: HTTPErrorProps) {
-      super(props.message);
+      super(props.message[0]);
       this.name = 'HTTPError';
       this.statusCode = props.statusCode;
-      this.errorResponse = props.errorResponse;
+      this.code = props.code;
    }
 }
 
