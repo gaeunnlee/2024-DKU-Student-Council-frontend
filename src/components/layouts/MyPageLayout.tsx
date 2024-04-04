@@ -4,7 +4,9 @@ import { useEffectOnce } from '@hooks/useEffectOnce';
 import { useLayout } from '@hooks/useLayout';
 import React from 'react';
 
+import SvgIcon from '@/components/common/icon/SvgIcon';
 import { IMyInfo } from '@/types/mypage/edit';
+
 
 export default function MyPageLayout({
    children,
@@ -47,18 +49,15 @@ export default function MyPageLayout({
                   {myInfo?.department} {myInfo?.major}
                </p>
             </div>
-            <ProfileImage src={myInfo?.profileImage} />
+            <ProfileImage gender={myInfo?.gender ?? '남자'} />
          </div>
          {children}
       </div>
    );
 }
 
-export const ProfileImage = ({ src }: { src?: string }) => (
-   <div
-      style={{
-         backgroundImage: `url('${src}')`,
-      }}
-      className='rounded-full bg-slate-300 w-[7rem] h-[7rem] bg-cover'
-   ></div>
+export const ProfileImage = ({ gender }: { gender: '남자' | '여자' }) => (
+   <div className='bg-[#D9D9D9] rounded-full'>
+      <SvgIcon id={`${gender === '여자' ? 'female' : 'male'}_icon`} width={100} height={100} />
+   </div>
 );

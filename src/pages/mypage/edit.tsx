@@ -268,7 +268,7 @@ export default function MyPageEdit() {
          {myInfo && (
             <div className='px-3 pb-5 flex items-center flex-col w-full'>
                <div className='flex justify-center py-10'>
-                  <ProfileImage src={myInfo.profileImage} />
+                  <ProfileImage gender={myInfo.gender} />
                </div>
                <div className='flex flex-col gap-5 w-full'>
                   {formInfo?.map((box, i) => (

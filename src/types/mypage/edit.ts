@@ -12,6 +12,7 @@ export interface IMyInfo {
    admin: boolean;
    profileImage: string;
    dkuChecked: boolean;
+   gender: '남자' | '여자';
 }
 
 export interface IInputValue {
