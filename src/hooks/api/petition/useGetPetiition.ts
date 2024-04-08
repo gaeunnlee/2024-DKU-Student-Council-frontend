@@ -17,7 +17,7 @@ interface PetitionResponse extends PageResponse {
 
 export const useGetPetition = () => {
    return useInfiniteQuery<PetitionResponse>({
-      queryKey: ['getRule'],
+      queryKey: ['getPetition'],
       queryFn: ({ pageParam = 0 }) => get(API_PATH.PETITION.ROOT + `?${QUERY_STRING.PAGE}=${pageParam}`),
       initialPageParam: 0,
       getNextPageParam: (lastPage, allPages) => {
