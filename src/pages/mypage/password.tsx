@@ -1,33 +1,29 @@
+import MyPageLayout from '@components/layouts/MyPageLayout';
 import { Button } from '@components/ui/button';
 import { Input } from '@components/ui/input';
-import Text from '@components/ui/text';
-import { useAuth } from '@hooks/useAuth';
-import MyPageLayout from '@layouts/MyPageLayout';
+import { usePostLogin } from '@hooks/api/auth/usePostLogin';
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function MyPagePassword() {
    const [loginInfo, setLoginInfo] = useState({ studentId: '', password: '' });
    const getStudentId = (id: string) => setLoginInfo((prev) => ({ ...prev, studentId: id }));
-   const { login, verification, setVerification } = useAuth();
+   const { mutate, isSuccess: isLogin } = usePostLogin();
    const navigate = useNavigate();
-   const handle = {
-      login: (e: FormEvent<HTMLFormElement>) => {
-         e.preventDefault();
-         login(loginInfo);
-      },
+
+   const login = (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      mutate(loginInfo);
    };
+
    useEffect(() => {
-      verification && navigate('/mypage/edit');
-      setVerification(false);
-   }, [verification]);
+      isLogin && navigate('/mypage/edit');
+   }, [isLogin]);
 
    return (
       <MyPageLayout getStudentId={getStudentId}>
-         <form className='w-full p-4 flex flex-col gap-4 mt-12' onSubmit={handle.login}>
-            <Text length={4} className='font-bold text-lg'>
-               비밀번호를 입력해주세요
-            </Text>
+         <form className='w-full p-4 flex flex-col gap-4 mt-12' onSubmit={login}>
+            <p className='font-bold text-lg'>비밀번호를 입력해주세요</p>
             <Input
                type='password'
                placeholder='password'

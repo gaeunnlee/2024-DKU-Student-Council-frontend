@@ -1,10 +1,10 @@
+import MyPageLayout from '@components/layouts/MyPageLayout';
 import { Button } from '@components/ui/button';
-import { API_PATH, CONSTANTS } from '@constants/api';
+import { useToast } from '@components/ui/toast/use-toaster';
+import { ROUTES } from '@constants/route';
 import { shadowStyle } from '@constants/shadow';
-import { useAlert } from '@hooks/useAlert';
-import { useApi } from '@hooks/useApi';
-import { useAuth } from '@hooks/useAuth';
-import MyPageLayout from '@layouts/MyPageLayout';
+import { useDeleteUser } from '@hooks/api/auth/useDeleteUser';
+import { removeToken } from '@utils/token';
 import React from 'react';
 import { BiSolidCalendarStar } from 'react-icons/bi';
 import { FaUser } from 'react-icons/fa6';
@@ -12,18 +12,20 @@ import { IoIosListBox } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
 
 export default function MyPage() {
-   const { logout } = useAuth();
-   const { alert } = useAlert();
-   const { delete: axiosDelte } = useApi();
    const navigate = useNavigate();
-   const deleteAccount = async () => {
-      try {
-         await axiosDelte(CONSTANTS.SERVER_URL + API_PATH.USER.ME, { authenticate: true });
-         alert('탈퇴하였습니다.');
-         logout();
-      } catch (error) {
-         alert(error);
-      }
+   const { mutate } = useDeleteUser();
+   const { toast } = useToast();
+
+   const deleteAccount = () => {
+      mutate();
+   };
+
+   const logout = () => {
+      removeToken();
+      toast({
+         title: '로그아웃 되었습니다.',
+      });
+      navigate(ROUTES.MAIN);
    };
 
    return (
@@ -32,7 +34,7 @@ export default function MyPage() {
             <ul
                className={`bg-white flex justify-between ${shadowStyle.default} rounded-[40px] w-11/12 px-10 pt-3 pb-2`}
             >
-               {NavContent.map(({ id, name, icon }) => (
+               {MYPAGE_NAV.map(({ id, name, icon }) => (
                   <li
                      key={id}
                      className='flex flex-col items-center text-4xl cursor-pointer'
@@ -58,7 +60,7 @@ export default function MyPage() {
    );
 }
 
-const NavContent = [
+const MYPAGE_NAV = [
    {
       id: 'edit',
       name: '내 정보 수정',

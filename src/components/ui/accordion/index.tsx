@@ -1,7 +1,7 @@
 'use client';
 
+import { cn } from '@libs/shadcn';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
-import { cn } from '@utils/shadcn';
 import * as React from 'react';
 
 import SvgIcon from '@/components/ui/icon/SvgIcon';

@@ -1,6 +1,5 @@
 import { Button } from '@components/ui/button';
 import { Input } from '@components/ui/input';
-import Text, { Title } from '@components/ui/text';
 import { API_PATH, CONSTANTS } from '@constants/api';
 import { useAlert } from '@hooks/useAlert';
 import { useApi } from '@hooks/useApi';
@@ -62,11 +61,11 @@ export default function MyPageUpdate() {
             handleSubmit(e);
          }}
       >
-         <Title className='text-2xl font-bold'>회원 정보 업데이트</Title>
-         <Text length={4} className='flex text-sm items-center'>
+         <p className='text-2xl font-bold'>회원 정보 업데이트</p>
+         <p className='flex text-sm items-center'>
             <GoDotFill />
             학생 인증
-         </Text>
+         </p>
          <div>
             <Input
                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,11 +89,11 @@ export default function MyPageUpdate() {
                value={loginInfo.dkuPassword}
             />
          </div>
-         <Text length={4} className='flex text-sm gap-1 text-neutral-400'>
+         <p className='flex text-sm gap-1 text-neutral-400'>
             <GoDotFill size={30} />
             단국대학교 웹정보 로그인 시 사용 되는 ID, PW를 통해 학생인증이 진행됩니다. (입력한 정보는 인증 후
             즉시 폐기됩니다)
-         </Text>
+         </p>
          <Button type='submit' size='md' className='w-full'>
             인증
          </Button>

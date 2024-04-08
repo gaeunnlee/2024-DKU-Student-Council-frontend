@@ -1,12 +1,11 @@
+import Organization01 from '@assets/images/organization-01.jpg';
+import Organization02 from '@assets/images/organization-02.jpg';
+import SinglePageLayout from '@components/layouts/SinglePageLayout';
 import Box from '@components/ui/box/index';
 import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
 import { useEffectOnce } from '@hooks/useEffectOnce';
 import { useLayout } from '@hooks/useLayout';
-import SinglePageLayout from '@layouts/SinglePageLayout';
 import React from 'react';
-
-import Organization01 from '../../assets/images/organization-01.jpg';
-import Organization02 from '../../assets/images/organization-02.jpg';
 
 export default function Organization() {
    const { setLayout } = useLayout();

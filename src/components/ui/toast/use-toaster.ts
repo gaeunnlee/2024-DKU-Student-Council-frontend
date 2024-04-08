@@ -1,9 +1,8 @@
 'use client';
 
 // Inspired by react-hot-toast library
+import type { ToastActionElement, ToastProps } from '@components/ui/toast';
 import * as React from 'react';
-
-import type { ToastActionElement, ToastProps } from '@/components/ui/toast';
 
 const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 1000000;
@@ -103,9 +102,9 @@ export const reducer = (state: State, action: Action): State => {
             toasts: state.toasts.map((t) =>
                t.id === toastId || toastId === undefined
                   ? {
-                       ...t,
-                       open: false,
-                    }
+                     ...t,
+                     open: false,
+                  }
                   : t,
             ),
          };

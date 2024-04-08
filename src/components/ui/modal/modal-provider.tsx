@@ -1,7 +1,8 @@
 import Modal, { ModalProps } from '@components/ui/modal/index';
-import { IWithReactChildren } from '@shared/interfaces/default-interfaces';
 import React from 'react';
 import ReactDom from 'react-dom';
+
+import { WithReactChildren } from '@/types/default-interfaces';
 
 export const ModalContext = React.createContext({
    setModalContent: (content: React.ReactNode) => {
@@ -14,7 +15,7 @@ export const ModalContext = React.createContext({
 
 const modalRoot = document.getElementById('modal-root') as HTMLElement;
 
-export default function ModalProvider({ children }: IWithReactChildren) {
+export default function ModalProvider({ children }: WithReactChildren) {
    const [modalContent, setModalContent] = React.useState<React.ReactNode>(undefined);
    const [options, setOptions] = React.useState<ModalProps>();
 

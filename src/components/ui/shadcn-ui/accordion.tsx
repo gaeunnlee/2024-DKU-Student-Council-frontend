@@ -1,8 +1,8 @@
 'use client';
 
 import SvgIcon from '@components/common/icon/SvgIcon';
+import { cn } from '@libs/shadcn';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
-import { cn } from '@utils/shadcn';
 import * as React from 'react';
 
 const Accordion = AccordionPrimitive.Root;

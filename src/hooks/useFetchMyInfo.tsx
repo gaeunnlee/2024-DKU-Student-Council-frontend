@@ -1,17 +1,17 @@
 import { API_PATH } from '@constants/api';
 import { useAlert } from '@hooks/useAlert';
 import { useApi } from '@hooks/useApi';
-import { useAuth } from '@hooks/useAuth';
 import { useEnrollmentStore } from '@stores/enrollment-store';
-import { useState } from 'react';
+import { isLoggedIn } from '@utils/token';
+import React from 'react';
 
-import { IMyInfo } from '../interfaces/mypage/edit';
+import { IMyInfo } from '@/types/mypage/edit';
 
 export const useFetchMyInfo = () => {
    const { get } = useApi();
-   const [myInfo, setMyInfo] = useState<IMyInfo>();
+   const [myInfo, setMyInfo] = React.useState<IMyInfo>();
    const { alert } = useAlert();
-   const { isLoggedIn } = useAuth();
+
    const { setEnrollment } = useEnrollmentStore();
 
    const fetchMyInfo = async () => {

@@ -1,9 +1,10 @@
 import SvgIcon from '@components/common/icon/SvgIcon';
 import { bottomNavSize } from '@constants/nav';
+import { ROUTES } from '@constants/route';
 import { menuStore } from '@stores/menu-store';
 import { motion } from 'framer-motion';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface NavItem {
    id: number;
@@ -12,7 +13,7 @@ interface NavItem {
    icon: React.ReactElement;
 }
 
-const navItems: NavItem[] = [
+const NAV_ITEMS: NavItem[] = [
    {
       id: 1,
       name: 'Menu',
@@ -21,19 +22,19 @@ const navItems: NavItem[] = [
    {
       id: 2,
       name: 'Home',
-      path: '/',
+      path: ROUTES.MAIN,
       icon: <SvgIcon id='home' width={19.53} height={19.6} />,
    },
    {
       id: 3,
       name: '제휴사업',
-      path: '/business/food',
+      path: ROUTES.BUSINESS.CATEGORY(':category'),
       icon: <SvgIcon id='partnership' width={17.54} height={19.6} />,
    },
    {
       id: 4,
       name: 'My page',
-      path: '/mypage',
+      path: ROUTES.MYPAGE.INDEX,
       icon: <SvgIcon id='mypage' width={20.06} height={20.13} />,
    },
 ];
@@ -43,6 +44,16 @@ export default function Nav() {
    const handleOpenMenu = () => {
       setMenuOpen(true);
    };
+   const navigate = useNavigate();
+
+   const handleNavigate = (el: NavItem) => {
+      if (el.name === '제휴사업') {
+         navigate(ROUTES.BUSINESS.CATEGORY('food'));
+      } else {
+         navigate(el.path as string);
+      }
+   };
+
    return (
       <React.Fragment>
          <motion.nav
@@ -53,16 +64,16 @@ export default function Nav() {
             exit={{ bottom: '-60px' }}
             transition={{ duration: 0.3 }}
          >
-            {navItems.map((el) =>
+            {NAV_ITEMS.map((el) =>
                el.path ? (
-                  <Link
+                  <div
                      key={el.id}
-                     to={el.path}
-                     className='text-white text-[10px] font-normal flex flex-col justify-end items-center gap-1'
+                     onClick={() => handleNavigate(el)}
+                     className='text-white text-[10px] font-normal flex flex-col justify-end items-center gap-1 cursor-pointer'
                   >
                      {el.icon}
                      {el.name}
-                  </Link>
+                  </div>
                ) : (
                   <div
                      key={el.id}

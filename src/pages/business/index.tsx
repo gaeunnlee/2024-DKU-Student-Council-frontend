@@ -1,20 +1,36 @@
-import Title, { Date } from '@components/ui/text/board';
-import { API_PATH } from '@constants/api';
+import Board from '@components/ui/board';
+import IntersectionBox from '@components/ui/box/intersectionBox';
+import ItemList from '@components/ui/item-list';
+import { Spinner } from '@components/ui/spinner/indext';
 import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
+import { useGetCoalitionList } from '@hooks/api/coalition/useGetCoalitionList';
+import { CoalitionContentResponse } from '@hooks/api/coalition/useGetCoalitionList';
+import { useInfiniteScroll } from '@hooks/useInfiniteScroll';
 import { useLayout } from '@hooks/useLayout';
-import BoardLayout, { IBoardList } from '@layouts/BoardLayout';
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
+import { ROUTES } from '@/constants/route';
+import { CoalitionType } from '@/types/coalition';
 
 export default function BusinessBoard() {
+   const category = useParams();
    const { setLayout } = useLayout();
-   const { pathname } = useLocation();
-   const [category, setCategory] = useState('');
+   const navigate = useNavigate();
+   const categoryType = category.category?.toUpperCase();
+
+   const {
+      data: coalition,
+      refetch,
+      fetchNextPage,
+      isFetchingNextPage,
+   } = useGetCoalitionList(categoryType as CoalitionType);
+   const intersectionRef = useInfiniteScroll(fetchNextPage);
 
    useEffect(() => {
-      const categoryName = pathname.split('/business/')[1].toUpperCase();
-      setCategory(categoryName);
-   }, [pathname]);
+      refetch();
+   }, [category, refetch]);
 
    useEffect(() => {
       setLayout({
@@ -24,7 +40,8 @@ export default function BusinessBoard() {
          fullscreen: false,
          headingText: HEADING_TEXT.BUSINESS.HEAD,
          subHeadingText:
-            Object.getOwnPropertyDescriptor(HEADING_TEXT.BUSINESS.SUBHEAD, category)?.value ?? '',
+            Object.getOwnPropertyDescriptor(HEADING_TEXT.BUSINESS.SUBHEAD, categoryType as CoalitionType)
+               ?.value ?? '',
          headingStyle: HEADING_STYLE.COUNCIL.HEAD,
          subHeadingStyle: HEADING_STYLE.COUNCIL.SUBHEAD,
          rounded: true,
@@ -32,28 +49,23 @@ export default function BusinessBoard() {
       });
    }, [category]);
 
-   const Cell = ({ data }: { data: IBoardList }) => (
-      <div className='flex gap-4 overflow-hidden '>
-         <div
-            className='w-[40%] h-[100px] overflow-hidden'
-            style={{ background: 'linear-gradient(131.53deg, #01060B 0%, #084287 100%)' }}
-         >
-            <img
-               className='w-full'
-               src={data.images !== undefined && data.images.length > 0 ? data.images[0].url : ''}
-            />
-         </div>
-         <div className='w-[60%] h-[100px] flex flex-col gap-3 justify-center'>
-            <Title content={data.title} className=' font-bold text-base line-clamp-2' />
-            <Date content={data.createdAt} className='text-gray-400 text-xs' />
-         </div>
-      </div>
-   );
+   const goToBusinessDetail = (item: CoalitionContentResponse) => {
+      navigate(ROUTES.BUSINESS.DETAIL(category.category?.toLowerCase() as string, item.id.toString()), {
+         state: item,
+      });
+   };
 
    return (
-      <BoardLayout
-         api={category.length > 0 ? API_PATH.POST.COALITION.ROOT + '?coalitionType=' + category : ''}
-         setCell={(data: IBoardList) => <Cell data={data} />}
-      />
+      <Board>
+         {coalition?.pages.map((page) =>
+            page.content.map((item) => (
+               <Board.Cell key={item.id} onClick={() => goToBusinessDetail(item)}>
+                  <ItemList content={item} />
+               </Board.Cell>
+            )),
+         )}
+         <IntersectionBox ref={intersectionRef} />
+         {isFetchingNextPage && <Spinner />}
+      </Board>
    );
 }

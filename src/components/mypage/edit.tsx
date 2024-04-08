@@ -4,7 +4,7 @@ import React from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { FaCircleExclamation } from 'react-icons/fa6';
 
-import { IEvent, IFormInfo, IInputValue } from '../../interfaces/mypage/edit';
+import { IEvent, IFormInfo, IInputValue } from '@/types/mypage/edit';
 
 export const Box = ({ children, key }: { children: React.ReactNode; key: number }) => (
    <div key={key} className='w-full rounded-lg bg-[#f4f4f4] p-4 flex flex-col gap-5'>
@@ -14,7 +14,7 @@ export const Box = ({ children, key }: { children: React.ReactNode; key: number 
 export const Label = ({ text }: { text: string }) => <strong>{text}</strong>;
 export const InputBox = ({ children }: { children: React.ReactNode }) => (
    <div
-      className={`bg-white ${shadowStyle.default} rounded-lg outline-none w-full h-10 w-full flex justify-between items-center overflow-hidden mt-2`}
+      className={`bg-white ${shadowStyle.default} rounded-lg outline-none h-10 w-full flex justify-between items-center overflow-hidden mt-2`}
    >
       {children}
    </div>

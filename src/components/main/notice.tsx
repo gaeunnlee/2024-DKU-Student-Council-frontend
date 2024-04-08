@@ -1,5 +1,6 @@
+import MainSectionLayout from '@components/layouts/MainSectionLayout';
 import { Button } from '@components/ui/button';
-import { BaseSkeleton, TextSkeleton } from '@components/ui/skeleton';
+import { ROUTES } from '@constants/route';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,11 +16,11 @@ export default function Notice({ notices }: { notices?: INotice[] }) {
    };
 
    const handleNotice = () => {
-      navigate('/notice');
+      navigate(ROUTES.NOTICE.ROOT);
    };
 
-   return notices ? (
-      <section className='px-4 py-5 m-4 rounded-xl bg-white shadow-md'>
+   return (
+      <MainSectionLayout>
          <div className='flex items-center justify-between'>
             <h3 className='font-bold text-lg'>총학소식</h3>
             <Button variant='ghost' className='text-[13px]' onClick={handleNotice}>
@@ -33,17 +34,6 @@ export default function Notice({ notices }: { notices?: INotice[] }) {
                </li>
             ))}
          </ul>
-      </section>
-   ) : (
-      <BaseSkeleton className='px-4 py-5 m-4 rounded-xl'>
-         <h3 className='font-bold text-lg'>총학소식</h3>
-         <ul className='mt-3 flex flex-col gap-2'>
-            <TextSkeleton className='my-3 rounded-full' width={7} />
-            <TextSkeleton className='my-3 rounded-full' width={15} />
-            <TextSkeleton className='my-3 rounded-full' width={10} />
-            <TextSkeleton className='my-3 rounded-full' width={17} />
-            <TextSkeleton className='my-3 rounded-full' width={14} />
-         </ul>
-      </BaseSkeleton>
+      </MainSectionLayout>
    );
 }

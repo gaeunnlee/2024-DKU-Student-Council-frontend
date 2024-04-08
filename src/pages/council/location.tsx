@@ -1,8 +1,8 @@
 import map from '@assets/images/map.png';
+import SinglePageLayout from '@components/layouts/SinglePageLayout';
 import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
 import { useEffectOnce } from '@hooks/useEffectOnce';
 import { useLayout } from '@hooks/useLayout';
-import SinglePageLayout from '@layouts/SinglePageLayout';
 import React from 'react';
 
 export default function Location() {
@@ -25,7 +25,7 @@ export default function Location() {
 
    return (
       <SinglePageLayout>
-         <img className='w-[366px] h-[240px] mx-auto' src={map} />
+         <img className='w-[366px] h-[240px] mx-auto' src={map} alt='단국대학교 총학생회 지도' />
          <ul className='flex flex-col gap-4'>
             <li>
                <h2 className='font-semibold'>위치</h2>

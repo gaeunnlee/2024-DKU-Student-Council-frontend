@@ -1,18 +1,20 @@
-import { Banner, Notice, Petition, Cafeteria, AppDownload } from '@components/main';
+import Carousel from '@components/common/carousel';
+import { Cafeteria, AppDownload, Notice, Petition } from '@components/main/';
+import NoticeSkeleton from '@components/ui/skeleton/main';
+import { Spinner } from '@components/ui/spinner/indext';
 import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
-import { useGetMain } from '@hooks/query/main/query';
+import useGetMain from '@hooks/api/main/useGetMain';
 import { useEffectOnce } from '@hooks/useEffectOnce';
-import { useFetchMyInfo } from '@hooks/useFetchMyInfo';
 import { useLayout } from '@hooks/useLayout';
-import React from 'react';
+import React, { Suspense } from 'react';
+
+
 
 export default function Main() {
    const { setLayout } = useLayout();
-   const { fetchMyInfo } = useFetchMyInfo();
    const { data: main } = useGetMain();
-
+   
    useEffectOnce(() => {
-      fetchMyInfo();
       setLayout({
          title: null,
          backButton: false,
@@ -25,14 +27,27 @@ export default function Main() {
          rounded: false,
       });
    });
-
+   //TODO) Cafeteria skeleton 추가
    return (
       <React.Fragment>
-         <Banner banners={main?.carousels ?? []} />
+         <div className='w-full h-[337px] flex justify-center'>
+            <Suspense fallback={<Spinner />}>
+               <Carousel
+                  data={main?.carousels ?? []}
+                  className='w-[322px] h-[322px] absolute top-44 mx-auto'
+               />
+            </Suspense>
+         </div>
          <div className='bg-gray-100 pt-5 pb-4'>
-            <Notice notices={main?.recentNotices} />
-            <Petition petitions={main?.popularPetitions} />
-            <Cafeteria />
+            <Suspense fallback={<NoticeSkeleton />}>
+               <Notice notices={main?.recentNotices} />
+            </Suspense>
+            <Suspense fallback={<NoticeSkeleton />}>
+               <Petition petitions={main?.popularPetitions} />
+            </Suspense>
+            <Suspense fallback={<div>로딩중</div>}>
+               <Cafeteria />
+            </Suspense>
             <AppDownload />
          </div>
       </React.Fragment>

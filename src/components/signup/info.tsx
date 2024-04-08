@@ -1,67 +1,96 @@
-import { IUserRegistration } from '@api/signup/types/signup';
 import { Button } from '@components/ui/button';
 import { Input } from '@components/ui/input';
 import { Label } from '@components/ui/label';
-import Message from '@components/ui/typo/message';
-import { usePostPhoneVerify, usePostPhoneConfirmCode, usePostSignup } from '@hooks/query/signup/mutation';
-import { useGetNicknameVerify } from '@hooks/query/signup/query';
+import Message from '@components/ui/text/message';
+import { useGetNicknameVerify } from '@hooks/api/signup/useGetNicknameVerify';
+import { usePostPhoneConfirmCode } from '@hooks/api/signup/usePostPhoneConfirmCode';
+import { usePostPhoneVerify } from '@hooks/api/signup/usePostPhoneVerify';
+import { UserRegistrationInfo } from '@hooks/api/signup/usePostSignup';
+import { usePostSignup } from '@hooks/api/signup/usePostSignup';
 import React, { ChangeEvent, useEffect } from 'react';
 
+import HTTPError from '@/types/statusError';
+
+
+
 export default function InfoForm({ signupToken }: { signupToken: string }) {
-   const [signupInfo, setSignupInfo] = React.useState<IUserRegistration>({
+   const [signupInfo, setSignupInfo] = React.useState<UserRegistrationInfo>({
       nickname: '',
       password: '',
    });
 
-   const { phoneVerifyMutation: phoneVerify, isPhoneVerified } = usePostPhoneVerify();
-   const { phoneConfirmMutation: phoneConfirm, isCodeVerified } = usePostPhoneConfirmCode();
-   const { signupMutation: signup } = usePostSignup();
+   const { mutate: phoneVerify, isSuccess: isPhoneVerifySuccess } = usePostPhoneVerify(signupToken);
+   const {
+      mutate: phoneConfirm,
+      isSuccess: isCodeConfirm,
+      isError: isCodeError,
+      error: codeError,
+   } = usePostPhoneConfirmCode(signupToken);
 
-   const { data, isSuccess, refetch } = useGetNicknameVerify(signupInfo.nickname);
+   const { mutate: signup } = usePostSignup(signupToken);
+   const codeErrorResponse = codeError?.response?.data as HTTPError;
+   const { isSuccess: isNicknameVerify, refetch } = useGetNicknameVerify(signupInfo.nickname);
 
    const labelStyle = 'ml-[14px] font-normal text-gray02';
 
    const [passwordConfirm, setPasswordConfirm] = React.useState<string>('');
-   const [passwordMismatch, setPasswordError] = React.useState<boolean>(false);
+   const [passwordMatch, setPasswordMatch] = React.useState<boolean>(false);
    const [phoneNumber, setphoneNumber] = React.useState<string>('');
    const [code, setCode] = React.useState<string>('');
    const [isNicknameValid, setIsNicknameValid] = React.useState<boolean>(false);
    const [isFormValid, setIsFormValid] = React.useState<boolean>(false);
 
    const handlePhoneVerify = () => {
-      phoneVerify({ phoneNumber, signupToken });
+      phoneVerify({ phoneNumber: phoneNumber });
    };
 
    const handlePhoneConfirm = () => {
-      phoneConfirm({ code, signupToken });
-   };
-
-   const handleSignup = () => {
-      signup({ signupInfo, signupToken });
+      phoneConfirm({ code: code });
    };
 
    const handleNicknameVerify = () => {
       refetch();
-      if (data.message === 'ok') {
-         setIsNicknameValid(isSuccess);
-      }
    };
 
    const handleFormSubmit = (e: React.FormEvent) => {
       e.preventDefault();
-      handleSignup();
+      signup(signupInfo);
    };
 
    useEffect(() => {
-      setIsFormValid(isNicknameValid && isPhoneVerified && isCodeVerified && !passwordMismatch);
-   }, [isNicknameValid, isPhoneVerified, isCodeVerified, passwordMismatch]);
+      setIsFormValid(
+         isNicknameVerify &&
+            isPhoneVerifySuccess &&
+            isCodeConfirm &&
+            passwordMatch &&
+            signupInfo.nickname !== '' &&
+            signupInfo.password !== '' &&
+            isNicknameValid,
+      );
+   }, [
+      isNicknameVerify,
+      isPhoneVerifySuccess,
+      isCodeConfirm,
+      passwordMatch,
+      signupInfo.nickname,
+      signupInfo.password,
+      isNicknameValid,
+   ]);
+
+   useEffect(() => {
+      setIsNicknameValid(
+         signupInfo.nickname.length >= 3 &&
+            signupInfo.nickname.length <= 16 &&
+            /^[ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z_\s]*$/.test(signupInfo.nickname),
+      );
+   }, [signupInfo.nickname]);
 
    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
       switch (name) {
          case 'passwordConfirm':
             setPasswordConfirm(value);
-            setPasswordError(signupInfo.password !== value);
+            setPasswordMatch(signupInfo.password === value);
             break;
          case 'phoneNumber':
             setphoneNumber(value);
@@ -76,6 +105,9 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
             });
       }
    };
+
+   const passwordMismatch = !passwordMatch && passwordConfirm !== '';
+   const codeErrorMsg = codeErrorResponse?.message[0];
 
    return (
       <form onSubmit={handleFormSubmit}>
@@ -123,9 +155,13 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
                   중복확인
                </Button>
             </div>
-            {isNicknameValid && <Message>사용가능한 닉네임입니다.</Message>}
+            {isNicknameValid && isNicknameVerify ? (
+               <Message>사용가능한 닉네임입니다.</Message>
+            ) : !isNicknameValid && isNicknameVerify ? (
+               <Message>한글, 영문 대소문자, 공백, _ 로 3자 이상 16자 이하여야 합니다.</Message>
+            ) : null}
          </section>
-         <section className='flex flex-col gap-2'>
+         <section className='flex flex-col gap-2 mb-4'>
             <Label htmlFor='tel' className={`${labelStyle}`}>
                휴대폰 인증
             </Label>
@@ -143,8 +179,8 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
                   인증요청
                </Button>
             </div>
-            {isPhoneVerified && <Message>인증번호가 전송되었습니다.</Message>}
-            <div className='flex items-center mb-6'>
+            {isPhoneVerifySuccess && <Message>인증번호가 전송되었습니다.</Message>}
+            <div className='flex items-center'>
                <Input
                   type='number'
                   placeholder='인증번호 6자리를 입력해주세요.'
@@ -157,16 +193,13 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
                   확인
                </Button>
             </div>
-            {isCodeVerified && <Message>인증번호가 일치합니다.</Message>}
+            {isCodeConfirm ? (
+               <Message>인증번호가 일치합니다.</Message>
+            ) : isCodeError ? (
+               <Message>{codeErrorMsg}</Message>
+            ) : null}
          </section>
-         <Button
-            size='md'
-            type='submit'
-            className='rounded-[20px]'
-            disabled={!isFormValid}
-            onClick={handleSignup}
-            variant='default'
-         >
+         <Button size='md' type='submit' className='rounded-[20px]' disabled={!isFormValid} variant='default'>
             확인
          </Button>
       </form>

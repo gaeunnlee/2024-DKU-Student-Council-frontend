@@ -1,10 +1,10 @@
-import { IPetition } from '@api/main/types/main';
+import MainSectionLayout from '@components/layouts/MainSectionLayout';
 import { Button } from '@components/ui/button';
-import { BaseSkeleton, TextSkeleton } from '@components/ui/skeleton';
+import { PetitionType } from '@hooks/api/main/useGetMain';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function Petition({ petitions }: { petitions?: IPetition[] }) {
+export default function Petition({ petitions }: { petitions?: PetitionType[] }) {
    const navigate = useNavigate();
 
    const handlePetitionItem = (id: number) => {
@@ -15,8 +15,8 @@ export default function Petition({ petitions }: { petitions?: IPetition[] }) {
       navigate('/petition');
    };
 
-   return petitions ? (
-      <section className='px-4 py-5 m-4 rounded-xl bg-white shadow-md'>
+   return (
+      <MainSectionLayout>
          <div className='flex items-center justify-between'>
             <h3 className='font-bold text-lg'>청원게시판</h3>
             <Button variant='ghost' className='text-[13px]' onClick={handlePetition}>
@@ -35,32 +35,6 @@ export default function Petition({ petitions }: { petitions?: IPetition[] }) {
                </li>
             ))}
          </ul>
-      </section>
-   ) : (
-      <BaseSkeleton className='px-4 py-5 m-4 rounded-xl'>
-         <h3 className='font-bold text-lg'>청원게시판</h3>
-         <ul className='mt-4'>
-            <li className='flex items-center justify-between my-1'>
-               <TextSkeleton className='my-1 rounded-full' width={7} />
-               <TextSkeleton className='my-1 rounded-full' width={3} />
-            </li>
-            <li className='flex items-center justify-between my-1'>
-               <TextSkeleton className='my-1 rounded-full' width={15} />
-               <TextSkeleton className='my-1 rounded-full' width={2} />
-            </li>
-            <li className='flex items-center justify-between my-1'>
-               <TextSkeleton className='my-1 rounded-full' width={10} />
-               <TextSkeleton className='my-1 rounded-full' width={3} />
-            </li>
-            <li className='flex items-center justify-between my-1'>
-               <TextSkeleton className='my-1 rounded-full' width={17} />
-               <TextSkeleton className='my-1 rounded-full' width={2} />
-            </li>
-            <li className='flex items-center justify-between my-1'>
-               <TextSkeleton className='my-1 rounded-full' width={14} />
-               <TextSkeleton className='my-1 rounded-full' width={2} />
-            </li>
-         </ul>
-      </BaseSkeleton>
+      </MainSectionLayout>
    );
 }

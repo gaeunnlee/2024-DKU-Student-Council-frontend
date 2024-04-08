@@ -1,7 +1,8 @@
 import { Button } from '@components/ui/button/index';
 import { Input } from '@components/ui/input';
-import { usePostFindId } from '@hooks/query/reset/mutation';
+import { usePostFindId } from '@hooks/api/reset/usePostFindId';
 import { useAlert } from '@hooks/useAlert';
+import { formatphoneNumber } from '@utils/tell';
 import React, { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,7 +21,9 @@ export default function IdForm() {
    const handleFindId = (e: React.FormEvent) => {
       e.preventDefault();
       if (phoneNumber.length === 11) {
-         mutate(phoneNumber);
+         const formattedPhoneNumber = formatphoneNumber(phoneNumber);
+         //TODO) 타입 수정
+         mutate({ phoneNumber: formattedPhoneNumber });
       } else {
          alert('올바른 휴대폰번호를 입력해주세요.');
       }

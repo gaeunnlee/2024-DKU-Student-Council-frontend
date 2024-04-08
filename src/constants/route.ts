@@ -1,79 +1,4 @@
-type TMypageRoutes = {
-   INDEX: string;
-   PASSWORD: string;
-   EDIT: string;
-   UPDATE: string;
-};
-
-type TSignupRoutes = {
-   ROOT: string;
-   TERMS: string;
-   INFO: string;
-   SUCCESS: string;
-};
-
-type TResetRoutes = {
-   INDEX: string;
-   ID: string;
-   PW_VERIFY: string;
-   PW: string;
-};
-
-type TCouncilRoutes = {
-   GREETING: string;
-   ORGANIZATION: string;
-   LOCATION: string;
-   RECRUITMENT: string;
-};
-
-type TRentalRoutes = {
-   ROOT: string;
-   ITEM: string;
-};
-
-type TPetitionRoutes = {
-   ROOT: string;
-   ID: string;
-   POST: string;
-};
-
-type TNoticeRoutes = {
-   ROOT: string;
-   POST: string;
-   ID: string;
-};
-
-type TConferenceRoutes = {
-   ROOT: string;
-};
-
-type TRuleRoutes = {
-   ROOT: string;
-};
-
-type TBusinessRoutes = {
-   ROOT: string;
-   DETAIL: string;
-   CATEGORY: string;
-};
-
-export type TMainRoutes = {
-   MAIN: string;
-   LOGIN: string;
-   MYPAGE: TMypageRoutes;
-   NOT_FOUND: string;
-   SIGNUP: TSignupRoutes;
-   RESET: TResetRoutes;
-   COUNCIL: TCouncilRoutes;
-   RENTAL: TRentalRoutes;
-   PETITION: TPetitionRoutes;
-   NOTICE: TNoticeRoutes;
-   CONFERENCE: TConferenceRoutes;
-   RULE: TRuleRoutes;
-   BUSINESS: TBusinessRoutes;
-};
-
-export const ROUTES: TMainRoutes = {
+export const ROUTES = {
    /** 메인 화면 */
    MAIN: '/',
    /** 로그인 화면 */
@@ -116,18 +41,11 @@ export const ROUTES: TMainRoutes = {
       /** 모집요강 */
       RECRUITMENT: '/recruitment',
    },
-   /** 대여물품 */
-   RENTAL: {
-      /** 루트 */
-      ROOT: '/rental',
-      /** 상세 품목 조회 */
-      ITEM: '/rental/:id',
-   },
    PETITION: {
       /** 청원 루트 */
       ROOT: '/petition',
       /** 청원 상세보기 */
-      ID: '/petition/:id',
+      ID: (id: string) => `/petition/${id}`,
       /** 청원 글쓰기 */
       POST: '/petition/post',
    },
@@ -138,7 +56,7 @@ export const ROUTES: TMainRoutes = {
       /** 청원 글 작성 */
       POST: '/notice/post',
       /** 공지 상세보기 */
-      ID: '/notice/:id',
+      ID: (id: string) => `/notice/${id}`,
    },
    /** 회의록 */
    CONFERENCE: {
@@ -155,8 +73,8 @@ export const ROUTES: TMainRoutes = {
       /** 루트 */
       ROOT: '/business',
       /** 상세보기 */
-      DETAIL: '/business/:category/:id',
+      DETAIL: (category: string, id: string) => `/business/${category}/${id}`,
       /** 음식 */
-      CATEGORY: '/business/:category',
+      CATEGORY: (category: string) => `/business/${category}`,
    },
-};
+} as const;

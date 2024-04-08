@@ -1,7 +1,5 @@
-import { IFormInfo } from '@api/upload/types/upload';
 import PostBox from '@components/ui/box/PostBox';
 import FloatingButton from '@components/ui/button/FloatingButton';
-import Title from '@components/ui/text/board';
 import { Textarea } from '@components/ui/textarea';
 import { HEADING_STYLE, HEADING_TEXT } from '@constants/heading';
 import { useEffectOnce } from '@hooks/useEffectOnce';
@@ -10,16 +8,21 @@ import { useLayout } from '@hooks/useLayout';
 import React, { ReactNode } from 'react';
 import { FaCamera } from 'react-icons/fa';
 
+export interface PostFormInfo {
+   title: string;
+   body: string;
+   files: File[];
+}
+
 interface PostProps {
-   formInfo: IFormInfo;
-   setFormInfo: React.Dispatch<React.SetStateAction<IFormInfo>>;
+   formInfo: PostFormInfo;
+   setFormInfo: React.Dispatch<React.SetStateAction<PostFormInfo>>;
    handleUpdate: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
    imageList: { imageUrl: string; imageName: string }[];
    addImage: (params: ImageProps['add']) => void;
    deleteImage: (params: ImageProps['delete']) => void;
-   pageTitle: string;
-   navigateUrl: string;
+   postType: '청원' | '공지';
 }
 
 export default function Post({
@@ -30,7 +33,7 @@ export default function Post({
    imageList,
    addImage,
    deleteImage,
-   pageTitle,
+   postType,
 }: PostProps) {
    const { setLayout } = useLayout();
 
@@ -46,11 +49,12 @@ export default function Post({
       });
    });
    //TODO) 이미지 리스트 컴포넌트로 분리
+   //TODO) Input 도 onChange를 useUploadForm 에 작성
 
    return (
       <form onSubmit={handleSubmit} encType='multipart/form-data' className='flex-col'>
          <Box>
-            <Title content={`${pageTitle} 제목`} />
+            <p>{`${postType} 제목`}</p>
             <input
                type='text'
                id='title'
@@ -66,10 +70,10 @@ export default function Post({
             />
          </Box>
          <Box>
-            <Title content={`${pageTitle} 내용`} />
+            <p>{`${postType} 내용`}</p>
             <Textarea
                value={formInfo.body && formInfo.body}
-               placeholder='청원 내용을 입력해 주세요.'
+               placeholder={`${postType} 내용을 입력해 주세요.`}
                onChange={handleUpdate}
             />
          </Box>
@@ -93,7 +97,6 @@ export default function Post({
                   <button
                      type='button'
                      onClick={() => {
-                        console.log(id);
                         deleteImage({ id, setFormInfo });
                      }}
                   >

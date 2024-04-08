@@ -1,7 +1,7 @@
 'use client';
 
+import { cn } from '@libs/shadcn';
 import * as LabelPrimitive from '@radix-ui/react-label';
-import { cn } from '@utils/shadcn';
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 
