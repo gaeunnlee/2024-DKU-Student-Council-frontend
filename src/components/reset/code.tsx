@@ -1,16 +1,19 @@
 import { Button } from '@components/ui/button';
 import { Input } from '@components/ui/input';
 import Message from '@components/ui/text/message';
+import { ROUTES } from '@constants/route';
 import { usePostPhoneConfirmCode } from '@hooks/api/reset/usePostPhoneConfirmCode';
 import { usePostPhoneVerify } from '@hooks/api/reset/usePostPhoneVerify';
 import { useAlert } from '@hooks/useAlert';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function PwVerifyForm() {
    const [pwVerifyInfo, setPwVerifyInfo] = React.useState({ phoneNumber: '', code: '' });
    const [token, setToken] = React.useState<string>('');
    const { alert } = useAlert();
-
+   const navigate = useNavigate();
    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
       setPwVerifyInfo({
@@ -24,7 +27,7 @@ export default function PwVerifyForm() {
          setToken(res.token);
       },
    });
-   const { mutate: confirmCode } = usePostPhoneConfirmCode();
+   const { mutate: confirmCode, isSuccess: codeSuccess } = usePostPhoneConfirmCode();
 
    const handlePhoneVerify = () => {
       if (pwVerifyInfo.phoneNumber.length === 11) {
@@ -45,6 +48,14 @@ export default function PwVerifyForm() {
          alert('인증 후 이용 가능합니다.');
       }
    };
+
+   React.useEffect(() => {
+      if (codeSuccess) {
+         navigate(ROUTES.RESET.PW, {
+            state: token,
+         });
+      }
+   }, [codeSuccess, navigate, token]);
 
    return (
       <form className='flex flex-col mx-auto w-[311px]'>
@@ -76,7 +87,7 @@ export default function PwVerifyForm() {
             onChange={handleChange}
             className='mb-4'
          />
-         <Button className='rounded-[30px]' onClick={handleConfirmCode} size='md' variant='default'>
+         <Button className='rounded-[30px]' type="button" onClick={handleConfirmCode} size='md' variant='default'>
             확인
          </Button>
       </form>
