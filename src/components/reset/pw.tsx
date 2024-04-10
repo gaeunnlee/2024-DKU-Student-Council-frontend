@@ -4,16 +4,15 @@ import Message from '@components/ui/text/message';
 import { usePostResetPw } from '@hooks/api/reset/usePostResetPw';
 import { useAlert } from '@hooks/useAlert';
 import React, { ChangeEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 
 export default function ResetPwForm({ token }: { token: string }) {
    const [password, setPassword] = React.useState<string>('');
    const [passwordConfirm, setPasswordConfirm] = React.useState<string>('');
    const [passwordMismatch, setPasswordMismatch] = React.useState<boolean>(false);
-   const navigate = useNavigate();
-   const { alert } = useAlert();
 
-   const { mutate, isSuccess: resetSuccess } = usePostResetPw();
+   const { alert } = useAlert();
+   const { mutate } = usePostResetPw();
 
    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
@@ -39,12 +38,7 @@ export default function ResetPwForm({ token }: { token: string }) {
       }
    };
 
-   React.useEffect(() => {
-      if (resetSuccess) {
-         alert('비밀번호가 변경되었습니다.');
-         navigate('/login');
-      }
-   }, [resetSuccess]);
+   //TODO) 400 (NotSMSSentException) -> 인증번호로 이동
 
    return (
       <form className='flex flex-col mx-auto w-[311px]'>
@@ -72,7 +66,7 @@ export default function ResetPwForm({ token }: { token: string }) {
          <p className="text-[13px] mb-8 whitespace-pre-wrap before:content-['●'] before:mr-1">
             {'비밀번호는 영문과 숫자 1자이상을 포함하는 \n8~16자리여야합니다.'}
          </p>
-         <Button className='rounded-[30px]' onClick={handleResetPw} size='md' variant='default'>
+         <Button className='rounded-[30px]' type="button" onClick={handleResetPw} size='md' variant='default'>
             변경
          </Button>
       </form>
