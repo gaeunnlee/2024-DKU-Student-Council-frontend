@@ -8,7 +8,7 @@ interface FindIdRequest {
 
 export const usePostFindId = (options?: UseMutationOptions<unknown, unknown, FindIdRequest>) => {
    return useMutation({
-      mutationFn: () => post(API_PATH.USER.RESET.FIND_ID),
+      mutationFn: (data) => post(API_PATH.USER.RESET.FIND_ID, data),
       ...options,
    });
 };

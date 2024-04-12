@@ -4,7 +4,7 @@ import Checkbox from '@components/ui/checkbox';
 import { Label } from '@components/ui/label';
 import { ROUTES } from '@constants/route';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export default function Term() {
    const allDisagree = Array(3).fill(false);
@@ -13,6 +13,7 @@ export default function Term() {
    const allChecked = agreeCheck.every(Boolean);
 
    const navigate = useNavigate();
+   const [searchParams] = useSearchParams();
 
    const handleCheckboxChange = (index: number) => {
       const newAgreeCheck = [...agreeCheck];
@@ -23,10 +24,9 @@ export default function Term() {
       const newAgreeCheck = allChecked ? allDisagree : allAgree;
       setAgreeCheck(newAgreeCheck);
    };
-
    const handleAgreeAll = () => {
       if (allChecked) {
-         navigate(ROUTES.SIGNUP.ROOT);
+         navigate(`${ROUTES.SIGNUP.ROOT}?${searchParams.toString()}`);
       } else {
          alert('약관에 동의해야 회원가입이 가능합니다.');
       }
@@ -75,7 +75,7 @@ export default function Term() {
                      <Label htmlFor={checkbox.id} className='text-xs'>
                         [필수]
                      </Label>
-                     <Label htmlFor={checkbox.id} className='text-xs -ml-1 text-gray02'>
+                     <Label htmlFor={checkbox.id} className='-ml-1 text-xs text-gray02'>
                         개인 정보 수집, 이용 동의
                      </Label>
                   </Checkbox>
