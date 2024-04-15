@@ -6,14 +6,15 @@ import { usePostPhoneConfirmCode } from '@hooks/api/reset/usePostPhoneConfirmCod
 import { usePostPhoneVerify } from '@hooks/api/reset/usePostPhoneVerify';
 import { useAlert } from '@hooks/useAlert';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export default function PwVerifyForm() {
    const [pwVerifyInfo, setPwVerifyInfo] = React.useState({ phoneNumber: '', code: '' });
    const [token, setToken] = React.useState<string>('');
    const { alert } = useAlert();
    const navigate = useNavigate();
+   const [searchParams] = useSearchParams();
+
    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
       setPwVerifyInfo({
@@ -27,7 +28,11 @@ export default function PwVerifyForm() {
          setToken(res.token);
       },
    });
-   const { mutate: confirmCode, isSuccess: codeSuccess } = usePostPhoneConfirmCode();
+   const { mutate: confirmCode } = usePostPhoneConfirmCode({
+      onSuccess: () => {
+         navigate(`${ROUTES.RESET.PW}?${searchParams.toString()}`, { state: token });
+      },
+   });
 
    const handlePhoneVerify = () => {
       if (pwVerifyInfo.phoneNumber.length === 11) {
@@ -87,7 +92,13 @@ export default function PwVerifyForm() {
             onChange={handleChange}
             className='mb-4'
          />
-         <Button className='rounded-[30px]' type="button" onClick={handleConfirmCode} size='md' variant='default'>
+         <Button
+            className='rounded-[30px]'
+            onClick={handleConfirmCode}
+            size='md'
+            variant='default'
+            type='button'
+         >
             확인
          </Button>
       </form>

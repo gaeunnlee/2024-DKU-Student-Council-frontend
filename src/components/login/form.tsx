@@ -5,9 +5,11 @@ import { Label } from '@components/ui/label';
 import { ROUTES } from '@constants/route';
 import { usePostLogin } from '@hooks/api/auth/usePostLogin';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
+import { usePostOAuthLogin } from '@/hooks/api/auth/usePostOAuthLogin';
 import { IdPassword } from '@/types/default-interfaces';
+import { isOAuthFlow } from '@/utils/oAuth';
 
 export default function LoginForm() {
    const initLoginInfo: IdPassword = {
@@ -16,18 +18,21 @@ export default function LoginForm() {
    };
    const [loginInfo, setLoginInfo] = React.useState<IdPassword>(initLoginInfo);
 
-   const { mutate } = usePostLogin();
+   const { mutate: login } = usePostLogin();
+   const { mutate: oAuthLogin } = usePostOAuthLogin();
+   const [searchParams] = useSearchParams();
 
    const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      mutate(loginInfo);
+
+      if (isOAuthFlow(searchParams)) {
+         oAuthLogin(loginInfo);
+      }
+      login(loginInfo);
    };
 
    return (
-      <form
-         className='w-[336px] flex flex-col mx-auto gap-3 mt-[76px]'
-         onSubmit={handleLogin}
-      >
+      <form className='w-[336px] flex flex-col mx-auto gap-3 mt-[76px]' onSubmit={handleLogin}>
          <Input
             value={loginInfo.studentId}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,9 +64,9 @@ export default function LoginForm() {
                </Label>
             </Checkbox>
             <div className='flex text-[12px] gap-2'>
-               <Link to={ROUTES.SIGNUP.TERMS}>회원가입</Link>
+               <Link to={`${ROUTES.SIGNUP.TERMS}?${searchParams.toString()}`}>회원가입</Link>
                <span> | </span>
-               <Link to={ROUTES.RESET.INDEX}>Forgot ID/PW?</Link>
+               <Link to={`${ROUTES.RESET.INDEX}?${searchParams.toString()}`}>Forgot ID/PW?</Link>
             </div>
          </div>
          <Button variant='default' type='submit' className='rounded-[15px]' size='default'>

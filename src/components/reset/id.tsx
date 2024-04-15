@@ -4,17 +4,27 @@ import { usePostFindId } from '@hooks/api/reset/usePostFindId';
 import { useAlert } from '@hooks/useAlert';
 import { formatphoneNumber } from '@utils/tell';
 import React, { ChangeEvent } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+
+import { isOAuthFlow, redirectToClient } from '@/utils/oAuth';
 
 export default function IdForm() {
    const [phoneNumber, setPhoneNumber] = React.useState<string>('');
    //TODO) 인증번호 전송 여부 Toast 추가
+   const navigate = useNavigate();
+   const [searchParams] = useSearchParams();
    const { alert } = useAlert();
 
    const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
       setPhoneNumber(e.target.value);
    };
 
-   const { mutate: findId } = usePostFindId();
+   const { mutate: findId } = usePostFindId({
+      onSuccess: () => {
+         alert('휴대전화로 아이디가 전송되었습니다.');
+         redirectLogin();
+      },
+   });
 
    const handleFindId = (e: React.FormEvent) => {
       e.preventDefault();
@@ -27,8 +37,16 @@ export default function IdForm() {
       }
    };
 
+   const redirectLogin = () => {
+      if (isOAuthFlow(searchParams)) {
+         redirectToClient(searchParams);
+      } else {
+         navigate('/login');
+      }
+   };
+
    return (
-      <form onSubmit={handleFindId} className='flex flex-col items-center gap-16'>
+      <form className='flex flex-col items-center gap-16'>
          <div className='flex mx-auto'>
             <Input
                size='md'
@@ -37,10 +55,10 @@ export default function IdForm() {
                placeholder='가입시 입력한 휴대전화번호 입력'
                onChange={handlePhoneChange}
             />
-            <Button variant='ghost' className='ml-[-40px] z-10 text-[13px]'>
-               요청
-            </Button>
          </div>
+         <Button onClick={handleFindId} size='md' variant='default' className='rounded-[30px]' type='button'>
+            요청
+         </Button>
       </form>
    );
 }

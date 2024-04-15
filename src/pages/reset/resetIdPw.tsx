@@ -5,18 +5,19 @@ import { ROUTES } from '@constants/route';
 import { useEffectOnce } from '@hooks/useEffectOnce';
 import { useLayout } from '@hooks/useLayout';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export default function ResetIdPw() {
    const { setLayout } = useLayout();
    const navigate = useNavigate();
+   const [searchParams] = useSearchParams();
 
    const handleFindId = () => {
-      navigate(ROUTES.RESET.ID);
+      navigate(`${ROUTES.RESET.ID}?${searchParams.toString()}`);
    };
 
    const handleVerifyPw = () => {
-      navigate(ROUTES.RESET.PW_VERIFY);
+      navigate(`${ROUTES.RESET.PW_VERIFY}?${searchParams.toString()}`);
    };
 
    useEffectOnce(() => {
