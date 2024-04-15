@@ -4,6 +4,8 @@ import { post } from '@libs/api';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
+import { isOAuthFlow, redirectToClient } from '@/utils/oAuth';
+
 export interface UserRegistrationInfo {
    nickname: string;
    password: string;
@@ -19,11 +21,11 @@ export const usePostSignup = (signupToken: string) => {
             password,
          }),
       onSuccess: () => {
-         if (searchParams.has('redirectUrl')) {
-            window.location.href = searchParams.get('redirectUrl') || '';
-            return;
+         if (isOAuthFlow(searchParams)) {
+            redirectToClient(searchParams);
+         } else {
+            navigate(ROUTES.LOGIN);
          }
-         navigate(ROUTES.LOGIN);
       },
    });
 };

@@ -6,6 +6,8 @@ import { useAlert } from '@hooks/useAlert';
 import React, { ChangeEvent } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
+import { isOAuthFlow, redirectToClient } from '@/utils/oAuth';
+
 export default function ResetPwForm({ token }: { token: string }) {
    const [password, setPassword] = React.useState<string>('');
    const [passwordConfirm, setPasswordConfirm] = React.useState<string>('');
@@ -44,8 +46,8 @@ export default function ResetPwForm({ token }: { token: string }) {
       if (resetSuccess) {
          alert('비밀번호가 변경되었습니다.');
 
-         if (searchParams.has('redirectUrl')) {
-            window.location.href = searchParams.get('redirectUrl') || '';
+         if (isOAuthFlow(searchParams)) {
+            redirectToClient(searchParams);
          } else {
             navigate('/login');
          }
