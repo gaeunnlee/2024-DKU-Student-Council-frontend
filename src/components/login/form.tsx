@@ -7,7 +7,9 @@ import { usePostLogin } from '@hooks/api/auth/usePostLogin';
 import React from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
+import { usePostOAuthLogin } from '@/hooks/api/auth/usePostOAuthLogin';
 import { IdPassword } from '@/types/default-interfaces';
+import { isOAuthFlow } from '@/utils/oAuth';
 
 export default function LoginForm() {
    const initLoginInfo: IdPassword = {
@@ -16,12 +18,17 @@ export default function LoginForm() {
    };
    const [loginInfo, setLoginInfo] = React.useState<IdPassword>(initLoginInfo);
 
-   const { mutate } = usePostLogin();
+   const { mutate: login } = usePostLogin();
+   const { mutate: oAuthLogin } = usePostOAuthLogin();
    const [searchParams] = useSearchParams();
 
    const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      mutate(loginInfo);
+
+      if (isOAuthFlow(searchParams)) {
+         oAuthLogin(loginInfo);
+      }
+      login(loginInfo);
    };
 
    return (
