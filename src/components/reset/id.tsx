@@ -6,6 +6,8 @@ import { formatphoneNumber } from '@utils/tell';
 import React, { ChangeEvent } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
+import { isOAuthFlow, redirectToClient } from '@/utils/oAuth';
+
 export default function IdForm() {
    const [phoneNumber, setPhoneNumber] = React.useState<string>('');
    //TODO) 인증번호 전송 여부 Toast 추가
@@ -36,11 +38,11 @@ export default function IdForm() {
    };
 
    const redirectLogin = () => {
-      if (searchParams.has('redirectUrl')) {
-         window.location.href = searchParams.get('redirectUrl') || '';
-         return;
+      if (isOAuthFlow(searchParams)) {
+         redirectToClient(searchParams);
+      } else {
+         navigate('/login');
       }
-      navigate('/login');
    };
 
    return (

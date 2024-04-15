@@ -34,7 +34,7 @@ export const API_PATH = {
          REFRESH: '/user/dku/refresh',
       },
       /** 로그인 */
-      LOGIN: '/user/login',
+      LOGIN: { DEFAULT: '/user/login', OAUTH: '/oauth/login' },
       /** 회원가입 */
       SIGNUP: {
          VERIFY: '/user/dku/verify',
