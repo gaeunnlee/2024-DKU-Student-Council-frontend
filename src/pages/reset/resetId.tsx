@@ -1,26 +1,20 @@
+import { Gnb, GnbGoBack } from '@components/common/gnb';
+import { ContentSection } from '@components/layouts';
 import IdForm from '@components/reset/id';
-import { useEffectOnce } from '@hooks/useEffectOnce';
-import { useLayout } from '@hooks/useLayout';
 import React from 'react';
 
-export default function ResetId() {
-   const { setLayout } = useLayout();
 
-   useEffectOnce(() => {
-      setLayout({
-         title: null,
-         backButton: true,
-         isMain: false,
-         fullscreen: false,
-         margin: '140px',
-         rounded: true,
-      });
-   });
+export default function ResetId() {
    return (
       <React.Fragment>
-         <h1 className='text-2xl font-extrabold ml-10 mb-[14px] mt-[52px]'>Login</h1>
-         <h2 className='text-base ml-10 font-extrabold mb-[60px]'>ID 찾기</h2>
-         <IdForm />
+         <Gnb>
+            <GnbGoBack />
+         </Gnb>
+         <ContentSection className="mt-[140px]" showNav={true}>
+            <h1 className='text-2xl font-extrabold ml-10 mb-[14px] mt-[52px]'>Login</h1>
+            <h2 className='text-base ml-10 font-extrabold mb-[60px]'>ID 찾기</h2>
+            <IdForm />
+         </ContentSection>
       </React.Fragment>
    );
 }
