@@ -1,29 +1,16 @@
 import SvgIcon from '@components/common/icon/SvgIcon';
 import { Button } from '@components/ui/button';
 import { ROUTES } from '@constants/route';
-import { useEffectOnce } from '@hooks/useEffectOnce';
-import { useLayout } from '@hooks/useLayout';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function SignupSuccess() {
-   const { setLayout } = useLayout();
    const navigate = useNavigate();
 
    const handleGoLogin = () => {
       navigate(ROUTES.LOGIN);
    };
 
-   useEffectOnce(() => {
-      setLayout({
-         title: null,
-         backButton: true,
-         isMain: false,
-         fullscreen: true,
-         margin: '140px',
-         rounded: true,
-      });
-   });
    return (
       <div className='w-full mt-[120px]'>
          <div className='flex flex-col items-center justify-center gap-3'>
