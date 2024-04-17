@@ -1,29 +1,24 @@
+import { Gnb, GnbGoBack } from '@components/common/gnb';
+import { GnhSubtitle, GnhTitle } from '@components/common/gnh';
+import { HeaderSection, ContentSection } from '@components/layouts';
 import LoginForm from '@components/login/form';
-import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
-import { useEffectOnce } from '@hooks/useEffectOnce';
-import { useLayout } from '@hooks/useLayout';
-import React, { Fragment } from 'react';
+import { HEADING_TEXT } from '@constants/heading';
+import React from 'react';
+
 
 export default function Login() {
-   const { setLayout } = useLayout();
-
-   useEffectOnce(() => {
-      setLayout({
-         title: null,
-         backButton: true,
-         isMain: false,
-         fullscreen: false,
-         headingText: HEADING_TEXT.LOGIN.HEAD,
-         subHeadingText: HEADING_TEXT.LOGIN.SUBHEAD,
-         headingStyle: HEADING_STYLE.LOGIN.HEAD,
-         subHeadingStyle: HEADING_STYLE.LOGIN.SUBHEAD,
-         rounded: true,
-      });
-   });
-
    return (
-      <Fragment>
-         <LoginForm />
-      </Fragment>
+      <React.Fragment>
+         <Gnb>
+            <GnbGoBack />
+         </Gnb>
+         <HeaderSection className="pt-9 pb-[51px] text-center">
+            <GnhTitle className='mb-[19px]'>{HEADING_TEXT.LOGIN.HEAD}</GnhTitle>
+            <GnhSubtitle className='font-extrabold'>{HEADING_TEXT.LOGIN.SUBHEAD}</GnhSubtitle>
+         </HeaderSection>
+         <ContentSection>
+            <LoginForm />
+         </ContentSection>
+      </React.Fragment>
    );
 }
