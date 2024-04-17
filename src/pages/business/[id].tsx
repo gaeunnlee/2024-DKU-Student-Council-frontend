@@ -26,7 +26,7 @@ export default function BusinessDetail() {
             <GnbGoBack />
             <GnbTitle>{HEADING_TEXT.COUNCIL.HEAD}</GnbTitle>
          </Gnb>
-         <HeaderSection className="pt-[38px] pl-[29px] pb-[30px]">
+         <HeaderSection className="pt-[38px] ml-[29px] pb-[30px]">
             <GnhTitle className="mb-2">{HEADING_TEXT.BUSINESS.HEAD}</GnhTitle>
             <Selector list={BUSINESS_LIST} subHeadingText={Object.getOwnPropertyDescriptor(HEADING_TEXT.BUSINESS.SUBHEAD, category as CoalitionType)?.value} />
          </HeaderSection>

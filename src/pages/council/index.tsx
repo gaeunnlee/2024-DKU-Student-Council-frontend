@@ -15,7 +15,7 @@ export default function Greeting() {
             <GnbGoBack />
             <GnbTitle>{HEADING_TEXT.COUNCIL.HEAD}</GnbTitle>
          </Gnb>
-         <HeaderSection className="pt-[38px] pl-[29px] pb-[30px]">
+         <HeaderSection className="pt-[38px] ml-[29px] pb-[30px]">
             <GnhTitle>{HEADING_TEXT.COUNCIL.HEAD}</GnhTitle>
             <Selector list={COUNCIL_LIST} subHeadingText={HEADING_TEXT.GREETING.SUBHEAD} />
          </HeaderSection>

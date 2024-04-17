@@ -4,9 +4,8 @@ import { HeaderSection, ContentSection } from '@components/layouts';
 import PostDetailLayout from '@components/layouts/PostDetailLayout';
 import NoticeItem from '@components/notice/[id]';
 import Selector from '@components/ui/selector';
-import NoticeSkeleton from '@components/ui/skeleton/main';
 import { HEADING_TEXT, COUNCIL_LIST } from '@constants/heading';
-import React, { Suspense } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 
 
@@ -22,15 +21,13 @@ export default function NoticeDetail() {
             <GnbGoBack />
             <GnbTitle>{HEADING_TEXT.COUNCIL.HEAD}</GnbTitle>
          </Gnb>
-         <HeaderSection className="pt-[38px] pl-[29px] pb-[30px]">
+         <HeaderSection className="pt-[38px] ml-[29px] pb-[30px]">
             <GnhTitle>{HEADING_TEXT.COUNCIL.HEAD}</GnhTitle>
             <Selector list={COUNCIL_LIST} subHeadingText={HEADING_TEXT.NOTICE.SUBHEAD} />
          </HeaderSection>
          <ContentSection>
             <PostDetailLayout>
-               <Suspense fallback={<NoticeSkeleton />}>
-                  <NoticeItem noticeId={noticeId} />
-               </Suspense>
+               <NoticeItem noticeId={noticeId} />
             </PostDetailLayout>
          </ContentSection>
       </React.Fragment>

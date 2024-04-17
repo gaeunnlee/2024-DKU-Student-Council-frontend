@@ -38,8 +38,8 @@ export default function Location() {
             <GnbGoBack />
             <GnbTitle>{HEADING_TEXT.COUNCIL.HEAD}</GnbTitle>
          </Gnb>
-         <HeaderSection className="pt-[38px] pl-[29px] pb-[30px]">
-            <GnhTitle>{HEADING_TEXT.COUNCIL.HEAD}</GnhTitle>
+         <HeaderSection className="pt-[38px] ml-[29px] pb-[30px]">
+            <GnhTitle className="mb-2">{HEADING_TEXT.COUNCIL.HEAD}</GnhTitle>
             <Selector list={COUNCIL_LIST} subHeadingText={HEADING_TEXT.LOCATION.SUBHEAD} />
          </HeaderSection>
          <ContentSection showNav={true}>

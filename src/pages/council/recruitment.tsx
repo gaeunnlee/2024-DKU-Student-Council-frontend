@@ -16,7 +16,7 @@ export default function Recruitment() {
             <GnbGoBack />
             <GnbTitle>{HEADING_TEXT.COUNCIL.HEAD}</GnbTitle>
          </Gnb>
-         <HeaderSection>
+         <HeaderSection className="pt-[38px] ml-[29px] pb-[30px]">
             <GnhTitle>{HEADING_TEXT.RECRUIT.HEAD}</GnhTitle>
             <Selector list={COUNCIL_LIST} subHeadingText={HEADING_TEXT.RECRUIT.SUBHEAD} />
          </HeaderSection>
