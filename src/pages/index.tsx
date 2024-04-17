@@ -1,55 +1,55 @@
-import Carousel from '@components/common/carousel';
-import { Cafeteria, AppDownload, Notice, Petition } from '@components/main/';
-import NoticeSkeleton from '@components/ui/skeleton/main';
+// import Carousel from '@components/common/carousel';
+import { HeaderSection, ContentSection } from '@components/layouts';
+import { AppDownload } from '@components/main/';
+import CafeteriaSkeleton from '@components/ui/skeleton/cafeteria';
 import { Spinner } from '@components/ui/spinner/indext';
-import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
+import { HEADING_TEXT } from '@constants/heading';
 import useGetMain from '@hooks/api/main/useGetMain';
-import { useEffectOnce } from '@hooks/useEffectOnce';
-import { useLayout } from '@hooks/useLayout';
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 
+import { Gnb, GnbLogo } from '@/components/common/gnb';
+import { GnhSubtitle, GnhTitle } from '@/components/common/gnh';
+import Nav from '@/components/common/nav';
+
+const Carousel = lazy(() => import('@components/common/carousel'));
+const Notice = lazy(() => import('@components/main/notice'));
+const Petition = lazy(() => import('@components/main/petition'));
+const Cafeteria = lazy(() => import('@components/main/cafeteria'));
 
 
 export default function Main() {
-   const { setLayout } = useLayout();
    const { data: main } = useGetMain();
    
-   useEffectOnce(() => {
-      setLayout({
-         title: null,
-         backButton: false,
-         isMain: true,
-         fullscreen: false,
-         headingText: HEADING_TEXT.MAIN.HEAD,
-         subHeadingText: HEADING_TEXT.MAIN.SUBHEAD,
-         headingStyle: HEADING_STYLE.MAIN.HEAD,
-         subHeadingStyle: HEADING_STYLE.MAIN.SUBHEAD,
-         rounded: false,
-      });
-   });
    //TODO) Cafeteria skeleton 추가
    return (
       <React.Fragment>
-         <div className='w-full h-[337px] flex justify-center'>
-            <Suspense fallback={<Spinner />}>
-               <Carousel
-                  data={main?.carousels ?? []}
-                  className='w-[322px] h-[322px] absolute top-44 mx-auto'
-               />
-            </Suspense>
-         </div>
-         <div className='bg-gray-100 pt-5 pb-4'>
-            <Suspense fallback={<NoticeSkeleton />}>
+         {/* <MainSkeleton /> */}
+         <Gnb>
+            <GnbLogo />
+         </Gnb>
+         <HeaderSection className="text-center h-[155px] pt-[41px] pb-[65px]">
+            <GnhTitle className='mb-[3pb]'>{HEADING_TEXT.MAIN.HEAD}</GnhTitle>
+            <GnhSubtitle className='text-[11px]'>{HEADING_TEXT.MAIN.SUBHEAD}</GnhSubtitle>
+         </HeaderSection>
+         <ContentSection className="!rounded-t-none mb-[60px]">
+            <div className='w-full h-[337px] flex justify-center bg-white relative'>
+               <Suspense fallback={<Spinner />}>
+                  <Carousel
+                     data={main?.carousels ?? []}
+                     className='w-[322px] h-[322px] absolute -top-12 mx-auto'
+                  />
+               </Suspense>
+            </div>
+            <div className='bg-gray-100 pt-5 pb-4'>
                <Notice notices={main?.recentNotices} />
-            </Suspense>
-            <Suspense fallback={<NoticeSkeleton />}>
                <Petition petitions={main?.popularPetitions} />
-            </Suspense>
-            <Suspense fallback={<div>로딩중</div>}>
-               <Cafeteria />
-            </Suspense>
-            <AppDownload />
-         </div>
+               <Suspense fallback={<CafeteriaSkeleton />}>
+                  <Cafeteria />
+               </Suspense>
+               <AppDownload />
+            </div>
+         </ContentSection>
+         <Nav />
       </React.Fragment>
    );
 }

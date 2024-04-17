@@ -1,44 +1,34 @@
+import { Gnb, GnbGoBack } from '@components/common/gnb';
+import { GnhTitle } from '@components/common/gnh';
+import { ContentSection, HeaderSection } from '@components/layouts';
 import PostDetailLayout from '@components/layouts/PostDetailLayout';
-import PostBox, { FileBox } from '@components/ui/box/PostBox';
+import FileBox from '@components/ui/box/FileBox';
+import PostBox from '@components/ui/box/PostBox';
 import FloatingButton from '@components/ui/button/FloatingButton';
 import DoughnutChart from '@components/ui/chart/DoughnutChart';
 import PetitonChartList from '@components/ui/chart/PetitionChartList';
 import Collapse from '@components/ui/collapse';
+import Selector from '@components/ui/selector';
 import { Spinner } from '@components/ui/spinner/indext';
 import { API_PATH } from '@constants/api';
-import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
+import { COUNCIL_LIST, HEADING_TEXT } from '@constants/heading';
 import { useGetPetitionItem } from '@hooks/api/petition/useGetPetitionItem';
 import { PetitionContentResponse } from '@hooks/api/petition/useGetPetitionItem';
 import { StatistResponse } from '@hooks/api/petition/useGetPetitionItem';
 import { useAlert } from '@hooks/useAlert';
 import { useApi } from '@hooks/useApi';
-import { useEffectOnce } from '@hooks/useEffectOnce';
-import { useLayout } from '@hooks/useLayout';
 import React, { ComponentProps, ReactNode, useEffect, useState, Suspense } from 'react';
 import { TbThumbUp, TbThumbUpFilled } from 'react-icons/tb';
 import { useParams } from 'react-router-dom';
 
 import { getDaysBetween, getPetitionStatus } from '.';
 
+
 import { WithReactChildren } from '@/types/default-interfaces';
 
 export default function PetitionDetail() {
-   const { setLayout } = useLayout();
    const params = useParams();
    const id = params.id;
-
-   useEffectOnce(() => {
-      setLayout({
-         title: null,
-         backButton: true,
-         isMain: false,
-         fullscreen: false,
-         headingText: HEADING_TEXT.PETITION.HEAD,
-         headingStyle: `${HEADING_STYLE.COUNCIL.HEAD} mb-[30px]`,
-         rounded: true,
-         dropDown: HEADING_STYLE.COUNCIL.DROPDOWN,
-      });
-   });
 
    const [updatePost, setUpdatePost] = useState(false);
    const [chartData, setChartData] = useState({ labels: [''], data: [0] });
@@ -104,62 +94,73 @@ export default function PetitionDetail() {
    };
 
    return (
-      <Suspense fallback={<Spinner />}>
-         {petition !== undefined && (
-            <PostDetailLayout>
-               {/* 청원글 */}
-               <Box>
-                  <div className='flex gap-4 text-gray-400'>
-                     <span>{petitionStatus}</span>
-                     <span>
-                        {remainingDays !== undefined && remainingDays > 0
-                           ? `D-${remainingDays}`
-                           : '기간 만료'}
-                     </span>
-                     <span>{`${petition.agreeCount}/150`}</span>
-                  </div>
-                  <Title>{petition.title}</Title>
-                  <p>{petition.body}</p>
-               </Box>
+      <React.Fragment>
+         <Gnb>
+            <GnbGoBack />
+         </Gnb>
+         <HeaderSection>
+            <GnhTitle>{HEADING_TEXT.PETITION.HEAD}</GnhTitle>
+            <Selector list={COUNCIL_LIST} subHeadingText={HEADING_TEXT.COUNCIL.HEAD} />
+         </HeaderSection>
+         <ContentSection>
+            <Suspense fallback={<Spinner />}>
+               {petition !== undefined && (
+                  <PostDetailLayout>
+                     {/* 청원글 */}
+                     <Box>
+                        <div className='flex gap-4 text-gray-400'>
+                           <span>{petitionStatus}</span>
+                           <span>
+                              {remainingDays !== undefined && remainingDays > 0
+                                 ? `D-${remainingDays}`
+                                 : '기간 만료'}
+                           </span>
+                           <span>{`${petition.agreeCount}/150`}</span>
+                        </div>
+                        <Title>{petition.title}</Title>
+                        <p>{petition.body}</p>
+                     </Box>
 
-               {/* 첨부파일 */}
-               {petition.files.length > 0 && <FileBox className='p-0 mt-0' files={petition?.files} />}
+                     {/* 첨부파일 */}
+                     {petition.files.length > 0 && <FileBox className='p-0 mt-0' files={petition?.files} />}
 
-               {/* 동의현황 */}
-               <PostBox className='shadow-none px-0 py-0 text-center'>
-                  <Collapse status={false} size='text-2xl' title={<Title className='mr-1'>동의현황</Title>}>
-                     <PostBox className='mx-0 mt-2 flex flex-col gap-3 px-6'>
-                        <p>어떤 과에서 가장 동의를 많이 했을까요?</p>
-                        <hr />
-                        <DoughnutChart chartData={chartData} sum={sum} />
-                        <PetitonChartList statisticList={petition.statisticList} sum={sum} />
+                     {/* 동의현황 */}
+                     <PostBox className='shadow-none px-0 py-0 text-center'>
+                        <Collapse status={false} size='text-2xl' title={<Title className='mr-1'>동의현황</Title>}>
+                           <PostBox className='mx-0 mt-2 flex flex-col gap-3 px-6'>
+                              <p>어떤 과에서 가장 동의를 많이 했을까요?</p>
+                              <hr />
+                              <DoughnutChart chartData={chartData} sum={sum} />
+                              <PetitonChartList statisticList={petition.statisticList} sum={sum} />
+                           </PostBox>
+                        </Collapse>
                      </PostBox>
-                  </Collapse>
-               </PostBox>
 
-               {/* 답변 */}
-               {petition.answer !== null && (
-                  <Box>
-                     <Title>총학생회 답변</Title>
-                     <p>{petition.answer}</p>
-                  </Box>
+                     {/* 답변 */}
+                     {petition.answer !== null && (
+                        <Box>
+                           <Title>총학생회 답변</Title>
+                           <p>{petition.answer}</p>
+                        </Box>
+                     )}
+
+                     {/* 플로팅 버튼 */}
+                     <FloatingButton
+                        event={() => {
+                           handleAgreeButtonClick();
+                        }}
+                     >
+                        {petition.agree ? (
+                           <TbThumbUpFilled color='white' size={40} />
+                        ) : (
+                           <TbThumbUp color='white' size={40} />
+                        )}
+                     </FloatingButton>
+                  </PostDetailLayout>
                )}
-
-               {/* 플로팅 버튼 */}
-               <FloatingButton
-                  event={() => {
-                     handleAgreeButtonClick();
-                  }}
-               >
-                  {petition.agree ? (
-                     <TbThumbUpFilled color='white' size={40} />
-                  ) : (
-                     <TbThumbUp color='white' size={40} />
-                  )}
-               </FloatingButton>
-            </PostDetailLayout>
-         )}
-      </Suspense>
+            </Suspense>
+         </ContentSection>
+      </React.Fragment>
    );
 }
 

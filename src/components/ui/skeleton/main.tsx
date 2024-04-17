@@ -1,31 +1,28 @@
-import MainSectionLayout from '@components/layouts/MainSectionLayout';
+import { Gnb, GnbLogo } from '@components/common/gnb';
+import { GnhTitle, GnhSubtitle } from '@components/common/gnh';
+import { HeaderSection } from '@components/layouts';
 import { Skeleton } from '@components/ui/skeleton/base';
-import React from 'react';
+import MainBoardSkeleton from '@components/ui/skeleton/mainBoard';
+import { HEADING_TEXT } from '@constants/heading';
+import React, { Fragment } from 'react';
 
-export default function NoticeSkeleton() {
+
+export default function MainSkeleton() {
    return (
-      <MainSectionLayout>
-         <div className='flex items-center justify-between mb-3'>
-            <Skeleton className='w-20 h-7' />
-            <Skeleton className='w-9 h-5' />
+      <Fragment>
+         <Gnb>
+            <GnbLogo />
+         </Gnb>
+         <HeaderSection className="text-center h-[155px] pt-[41px] pb-[65px]">
+            <GnhTitle className='mb-[3pb]'>{HEADING_TEXT.MAIN.HEAD}</GnhTitle>
+            <GnhSubtitle className='text-[11px]'>{HEADING_TEXT.MAIN.SUBHEAD}</GnhSubtitle>
+         </HeaderSection>
+         <div className='w-full h-[337px] flex justify-center bg-white relative'>
+            <Skeleton className="w-[322px] h-[322px]" />
          </div>
-         <ul className='space-y-2'>
-            <li>
-               <Skeleton className='w-full h-5' />
-            </li>
-            <li>
-               <Skeleton className='w-full h-5' />
-            </li>
-            <li>
-               <Skeleton className='w-full h-5' />
-            </li>
-            <li>
-               <Skeleton className='w-full h-5' />
-            </li>
-            <li>
-               <Skeleton className='w-full h-5' />
-            </li>
-         </ul>
-      </MainSectionLayout>
+         <div className='bg-gray-100 pt-5 pb-4'>
+            <MainBoardSkeleton />
+         </div>
+      </Fragment>
    );
 }

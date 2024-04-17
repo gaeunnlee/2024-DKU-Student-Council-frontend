@@ -1,56 +1,29 @@
-import Board from '@components/ui/board';
-import IntersectionBox from '@components/ui/box/intersectionBox';
-import CouncilSkeleton from '@components/ui/skeleton/council';
-import { Spinner } from '@components/ui/spinner/indext';
-import { Date } from '@components/ui/text/board';
-import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
-import { useGetConference } from '@hooks/api/conference/useGetConference';
-import { ConferenceContentResponse } from '@hooks/api/conference/useGetConference';
-import { useEffectOnce } from '@hooks/useEffectOnce';
-import { useInfiniteScroll } from '@hooks/useInfiniteScroll';
-import { useLayout } from '@hooks/useLayout';
-import React, { Suspense } from 'react';
+import { Gnb, GnbGoBack, GnbTitle } from '@components/common/gnb';
+import { GnhTitle } from '@components/common/gnh';
+import { HeaderSection, ContentSection } from '@components/layouts';
+import Selector from '@components/ui/selector';
+import ConferenceSkeleton from '@components/ui/skeleton/conference';
+import { HEADING_TEXT, COUNCIL_LIST } from '@constants/heading';
+import React, { Suspense, lazy } from 'react';
+
+const ConferenceList = lazy(() => import('@components/conference/index'));
 
 export default function ConferenceBoard() {
-   const { setLayout } = useLayout();
-   const { data: conference, fetchNextPage, isFetchingNextPage } = useGetConference();
-   const intersectionRef = useInfiniteScroll(fetchNextPage);
-
-   useEffectOnce(() => {
-      setLayout({
-         title: HEADING_TEXT.COUNCIL.HEAD,
-         backButton: true,
-         isMain: false,
-         fullscreen: false,
-         headingText: HEADING_TEXT.COUNCIL.HEAD,
-         subHeadingText: HEADING_TEXT.CONFERENCE.SUBHEAD,
-         headingStyle: HEADING_STYLE.COUNCIL.HEAD,
-         subHeadingStyle: HEADING_STYLE.COUNCIL.SUBHEAD,
-         rounded: true,
-         dropDown: HEADING_STYLE.COUNCIL.DROPDOWN,
-      });
-   });
-
-   const openFile = (item: ConferenceContentResponse) => {
-      window.open(item.files[0].url);
-   };
-
    return (
-      <Suspense fallback={<CouncilSkeleton />}>
-         <Board>
-            {conference?.pages.map((page) =>
-               page.content.map((item) => (
-                  <Board.Cell key={item.id} onClick={() => openFile(item)}>
-                     <div className='flex gap-2 p-3'>
-                        <p className='grow text-center truncate'>{item.title}</p>
-                        <Date date={item.createdAt} />
-                     </div>
-                  </Board.Cell>
-               )),
-            )}
-            <IntersectionBox ref={intersectionRef} />
-            {isFetchingNextPage && <Spinner />}
-         </Board>
-      </Suspense>
+      <React.Fragment>
+         <Gnb>
+            <GnbGoBack />
+            <GnbTitle>{HEADING_TEXT.COUNCIL.HEAD}</GnbTitle>
+         </Gnb>
+         <HeaderSection className="pt-[38px] ml-[29px] pb-[30px]">
+            <GnhTitle className="mb-2">{HEADING_TEXT.COUNCIL.HEAD}</GnhTitle>
+            <Selector list={COUNCIL_LIST} subHeadingText={HEADING_TEXT.CONFERENCE.SUBHEAD} />
+         </HeaderSection>
+         <ContentSection showNav={true}>
+            <Suspense fallback={<ConferenceSkeleton />}>
+               <ConferenceList />
+            </Suspense>
+         </ContentSection>
+      </React.Fragment>
    );
 }
