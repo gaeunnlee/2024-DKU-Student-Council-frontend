@@ -47,7 +47,7 @@ export default function Carousel({ data, className }: CarouselProps) {
          </div>
          <div className='absolute bottom-0 h-[30px] text-white flex gap-2'>
             {data.map((_, index) => (
-               <GoDotFill key={index} className={index === currentIndex ? '' : 'text-slate-300'} />
+               <GoDotFill key={index} className={index === currentIndex ? 'text-black' : 'text-slate-300'} />
             ))}
          </div>
          {data.map((item, index) => (
