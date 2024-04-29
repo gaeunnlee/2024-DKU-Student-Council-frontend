@@ -4,8 +4,6 @@ import { authorization } from '@libs/interceptor';
 import { TokenType, getRefreshToken, setToken } from '@utils/token';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
-
-
 export const client = axios.create({
    baseURL: CONSTANTS.SERVER_URL,
    timeout: 18000,
@@ -41,6 +39,10 @@ client.interceptors.response.use(
       const originalRequest = error.config;
       if (!originalRequest?.headers || originalRequest.headers.Authorization) return Promise.reject(error);
       const refreshToken = getRefreshToken();
+      if (localStorage.getItem('damda-atk') === null && error.response?.status === 401) {
+         alert('로그인 이후 이용 가능합니다.');
+         window.location.href = '/login';
+      }
       if (error.response?.status === 401) {
          try {
             const res = await client.post<TokenType>('/user/reissue', { refreshToken });
