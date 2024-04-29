@@ -27,10 +27,16 @@ export default function PwVerifyForm() {
       onSuccess: (res) => {
          setToken(res.token);
       },
+      onError: () => {
+         alert('가입되지 않은 휴대폰번호입니다.');
+      },
    });
    const { mutate: confirmCode, isSuccess: codeSuccess } = usePostPhoneConfirmCode({
       onSuccess: () => {
          navigate(`${ROUTES.RESET.PW}?${searchParams.toString()}`, { state: token });
+      },
+      onError: () => {
+         alert('인증번호가 알맞지 않습니다.');
       },
    });
 
