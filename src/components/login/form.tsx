@@ -9,8 +9,8 @@ import { isOAuthFlow } from '@utils/oAuth';
 import React from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
+import { useAlert } from '@/hooks/useAlert';
 import { IdPassword } from '@/types/default-interfaces';
-
 
 export default function LoginForm() {
    const initLoginInfo: IdPassword = {
@@ -22,13 +22,18 @@ export default function LoginForm() {
    const { mutate: login } = usePostLogin();
    const { mutate: oAuthLogin } = usePostOAuthLogin();
    const [searchParams] = useSearchParams();
+   const { alert } = useAlert();
    const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      if (isOAuthFlow(searchParams)) {
-         oAuthLogin(loginInfo);
+      if (loginInfo.studentId.length > 0 && loginInfo.password.length > 0) {
+         if (isOAuthFlow(searchParams)) {
+            oAuthLogin(loginInfo);
+         }
+         login(loginInfo);
+      } else {
+         alert('모두 입력해주세요');
       }
-      login(loginInfo);
    };
 
    return (

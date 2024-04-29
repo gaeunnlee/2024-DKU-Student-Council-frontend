@@ -39,6 +39,11 @@ export default function PetitionDetail() {
    const { alert } = useAlert();
    const { post } = useApi();
 
+   useEffect(() => {
+      alert('hi');
+      localStorage.getItem('damda-atk') === null && alert('로그인 이후 이용 가능합니다');
+   }, []);
+
    // TODO) 전역 에러핸들링
    if (isError) {
       alert(error);

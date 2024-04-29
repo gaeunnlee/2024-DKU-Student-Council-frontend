@@ -22,6 +22,7 @@ export const usePostLogin = (options?: UseMutationOptions<LoginResponse, AxiosEr
    const navigate = useNavigate();
    const { pathname } = useLocation();
    const { alert } = useAlert();
+
    return useMutation<LoginResponse, AxiosError, LoginRequest>({
       mutationFn: ({ studentId, password }: LoginRequest) =>
          post(API_PATH.USER.LOGIN.DEFAULT, { studentId, password }),
@@ -30,7 +31,8 @@ export const usePostLogin = (options?: UseMutationOptions<LoginResponse, AxiosEr
          pathname === '/login' && navigate(ROUTES.MAIN);
       },
       onError: (error: AxiosError) => {
-         alert(error.response?.data?.message[0]);
+         const data = Object.getOwnPropertyDescriptor(error.response, 'data')!.value;
+         alert(data.message[0]);
       },
       ...options,
    });
