@@ -24,7 +24,7 @@ export const usePostSignup = (signupToken: string) => {
          if (isOAuthFlow(searchParams)) {
             redirectToClient(searchParams);
          } else {
-            navigate(ROUTES.LOGIN);
+            navigate(ROUTES.SIGNUP.SUCCESS);
          }
       },
    });

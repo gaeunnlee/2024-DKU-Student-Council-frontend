@@ -27,8 +27,6 @@ export default function MyPage() {
             text: '확인',
             onClick: () => {
                mutate();
-               removeToken();
-               navigate(ROUTES.MAIN);
             },
          },
          cancel: {
