@@ -28,7 +28,7 @@ export default function PwVerifyForm() {
          setToken(res.token);
       },
    });
-   const { mutate: confirmCode } = usePostPhoneConfirmCode({
+   const { mutate: confirmCode, isSuccess: codeSuccess } = usePostPhoneConfirmCode({
       onSuccess: () => {
          navigate(`${ROUTES.RESET.PW}?${searchParams.toString()}`, { state: token });
       },
