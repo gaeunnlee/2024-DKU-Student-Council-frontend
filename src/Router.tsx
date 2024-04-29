@@ -32,15 +32,19 @@ import SignupTerms from '@pages/signup/terms';
 import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
+import PrivateRoute from './PrivateRoute';
 
 export default function Router() {
    return (
       <Routes>
-         <Route path={ROUTES.MAIN} element={
-            <Suspense fallback={<MainSkeleton />}>
-               <Main />
-            </Suspense>
-         } />
+         <Route
+            path={ROUTES.MAIN}
+            element={
+               <Suspense fallback={<MainSkeleton />}>
+                  <Main />
+               </Suspense>
+            }
+         />
          <Route path={ROUTES.LOGIN} element={<Login />} />
          {/* 아이디 및 비밀번호 재설정 */}
          <Route path={ROUTES.RESET.INDEX} element={<ResetIdPw />} />
@@ -48,7 +52,14 @@ export default function Router() {
          <Route path={ROUTES.RESET.PW_VERIFY} element={<VerifyPw />} />
          <Route path={ROUTES.RESET.PW} element={<ResetPw />} />
          {/* 마이페이지 설정 */}
-         <Route path={ROUTES.MYPAGE.INDEX} element={<MyPage />} />
+         <Route
+            path={ROUTES.MYPAGE.INDEX}
+            element={
+               <PrivateRoute>
+                  <MyPage />
+               </PrivateRoute>
+            }
+         />
          <Route path={ROUTES.MYPAGE.PASSWORD} element={<MyPagePassword />} />
          <Route path={ROUTES.MYPAGE.EDIT} element={<MyPageEdit />} />
          <Route path={ROUTES.MYPAGE.UPDATE} element={<MyPageUpdate />} />
