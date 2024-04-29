@@ -4,7 +4,9 @@ import { post } from '@libs/api';
 import { useMutation, type UseMutationOptions } from '@tanstack/react-query';
 import { setToken } from '@utils/token';
 import { AxiosError } from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import { useAlert } from '@/hooks/useAlert';
 
 interface LoginRequest {
    studentId: string;
@@ -18,15 +20,19 @@ interface LoginResponse {
 
 export const usePostLogin = (options?: UseMutationOptions<LoginResponse, AxiosError, LoginRequest>) => {
    const navigate = useNavigate();
+   const { pathname } = useLocation();
+   const { alert } = useAlert();
+
    return useMutation<LoginResponse, AxiosError, LoginRequest>({
       mutationFn: ({ studentId, password }: LoginRequest) =>
          post(API_PATH.USER.LOGIN.DEFAULT, { studentId, password }),
       onSuccess: (data) => {
          setToken(data);
-         navigate(ROUTES.MAIN);
+         pathname === '/login' && navigate(ROUTES.MAIN);
       },
-      onError: (error: Error) => {
-         console.log(error);
+      onError: (error: AxiosError) => {
+         const data = Object.getOwnPropertyDescriptor(error.response, 'data')!.value;
+         alert(data.message[0]);
       },
       ...options,
    });

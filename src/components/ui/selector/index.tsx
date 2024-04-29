@@ -33,7 +33,7 @@ export default function Selector({ list, subHeadingText }: { list: TOption[]; su
 
    const SubHeadingText = ({ className, id }: SubHeadingProps) => {
       return (
-         <div className={`flex items-center gap-1 ml-[29px] ${className}`}>
+         <div className={`flex items-center gap-1 ${className ?? ''}`}>
             <h2 className='text-xl font-extrabold text-white'>{selected}</h2>
             <IconButton id={id} width={18} height={18} onClick={handleOption} />
          </div>
@@ -43,11 +43,11 @@ export default function Selector({ list, subHeadingText }: { list: TOption[]; su
    return (
       <Fragment>
          {!open ? (
-            <SubHeadingText className='mb-[30px]' id='drop_down_circle' />
+            <SubHeadingText id='drop_down_circle' />
          ) : (
             <Fragment>
                <SubHeadingText className='mb-3' id='drop_up_circle' />
-               <ul className='ml-[29px] w-20 mb-[30px]'>
+               <ul className='w-20 mb-[30px]'>
                   {list
                      .filter((option) => option.text !== subHeadingText)
                      .map((option, index) => (

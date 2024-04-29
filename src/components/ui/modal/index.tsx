@@ -17,6 +17,7 @@ export interface ModalProps {
       disable?: boolean;
    };
    disableCancle?: boolean;
+   isActiveCancle?: boolean;
 }
 
 export default function Modal({
@@ -47,27 +48,27 @@ export default function Modal({
             </header>
             <div />
             <div className='my-4 mx-2 overflow-hidden'>{children}</div>
-            <div className='flex flex-col gap-2'>
-               {accept && (
-                  <Button
-                     size='md'
-                     onClick={() => {
-                        accept?.onClick();
-                        close();
-                     }}
-                  >
-                     {accept?.text ?? '확인'}
-                  </Button>
-               )}
+            <div className='flex gap-2'>
                {cancel && (
                   <Button
-                     size='md'
+                     className='w-1/2'
                      onClick={() => {
                         cancel?.onClick();
                         close();
                      }}
                   >
                      {cancel?.text ?? '취소'}
+                  </Button>
+               )}
+               {accept && (
+                  <Button
+                     className={cancel ? 'w-1/2' : 'w-full'}
+                     onClick={() => {
+                        accept?.onClick();
+                        close();
+                     }}
+                  >
+                     {accept?.text ?? '확인'}
                   </Button>
                )}
             </div>

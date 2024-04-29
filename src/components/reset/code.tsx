@@ -27,10 +27,16 @@ export default function PwVerifyForm() {
       onSuccess: (res) => {
          setToken(res.token);
       },
+      onError: () => {
+         alert('가입되지 않은 휴대폰번호입니다.');
+      },
    });
-   const { mutate: confirmCode } = usePostPhoneConfirmCode({
+   const { mutate: confirmCode, isSuccess: codeSuccess } = usePostPhoneConfirmCode({
       onSuccess: () => {
          navigate(`${ROUTES.RESET.PW}?${searchParams.toString()}`, { state: token });
+      },
+      onError: () => {
+         alert('인증번호가 알맞지 않습니다.');
       },
    });
 
@@ -53,6 +59,14 @@ export default function PwVerifyForm() {
          alert('인증 후 이용 가능합니다.');
       }
    };
+
+   React.useEffect(() => {
+      if (codeSuccess) {
+         navigate(ROUTES.RESET.PW, {
+            state: token,
+         });
+      }
+   }, [codeSuccess, navigate, token]);
 
    return (
       <form className='flex flex-col mx-auto w-[311px]'>

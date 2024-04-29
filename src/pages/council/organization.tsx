@@ -1,36 +1,34 @@
 import Organization01 from '@assets/images/organization-01.jpg';
 import Organization02 from '@assets/images/organization-02.jpg';
+import { Gnb, GnbGoBack, GnbTitle } from '@components/common/gnb';
+import { GnhTitle } from '@components/common/gnh';
+import { ContentSection, HeaderSection } from '@components/layouts';
 import SinglePageLayout from '@components/layouts/SinglePageLayout';
 import Box from '@components/ui/box/index';
-import { HEADING_TEXT, HEADING_STYLE } from '@constants/heading';
-import { useEffectOnce } from '@hooks/useEffectOnce';
-import { useLayout } from '@hooks/useLayout';
+import Selector from '@components/ui/selector';
+import { COUNCIL_LIST, HEADING_TEXT } from '@constants/heading';
 import React from 'react';
 
+
 export default function Organization() {
-   const { setLayout } = useLayout();
-
-   useEffectOnce(() => {
-      setLayout({
-         title: HEADING_TEXT.COUNCIL.HEAD,
-         backButton: true,
-         isMain: false,
-         fullscreen: false,
-         headingText: HEADING_TEXT.COUNCIL.HEAD,
-         subHeadingText: HEADING_TEXT.ORGANIZATION.SUBHEAD,
-         headingStyle: HEADING_STYLE.COUNCIL.HEAD,
-         subHeadingStyle: HEADING_STYLE.COUNCIL.SUBHEAD,
-         rounded: true,
-         dropDown: HEADING_STYLE.COUNCIL.DROPDOWN,
-      });
-   });
-
    return (
-      <SinglePageLayout>
-         <Box type='shadow' className='flex flex-col gap-5'>
-            <img className='rounded-md' src={Organization01} />
-            <img className='rounded-md' src={Organization02} />
-         </Box>
-      </SinglePageLayout>
+      <React.Fragment>
+         <Gnb>
+            <GnbGoBack />
+            <GnbTitle>{HEADING_TEXT.COUNCIL.HEAD}</GnbTitle>
+         </Gnb>
+         <HeaderSection className="pt-[38px] ml-[29px] pb-[30px]">
+            <GnhTitle className="mb-2">{HEADING_TEXT.COUNCIL.HEAD}</GnhTitle>
+            <Selector list={COUNCIL_LIST} subHeadingText={HEADING_TEXT.ORGANIZATION.SUBHEAD} />
+         </HeaderSection>
+         <ContentSection showNav={true} className="mb-20">
+            <SinglePageLayout>
+               <Box type='shadow' className='flex flex-col gap-5'>
+                  <img className='rounded-md' src={Organization01} />
+                  <img className='rounded-md' src={Organization02} />
+               </Box>
+            </SinglePageLayout>
+         </ContentSection>
+      </React.Fragment>
    );
 }

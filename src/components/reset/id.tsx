@@ -19,7 +19,7 @@ export default function IdForm() {
       setPhoneNumber(e.target.value);
    };
 
-   const { mutate } = usePostFindId({
+   const { mutate: findId } = usePostFindId({
       onSuccess: () => {
          alert('휴대전화로 아이디가 전송되었습니다.');
          redirectLogin();
@@ -31,7 +31,7 @@ export default function IdForm() {
       if (phoneNumber.length === 11) {
          const formattedPhoneNumber = formatphoneNumber(phoneNumber);
          //TODO) 타입 수정
-         mutate({ phoneNumber: formattedPhoneNumber });
+         findId({ phoneNumber: formattedPhoneNumber });
       } else {
          alert('올바른 휴대폰번호를 입력해주세요.');
       }

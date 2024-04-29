@@ -67,26 +67,3 @@ export const BUSINESS_LIST: TOption[] = [
    { text: '헬스', path: `${ROUTES.BUSINESS.ROOT}/health` },
    { text: '기타', path: `${ROUTES.BUSINESS.ROOT}/etc` },
 ];
-
-export const HEADING_STYLE = {
-   MAIN: {
-      HEAD: 'mt-[41px] mb-[3px] text-center',
-      SUBHEAD: 'text-center font-normal text-[11px] mb-[61px]',
-   },
-   LOGIN: {
-      HEAD: 'mt-7 mb-[19px] text-center',
-      SUBHEAD: 'text-center mb-[51px] font-extrabold',
-   },
-   COUNCIL: {
-      HEAD: 'ml-[29px] mt-[38px] mb-2',
-      SUBHEAD: 'text-xl ml-[29px] mb-[30px] font-extrabold',
-      DROPDOWN: COUNCIL_LIST,
-   },
-   RESET: {
-      HEAD: 'mt-[15px] mb-[19px] text-center',
-      SUBHEAD: 'text-center mb-[55px] font-extrabold',
-   },
-   BUSINESS: {
-      DROPDOWN: BUSINESS_LIST,
-   },
-};

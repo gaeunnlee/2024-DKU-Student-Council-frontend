@@ -11,8 +11,6 @@ import React, { ChangeEvent, useEffect } from 'react';
 
 import HTTPError from '@/types/statusError';
 
-
-
 export default function InfoForm({ signupToken }: { signupToken: string }) {
    const [signupInfo, setSignupInfo] = React.useState<UserRegistrationInfo>({
       nickname: '',
@@ -37,6 +35,7 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
    const [passwordMatch, setPasswordMatch] = React.useState<boolean>(false);
    const [phoneNumber, setphoneNumber] = React.useState<string>('');
    const [code, setCode] = React.useState<string>('');
+   const [isPasswordValid, setIsPasswordValid] = React.useState(false);
    const [isNicknameValid, setIsNicknameValid] = React.useState<boolean>(false);
    const [isFormValid, setIsFormValid] = React.useState<boolean>(false);
 
@@ -65,6 +64,7 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
             passwordMatch &&
             signupInfo.nickname !== '' &&
             signupInfo.password !== '' &&
+            isPasswordValid &&
             isNicknameValid,
       );
    }, [
@@ -75,6 +75,7 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
       signupInfo.nickname,
       signupInfo.password,
       isNicknameValid,
+      isPasswordValid,
    ]);
 
    useEffect(() => {
@@ -85,9 +86,21 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
       );
    }, [signupInfo.nickname]);
 
+   useEffect(() => {
+      setIsPasswordValid(
+         signupInfo.password.length > 7 &&
+            signupInfo.password.length < 17 &&
+            /^(?=.*[a-zA-Z])(?=.*[0-9]).{7,17}$/.test(signupInfo.password),
+      );
+   }, [signupInfo.password]);
+
    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
       switch (name) {
+         case 'password':
+            setSignupInfo((prev) => ({ ...prev, password: value }));
+            setPasswordMatch(signupInfo.password === value);
+            break;
          case 'passwordConfirm':
             setPasswordConfirm(value);
             setPasswordMatch(signupInfo.password === value);
@@ -135,6 +148,9 @@ export default function InfoForm({ signupToken }: { signupToken: string }) {
                size='md'
                className='rounded-[10px]'
             />
+            {!isPasswordValid && (
+               <Message>비밀번호는 영문과 숫자 1자이상을 포함하는 8~16자리여야합니다.</Message>
+            )}
             {passwordMismatch && <Message>비밀번호가 일치하지 않습니다.</Message>}
          </section>
          <section className='mb-6'>

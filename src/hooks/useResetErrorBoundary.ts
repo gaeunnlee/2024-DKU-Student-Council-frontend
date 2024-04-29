@@ -1,28 +1,24 @@
 import { HTTP_STATUS_CODE } from '@constants/error';
-import { ROUTES } from '@constants/route';
 import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import HTTPError from '@/types/statusError';
 
 export const useResetError = () => {
-   const navigate = useNavigate();
 
    const handleErrorReset = useCallback(
       (error: Error | HTTPError) => {
          if (error instanceof Error && !(error instanceof HTTPError)) {
-            navigate(ROUTES.MAIN);
-
+            window.location.href = '/';
             return;
          }
 
          if (error.statusCode && error?.statusCode >= HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR) {
-            navigate(0);
+            window.location.reload();
          } else {
-            navigate(ROUTES.MAIN);
+            window.location.href = '/';
          }
       },
-      [navigate],
+      [],
    );
 
    return { handleErrorReset };

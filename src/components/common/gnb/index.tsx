@@ -5,11 +5,10 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 interface Props extends React.ComponentProps<'header'> {
-   left?: JSX.Element | null;
-   center?: JSX.Element | null;
+   children: React.ReactNode;
 }
 
-export default function Gnb({ left, center, ...props }: Props) {
+const Gnb = ({ children, ...props }: Props) => {
    return (
       <header
          className={`w-[390px] flex mx-auto px-[22px] py-1.5 h-[50px] items-center ${
@@ -17,15 +16,12 @@ export default function Gnb({ left, center, ...props }: Props) {
          }`}
          {...props}
       >
-         <div className='w-full flex items-center'>
-            {left && left}
-            {center && center}
-         </div>
+         <div className='w-full flex items-center'>{children}</div>
       </header>
    );
-}
+};
 
-Gnb.Logo = function Logo() {
+const GnbLogo = () => {
    return (
       <Link to={ROUTES.MAIN}>
          <img src={logo} alt='단국대학교 로고' />
@@ -33,11 +29,21 @@ Gnb.Logo = function Logo() {
    );
 };
 
-Gnb.GoBack = function GoBack() {
+const GnbGoBack = ({ url }: { url?: string }) => {
    const navigate = useNavigate();
-   return <IconButton id='arrow_back' width={18} height={22} color='white' onClick={() => navigate(-1)} />;
+   return (
+      <IconButton
+         id='arrow_back'
+         width={18}
+         height={22}
+         color='white'
+         onClick={() => (url ? navigate(url) : navigate(-1))}
+      />
+   );
 };
 
-Gnb.Title = function Title({ children }: { children: string }) {
+const GnbTitle = ({ children }: { children: string }) => {
    return <h1 className='font-semibold mx-auto text-white text-xs'>{children}</h1>;
 };
+
+export { Gnb, GnbLogo, GnbGoBack, GnbTitle };

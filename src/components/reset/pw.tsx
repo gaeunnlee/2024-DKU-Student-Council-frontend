@@ -16,7 +16,7 @@ export default function ResetPwForm({ token }: { token: string }) {
    const { alert } = useAlert();
    const [searchParams] = useSearchParams();
 
-   const { mutate, isSuccess: resetSuccess } = usePostResetPw();
+   const { mutate , isSuccess: resetSuccess } = usePostResetPw();
 
    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
