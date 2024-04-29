@@ -12,23 +12,51 @@ import { IoIosListBox } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
 
 import { useAlert } from '@/hooks/useAlert';
+import { useModal } from '@/hooks/useModal';
 
 export default function MyPage() {
    const navigate = useNavigate();
    const { mutate } = useDeleteUser();
    const { toast } = useToast();
    const { alert } = useAlert();
+   const { open, close } = useModal();
 
    const deleteAccount = () => {
-      mutate();
+      open(<>탈퇴하시겠습니까?</>, {
+         accept: {
+            text: '확인',
+            onClick: () => {
+               mutate();
+            },
+         },
+         cancel: {
+            text: '취소',
+            onClick: () => {
+               close();
+            },
+         },
+      });
    };
 
    const logout = () => {
-      removeToken();
-      toast({
-         title: '로그아웃 되었습니다.',
+      open(<>로그아웃하시겠습니까?</>, {
+         accept: {
+            text: '확인',
+            onClick: () => {
+               removeToken();
+               toast({
+                  title: '로그아웃되었습니다.',
+               });
+               navigate(ROUTES.MAIN);
+            },
+         },
+         cancel: {
+            text: '취소',
+            onClick: () => {
+               close();
+            },
+         },
       });
-      navigate(ROUTES.MAIN);
    };
 
    return (
