@@ -18,6 +18,7 @@ import { useLayout } from '@hooks/useLayout';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { Gnb, GnbGoBack } from '@/components/common/gnb';
 import { IEvent, IFormInfo, IInputValue, IValidationInfo } from '@/types/mypage/edit';
 
 export default function MyPageEdit() {
@@ -265,8 +266,11 @@ export default function MyPageEdit() {
 
    return (
       <>
+         <Gnb>
+            <GnbGoBack />
+         </Gnb>
          {myInfo && (
-            <div className='px-3 pb-5 flex items-center flex-col w-full'>
+            <div className='px-3 pb-5 flex items-center flex-col w-full bg-white'>
                <div className='flex justify-center py-10'>
                   <ProfileImage gender={myInfo.gender} />
                </div>

@@ -4,6 +4,8 @@ import { useEffectOnce } from '@hooks/useEffectOnce';
 import { useLayout } from '@hooks/useLayout';
 import React from 'react';
 
+import { Gnb, GnbGoBack } from '../common/gnb';
+
 import SvgIcon from '@/components/common/icon/SvgIcon';
 import { IMyInfo } from '@/types/mypage/edit';
 
@@ -39,19 +41,24 @@ export default function MyPageLayout({
    });
 
    return (
-      <div className='h-[calc(100vh-110px)] bg-white'>
-         <div className='flex justify-between px-8 pt-4 pb-14 text-white bg-black'>
-            <div className='flex flex-col justify-evenly w-7/12'>
-               <strong className='text-2xl'>{myInfo?.nickname}</strong>
-               <p>
-                  {myInfo?.studentId} <br />
-                  {myInfo?.department} {myInfo?.major}
-               </p>
+      <>
+         <Gnb>
+            <GnbGoBack />
+         </Gnb>
+         <div className='h-[calc(100vh-110px)] bg-white'>
+            <div className='flex justify-between px-8 pt-4 pb-14 text-white bg-black'>
+               <div className='flex flex-col justify-evenly w-7/12'>
+                  <strong className='text-2xl'>{myInfo?.nickname}</strong>
+                  <p>
+                     {myInfo?.studentId} <br />
+                     {myInfo?.department} {myInfo?.major}
+                  </p>
+               </div>
+               <ProfileImage gender={myInfo?.gender ?? '남자'} />
             </div>
-            <ProfileImage gender={myInfo?.gender ?? '남자'} />
+            {children}
          </div>
-         {children}
-      </div>
+      </>
    );
 }
 
