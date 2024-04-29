@@ -7,7 +7,6 @@ import React from 'react';
 import SvgIcon from '@/components/common/icon/SvgIcon';
 import { IMyInfo } from '@/types/mypage/edit';
 
-
 export default function MyPageLayout({
    children,
    getStudentId,
@@ -40,8 +39,8 @@ export default function MyPageLayout({
    });
 
    return (
-      <div className='h-[calc(100vh-110px)]'>
-         <div className='flex justify-between px-8 pt-4 pb-14 bg-black text-white'>
+      <div className='h-[calc(100vh-110px)] bg-white'>
+         <div className='flex justify-between px-8 pt-4 pb-14 text-white bg-black'>
             <div className='flex flex-col justify-evenly w-7/12'>
                <strong className='text-2xl'>{myInfo?.nickname}</strong>
                <p>
