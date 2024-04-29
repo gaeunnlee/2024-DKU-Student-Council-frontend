@@ -9,7 +9,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className, type,
    const sizeClass = {
       md: 'w-[311px] py-[15px]',
       lg: 'w-[336px] py-[15px]',
-      full: 'w-100',
+      full: 'w-100 py-[15px]',
    };
    return (
       <React.Fragment>
