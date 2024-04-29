@@ -6,6 +6,8 @@ import { setToken } from '@utils/token';
 import { AxiosError } from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { useAlert } from '@/hooks/useAlert';
+
 interface LoginRequest {
    studentId: string;
    password: string;
@@ -19,6 +21,7 @@ interface LoginResponse {
 export const usePostLogin = (options?: UseMutationOptions<LoginResponse, AxiosError, LoginRequest>) => {
    const navigate = useNavigate();
    const { pathname } = useLocation();
+   const { alert } = useAlert();
    return useMutation<LoginResponse, AxiosError, LoginRequest>({
       mutationFn: ({ studentId, password }: LoginRequest) =>
          post(API_PATH.USER.LOGIN.DEFAULT, { studentId, password }),
@@ -26,8 +29,8 @@ export const usePostLogin = (options?: UseMutationOptions<LoginResponse, AxiosEr
          setToken(data);
          pathname === '/login' && navigate(ROUTES.MAIN);
       },
-      onError: (error: Error) => {
-         console.log(error);
+      onError: (error: AxiosError) => {
+         alert(error.response?.data?.message[0]);
       },
       ...options,
    });
