@@ -16,9 +16,7 @@ const Gnb = ({ children, ...props }: Props) => {
          }`}
          {...props}
       >
-         <div className='w-full flex items-center'>
-            {children}
-         </div>
+         <div className='w-full flex items-center'>{children}</div>
       </header>
    );
 };
@@ -31,19 +29,21 @@ const GnbLogo = () => {
    );
 };
 
-const GnbGoBack = () => {
+const GnbGoBack = ({ url }: { url?: string }) => {
    const navigate = useNavigate();
    return (
-      <IconButton id='arrow_back' width={18} height={22} color='white' onClick={() => navigate(-1)} />
+      <IconButton
+         id='arrow_back'
+         width={18}
+         height={22}
+         color='white'
+         onClick={() => (url ? navigate(url) : navigate(-1))}
+      />
    );
 };
-
 
 const GnbTitle = ({ children }: { children: string }) => {
-   return (
-      <h1 className='font-semibold mx-auto text-white text-xs'>{children}</h1>
-   );
+   return <h1 className='font-semibold mx-auto text-white text-xs'>{children}</h1>;
 };
-
 
 export { Gnb, GnbLogo, GnbGoBack, GnbTitle };

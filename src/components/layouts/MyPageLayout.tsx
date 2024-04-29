@@ -3,6 +3,7 @@ import { useApi } from '@hooks/useApi';
 import { useEffectOnce } from '@hooks/useEffectOnce';
 import { useLayout } from '@hooks/useLayout';
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { Gnb, GnbGoBack } from '../common/gnb';
 
@@ -19,6 +20,7 @@ export default function MyPageLayout({
    const { setLayout } = useLayout();
    const [myInfo, setMyInfo] = React.useState<IMyInfo | null>(null);
    const { get } = useApi();
+   const { pathname } = useLocation();
 
    const fetchMyInfo = async () => {
       const data = await get<IMyInfo>(API_PATH.USER.ME, { authenticate: true });
@@ -43,7 +45,7 @@ export default function MyPageLayout({
    return (
       <>
          <Gnb>
-            <GnbGoBack />
+            <GnbGoBack url={pathname === '/mypage' ? '/' : '/mypage'} />
          </Gnb>
          <div className='h-[calc(100vh-110px)] bg-white'>
             <div className='flex justify-between px-8 pt-4 pb-14 text-white bg-black'>
