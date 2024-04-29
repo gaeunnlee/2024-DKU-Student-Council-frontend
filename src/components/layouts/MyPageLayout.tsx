@@ -3,7 +3,7 @@ import { useApi } from '@hooks/useApi';
 import { useEffectOnce } from '@hooks/useEffectOnce';
 import { useLayout } from '@hooks/useLayout';
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Gnb, GnbGoBack } from '../common/gnb';
 
@@ -21,6 +21,7 @@ export default function MyPageLayout({
    const [myInfo, setMyInfo] = React.useState<IMyInfo | null>(null);
    const { get } = useApi();
    const { pathname } = useLocation();
+   const navigate = useNavigate();
 
    const fetchMyInfo = async () => {
       const data = await get<IMyInfo>(API_PATH.USER.ME, { authenticate: true });
@@ -28,7 +29,7 @@ export default function MyPageLayout({
       getStudentId && getStudentId(data.studentId);
    };
    useEffectOnce(() => {
-      fetchMyInfo();
+      localStorage.getItem('damda-atk') !== null ? fetchMyInfo() : navigate('/login');
       setLayout({
          title: '',
          backButton: true,
