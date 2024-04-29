@@ -11,10 +11,13 @@ import { FaUser } from 'react-icons/fa6';
 import { IoIosListBox } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
 
+import { useAlert } from '@/hooks/useAlert';
+
 export default function MyPage() {
    const navigate = useNavigate();
    const { mutate } = useDeleteUser();
    const { toast } = useToast();
+   const { alert } = useAlert();
 
    const deleteAccount = () => {
       mutate();
@@ -39,7 +42,7 @@ export default function MyPage() {
                      key={id}
                      className='flex flex-col items-center text-4xl cursor-pointer'
                      onClick={() => {
-                        id === 'edit' ? navigate('password') : navigate(id);
+                        id === 'edit' ? navigate('password') : alert('준비 중입니다');
                      }}
                   >
                      {icon}
