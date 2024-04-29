@@ -5,19 +5,18 @@ import Collapse from '@components/ui/collapse';
 import { useGetNoticeItem } from '@hooks/api/notice/useGetNoticeItem';
 import React from 'react';
 
-
-export default function NoticeItem({noticeId}: {noticeId: string}) {
+export default function NoticeItem({ noticeId }: { noticeId: string }) {
    const { data: notice } = useGetNoticeItem(noticeId as string);
    return (
       <React.Fragment>
          <PostBox>
             <Collapse status={true}>
-               {notice?.images.length > 0 && (<Carousel data={notice?.images} />)}
+               {notice?.images.length > 0 && <Carousel data={notice?.images} />}
             </Collapse>
             <p>{notice.title}</p>
             <p>{notice.body}</p>
          </PostBox>
-         {notice.files.length && <FileBox files={notice.files} />}
+         {notice.files.length > 0 && <FileBox files={notice.files} />}
       </React.Fragment>
    );
 }
