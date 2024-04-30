@@ -29,6 +29,7 @@ export default function LoginForm() {
       if (loginInfo.studentId.length > 0 && loginInfo.password.length > 0) {
          if (isOAuthFlow(searchParams)) {
             oAuthLogin(loginInfo);
+            return;
          }
          login(loginInfo);
       } else {
